@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE animation SYSTEM "animation.dtd">
+<animation>
+  <background>img/galaxie1.jpg</background>
+
+  <objects>
+
+    <object_text 
+      text="click this text@to start" 
+      font="Courier,12,bold"
+      transparency="false"
+      bgcolor="255,255,255"
+      fgcolor="0,0,0"
+      bocolor="0,0,128"
+      layer="1">Texte</object_text>
+
+    <object_image
+      image="img/spaceship.png"
+      width="40"
+      height="40"
+      >Image</object_image>
+
+    <object_polygon
+      coord_x="10,10,0,15,30,20,20,10"
+      coord_y=" 0,10,10,20,10,10,0,0"
+      fgcolor="255,0,0"
+      bgcolor="0,128,0"
+      >Polygone</object_polygon>
+
+  </objects>
+
+  <programs>
+
+    <program assigned_to="Texte">
+      <setxy x="10" y="10" />
+      <visible value="true" />
+      <click />
+      <trigger object="Image" value="appear" />
+      <setproperty object="Texte" property="text" 
+	value="Now click on ship@to make it move" />
+      <wait value="ship_displayed" />
+      <trigger object="Polygone" value="appear" />
+      <setproperty object="Texte" property="bgcolor" value="250,0,0" />
+      <setproperty object="Texte" property="text" 
+	value="Now click on arrow@to make it move" />
+      <wait value="arrow_displayed" />
+      <setproperty object="Texte" property="bgcolor" value="0,240,0" />
+      <setproperty object="Texte" property="text" 
+	value="Now click here@to stop animation" />
+      <click />
+      <stop />
+    </program>
+
+    <program assigned_to="Image">
+      <wait value="appear" />
+      <setxy x="100" y="100" />
+      <visible value="true" />
+      <click />
+      <trigger object="Texte" value="ship_displayed" />
+      <label value="loop" />
+      <moveto x="200" y="200" dx="1" dy="1" delay="2"/>
+      <moveto x="100" y="100" dx="-5" dy="-5" delay="2" />
+      <goto value="loop" />
+    </program>
+
+    <program assigned_to="Polygone">
+      <wait value="appear" />
+      <setxy x="300" y="100" />
+      <visible value="true" />
+      <click />
+      <trigger object="Texte" value="arrow_displayed" />
+      <label value="loop" />
+      <right x="100" dx="5" />
+      <down y="100" dy="5" />
+      <left x="100" dx="5" />
+      <up y="100" dy="5" />
+      <goto value="loop" />
+    </program>
+
+  </programs>
+
+</animation>

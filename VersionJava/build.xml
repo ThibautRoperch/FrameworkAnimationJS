@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Animation" basedir="." default="compile">
+
+<property name="src.dir" value="src" />
+<property name="build.dir" value="bin" />
+<property name="dst.dir" value="/home/richer/public_html/Animation" />
+<property name="jar.file" value="/home/richer/workspace/Animation" />
+
+
+<target name="compile" description="compile the source">
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+    	<compilerarg value="-Xlint:unchecked"/>
+    </javac>	
+</target>
+
+<target name="jar">
+	<jar destfile="Animation.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="AnimationApplet"/>
+            </manifest>
+        </jar>
+</target>
+
+<target name="run">
+	<exec executable="appletviewer">
+        <arg value="exemple.html"/>
+    </exec>
+</target>
+
+<target name="run_cpu_anim1">
+	<exec executable="appletviewer">
+        <arg value="cpu_anim1.html"/>
+    </exec>
+</target>
+
+<target name="run_cpu_mono_core">
+	<exec executable="appletviewer">
+        <arg value="cpu_mono_core.html"/>
+    </exec>
+</target>
+    
+<target name="run_cpu_dual_core">
+	<exec executable="appletviewer">
+        <arg value="cpu_dual_core.html"/>
+    </exec>
+</target>
+    
+<target name="run_cpu_pipeline1">
+	<exec executable="appletviewer">
+        <arg value="cpu_pipeline1.html"/>
+    </exec>
+</target>    
+    
+<target name="export" depends="deploy">
+</target>
+
+<target name="deploy">
+	<echo message="copy from ${src.dir} to ${dst.dir}" />
+	<copy todir="${dst.dir}">
+    <fileset dir="${src.dir}" />
+  </copy>      
+</target>
+
+</project>

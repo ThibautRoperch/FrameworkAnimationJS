@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Animation" basedir="." default="export">
+
+<property name="src.dir" value="." />
+<property name="dst.dir" value="/home/richer/public_html/Animation" />
+<property name="jar.file" value="/home/richer/workspace/Animation" />
+
+<target name="export" depends="deploy">
+</target>
+
+<target name="deploy">
+	<echo message="copy from ${src.dir} to ${dst.dir}" />
+	<copy todir="${dst.dir}">
+    <fileset dir="${src.dir}" />
+  </copy>      
+</target>
+
+</project>

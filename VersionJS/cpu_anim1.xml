@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE animation SYSTEM "animation.dtd">
+<animation>
+  <background>img/cpu8086simple.png</background>
+
+  <objects>
+    <object_text 
+      text="mov eax,[100]" transparency="false"
+      fgcolor="255,255,255"
+      bgcolor="0,0,128"
+      font="Courier,12,bold">ins1</object_text>
+    <object_text 
+      text="mov ebx,[104]" transparency="false"
+      fgcolor="255,255,255"
+      bgcolor="0,0,128"
+      font="Courier,12,bold">ins2</object_text>
+    <object_text 
+      text="add eax,ebx" transparency="false"
+      fgcolor="255,255,255"
+      bgcolor="0,0,128"
+      font="Courier,12,bold">ins3</object_text>
+    <object_text 
+      text="mov [108],eax" transparency="false"
+      fgcolor="255,255,255"
+      bgcolor="0,0,128"
+      font="Courier,12,bold">ins4</object_text>
+
+    <object_text 
+      text="[100]=1" transparency="false"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">data1</object_text>
+    <object_text 
+      text="[104]=2" transparency="false"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">data2</object_text>
+    <object_text 
+      text="[108]=?" transparency="false"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">data3</object_text>
+
+  <object_text 
+      text="eax=?" transparency="true"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">eax</object_text>
+    <object_text 
+      text="ebx=?" transparency="true"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">ebx</object_text>
+
+    <object_text 
+      text="00 100 ? 00 ?" transparency="false"
+      font="Courier,12,bold">ins1_decode</object_text>
+    <object_text 
+      text="00 104 ? 01 ?" transparency="false"
+      font="Courier,12,bold">ins2_decode</object_text>
+    <object_text 
+      text="11 ? ? 00 01 ?" transparency="false"
+      font="Courier,12,bold">ins3_decode</object_text>
+    <object_text 
+      text="01 104 ? 00 ?" transparency="false"
+      font="Courier,12,bold">ins4_decode</object_text>
+
+    <object_text 
+      text="request [100]" transparency="false"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">data_request1</object_text>
+    <object_text 
+      text="request [104]" transparency="false"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">data_request2</object_text>
+    <object_text 
+      text="request eax" transparency="false"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">data_request31</object_text>
+    <object_text 
+      text="request ebx" transparency="false"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">data_request32</object_text>
+    <object_text 
+      text="request eax" transparency="false"
+      fgcolor="0,0,0"
+      bgcolor="255,255,0"
+      font="Courier,12,bold">data_request41</object_text>
+
+    <object_text
+      text="click on first instruction@to start"  transparency="false"
+      fgcolor="0,0,0"
+      bgcolor="255,255,255"
+      font="Courier,12,bold">message</object_text>
+  
+  </objects>
+  
+  <programs> 
+
+    <program assigned_to="message">
+      <setxy x="450" y="10" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="ins1">
+      <setxy x="20" y="30" />
+      <visible value="true" />
+      <setproperty object="ins1" property="fgcolor" value="255,255,0" />
+      <click />
+      <setproperty object="ins1" property="fgcolor" value="255,255,255" />
+      <setproperty object="message" property="text" value="" />
+      <right x="80" dx="5" />
+      <down y="80" dy="5" />
+      <right x="50" dx="5" />
+      <up y="100" dy="5" />
+      <right x="200" dx="5" />
+      <down y="60" dy="5" />
+      <trigger object="ins1_decode" value="decode_ins1" />
+      <wait value="unlock" />
+      <visible value="false" />
+    </program>
+
+    <program assigned_to="ins2">
+      <setxy x="20" y="50" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <state value="normal" />
+      <setproperty object="ins2" property="fgcolor" value="255,255,0" />
+      <blink times="6" delay="20" />
+      <click />
+      <setproperty object="message" property="text" value="" />
+      <setproperty object="ins2" property="fgcolor" value="255,255,255" />
+      <right x="80" dx="5" />
+      <down y="60" dy="5" />
+      <right x="50" dx="5" />
+      <up y="100" dy="5" />
+      <right x="200" dx="5" />
+      <down y="60" dy="5" />
+      <trigger object="ins2_decode" value="decode_ins2" />
+      <wait value="unlock" />
+      <visible value="false" />
+    </program>
+
+    <program assigned_to="ins3">
+      <setxy x="20" y="70" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <state value="normal" />
+      <setproperty object="ins3" property="fgcolor" value="255,255,0" />
+      <blink times="6" delay="20" />
+      <click />
+      <setproperty object="message" property="text" value="" />
+      <setproperty object="ins3" property="fgcolor" value="255,255,255" />
+      <right x="80" dx="5" />
+      <down y="40" dy="5" />
+      <right x="50" dx="5" />
+      <up y="100" dy="5" />
+      <right x="200" dx="5" />
+      <down y="60" dy="5" />
+      <trigger object="ins3_decode" value="decode_ins3" />
+      <wait value="unlock" />
+      <visible value="false" />
+    </program>
+
+    <program assigned_to="ins4">
+      <setxy x="20" y="90" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <state value="normal" />
+      <setproperty object="ins4" property="fgcolor" value="255,255,0" />
+      <blink times="6" delay="20" />
+      <click />
+      <setproperty object="message" property="text" value="" />
+      <setproperty object="ins4" property="fgcolor" value="255,255,255" />
+      <right x="80" dx="5" />
+      <down y="20" dy="5" />
+      <right x="50" dx="5" />
+      <up y="100" dy="5" />
+      <right x="200" dx="5" />
+      <down y="60" dy="5" />
+      <trigger object="ins4_decode" value="decode_ins4" />
+      <wait value="unlock" />
+      <visible value="false" />
+    </program>
+
+    <program assigned_to="eax">
+      <setxy x="590" y="120" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="ebx">
+      <setxy x="590" y="140" />
+      <visible value="true" />
+    </program>
+
+
+    <program assigned_to="data1">
+      <setxy x="20" y="150" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="data2">
+      <setxy x="20" y="170" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="data3">
+      <setxy x="20" y="190" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <blink times="6" delay="20" />
+    </program>
+
+    <program assigned_to="ins1_decode">
+      <setxy x="350" y="105" />
+      <wait value="decode_ins1" />
+      <visible value="true" />
+      <sleep value="40" />
+      <down y="38" dy="1" />
+      <trigger object="data_request1" value="request100" />
+      <wait value="unlock" />
+      <down y="38" dy="1" />
+      <sleep value="20" />
+      <down y="110" dy="1" />
+      <setproperty object="ins1_decode" property="text" value="update eax=1" />
+      <sleep value="20" />
+      <down y="55" dy="1" />
+      <right x="220" dx="5" />
+      <up y="180" dy="5" />
+      <sleep value="40" />
+      <visible value="false" />
+      <setproperty object="eax" property="text" value="eax=1" />
+      <setproperty object="message" property="text" 
+	value="Click on second instruction@to continue" />
+      <trigger object="ins1" value="unlock" />
+      <trigger object="ins2" value="unlock" />
+    </program>
+
+    <program assigned_to="data_request1">
+      <setxy x="320" y="143" />
+      <wait value="request100" />
+      <visible value="true" />
+      <left x="250" dx="5" />
+      <sleep value="10" />
+      <setproperty object="data_request1" property="text" value="1" /> 
+      <right x="250" dx="5" />
+      <sleep value="20" />
+      <setproperty object="ins1_decode" property="text" value="00 100 1 00 ?" />
+      <trigger object="ins1_decode" value="unlock" />
+      <visible value="false" />
+    </program>
+
+   <program assigned_to="ins2_decode">
+      <setxy x="350" y="105" />
+      <wait value="decode_ins2" />
+      <visible value="true" />
+      <sleep value="40" />
+      <down y="38" dy="1" />
+      <trigger object="data_request2" value="request104" />
+      <wait value="unlock" />
+      <down y="38" dy="1" />
+      <sleep value="20" />
+      <down y="110" dy="1" />
+      <setproperty object="ins2_decode" property="text" value="update ebx=2" />
+      <sleep value="20" />
+      <down y="55" dy="1" />
+      <right x="220" dx="5" />
+      <up y="180" dy="5" />
+      <sleep value="40" />
+      <visible value="false" />
+      <setproperty object="ebx" property="text" value="ebx=2" />
+      <setproperty object="message" property="text" 
+	value="Click on third instruction@to continue" />      
+      <trigger object="ins2" value="unlock" />
+      <trigger object="ins3" value="unlock" />
+    </program>
+
+    <program assigned_to="data_request2">
+      <setxy x="320" y="143" />
+      <wait value="request104" />
+      <visible value="true" />
+      <left x="250" dx="5" />
+      <sleep value="10" />
+      <setproperty object="data_request2" property="text" value="2" /> 
+      <right x="250" dx="5" />
+      <sleep value="20" />
+      <setproperty object="ins2_decode" property="text" value="00 104 2 01 ?" />
+      <trigger object="ins2_decode" value="unlock" />
+      <visible value="false" />
+    </program>
+
+   <program assigned_to="ins3_decode">
+      <setxy x="350" y="105" />
+      <wait value="decode_ins3" />
+      <visible value="true" />
+      <sleep value="40" />
+      <down y="38" dy="1" />
+      <trigger object="data_request31" value="request_eax" />
+      <wait value="unlock" />
+      <down y="38" dy="1" />
+      <sleep value="20" />
+      <down y="50" dy="1" />
+      <sleep value="40" />
+      <setproperty object="ins3_decode" property="text" value="compute 2+1" /> 
+      <sleep value="40" />
+      <setproperty object="ins3_decode" property="text" value="11 3 2 00 01" /> 
+      <sleep value="60" />
+      <down y="60" dy="1" />
+      <setproperty object="ins3_decode" property="text" value="update eax=3" />
+      <sleep value="40" /> 
+      <down y="50" dy="5" />
+      <right x="220" dx="5" />
+      <up y="180" dy="5" />
+      <sleep value="40" />
+      <visible value="false" />
+      <setproperty object="eax" property="text" value="eax=3" />
+      <trigger object="ins3" value="unlock" />
+      <wait value="unlock" />
+      <down y="20" dy="5" />
+      <visible value="false" />
+      <setproperty object="message" property="text" 
+	value="Click on last instruction@to terminate" />
+      <trigger object="ins3" value="unlock" />
+      <trigger object="ins4" value="unlock" />
+    </program>
+
+    <program assigned_to="data_request31">
+      <setxy x="400" y="125" />
+      <wait value="request_eax" />
+      <visible value="true" />
+      <right x="140" dx="1" />
+      <sleep value="40" />
+      <setproperty object="data_request31" property="text" value="1" />
+      <left x="140" dx="1" />
+      <sleep value="40" />
+      <visible value="false" />
+      <setproperty object="ins3_decode" property="text" value="11 1 ? 00 01" /> 
+      <trigger object="data_request32" value="request_ebx" />
+      <visible value="false" />
+    </program>
+
+    <program assigned_to="data_request32">
+      <setxy x="400" y="125" />
+      <wait value="request_ebx" />
+      <visible value="true" />
+      <right x="140" dx="1" />
+      <sleep value="40" />
+      <setproperty object="data_request32" property="text" value="2" />
+      <left x="140" dx="2" />
+      <sleep value="40" />
+      <visible value="false" />
+      <setproperty object="ins3_decode" property="text" value="11 1 2 00 01" /> 
+      <trigger object="ins3_decode" value="unlock" />
+      <visible value="false" />
+    </program>
+
+   
+   <program assigned_to="ins4_decode">
+      <setxy x="350" y="105" />
+      <wait value="decode_ins4" />
+      <visible value="true" />
+      <sleep value="40" />
+      <down y="38" dy="1" />
+      <trigger object="data_request41" value="request_eax" />
+      <wait value="unlock" />
+      <down y="38" dy="1" />
+      <sleep value="20" />
+      <down y="50" dy="1" />
+      <sleep value="40" />
+      <down y="60" dy="1" />
+      <setproperty object="ins4_decode" property="text" value="update [108]" />
+      <sleep value="40" /> 
+      <down y="50" dy="1" />
+      <left x="190" dx="5" />
+      <up y="200" dy="5" />
+      <left x="80" dx="5" />
+      <setproperty object="data3" property="text" value="[108]=3" />
+      <trigger object="data3" value="unlock" />
+      <visible value="false" />
+    </program>
+
+    <program assigned_to="data_request41">
+      <setxy x="400" y="125" />
+      <wait value="request_eax" />
+      <visible value="true" />
+      <right x="140" dx="1" />
+      <sleep value="40" />
+      <setproperty object="data_request41" property="text" value="3" />
+      <left x="140" dx="1" />
+      <sleep value="40" />
+      <visible value="false" />
+      <setproperty object="ins4_decode" property="text" value="01 104 3 00 ?" /> 
+      <trigger object="ins4_decode" value="unlock" />
+      <visible value="false" />
+    </program>
+
+  </programs>
+</animation>

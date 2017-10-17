@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE animation SYSTEM "animation.dtd">
+<animation>
+
+  <init>
+  	<start_button text="Click" x="10" y="100" present="false" /> 
+  </init>
+  
+  <background>../cpu8086simple.png</background>
+  
+  <objects>
+  
+  <object_ellipse
+  	bgcolor="128,0,0"
+  	fgcolor="0,128,0"
+  	width="50"
+  	height="80"
+  	transparency="false">Ellipse</object_ellipse>
+  	
+ 
+    <object_text 	text="i=1;@i=2;" 
+    				layer="1" transparency="false"
+                 	font="Courier,12,bold"
+                 	bocolor="0,128,0" border="10"
+                 	fgcolor="125,90,250"
+                 	bgcolor="250,245,250">Instruction1</object_text>
+    
+    <object_text 	text="i=2;"
+    				layer="2"  transparency="false"
+                 	font="Courier,12,bold"
+                 	fgcolor="125,90,250"
+                 	bgcolor="250,245,250">Instruction2</object_text>
+      
+      
+    <object_polygon
+      coord_x="10,10,0,15,30,20,20,10"
+      coord_y=" 0,10,10,20,10,10,0,0"
+      fgcolor="128,0,0"
+      bgcolor="0,128,0"
+      >Polygone</object_polygon>
+      
+      <object_image   
+      	image="../spaceship.png"
+      	width="40"
+      	height="40">Image1</object_image>
+                   	
+      <object_circle
+      	fgcolor="128,60,200"
+      	bgcolor="200,128,60"
+      	rayon="50">Cercle</object_circle>  
+      	           	
+  </objects>
+  
+  <programs>
+ 
+ 	<program assigned_to="Instruction1">
+ 		<setxy x="100" y="100" />
+ 		<visible value="true" />
+ 		<click />
+ 		<setproperty object="Instruction2" property="fgcolor" value="255,0,0" />
+ 		<down y="100" dy="1" />
+ 	</program>
+ 	
+ 	<program assigned_to="Instruction2">
+ 		<setxy x="150" y="120"/>
+ 		<visible value="true" />
+ 		<click />
+ 		<stop />
+ 	</program>
+ 	
+ 	<program assigned_to="Polygone">
+ 		<setxy x="250" y="320"/>
+ 		<visible value="true" />
+		<click />
+		<up y="100" dy="1" />
+ 	</program>
+ 	
+ 	<program assigned_to="Image1">
+ 	  <setxy x="400" y="200" />
+      <visible value="true" />
+      <click />
+      <right x="100" dx="5" />
+      <down y="100" dy="5" />
+      <left x="100" dx="5" />
+      <up y="100" dy="5" /> 
+    </program>
+      
+    <program assigned_to="Cercle">
+      <setxy x="250" y="100" />
+      <visible value="true" />
+    <click />
+      <right x="100" dx="5" />
+    </program>
+      
+    
+    
+     <program assigned_to="Ellipse">
+      <setxy x="50" y="100" />
+      <visible value="true" />
+      <click />
+      <right x="100" dx="5" />
+    </program>
+    
+  </programs>
+  
+ </animation>                	

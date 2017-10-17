@@ -1,0 +1,554 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css.css" /> 
+<title>Animation</title>
+</head>
+
+<body>
+<h1>Animation</h1>
+
+<h2>1. Description</h2>
+
+<p>
+Le fichier Animation.jar est un fichier archive java qui contient une Applet permettant de réaliser de petites animations à des fins de démonstrations pédagogiques.
+</p>
+
+<p>Voici un petit <a href="exemple.html">exemple</a> de ce qui peut être réalisé rapidement.
+</p>
+
+<h2>2. Utilisation</h2>
+
+<p>Télécharger le fichier <a href="Animation.jar">Animation.jar</a> et inclure le code source suivant au sein de la page XHTML :
+</p>
+
+<pre>
+<code>
+    &lt;applet codebase="." <br>
+     code="AnimationApplet.class"<br>
+     archive="Animation.jar"<br>
+     alt="Animation Applet"<br>
+     <font color="red">width</font>="640" <font color="red">height</font>="480"&gt;<br>
+    &lt;param name="config" value=<font color="red">"animation.xml"</font> /&gt;<br>
+    &lt;/applet&gt;
+</code>
+</pre>
+
+<p>Vous pouvez modifier les paramètres suivants :</p>
+
+<ul>
+<li><code>width</code> : largeur en pixels de l'espace occupé par l'Applet</li>
+<li><code>height</code> : hauteur en pixels de l'espace occupé par l'Applet</li>
+<li><code>animation.xml</code> : il s'agit du fichier qui décrit l'animation</li>
+</ul>
+
+<h2>3. Fichier de description de l'animation</h2>
+
+<p>Ce fichier est au format XML, la DTD qui lui correspond est <a href="animation.dtd">animation.dtd</a></p>
+
+<p>Le fichier XML se compose de 3 parties :</p>
+
+<ul>
+<li><b>background</b> : permet de spécifier une image de fond</li>
+<li><b>objects</b> : permet de décrire les différents objets de l'animation</li>
+<li><b>programs</b> : permet de décrire les actions associées aux objets</li>
+</ul>
+
+<h3>3.1 Les objets</h3>
+
+<p>Les objets sont définis par :</p>
+
+<ul>
+<li>un <b>identifiant</b> unique donné par l'utilisateur</li>
+<li>des coordonnées <b>x,y</b> qui indiquent leur position</li>
+<li>des <b>couleurs</b> de fond, d'affichage et éventuellement de cadre</li>
+<li>un <b>état</b> représenté par une chaîne de caractères</li>
+<li>un indicateur de la <b>couche</b> d'affichage de l'objet</li>
+</ul>
+
+d'autres attributs existent mais ne sont pour le moment pas utilisés :
+
+<ul>
+<li> <b>angle</b> de rotation de l'objet </li>
+</ul>
+
+<p>On distingue 5 objets de base :</p>
+
+<ul>
+<li><b>object_text</b> pour le texte</li>
+<li><b>object_box</b> pour un rectangle</li>
+<li><b>object_image</b> pour une image (sprite)</li>
+<li><b>object_polygon</b> pour une forme définie par l'utilisateur</li>
+<li><b>object_ellipse</b> ellipse</li>
+</ul>
+
+<p>Note : l'utilisateur peut incorporer ses propres objets (cf. <a href="#CSPO">créer ses propres objets</a>)</p>
+
+<h4>3.1.1 object_text</h4>
+
+<p>Les attributs pour un texte sont les suivants :</p>
+
+<ul>
+<li><b>text</b> : le texte, ou le caractère @ indique un retour chariot</li>
+<li><b>font</b> : la fonte décrite au format AWT de Java</li>
+<li><b>fgcolor</b> : couleur du texte format RGB</li>
+<li><b>bgcolor</b> : couleur du fond</li>
+<li><b>bocolor</b> : couleur du bord du cadre englobant le texte</li>
+<li><b>border</b> : nombre de pixels entre texte et cadre du texte</li>
+<li><b>transparency</b> : booléen (true|false), indique si on utilise la couleur de fond</li>
+<li><b>layer</b> : couche de superposition des objets, par défaut à 0. Un objet qui possède une valeur de couche supérieure à un autre, sera dessiné après cet objet</li>
+</ul>
+
+<p>Exemple : texte sur 2 lignes en Courier normal 12 points, couleur de fond noir, couleur de texte blanc</p>
+
+<pre>
+<code>
+&lt;object_text<br />
+  text="click on text@to start"<br />
+  font="Courier,PLAIN,12"<br />
+  fgcolor="255,255,255" <br />
+  bgcolor="0,0,0"<br />
+  border=2<br />
+  transparency="false"<br />
+  layer="2" &gt;Mon_Texte&lt;object_text&gt;
+</code>
+</pre>
+
+<h4>3.1.2 object_image</h4>
+
+<p>Les attributs pour une image sont les suivants :</p>
+
+<ul>
+<li><b>image</b> : chemin jusqu'à l'image</li>
+<li><b>fgcolor</b> : couleur du texte format RGB</li>
+<li><b>bgcolor</b> : couleur du fond</li>
+<li><b>layer</b> : couche de superposition des objets, par défaut à 0. Un objet qui possède une valeur de couche supérieure à un autre, sera dessiné après cet objet</li>
+</ul>
+
+<p>Exemple :</p>
+
+<pre>
+<code>
+&lt;object_image<br />
+  image="space_ship.jpg"<br />
+  layer="4" &gt;Mon_Vaisseau&lt;object_image&gt;
+</code>
+</pre>
+
+<h4>3.1.3 object_box</h4>
+
+<p>Les attributs pour une boîte sont les suivants :</p>
+
+<ul>
+<li><b>width</b> : largeur en pixels</li>
+<li><b>height</b> : hauteur en pixels</li>
+<li><b>fgcolor</b> : couleur du texte format RGB</li>
+<li><b>bgcolor</b> : couleur du fond</li>
+<li><b>bocolor</b> : couleur du bord du cadre englobant le texte</li>
+<li><b>layer</b> : couche de superposition des objets, par défaut à 0. Un objet qui possède une valeur de couche supérieure à un autre, sera dessiné après cet objet</li>
+</ul>
+
+<p>Exemple :</p>
+
+<pre>
+<code>
+&lt;object_box<br />
+  width="200"<br />
+  height="100"<br />
+  fgcolor="255,255,255" <br />
+  bgcolor="0,0,0"<br />
+  layer="1" &gt;Ma_Boite&lt;object_box&gt;
+</code>
+</pre>
+
+<h4>3.1.4 object_polygon</h4>
+
+<p>Les attributs pour un polygone sont les suivants :</p>
+
+<ul>
+<li><b>coord_x</b> : coordonnées sur l'axe des X</li>
+<li><b>coord_y</b> : coordonnées sur l'axe des Y</li>
+<li><b>fgcolor</b> : couleur du texte format RGB</li>
+<li><b>bgcolor</b> : couleur du fond</li>
+<li><b>layer</b> : couche de superposition des objets, par défaut à 0. Un objet qui possède une valeur de couche supérieure à un autre, sera dessiné après cet objet</li>
+</ul>
+
+<p>Exemple :</p>
+
+<pre>
+<code>
+&lt;object_polygon<br />
+  coord_x="10,10, 0,15,30,20,20,10"<br />
+  coord_y=" 0,10,10,20,10,10,0, 0"<br />
+  fgcolor="255,255,255" <br />
+  bgcolor="0,0,0"<br />
+  layer="1" &gt;Ma_Boite&lt;object_polygon&gt;
+</code>
+</pre>
+
+<h3>3.2 Les programmes</h3>
+
+<p>On dispose d'un ensemble d'instructions pour modifier la position ou les propriétés des objets : </p>
+
+<h4>3.2.1 Déplacement</h4>
+
+<table width="90%" align="center">
+<tr>
+  <th align=center width="25%">Instruction</th>
+  <th align=center width="25%">Attributs</th>
+  <th align=center width="50%">Description</th>
+</tr>
+<tr>
+  <td><b> setx </b>  </td>
+  <td>
+    <ul>
+      <li>x : abscisse</li>
+    </ul>
+  </td>
+  <td> modifie l'abscisse de l'objet</td>
+</tr>
+
+<tr>
+  <td><b> sety </b>  </td>
+  <td>
+    <ul>
+      <li>y : ordonnée</li>
+    </ul>
+  </td>
+  <td> modifie l'odonnée de l'objet</td>
+</tr>
+
+<tr>
+  <td><b> setxy </b>  </td>
+  <td>
+    <ul>
+      <li>x : abscisse</li>
+      <li>y : ordinnée</li>
+    </ul>
+  </td>
+  <td> modifie abscisse et ordonnée</td>
+</tr>
+
+<tr>
+  <td><b> moveto </b>  </td>
+  <td>
+    <ul>
+      <li>x : abscisse</li>
+      <li>y : ordonnée</li>
+      <li>dx : incrément sur l'axe x</li>
+      <li>dy : incrément sur l'axe y</li>
+      <li>delay : délai de temporisation</li>
+
+    </ul>
+  </td>
+  <td> déplace l'objet jusqu'à la position donnée</td>
+</tr>
+
+<tr>
+  <td><b> down </b>  </td>
+  <td>
+    <ul>
+      <li>y : longueur du déplacement</li>
+      <li>dy : incrément sur l'axe y</li>
+    </ul>
+  </td>
+  <td> déplace l'objet vers le bas de y pixels</td>
+</tr>
+
+<tr>
+  <td><b> up </b>  </td>
+  <td>
+    <ul>
+      <li>y : longueur du déplacement</li>
+      <li>dy : incrément sur l'axe y</li>
+    </ul>
+  </td>
+  <td> déplace l'objet vers le haut de y pixels</td>
+</tr>
+
+<tr>
+  <td><b> left </b>  </td>
+  <td>
+    <ul>
+      <li>x : longueur du déplacement</li>
+      <li>dx : incrément sur l'axe x</li>
+    </ul>
+  </td>
+  <td> déplace l'objet vers la gauche de x pixels</td>
+</tr>
+
+<tr>
+  <td><b> right </b>  </td>
+  <td>
+    <ul>
+      <li>x : longueur du déplacement</li>
+      <li>dx : incrément sur l'axe x</li>
+    </ul>
+  </td>
+  <td> déplace l'objet vers la droite de x pixels</td>
+</tr>
+
+</table>
+
+<h4>3.2.2 Temporisation</h4>
+
+<table width="90%" align="center">
+<tr>
+  <th align=center width="25%">Instruction</th>
+  <th align=center width="25%">Attributs</th>
+  <th align=center width="50%">Description</th>
+</tr>
+<tr>
+  <td><b> sleep </b>  </td>
+  <td>
+    <ul>
+      <li>value : délai de temporisation</li>
+    </ul>
+  </td>
+  <td> temporisation en nombre de cycles d'affichage</td>
+</tr>
+
+<tr>
+  <td><b> state </b>  </td>
+  <td>
+    <ul>
+      <li>value : état</li>
+    </ul>
+  </td>
+  <td> passe l'objet courant dans l'état donné</td>
+</tr>
+
+<tr>
+  <td><b> wait </b>  </td>
+  <td>
+    <ul>
+      <li>value : état</li>
+    </ul>
+  </td>
+  <td> attend que l'objet passe dans l'état indiqué</td>
+</tr>
+
+<tr>
+  <td><b> trigger </b>  </td>
+  <td>
+    <ul>
+      <li>object : nom d'objet</li>
+      <li>value : état</li>
+    </ul>
+  </td>
+  <td> passe l'objet spécifié dans l'état donné</td>
+</tr>
+
+</table>
+
+<h4>3.2.3 Affichage</h4>
+
+<table width="90%" align="center">
+<tr>
+  <th align=center width="25%">Instruction</th>
+  <th align=center width="25%">Attributs</th>
+  <th align=center width="50%">Description</th>
+</tr>
+<tr>
+  <td><b> visible </b>  </td>
+  <td>
+    <ul>
+      <li>value : true ou false</li>
+    </ul>
+  </td>
+  <td> apparition ou disparition de l'objet</td>
+</tr>
+
+<tr>
+  <td><b> blink </b>  </td>
+  <td>
+    <ul>
+      <li>times : nombre de clignotements</li>
+      <li>délai : délai entre 2 clignotements</li>
+    </ul>
+  </td>
+  <td> faire clignoter l'objet</td>
+</tr>
+
+</table>
+
+<h4>3.2.4 Répétition (boucle)</h4>
+
+<table width="90%" align="center">
+<tr>
+  <th align=center width="25%">Instruction</th>
+  <th align=center width="25%">Attributs</th>
+  <th align=center width="50%">Description</th>
+</tr>
+<tr>
+  <td><b> label </b>  </td>
+  <td>
+    <ul>
+      <li>value : identifiant</li>
+    </ul>
+  </td>
+  <td> définit une ligne de code ou l'on pourra revenir</td>
+</tr>
+
+<tr>
+  <td><b> goto </b>  </td>
+  <td>
+    <ul>
+      <li>value : identifiant de label</li>
+    </ul>
+  </td>
+  <td> saute au label indiqué</td>
+</tr>
+
+</table>
+
+<h4>3.2.5 Modification des propriétés</h4>
+
+<table width="90%" align="center">
+<tr>
+  <th align=center width="25%">Instruction</th>
+  <th align=center width="25%">Attributs</th>
+  <th align=center width="50%">Description</th>
+</tr>
+<tr>
+  <td><b> setproperty </b>  </td>
+  <td>
+    <ul>
+      <li>object : identifiant d'objet</li>
+      <li>property : propriété à modifier</li>
+      <li>value : valeur</li>
+    </ul>
+  </td>
+  <td> permet de modifier une propriété de l'objet comme la couleur de fond (bgcolor), la couleur d'affichage (fgcolor), la couleur du cadre (bocolor), le texte (text) pour un objet de type texte.
+  </td>
+</tr>
+
+</table>
+
+<h4>3.2.6 Divers</h4>
+
+<table width="90%" align="center">
+<tr>
+  <th align=center width="25%">Instruction</th>
+  <th align=center width="25%">Attributs</th>
+  <th align=center width="50%">Description</th>
+</tr>
+<tr>
+  <td><b> click </b>  </td>
+  <td>
+    aucun
+  </td>
+  <td> attends que l'on clique sur l'objet</td>
+</tr>
+
+<tr>
+  <td><b> stop </b>  </td>
+  <td>
+    aucun
+  </td>
+  <td> arrête l'applet</td>
+</tr>
+
+</table>
+
+<p>Exemple :</p>
+
+<pre><code>
+&lt;program assigned_to="Mon_Texte"&gt;<br />
+  &lt;setxy x="100" y="100" /&gt;<br />
+  &lt;visible value="true" /&gt;<br />
+  &lt;right x="200" dx="1" /&gt;<br />
+&lt;/program&gt;<br />
+
+</pre></code>
+
+<a name="CSPO"></a>
+<h2>4. Créer ses propres objets</h2>
+
+<p>Les objets externes (créés par l'utilisateur) sont intégrés dans la section <code>objects</code> grâce au tag <code>object_extern</code> qui prend 2 attributs :</p>
+
+<ul>
+<li><b>class</b> : le nom de la classe</li>
+<li><b>constructor</b>: une chaine de caratère qui comprend les paramètres pour la construction de l'objet</li>
+</ul>
+
+<p>L'objet doit dériver de la classe <code>AnimatedObject</code> et founir les méthodes suivantes :</p>
+
+<ul>
+<li><b>un constructeur</b> : qui prend 3 paramètres</li>
+<li><b>une méthode de dessin</b> : pour l'affichage</li>
+<li><b>un controleur</b> : qui vérifie si on a cliqué sur l'objet</li>
+</ul>
+
+<p>Exemple : on désire créer un objet cercle 
+
+<pre><code>
+import java.applet.*;
+import java.awt.*;
+
+public class AnimatedCircle extends AnimatedObject {
+
+    protected int rayon;
+	
+    public AnimatedCircle(Applet applet, String name, String cons) {
+	super(applet,name);
+	this.rayon=Integer.parseInt(cons);
+	width=height=rayon;
+    }
+	
+    public void draw(Graphics2D g2d) {
+	g2d.translate(x, y);
+	g2d.rotate(Math.toRadians(face_angle));
+	g2d.setColor(bgcolor);
+	g2d.drawRect(0, 0, width, height);
+	g2d.fillOval(0, 0, rayon, rayon);
+	g2d.setColor(fgcolor);
+	g2d.drawOval(0,0, rayon, rayon);
+	
+     }
+
+     public boolean isInside(int x, int y, Graphics2D g2d) {
+	double xx = this.x + ((double)rayon/2) - (double)x;
+	double yy = this.y + ((double)rayon/2) - (double)y;
+	double r=Math.sqrt(xx*xx+yy*yy);
+	return (r < (double)rayon);
+     }
+}
+
+</code></pre>
+
+<p>On met les fichiers <code>AnimatedCircle.java</code> et <code>AnimatedCircle.class</code> dans le même répertoire que <code>Animation.jar</code>.</p>
+
+<p>On compile le fichier Java comme suit :</p>
+
+<pre><code>
+javac AnimatedCircle.java -jar Animation.jar
+
+</code></pre>
+
+<p>Enfin, pour créer un objet dans l'animation, on modifie le fichier de configuration XML comme suit :</p>
+
+<pre><code>
+&lt;object&gt;
+
+  &lt;object_extern class="AnimatedCircle" 
+
+    constructor="50"&gt;MonCercle&lt;object_extern&gt;
+
+&lt;/object&gt;
+
+</code></pre>
+
+<h2>5. Autres exemples</h2>
+
+<p>Vous trouverez ici quelques exemples d'animations :</p>
+
+<ul>
+<li> <a href="cpu_anim1.html">Animation fontionnement CPU</a> : fonctionnement interne du microprocesseur et utilisation de micro instructions</<li>
+<li> <a href="cpu_mono_core.html">CPU avec 1 Core</a></li>
+<li> <a href="cpu_dual_core.html">CPU avec 2 Core</a></li>
+</ul>
+<br />
+
+</body>
+</html>

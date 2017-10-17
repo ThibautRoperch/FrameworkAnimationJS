@@ -1,0 +1,76 @@
+
+Fonctionnalités
+===============
+
+Un fichier XML contient la description d'un dessin ainsi qu'un programme défini par des actions correspondantes à des animations des objets du dessin
+
+Les objets n'ont pas de coordonnées au début. C'est le programme qui donne les coordonnées de chaque objet. Une instruction du programme est explicitement assignée à un objet.
+
+Actions possibles dans le programme :
+- Déplacer un élément, le rendre visible, le faire attendre, clignoter, déclencher un objet avec <click/> et trigger
+- Changer les autres valeurs d'un attribut d'un élément (couleur, texte, position) avec l'objet XML <setproperty object="" property="" value="" />
+
+Questions
+=========
+
+Pourquoi avoir mis la valeur d'un texte dans un attribut, et sa référence (id) dans la balise ? Pas de raison particulière, on peut changer
+Dans cpu_anim1.xml par exemple, le premier texte qui clignotte n'est pas dans le XML ; message automatique ? 
+C'est quoi le @, dans des XML ? Saut de ligne
+
+Technique
+=========
+
+Parsing de fichier XML :
+
+var parser = new DOMParser();
+var xmlDoc = parser.parseFromString(fichier ,"text/xml");
+
+while (xmlDoc.getElementsByTagName("note")[i]) {
+	...
+}
+
+P5.js permet de dessiner des figures. Les figures ne sont pas des éléments HTML récupérables.
+
+P5.js : La fonction draw() dessine des objets (ellipse, line, ...). C'est une boucle. Les figures doivent donc êtres enregistrées dans un tableau.
+
+XML : les programmes (associés à un objet du dessin) sont à exécuter en parallèle. Il faut donc lire tous les programmes, les enregistrer dans un tableau sous forme d'instructions, et les exécuter en même temps.
+
+Implémenter
+===========
+
+On devra faire des classes, une par objet, une par intruction.
+Un programme principal lira un XML donné et mettra les objets du dessin dans un tableau de type associatif (identifiant : Object), ainsi que les programmes dans un tableau associatif (identifiant : Program).
+Les actions des objets sont des méthodes associées à ces derniers. Superclasse "Object".
+Exemple : le déplacement vers la droite d'un objet (right, down, up, left) change progressivement les coordonnées de l'objet concerné.
+Une variable globale PAS qui définit le pas de déplacement par défaut d'un objet (temps de la boucle de déplacement fixé à 5 ms);
+Variable globale PAUSE, qui sert de jeton, mise à false par wait() lorsqu'une instruction de déplacement est lue par le programme principal, mise à true par l'objet une fois déplacé.
+Comment gérer le clique ? => wait() ;  lorsqu'on lit <click />, mouseClicked(), checker la position de la souris, si elle est dans la hitbox de l'élement, PAUSE = false.
+
+function wait() { setTimeout(function() { if (PAUSE) wait(); }, 10); }
+
+Pouvoir copier/coller des objets
+Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilité de bouger à l'infini sur le tracé (revenir au débbut à chaque fois qu'il arrive à la fin)
+Un objet de type tracé, avec des présets, comme une sinusoidale
+
+On n'utilisera pas les instructions setx, sety, setxy, visible. Elles seront remplacées par l'instruction setproperty.
+
+Conventions
+===========
+
+Tout en anglais (commentaires, nom des classes et des méthodes, nom des variables, ...)
+Nom des classes : CamelCase
+Nom des méthodes : lowerCamelCase
+Nom des fonctions et variables : snake_case, explicites, HIGHER pour les variables globales
+Tabulations : TAB
+Un espace après une virgule, un point virgule, une parenthèse fermante, un mot-clé, avant et après un opérateur de comparaison
+Ouverture du bloc sur la même ligne que son instruction
+
+Exemple :
+class MyClass {
+	firstMethod(arg1, arg2) {
+		for (var i = 0; i < some_vector.length; ++i) {
+			// Some instructions
+		}
+	}
+}
+
