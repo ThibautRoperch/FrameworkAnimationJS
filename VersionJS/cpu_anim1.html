@@ -1,20 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <title>Animation CPU</title>
-<link rel="stylesheet" type="text/css" href="css.css" /> 
+<link rel="stylesheet" type="text/css" href="css/css.css" />
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script> -->
+<script src="js/animation.js"></script>
 </head>
 
 <body>
+
+<applet id="a">
+</applet>
+
 <h1>Animation CPU</h1>
 
 <h2>Objectif</h2>
 
-<p>Le but de cette animation est de montrer sch�matiquement comment sont ex�cut�es les instructions au niveau du microprocesseur.</p>
+<p>Le but de cette animation est de montrer schématiquement comment sont exécutées les instructions au niveau du microprocesseur.</p>
 
 <h2>Fonctionnement</h2>
 
-<p>On d�sire mod�liser le fonctionnement du programme C suivant :</p>
+<p>On désire modéliser le fonctionnement du programme C suivant :</p>
 
 <pre>
 <code>
@@ -23,24 +29,24 @@ c = a + b;
 </code>
 </pre>
 
-<p>On consid�re que l'on travaille avec des registres 32 bits et que les variables enti�res <code>a, b</code> et <code>c</code> sont respectivement stock�es aux adresses <b>100</b>, <b>104</b> et <b>108</b>.</p>
+<p>On considère que l'on travaille avec des registres 32 bits et que les variables entières <code>a, b</code> et <code>c</code> sont respectivement stockées aux adresses <b>100</b>, <b>104</b> et <b>108</b>.</p>
 
 <h3>Traduction en assembleur 80386</h3>
 
-<p>Le code pr�c�dent se traduit en :</p>
+<p>Le code précédent se traduit en :</p>
 
 <pre>
 <code>
 mov eax,[100] ; mettre la valeur de a dans eax<br />
 mov ebx,[104] ; mettre la valeur de b dans ebx<br />
-add eax,ebx   ; ajouter ebx � eax<br />
-mov [108],eax ; mettre le r�sultat dans c<br />
+add eax,ebx   ; ajouter ebx à eax<br />
+mov [108],eax ; mettre le résultat dans c<br />
 </code>
 </pre>
 
 <h3>Micro code</h3>   
   
-<p>On rappelle que les instructions 80386 sont traduites en micro-op�rations au sein du microprocesseur. On utilise ici le format suivant :</p>
+<p>On rappelle que les instructions 80386 sont traduites en micro-opérations au sein du microprocesseur. On utilise ici le format suivant :</p>
 
 <table align="center" width="50%">
 <tr>
@@ -69,8 +75,8 @@ mov [108],eax ; mettre le r�sultat dans c<br />
   <li><b>11</b> :  <code>ADD REGISTRE 1, REGISTRE 2</code></li>
   </ul>
   </li>
-<li> <b>VALUE 1</b> et <b>VALUE 2</b> : repr�sentent des valeurs ou des adresses sur 32 bits</li>
-<li> <b>REGISTRE 1</b> et <b>REGISTRE 2</b> : repr�sentent des registres :
+<li> <b>VALUE 1</b> et <b>VALUE 2</b> : représentent des valeurs ou des adresses sur 32 bits</li>
+<li> <b>REGISTRE 1</b> et <b>REGISTRE 2</b> : représentent des registres :
   <ul>
   <li> <b>00</b> : EAX</li>
   <li> <b>01</b> : EBX</li>
@@ -103,13 +109,15 @@ mov [108],eax ; mettre le r�sultat dans c<br />
 
 <h2>Applet</h2>
 
-<p>Voici l'animation correspondant � l'ex�cution du code (sans pipeline)</p>
+<p>Voici l'animation correspondant à l'exécution du code (sans pipeline)</p>
 
 
-<applet>
-  <script src="js/animation.js"></script>
-  <script>open_animation("cpu_anim1.xml", this, 692, 398);</script>
+<applet id="cpu_anim1">
+  <script>
+    load_animation("cpu_anim1.xml", "a", 692, 398);
+  </script>
 </applet>
+
 
 <br />
 <br />
