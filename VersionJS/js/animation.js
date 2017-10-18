@@ -172,9 +172,12 @@ function include_scripts() {
 		// p5.js
 		"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js",
 		// Objects
-		// "js/Objects/Object.js",
-		// "js/Objects/Image.js",
-		// "js/Objects/Text.js"
+		"js/Objects/AnimatedObject.js",
+		"js/Objects/Box.js",
+		"js/Objects/Grid.js",
+		"js/Objects/Image.js",
+		"js/Objects/Polygon.js",
+		"js/Objects/Text.js"
 		// Instructions
 	];
 

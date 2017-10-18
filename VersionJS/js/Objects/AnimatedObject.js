@@ -1,4 +1,3 @@
-
 class AnimatedObject {
 	constructor(id, x, y, fgcolor, bgcolor, state, layer, visibility) {
 		this.id = id;
