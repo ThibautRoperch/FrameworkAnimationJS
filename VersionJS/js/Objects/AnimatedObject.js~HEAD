@@ -1,12 +1,12 @@
-class Object {
+class AnimatedObject {
 	constructor(id, x, y, fgcolor, bgcolor, state, layer) {
 		this.id = id;
-		this.x = x;
-		this.y = y;
+		this.x = (x == undefined) ? 0 : x;
+		this.y = (y == undefined) ? 0 : y;
 		this.fgcolor = fgcolor;
 		this.bgcolor = bgcolor;
 		this.state = state;
-		this.layer = layer;
+		this.layer = (layer == undefined) ? 0 : layer;
 	}
 
 	getId() {
