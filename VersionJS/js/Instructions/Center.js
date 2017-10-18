@@ -1,0 +1,1 @@
+class Center extends Instruction

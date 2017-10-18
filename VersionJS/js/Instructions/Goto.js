@@ -1,0 +1,1 @@
+class Goto extends Instruction

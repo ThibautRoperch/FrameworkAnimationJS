@@ -1,0 +1,1 @@
+class Sleep extends Instruction

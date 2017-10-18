@@ -1,0 +1,1 @@
+class Blink extends Instruction

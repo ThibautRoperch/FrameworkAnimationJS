@@ -1,0 +1,1 @@
+class Visible extends Instruction

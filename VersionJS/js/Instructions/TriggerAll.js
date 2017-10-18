@@ -1,0 +1,1 @@
+class TriggerAll extends Instruction

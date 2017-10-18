@@ -1,0 +1,1 @@
+class Stop extends Instruction
