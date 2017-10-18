@@ -1,13 +1,12 @@
 class Object {
-	constructor(id, x, y, red, green, blue, state, layer ){
+	constructor(id, x, y, fgcolor, bgcolor, state, layer) {
 		this.id = id;
-		this.x = x;
-		this.y = y;
-		this.red = red;
-		this.green = green;
-		this.blue = blue;
+		this.x = (x == undefined) ? 0 : x;
+		this.y = (y == undefined) ? 0 : y;
+		this.fgcolor = fgcolor;
+		this.bgcolor = bgcolor;
 		this.state = state;
-		this.layer = layer;
+		this.layer = (layer == undefined) ? 0 : layer;
 	}
 
 	getId() {
@@ -22,16 +21,12 @@ class Object {
 		return this.y;
 	}
 
-	getRed() {
-		return this.red;
+	getFgcolor() {
+		return this.fgcolor;
 	}
 
-	getGreen() {
-		return this.green;
-	}
-
-	getBlue() {
-		return this.blue;
+	getBgcolor() {
+		return this.bgcolor;
 	}
 
 	getState() {
@@ -54,16 +49,12 @@ class Object {
 		this.y = y;
 	}
 
-	setRed(red) {
-		this.red = red;
+	setFgcolor(fgcolor) {
+		this.fgcolor = fgcolor;
 	}
 
-	setGreen(green) {
-		this.green = green;
-	}
-
-	setBlue(blue) {
-		this.blue = blue;
+	setBgcolor(bgcolor) {
+		this.bgcolor = bgcolor;
 	}
 
 	setState(state) {

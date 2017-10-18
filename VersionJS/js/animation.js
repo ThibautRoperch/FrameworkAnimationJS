@@ -72,9 +72,21 @@ function read_xml_file(contents) {
 	if (objects_node) {
 		// Create and push each object in the objects array
 		for (var i = 0; i < objects_node.childNodes.length; ++i) {
-			var object = objects_node.childNodes[i];
-			// object.getAttribute("dazdazd");
-			// OBJECTS.push();
+			var read_object = objects_node.childNodes[i];
+			var new_object;
+			console.log(objects_node);
+			var id = read_object.nodeValue;
+			var fgcolor = read_object.getAttribute("fgcolor");
+			var bgcolor = read_object.getAttribute("bgcolor");
+			var layer = read_object.getAttribute("layer");
+			// if (type == "object_text") {
+			// 	read_object.getAttribute("text");
+			// 	read_object.getAttribute("font");
+			// 	read_object.getAttribute("border");
+			// 	read_object.getAttribute("transparency");
+			// 	new_object = new Text(id, x, y, text, font, fgcolor, bgcolor, bocolor, border, transparency, layer);
+			// }
+			// OBJECTS[id] = new_object; 
 		}
 	}
 
@@ -151,7 +163,7 @@ function draw() {
 function include_scripts() {
 	scripts = [
 		// p5.js
-		// "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js",
+		"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js",
 		// Objects
 		// "js/Objects/Object.js",
 		// "js/Objects/Image.js",
