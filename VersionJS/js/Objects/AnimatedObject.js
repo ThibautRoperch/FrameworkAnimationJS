@@ -8,7 +8,7 @@ class AnimatedObject {
 		this.bgcolor = bgcolor;
 		this.state = state;
 		this.layer = layer;
-		this.visibility = visibility;
+		this.visible = visible;
 	}
 
 	getId() {
@@ -70,8 +70,8 @@ class AnimatedObject {
 	setLayer(layer) {
 		this.layer = layer;
 	}
-	
-	setVisiblity(visibility) {
-		this.visibility = visibility;
+
+	setVisible(visible) {
+		this.visible = visible;
 	}
 }

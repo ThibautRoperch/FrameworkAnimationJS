@@ -1,9 +1,9 @@
 class Visible extends Instruction{
-    constructor(object, visibility) {
+    constructor(object, visible) {
         super(object, "Visible");
-        this.visibility =  visibility;
+        this.visible =  visible;
     }
     execute() {
-        this.object.setVisibility(this.visibility);
+        this.object.setVisible(this.visible);
     }
 }
