@@ -1,7 +1,8 @@
-class Text extends Object {
-	constructor(id, x, y, text, font, red, green, blue, state, border, transparency, layer) {
-		super(id, x, y, red, green, blue, state, layer);
+class Text extends AnimatedObject {
+	constructor(id, x, y, text, font, fgcolor, bgcolor, bocolor, state, border, transparency, layer) {
+		super(id, x, y, fgcolor, bgcolor, state, layer);
 		this.text = text;
+		this.bocolor = bocolor;
 		this.font = font;
 		this.border = border;
 		this.transparency = transparency;
@@ -9,6 +10,10 @@ class Text extends Object {
 
 	getText() {
 		return this.text;
+	}
+
+	getBocolor() {
+		return this.bocolor;
 	}
 
 	getFont() {
@@ -25,6 +30,10 @@ class Text extends Object {
 
 	setText(text) {
 		this.text = text;
+	}
+
+	setBocolor(bocolor) {
+		this.bocolor = bocolor;
 	}
 
 	setFont(font) {
