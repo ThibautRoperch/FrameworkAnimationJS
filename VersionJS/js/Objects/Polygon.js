@@ -1,4 +1,4 @@
-class Box extends AnimatedObject {
+class Polygon extends AnimatedObject {
 	constructor(id, x, y, fgcolor, bgcolor, state, layer, width, height, bocolor) {
         super(id, x, y, fgcolor, bgcolor, state, layer);
         this.width = width;
