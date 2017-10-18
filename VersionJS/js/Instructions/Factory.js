@@ -1,0 +1,1 @@
+class Factory extends Instruction

@@ -1,0 +1,1 @@
+class Left extends Instruction

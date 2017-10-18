@@ -1,0 +1,1 @@
+class SetProperty extends Instruction

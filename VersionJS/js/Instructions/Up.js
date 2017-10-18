@@ -1,0 +1,1 @@
+class Up extends Instruction

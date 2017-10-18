@@ -1,0 +1,1 @@
+class Trigger extends Instruction

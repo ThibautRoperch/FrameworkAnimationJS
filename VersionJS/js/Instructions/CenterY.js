@@ -1,0 +1,1 @@
+class CenterY extends Instruction
