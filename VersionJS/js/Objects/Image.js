@@ -8,11 +8,4 @@ class Image extends AnimatedObject {
         return this.image;
     }
 
-
-
-
-
-
-
-
 }
