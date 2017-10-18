@@ -1,41 +1,50 @@
-class Text extends Object {
-    constructor(id, x, y, text, font, red, green, blue, state, border, transparency, layer) {
-        super(id, x, y, red, green, blue, state, layer);
-        this.text = text;
-        this.font = font;
-        this.border = border;
-        this.transparency = transparency;
-    }
+class Text extends AnimatedObject {
+	constructor(id, x, y, text, font, fgcolor, bgcolor, bocolor, state, border, transparency, layer) {
+		super(id, x, y, fgcolor, bgcolor, state, layer);
+		this.text = text;
+		this.bocolor = bocolor;
+		this.font = font;
+		this.border = border;
+		this.transparency = transparency;
+	}
 
-    getText() {
-        return this.text;
-    }
+	getText() {
+		return this.text;
+	}
 
-    getFont() {
-        return this.font;
-    }
+	getBocolor() {
+		return this.bocolor;
+	}
 
-    getBorder() {
-        return this.border;
-    }
+	getFont() {
+		return this.font;
+	}
 
-    getTransparency() {
-        return this.transparency;
-    }
+	getBorder() {
+		return this.border;
+	}
 
-    setText(text) {
-        this.text = text;
-    }
+	getTransparency() {
+		return this.transparency;
+	}
 
-    setFont(font) {
-        this.font = font;
-    }
+	setText(text) {
+		this.text = text;
+	}
 
-    setBorder(border) {
-        this.border = border;
-    }
+	setBocolor(bocolor) {
+		this.bocolor = bocolor;
+	}
 
-    setTransparency(transparency) {
-        this.transparency = transparency;
-    }
+	setFont(font) {
+		this.font = font;
+	}
+
+	setBorder(border) {
+		this.border = border;
+	}
+
+	setTransparency(transparency) {
+		this.transparency = transparency;
+	}
 }

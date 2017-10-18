@@ -89,5 +89,6 @@ Changements effectués
 Les feuilles de style sont désormais dans le dossier css : <link rel="stylesheet" type="text/css" href="css/css.css" />
 Il faut inclure le script animation.js dans chaque page contenant une animation : <script src="js/animation.js"></script>
 Pour charger une animation (charger un fichier XML, afficher les objets, lancer le programme) : load_animation("animation.xml", "target_node_id", <width>, <height>);
+On peut donner les coordonnées x et y de l'objet lors de sa création, 0 par défaut
 Les instructions setx, sety, setxy, visible sont remplacées par l'instruction setproperty. DTD mise à jour en conséquence.
 Ajout des règles applet et div.loading dans le fichier css/css.css
