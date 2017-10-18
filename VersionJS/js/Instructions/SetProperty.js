@@ -15,22 +15,27 @@ class SetProperty extends Instruction {
                 this.object.setX(this.value);
                 break;
 
+
+            case "visible":
+                this.object.setText(this.value);
+                break;
+
             case "text":
                 this.object.setText(this.value);
                 break;
 
             case "fgcolor":
-                this.object.set(this.value);
+                this.object.setFgcolor(this.value);
                 break;
 
             case "bgcolor":
-                this.object.set(this.value);
+                this.object.setBgcolor(this.value);
                 break;
 
             case "bocolor":
-                this.object.set(this.value);
+                this.object.setBocolor(this.value);
                 break;
 
-                    }
+        }
     }
 }

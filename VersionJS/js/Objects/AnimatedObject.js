@@ -1,6 +1,6 @@
 
 class AnimatedObject {
-	constructor(id, x, y, fgcolor, bgcolor, state, layer) {
+	constructor(id, x, y, fgcolor, bgcolor, state, layer, visibility) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -8,6 +8,7 @@ class AnimatedObject {
 		this.bgcolor = bgcolor;
 		this.state = state;
 		this.layer = layer;
+		this.visibility = visibility;
 	}
 
 	getId() {
@@ -38,6 +39,10 @@ class AnimatedObject {
 		return this.layer;
 	}
 
+	getVisibility() {
+		return this.visibility;
+	}
+
 	setId(id) {
 		this.id = id;
 	}
@@ -64,5 +69,9 @@ class AnimatedObject {
 
 	setLayer(layer) {
 		this.layer = layer;
+	}
+	
+	setVisiblity(visibility) {
+		this.visibility = visibility;
 	}
 }
