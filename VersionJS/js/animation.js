@@ -63,22 +63,26 @@ function read_xml_file(contents) {
 
 	// If the background node exists
 	if (background_node) {
-		BG_IMAGE = background_node.childNodes[0].nodeValue;
+		BG_IMAGE = background_node.textContent;
 	} else {
 		BG_IMAGE = "";
 	}
-
+	
 	// If the objects node exists
 	if (objects_node) {
 		// Create and push each object in the objects array
-		for (var i = 0; i < objects_node.childNodes.length; ++i) {
-			var read_object = objects_node.childNodes[i];
+		for (var i = 0; i < objects_node.children.length; ++i) {
+			var read_object = objects_node.children[i];
 			var new_object;
-			console.log(objects_node);
-			var id = read_object.nodeValue;
-			var fgcolor = read_object.getAttribute("fgcolor");
-			var bgcolor = read_object.getAttribute("bgcolor");
-			var layer = read_object.getAttribute("layer");
+			alert(read_object.hasAttribute("fgcolor"));
+			var x = read_object.hasAttribute("x") ? parseInt(read_object.getAttribute("x")) : 0;
+			var y = read_object.hasAttribute("y") ? parseInt(read_object.getAttribute("y")) : 0;
+			console.log(y);
+			// var test2 = read_object.getAttribute("xezfuhzeilm");
+			// var id = read_object.nodeValue;
+			// var fgcolor = read_object.getAttribute("fgcolor");
+			// var bgcolor = read_object.getAttribute("bgcolor");
+			// var layer = read_object.getAttribute("layer");
 			// if (type == "object_text") {
 			// 	read_object.getAttribute("text");
 			// 	read_object.getAttribute("font");
