@@ -74,23 +74,26 @@ function read_xml_file(contents) {
 		for (var i = 0; i < objects_node.children.length; ++i) {
 			var read_object = objects_node.children[i];
 			var new_object;
-			alert(read_object.hasAttribute("fgcolor"));
+			var type = read_object.nodeName;
+			var id = read_object.nodeValue;
 			var x = read_object.hasAttribute("x") ? parseInt(read_object.getAttribute("x")) : 0;
 			var y = read_object.hasAttribute("y") ? parseInt(read_object.getAttribute("y")) : 0;
-			console.log(y);
-			// var test2 = read_object.getAttribute("xezfuhzeilm");
-			// var id = read_object.nodeValue;
-			// var fgcolor = read_object.getAttribute("fgcolor");
-			// var bgcolor = read_object.getAttribute("bgcolor");
-			// var layer = read_object.getAttribute("layer");
-			// if (type == "object_text") {
-			// 	read_object.getAttribute("text");
-			// 	read_object.getAttribute("font");
-			// 	read_object.getAttribute("border");
-			// 	read_object.getAttribute("transparency");
-			// 	new_object = new Text(id, x, y, text, font, fgcolor, bgcolor, bocolor, border, transparency, layer);
-			// }
-			// OBJECTS[id] = new_object; 
+			var fgcolor = read_object.hasAttribute("fgcolor") ? read_object.getAttribute("fgcolor").split(",") : [0, 0, 0];
+				for (c in fgcolor) fgcolor[c] = parseInt(fgcolor[c]);
+			var bgcolor = read_object.hasAttribute("bgcolor") ? read_object.getAttribute("bgcolor").split(",") : [0, 0, 0];
+				for (c in bgcolor) bgcolor[c] = parseInt(bgcolor[c]);
+			var bocolor = read_object.hasAttribute("bocolor") ? read_object.getAttribute("bocolor").split(",") : [0, 0, 0];
+				for (c in bocolor) bocolor[c] = parseInt(bocolor[c]);
+			var layer = read_object.hasAttribute("layer") ? parseInt(read_object.getAttribute("layer")) : 0;
+			var visible = read_object.hasAttribute("layer") ? read_object.getAttribute("visible") == "true" : false;
+			if (type == "object_text") {
+				var text = read_object.getAttribute("text");
+				var font = read_object.getAttribute("font");
+				var border = read_object.hasAttribute("border") ? parseInt(read_object.getAttribute("border")) : 0;
+				var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : false;
+				new_object = new Text(id, x, y, text, font, fgcolor, bgcolor, bocolor, border, bgtransparent, layer);
+			}
+			OBJECTS[id] = new_object;
 		}
 	}
 

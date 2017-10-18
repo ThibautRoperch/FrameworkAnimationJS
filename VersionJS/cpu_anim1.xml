@@ -5,94 +5,94 @@
 
   <objects>
     <object_text 
-      text="mov eax,[100]" transparency="false"
+      text="mov eax,[100]" bgtransparent="false"
       fgcolor="255,255,255"
       bgcolor="0,0,128"
       font="Courier,12,bold">ins1</object_text>
     <object_text 
-      text="mov ebx,[104]" transparency="false"
+      text="mov ebx,[104]" bgtransparent="false"
       fgcolor="255,255,255"
       bgcolor="0,0,128"
       font="Courier,12,bold">ins2</object_text>
     <object_text 
-      text="add eax,ebx" transparency="false"
+      text="add eax,ebx" bgtransparent="false"
       fgcolor="255,255,255"
       bgcolor="0,0,128"
       font="Courier,12,bold">ins3</object_text>
     <object_text 
-      text="mov [108],eax" transparency="false"
+      text="mov [108],eax" bgtransparent="false"
       fgcolor="255,255,255"
       bgcolor="0,0,128"
       font="Courier,12,bold">ins4</object_text>
 
     <object_text 
-      text="[100]=1" transparency="false"
+      text="[100]=1" bgtransparent="false"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data1</object_text>
     <object_text 
-      text="[104]=2" transparency="false"
+      text="[104]=2" bgtransparent="false"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data2</object_text>
     <object_text 
-      text="[108]=?" transparency="false"
+      text="[108]=?" bgtransparent="false"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data3</object_text>
 
   <object_text 
-      text="eax=?" transparency="true"
+      text="eax=?" bgtransparent="true"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">eax</object_text>
     <object_text 
-      text="ebx=?" transparency="true"
+      text="ebx=?" bgtransparent="true"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">ebx</object_text>
 
     <object_text 
-      text="00 100 ? 00 ?" transparency="false"
+      text="00 100 ? 00 ?" bgtransparent="false"
       font="Courier,12,bold">ins1_decode</object_text>
     <object_text 
-      text="00 104 ? 01 ?" transparency="false"
+      text="00 104 ? 01 ?" bgtransparent="false"
       font="Courier,12,bold">ins2_decode</object_text>
     <object_text 
-      text="11 ? ? 00 01 ?" transparency="false"
+      text="11 ? ? 00 01 ?" bgtransparent="false"
       font="Courier,12,bold">ins3_decode</object_text>
     <object_text 
-      text="01 104 ? 00 ?" transparency="false"
+      text="01 104 ? 00 ?" bgtransparent="false"
       font="Courier,12,bold">ins4_decode</object_text>
 
     <object_text 
-      text="request [100]" transparency="false"
+      text="request [100]" bgtransparent="false"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request1</object_text>
     <object_text 
-      text="request [104]" transparency="false"
+      text="request [104]" bgtransparent="false"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request2</object_text>
     <object_text 
-      text="request eax" transparency="false"
+      text="request eax" bgtransparent="false"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request31</object_text>
     <object_text 
-      text="request ebx" transparency="false"
+      text="request ebx" bgtransparent="false"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request32</object_text>
     <object_text 
-      text="request eax" transparency="false"
+      text="request eax" bgtransparent="false"
       fgcolor="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request41</object_text>
 
     <object_text
-      text="click on first instruction@to start"  transparency="false"
+      text="click on first instruction@to start"  bgtransparent="false"
       fgcolor="0,0,0"
       bgcolor="255,255,255"
       font="Courier,12,bold">message</object_text>

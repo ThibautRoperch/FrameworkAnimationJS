@@ -60,8 +60,15 @@ Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilit�
 Un objet de type tracé, avec des presets, comme une sinusoidale
 
 On n'utilisera pas les instructions setx, sety, setxy, visible. Elles seront remplacées par l'instruction setproperty. Mettre à jour la DTD.
+On peut donner le x et le y à la création de l'objet (#IMPLIED avant le text #REQUIRED). Mêtre à jour la DTD. Pareil pour visible (true|false)
 
 Refaire le texte de création d'objet, comme dans index.html, 4. Créer ses propres objets
+
+Supprimer this.type des instructions si on s'en sert pas (dans les classes héritant de Instruction)
+
+Attribut opacity pour les objets (entre 0 et 1, un double, par défaut 1, pour gérer les objets qui se supperposent), mettre à jour la DTD
+
+Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir. Valeurs very fast, fast, normal, slow, very slow
 
 Conventions
 ===========
@@ -89,6 +96,7 @@ Changements effectués
 Les feuilles de style sont désormais dans le dossier css : <link rel="stylesheet" type="text/css" href="css/css.css" />
 Il faut inclure le script animation.js dans chaque page contenant une animation : <script src="js/animation.js"></script>
 Pour charger une animation (charger un fichier XML, afficher les objets, lancer le programme) : load_animation("animation.xml", "target_node_id", <width>, <height>);
-On peut donner les coordonnées x et y de l'objet lors de sa création, 0 par défaut
+On peut donner les coordonnées x et y de l'objet lors de sa création, 0 par défaut. Pareil pour visible (true|false, true par défaut). DTD mise à jour en conséquence.
+On considère que tous les objets peuvent avoir une couleur de bordure
 Les instructions setx, sety, setxy, visible sont remplacées par l'instruction setproperty. DTD mise à jour en conséquence.
 Ajout des règles applet et div.loading dans le fichier css/css.css
