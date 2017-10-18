@@ -85,13 +85,16 @@ function read_xml_file(contents) {
 			var bocolor = read_object.hasAttribute("bocolor") ? read_object.getAttribute("bocolor").split(",") : [0, 0, 0];
 				for (c in bocolor) bocolor[c] = parseInt(bocolor[c]);
 			var layer = read_object.hasAttribute("layer") ? parseInt(read_object.getAttribute("layer")) : 0;
-			var visible = read_object.hasAttribute("layer") ? read_object.getAttribute("visible") == "true" : false;
+			var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : false;
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");
 				var font = read_object.getAttribute("font");
 				var border = read_object.hasAttribute("border") ? parseInt(read_object.getAttribute("border")) : 0;
 				var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : false;
-				new_object = new Text(id, x, y, text, font, fgcolor, bgcolor, bocolor, border, bgtransparent, layer);
+				new_object = new Text(id, x, y, text, font, fgcolor, bgcolor, bocolor, state, border, bgtransparent, layer, VISIBLE ICI ?);
+				console.log(new_object);
+				// BORDERCOLOR sur tous les objets ? si oui, BORDER sur tous les objets aussi
+				// Il manque VISIBLE dans le constructeur des objets
 			}
 			OBJECTS[id] = new_object;
 		}
@@ -160,6 +163,9 @@ function draw() {
 	if (y >= 150) {
 		y = -100;
 	}
+
+	// TODO
+	// afficher les objets de chaque couche
 }
 
 
