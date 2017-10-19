@@ -13,6 +13,8 @@ Supprimer this.type des instructions si on s'en sert pas (dans les classes héri
 
 Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir, et màj la dtd
 
+XML de l'objet grille et màj DTD + à traiter dans le reader
+
 AnimatedObject::setAngle(value)
 AnimatedObject::getWidth()
 AnimatedObject::getHeight()
@@ -23,6 +25,7 @@ Possibilité de donner le border radius de chaque coin pour un rectangle : borde
 Comment gérer le clique ? => wait() ;  lorsqu'on lit <click />, mouseClicked(), checker la position de la souris, si elle est dans la hitbox de l'élement, PAUSE = false.
 function wait() { setTimeout(function() { if (PAUSE) wait(); }, 10); }
 
+Récap des attributs de chaque objet (tableau ? graphe des classes ?)
 
 Questions
 =========

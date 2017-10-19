@@ -60,17 +60,29 @@ On considère que tous les objets peuvent avoir une couleur de bordure.
 On peut donner les propriétés "x" et "y" de l'objet lors de sa création, 0 par défaut. DTD mise à jour en conséquence.
 Pareil pour toutes ses autres propriétés, sauf "state".
 
-Les propriétés suivantes ont été ajoutées :
+Les propriétés suivantes ont été ajoutées pour tous les objets :
 - visible (true|false, true par défaut) : l'objet est visible
-- bgtransparent (true|false, false par défaut) : le background est transparent
+- bgtransparent (true|false, false par défaut) : le background est transparent (anciennement l'attribut "transparency")
 - botransparent (true|false, false par défaut) : la bordure est transparente
 - opacity (nombre entre 0 et 1, 1 par défaut) : l'opacité de l'objet, utile lorsque des objets se superposent
+
+La couleur par défaut de tous les objets a été modifiée :
+- fgcolor (couleur du premier plan) : rgb(0, 0, 0) par défaut
+- bgcolor (couleur de l'arrière plan) : rgb(0, 0, 0) par défaut
+- bocolor (couleur de la bordure) : rgb(0, 0, 0) par défaut
+
+La propriété suivante a été ajoutée pour l'objet rectangle :
+- round (entier supérieur à 0, 0 par défaut) : rayon du congé des coins du rectangle
+
+Ces propriétés de l'objet image ont été modifiées :
+- width (largeur de l'image) : 100 par défaut
+- height (hauteur de l'image) : 100 par défaut
 
 Les instructions setx, sety, setxy, visible sont remplacées par l'instruction setproperty. DTD mise à jour en conséquence.
 
 L'état par défaut d'un objet du dessin est "normal".
 L'instruction <click> est gérée de la façon suivante : l'état de l'objet devient "waiting_click", et quand un objet est cliqué, ca envoie un trigger avec la value "waiting_click".
-Les instructions <label>, <goto>, <stop> sont gérées directement par le programme principal, sans créer d'objet Instruction.
+Les instructions <label>, <goto>, <stop> sont propres à l'exécution du programme, elles n'agissent pas directement sur l'objet auquel le programme est associé.
 
 Le noeud <framerate> permet de changer la vitesse de rafraichissement du dessin : "very slow", "slow", "normal" (défaut), "fast", "very fast". DTD mise à jour en conséquence.
 

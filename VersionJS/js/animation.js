@@ -77,10 +77,9 @@ function read_xml_file(contents) {
 	
 	// If the objects' node exists
 	if (objects_node) {
-		// Create and push each object in the objects array
-		for (var i = 0; i < objects_node.children.length; ++i) {
-			var read_object = objects_node.children[i];
-			var new_object;
+		// Create and push each object in the objects' array
+		for (var read_object of objects_node.children) {
+			var new_object = null;
 			// Retrieve the AnimatedObjects' attributes
 			var type = read_object.nodeName;
 			var id = read_object.textContent;
@@ -95,10 +94,10 @@ function read_xml_file(contents) {
 				for (c in bocolor) bocolor[c] = parseInt(bocolor[c]);
 			var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : false;
 			var layer = parseInt(read_object.getAttribute("layer")) | 0;
+			LAYERS.add(layer);
 			var state = "normal";
 			var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : true;
 			var opacity = parseInt(read_object.getAttribute("opacity")) | 1;
-			LAYERS.add(opacity);
 			// Retrieve the others specific attributes and create the associated animated object
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");
@@ -106,17 +105,28 @@ function read_xml_file(contents) {
 				var border = parseInt(read_object.getAttribute("border")) | 0;
 				var bocolor = read_object.hasAttribute("bocolor") ? read_object.getAttribute("bocolor").split(",") : [0, 0, 0];
 					for (c in bocolor) bocolor[c] = parseInt(bocolor[c]);
-				new_object = new Text(id, x, y, text, font, fgcolor, bgcolor, bocolor, "normal", border, bgtransparent, layer, visible, opacity);
+				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border);
 			} else if (type == "object_image") {
-				new_object = new Image(id, x, y, text, font, fgcolor, bgcolor, bocolor, "normal", border, bgtransparent, layer, visible, opacity);
+				var width = parseInt(read_object.getAttribute("width")) | 100;
+				var height = parseInt(read_object.getAttribute("height")) | 100;
+				var image = read_object.getAttribute("image");
+				new_object = new Image(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height, image);
 			} else if (type == "object_rectangle") {
-				new_object = new Rectangle(id, x, y, text, font, fgcolor, bgcolor, bocolor, "normal", border, bgtransparent, layer, visible, opacity);
+				var width = parseInt(read_object.getAttribute("width"));
+				var height = parseInt(read_object.getAttribute("height"));
+				var round = parseInt(read_object.getAttribute("round")) | 0;
+				// new_object = new Rectangle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height, round); // TODO renommer Box en Rectangle
 			} else if (type == "object_polygon") {
-				new_object = new Polygon(id, x, y, text, font, fgcolor, bgcolor, bocolor, "normal", border, bgtransparent, layer, visible, opacity);
+				var coord_x = parseInt(read_object.getAttribute("coord_x"));
+				var coord_y = parseInt(read_object.getAttribute("coord_y"));
+				new_object = new Polygon(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, coord_x, coord_y);
 			} else if (type == "object_circle") {
-				new_object = new Circle(id, x, y, fgcolor, bgcolor, bocolor, bgtransparent, "normal", layer, visible, opacity);
+				var radius = parseInt(read_object.getAttribute("radius"));
+				// new_object = new Circle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, radius); // TODO revoir le constructeur
 			} else if (type == "object_ellipse") {
-				new_object = new Ellipse(id, x, y, fgcolor, bgcolor, bocolor, bgtransparent, "normal", layer, visible, opacity);
+				var width = parseInt(read_object.getAttribute("width"));
+				var height = parseInt(read_object.getAttribute("height"));
+				new_object = new Ellipse(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height);
 			}
 			OBJECTS.set(id, new_object);
 		}
@@ -124,8 +134,74 @@ function read_xml_file(contents) {
 
 	// If the programs' node exists
 	if (programs_node) {
-		// Create and push each program in the programs array
-
+		// Create and push each instruction's program in the programs' array
+		for (var read_program of programs_node.children) {
+			var object_id = read_program.getAttribute("assigned_to");
+			var instructions = new Array();
+			for (var read_instruction of read_program.children) {
+				var new_instruction = null;
+				// Retrieve ...
+				var type = read_instruction.nodeName;
+				// Retrieve ...
+				if (type == "click") {
+					new_instruction = new Click(OBJECTS.get(object_id));
+				} else if (type == "label") {
+					var value = read_instruction.getAttribute("value");
+					// new_instruction = new Label(OBJECTS.get(object_id), value); // TODO objet qui a un execute() vide
+				} else if (type == "moveto") {
+					// TODO plein d'attributs
+					new_instruction = new MoveTo(OBJECTS.get(object_id));
+				} else if (type == "wait") {
+					var value = read_instruction.getAttribute("value");
+					new_instruction = new Wait(OBJECTS.get(object_id), value);
+				} else if (type == "sleep") {
+					var value = parseInt(read_instruction.getAttribute("value"));
+					new_instruction = new Sleep(OBJECTS.get(object_id), value);
+				} else if (type == "state") {
+					var value = read_instruction.getAttribute("value");
+					new_instruction = new State(OBJECTS.get(object_id), value);
+				} else if (type == "trigger") {
+					var object = read_instruction.getAttribute("object");
+					var value = read_instruction.getAttribute("value");
+					new_instruction = new Trigger(OBJECTS.get(object_id), object, value);
+				} else if (type == "goto") {
+					var value = read_instruction.getAttribute("value");
+					// new_instruction = new GoTo(OBJECTS.get(object_id), value); // TODO GoTo ou Goto ?
+				} else if (type == "up") {
+					var y = parseInt(read_instruction.getAttribute("y"));
+					var dy = parseInt(read_instruction.getAttribute("dy"));
+					new_instruction = new Up(OBJECTS.get(object_id), y, dy);
+				} else if (type == "down") {
+					var y = parseInt(read_instruction.getAttribute("y"));
+					var dy = parseInt(read_instruction.getAttribute("dy"));
+					new_instruction = new Down(OBJECTS.get(object_id), y, dy);
+				} else if (type == "left") {
+					var x = parseInt(read_instruction.getAttribute("x"));
+					var dx = parseInt(read_instruction.getAttribute("dx"));
+					new_instruction = new Left(OBJECTS.get(object_id), x, dx);
+				} else if (type == "right") {
+					var x = parseInt(read_instruction.getAttribute("x"));
+					var dx = parseInt(read_instruction.getAttribute("dx"));
+					new_instruction = new Right(OBJECTS.get(object_id), x, dx);
+				} else if (type == "angle") {
+					var degrees = parseInt(read_instruction.getAttribute("degrees"));
+					new_instruction = new Angle(OBJECTS.get(object_id), degrees);
+				} else if (type == "setproperty") {
+					var object = read_instruction.getAttribute("object");
+					var property = read_instruction.getAttribute("property");
+					var value = read_instruction.getAttribute("value"); // TODO la value peut etre un entier, un bool, ou encore une cdc ; parseint dans le switch case setproperty
+					new_instruction = new SetProperty(OBJECTS.get(object_id), object, property, value);
+				} else if (type == "blink") {
+					var times = parseInt(read_instruction.getAttribute("object"));
+					var delay = parseInt(read_instruction.getAttribute("property"));
+					new_instruction = new Blink(OBJECTS.get(object_id), times, delay);
+				} else if (type == "stop") {
+					// new_instruction = new Stop(OBJECTS.get(object_id)); // TODO objet qui a un execute() vide
+				}
+				instructions.push(new_instruction);
+			}
+			PROGRAMS.set(object_id, )
+		}
 	}
 
 	// Remove the loading message
@@ -136,7 +212,9 @@ function read_xml_file(contents) {
 }
 
 function execute_animation() {
-
+	// Tous les programmes où l'objet assoocié n'est pas dans l'etat normal, je continue pas le programme (while obj.etat == "normal")
+	// L'état peut etre : sleeping (<sleep>), l'état donné par <wait>, 
+	// Traiter <label>, <goto>, <stop>
 }
 
 
@@ -175,7 +253,7 @@ function draw() {
 	// fill(200); // colorie l'interieur des prochaines 	figures
 	// stroke(100, 1, 50); // colorie la bordure des prochaines figures
 
-	ellipse(0 + x, 200 - y, 80, 80);
+	/*ellipse(0 + x, 200 - y, 80, 80);
 	x += 0.3;
 	if (x > 50) {
 		x = 0;
@@ -183,7 +261,7 @@ function draw() {
 	}
 	if (y >= 150) {
 		y = -100;
-	}
+	}*/
 
 	// Display objects of each layer, if they're set as visible
 	for (var layer of LAYERS) {
@@ -193,10 +271,6 @@ function draw() {
 			}
 		}
 	}
-
-	// TOus les programmes où l'objet assoocié n'est pas dans l'etat normal, je continue pas le programme (while obj.etat == "normal")
-	// L'état peut etre : sleeping (<sleep>), l'état donné par <wait>, 
-	// Traiter <label>, <goto>, <stop>
 }
 
 
@@ -217,19 +291,22 @@ function include_scripts() {
 		"js/Objects/Text.js",
 		// Instructions
 		"js/Instructions/Instruction.js",
-		// "js/Instructions/Angle.js",
+		"js/Instructions/Angle.js",
 		"js/Instructions/Blink.js",
-		// "js/Instructions/Center.js",
+		"js/Instructions/Center.js",
 		"js/Instructions/CenterX.js",
 		"js/Instructions/CenterY.js",
 		"js/Instructions/Click.js",
 		"js/Instructions/Down.js",
+		"js/Instructions/GoTo.js",
+		"js/Instructions/Label.js",
 		"js/Instructions/Left.js",
 		"js/Instructions/MoveTo.js",
 		"js/Instructions/Right.js",
 		"js/Instructions/SetProperty.js",
 		"js/Instructions/Sleep.js",
-		// "js/Instructions/State.js",
+		"js/Instructions/State.js",
+		"js/Instructions/Stop.js",
 		"js/Instructions/Trigger.js",
 		"js/Instructions/Up.js",
 		"js/Instructions/Visible.js",

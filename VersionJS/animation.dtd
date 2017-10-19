@@ -46,6 +46,7 @@
 <!ELEMENT object_rectangle (#PCDATA) >
 <!ATTLIST object_rectangle width CDATA #REQUIRED >
 <!ATTLIST object_rectangle height CDATA #REQUIRED >
+<!ATTLIST object_rectangle round CDATA #IMPLIED >
 <!ATTLIST object_rectangle x CDATA #IMPLIED >
 <!ATTLIST object_rectangle y CDATA #IMPLIED >
 <!ATTLIST object_rectangle fgcolor CDATA #IMPLIED >
@@ -72,7 +73,7 @@
 <!ATTLIST object_polygon opacity CDATA #IMPLIED >
 
 <!ELEMENT object_circle (#PCDATA) >
-<!ATTLIST object_circle rayon CDATA #REQUIRED >
+<!ATTLIST object_circle radius CDATA #REQUIRED >
 <!ATTLIST object_circle x CDATA #IMPLIED >
 <!ATTLIST object_circle y CDATA #IMPLIED >
 <!ATTLIST object_circle fgcolor CDATA #IMPLIED >
@@ -87,6 +88,8 @@
 <!ELEMENT object_ellipse (#PCDATA) >
 <!ATTLIST object_ellipse width CDATA #REQUIRED >
 <!ATTLIST object_ellipse height CDATA #REQUIRED >
+<!ATTLIST object_ellipse x CDATA #IMPLIED >
+<!ATTLIST object_ellipse y CDATA #IMPLIED >
 <!ATTLIST object_ellipse fgcolor CDATA #IMPLIED >
 <!ATTLIST object_ellipse bgcolor CDATA #IMPLIED >
 <!ATTLIST object_ellipse bgtransparent (true|false) #IMPLIED >
@@ -102,13 +105,10 @@
 
 <!ELEMENT programs (program+) >
 
-<!ELEMENT program (visible|label|moveto|wait|sleep|state|goto|trigger|up|down|left|right|angle|click|setproperty|blink|stop)+ >
+<!ELEMENT program (click|label|moveto|wait|sleep|state|goto|trigger|up|down|left|right|angle|setproperty|blink|stop)+ >
 <!ATTLIST program assigned_to CDATA #REQUIRED >
 
 <!ELEMENT click EMPTY >
-
-<!ELEMENT visible EMPTY >
-<!ATTLIST visible value CDATA #REQUIRED >
 
 <!ELEMENT label EMPTY >
 <!ATTLIST label value CDATA #REQUIRED >
