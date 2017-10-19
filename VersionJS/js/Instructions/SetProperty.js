@@ -1,3 +1,6 @@
+/*
+*	This instruction set the property of the object at a certain value
+*/
 class SetProperty extends Instruction {
 
 	constructor(object, property, value) {
@@ -37,6 +40,14 @@ class SetProperty extends Instruction {
 				this.object.setBocolor(this.value);
 				break;
 			
+			case "bgtransparent":
+				this.object.setBgtransparent(this.value);
+				break;
+
+			case "layer":
+				this.object.setLayer(this.value);
+				break;
+
 			case "opacity":
 				this.object.setOpacity(this.value);
 				break;

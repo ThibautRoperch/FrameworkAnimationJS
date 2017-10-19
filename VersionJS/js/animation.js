@@ -51,10 +51,16 @@ function read_xml_file(contents) {
 	var root = parser.parseFromString(contents ,"text/xml");
 
 	// Retrieve init, background, objects and programs nodes
+	var framerate_node = root.getElementsByTagName("framerate")[0];
 	var init_node = root.getElementsByTagName("init")[0];
 	var background_node = root.getElementsByTagName("background")[0];
 	var objects_node = root.getElementsByTagName("objects")[0];
 	var programs_node = root.getElementsByTagName("programs")[0];
+
+	// If the framerate node node exists
+	if (framerate_node) {
+		// TODO
+	}
 
 	// If the init node exists
 	if (init_node) {

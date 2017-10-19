@@ -1,3 +1,6 @@
+/*
+*   This instruction center horizontaly the object atached to it
+*/
 class CenterX extends Instruction {
 
     constructor(object) {

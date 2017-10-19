@@ -1,5 +1,8 @@
+/*
+*   This instruction move the object right of x by interval of interval_x at a rate of FRAME_RATE 
+*/
 class Right extends Instruction {
-	
+
 	constructor(object, x, interval_x) {
 		this.object = object;
 		this.type = "Right";

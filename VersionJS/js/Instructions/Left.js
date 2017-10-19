@@ -1,5 +1,8 @@
+/*
+*   This instruction move the object left of x by interval of interval_x at a rate of FRAME_RATE 
+*/
 class Left extends Instruction{
-    
+
     constructor(object, x, interval_x) {
         this.object = object;
         this.type = "Left";

@@ -1,3 +1,6 @@
+/*
+*   This instruction center verticaly the object atached to it
+*/
 class CenterY extends Instruction{
 
     constructor(object){
