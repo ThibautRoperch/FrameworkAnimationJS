@@ -68,7 +68,7 @@ Supprimer this.type des instructions si on s'en sert pas (dans les classes héri
 
 Attribut opacity pour les objets (entre 0 et 1, un double, par défaut 1, pour gérer les objets qui se supperposent), mettre à jour la DTD
 
-Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir. Valeurs very fast, fast, normal, slow, very slow
+Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir et màj la dtd
 
 AnimatedObject::setAngle(value)
 AnimatedObject::getWidth()
@@ -116,3 +116,5 @@ L'instruction <setproperty> est utilisée pour changer les attributs : x, y, vis
 L'état par défaut d'un objet du dessin est "normal".
 L'instruction <click> est gérée de la façon suivante : l'état de l'objet devient "waiting_click", et quand un objet est cliqué, ca envoie un trigger avec la value "waiting_click".
 Les instructions <label>, <goto>, <stop> sont gérées directement par le programme principal, sans créer d'objet Instruction.
+
+Le noeud <framerate> permet de changer la vitesse de rafraichissement du dessin : "very slow", "slow", "normal" (défaut), "fast", "very fast". DTD mise à jour en conséquence.
