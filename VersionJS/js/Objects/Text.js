@@ -5,7 +5,7 @@ class Text extends AnimatedObject {
 		this.bocolor = bocolor;
 		this.font = font;
 		this.border = border;
-		this.transparency = transparency;
+		this.bgtransparent = bgtransparent;
 	}
 
 	getText() {
@@ -46,5 +46,9 @@ class Text extends AnimatedObject {
 
 	setTransparency(transparency) {
 		this.transparency = transparency;
+	}
+
+	draw() {
+		text(this.text, this.x, this.y)
 	}
 }

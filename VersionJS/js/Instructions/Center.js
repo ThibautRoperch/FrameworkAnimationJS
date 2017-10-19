@@ -1,5 +1,8 @@
+/*
+ *  This instruction center horizontaly and verticaly the object atached to it  
+ */
 class Center extends Instruction {
-    
+
     construct(object) {
         super(object, "Center")
     }

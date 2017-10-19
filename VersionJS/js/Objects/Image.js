@@ -8,4 +8,8 @@ class Image extends AnimatedObject {
         return this.image;
     }
 
+
+    draw() {
+        image(this.image, this.x, this.y);
+    }
 }

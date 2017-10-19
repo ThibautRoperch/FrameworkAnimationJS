@@ -17,6 +17,8 @@ Pourquoi avoir mis la valeur d'un texte dans un attribut, et sa référence (id)
 Dans cpu_anim1.xml par exemple, le premier texte qui clignotte n'est pas dans le XML ; message automatique ? 
 C'est quoi le @, dans des XML ? Saut de ligne
 
+À quoi sert l'élément extern dans la DTD ? 
+
 Technique
 =========
 
@@ -110,9 +112,13 @@ On peut donner les coordonnées x et y de l'objet lors de sa création, 0 par d�
 On considère que tous les objets peuvent avoir une couleur de bordure
 
 Les instructions setx, sety, setxy, visible sont remplacées par l'instruction setproperty. DTD mise à jour en conséquence.
+<<<<<<< HEAD
+Ajout de l'attribut "opacity", qui est un nombre entre 0 et 1
+=======
 Ajout des règles applet et div.loading dans le fichier css/css.css
 
 Ajout de l'attribut "opacity", qui est un nombre entre 0 et 1.
+>>>>>>> 01333ff084f9d233818b3020ec2c0e4b83419525
 
 L'instruction <setproperty> est utilisée pour changer les attributs : x, y, visible (true|false), opacity (entre 0 et 1).
 
