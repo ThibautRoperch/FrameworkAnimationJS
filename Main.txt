@@ -75,6 +75,8 @@ AnimatedObject::getWidth()
 AnimatedObject::getHeight()
 SousClasse::draw(value en fonction de l'objet);
 
+Possibilité de donner le border radius de chaque coin pour un rectangle : border-radius = "[5, 10, 0, 0]", màj la dtd, à gérer avec setproperty
+
 Conventions
 ===========
 
