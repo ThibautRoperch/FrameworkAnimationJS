@@ -1,9 +1,8 @@
 class Polygon extends AnimatedObject {
-	constructor(id, x, y, fgcolor, bgcolor, state, layer, width, height, bocolor, opacity) {
-        super(id, x, y, fgcolor, bgcolor, state, layer, opacity);
+	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height) {
+        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
         this.width = width;
         this.height = height;
-        this.bocolor = bocolor;
     }
 
     getWidth() {
@@ -14,20 +13,12 @@ class Polygon extends AnimatedObject {
         return this.height;
     }
 
-    getBocolor() {
-        return this.bocolor;
-    }
-
     setWidth(width) {
         this.width = width;
     }
 
     setHeight(height) {
         this.height = height;
-    }
-
-    setBocolor(bocolor) {
-        this.bocolor = bocolor;
     }
     
 }

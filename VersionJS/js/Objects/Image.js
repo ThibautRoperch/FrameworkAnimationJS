@@ -1,6 +1,8 @@
 class Image extends AnimatedObject {
-    constructor(id, x, y, image, fgcolor, bgcolor, state, layer, opacity) {
-        super(id, x, y, fgcolor, bgcolor, state, layer, opacity);
+    constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height, image) {
+        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
+        this.width = width;
+        this.height = height;
         this.image = image;
     }
 
@@ -8,8 +10,12 @@ class Image extends AnimatedObject {
         return this.image;
     }
 
+    setImage(image) {
+        this.image = image;
+    }
 
     draw() {
         image(this.image, this.x, this.y);
     }
+
 }

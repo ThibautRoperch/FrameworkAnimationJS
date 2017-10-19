@@ -1,9 +1,8 @@
 class Ellipse extends AnimatedObject {
-    constructor(id, x, y, image, fgcolor, bgcolor, state, layer, opacity, width, height, bgtransparent) {
-        super(id, x, y, fgcolor, bgcolor, state, layer, opacity);
+    constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height) {
+        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
         this.width = width;
         this.height = height;
-        this.bgtransparent = bgtransparent;
     }
 
     getWidth() {
@@ -14,10 +13,6 @@ class Ellipse extends AnimatedObject {
         return this.height;
     }
 
-    getBgtransparent() {
-        return this.bgtransparent;
-    }
-
     setWidth(width) {
         this.width = width;
     }
@@ -26,11 +21,8 @@ class Ellipse extends AnimatedObject {
         this.height = height;
     }
 
-    setBgtransparent(bgtransparent) {
-        this.bgtransparent = bgtransparent;
-    }
-
     draw() {
         ellipse(this.x, this.y, this.width, this.height);
     }
+
 }

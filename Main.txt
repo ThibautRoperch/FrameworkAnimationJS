@@ -10,15 +10,6 @@ Actions possibles dans le programme :
 - Déplacer un élément, le rendre visible, le faire attendre, clignoter, déclencher un objet avec <click/> et trigger
 - Changer les autres valeurs d'un attribut d'un élément (couleur, texte, position) avec l'objet XML <setproperty object="" property="" value="" />
 
-Questions
-=========
-
-Pourquoi avoir mis la valeur d'un texte dans un attribut, et sa référence (id) dans la balise ? Pas de raison particulière, on peut changer ça (+ màj DTD)
-Dans cpu_anim1.xml par exemple, le premier texte qui clignotte n'est pas dans le XML ; message automatique ? 
-C'est quoi le @, dans des XML ? Saut de ligne
-
-À quoi sert l'élément extern dans la DTD ? 
-
 Technique
 =========
 
@@ -35,49 +26,6 @@ P5.js permet de dessiner des figures. Les figures ne sont pas des éléments HTM
 P5.js : La fonction draw() dessine des objets (ellipse, line, ...). C'est une boucle. Les figures doivent donc êtres enregistrées dans un tableau.
 
 XML : les programmes (associés à un objet du dessin) sont à exécuter en parallèle. Il faut donc lire tous les programmes, les enregistrer dans un tableau sous forme d'instructions, et les exécuter en même temps.
-
-Idées
-=====
-
-Variable globale PAUSE, qui sert de jeton, mise à false par wait() lorsqu'une instruction de déplacement est lue par le programme principal, mise à true par l'objet une fois déplacé.
-Comment gérer le clique ? => wait() ;  lorsqu'on lit <click />, mouseClicked(), checker la position de la souris, si elle est dans la hitbox de l'élement, PAUSE = false.
-
-function wait() { setTimeout(function() { if (PAUSE) wait(); }, 10); }
-
-TODO
-====
-
-Faire des classes, une par objet, une par intruction.
-Un programme principal lira un XML donné et mettra les objets du dessin dans un tableau de type associatif (identifiant : Object), ainsi que les programmes dans un tableau associatif (identifiant : Program).
-
-Les actions des objets sont des méthodes associées à ces derniers. Superclasse "Object".
-Exemple : le déplacement vers la droite d'un objet (right, down, up, left) change progressivement les coordonnées de l'objet concerné.
-Les figures doivent être capable de se dessiner (en une méthode qui sera appelée par le programme principal), en appelant les fonctions de dessin de p5.js.
-
-Une variable globale PAS qui définit le pas de déplacement par défaut d'un objet
-(taux de rafraichissement de draw() et de la boucle de déplacement fixé à 5 ms dans une variable globale)
-
-Pouvoir copier/coller des objets => wut ?
-Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilité de bouger à l'infini sur le tracé (revenir au débbut à chaque fois qu'il arrive à la fin)
-Un objet de type tracé, avec des presets, comme une sinusoidale
-
-On n'utilisera pas les instructions setx, sety, setxy, visible. Elles seront remplacées par l'instruction setproperty. Mettre à jour la DTD.
-On peut donner le x et le y à la création de l'objet (#IMPLIED avant le text #REQUIRED). Mêtre à jour la DTD. Pareil pour visible (true|false)
-
-Refaire le texte de création d'objet, comme dans index.html, 4. Créer ses propres objets
-
-Supprimer this.type des instructions si on s'en sert pas (dans les classes héritant de Instruction)
-
-Attribut opacity pour les objets (entre 0 et 1, un double, par défaut 1, pour gérer les objets qui se supperposent), mettre à jour la DTD
-
-Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir et màj la dtd
-
-AnimatedObject::setAngle(value)
-AnimatedObject::getWidth()
-AnimatedObject::getHeight()
-SousClasse::draw(value en fonction de l'objet);
-
-Possibilité de donner le border radius de chaque coin pour un rectangle : border-radius = "[5, 10, 0, 0]", màj la dtd, à gérer avec setproperty
 
 Conventions
 ===========
@@ -108,22 +56,38 @@ Pour charger une animation (charger un fichier XML, afficher les objets, lancer 
 
 Ajout des règles applet et div.loading dans le fichier css/css.css
 
-On peut donner les coordonnées x et y de l'objet lors de sa création, 0 par défaut. Pareil pour visible (true|false, true par défaut). DTD mise à jour en conséquence.
-On considère que tous les objets peuvent avoir une couleur de bordure
+On considère que tous les objets peuvent avoir une couleur de bordure.
+On peut donner les propriétés "x" et "y" de l'objet lors de sa création, 0 par défaut. DTD mise à jour en conséquence.
+Pareil pour toutes ses autres propriétés, sauf "state".
+
+Les propriétés suivantes ont été ajoutées :
+- visible (true|false, true par défaut) : l'objet est visible
+- bgtransparent (true|false, false par défaut) : le background est transparent
+- botransparent (true|false, false par défaut) : la bordure est transparente
+- opacity (nombre entre 0 et 1, 1 par défaut) : l'opacité de l'objet, utile lorsque des objets se superposent
 
 Les instructions setx, sety, setxy, visible sont remplacées par l'instruction setproperty. DTD mise à jour en conséquence.
-<<<<<<< HEAD
-Ajout de l'attribut "opacity", qui est un nombre entre 0 et 1
-=======
-Ajout des règles applet et div.loading dans le fichier css/css.css
-
-Ajout de l'attribut "opacity", qui est un nombre entre 0 et 1.
->>>>>>> 01333ff084f9d233818b3020ec2c0e4b83419525
-
-L'instruction <setproperty> est utilisée pour changer les attributs : x, y, visible (true|false), opacity (entre 0 et 1).
 
 L'état par défaut d'un objet du dessin est "normal".
 L'instruction <click> est gérée de la façon suivante : l'état de l'objet devient "waiting_click", et quand un objet est cliqué, ca envoie un trigger avec la value "waiting_click".
 Les instructions <label>, <goto>, <stop> sont gérées directement par le programme principal, sans créer d'objet Instruction.
 
 Le noeud <framerate> permet de changer la vitesse de rafraichissement du dessin : "very slow", "slow", "normal" (défaut), "fast", "very fast". DTD mise à jour en conséquence.
+
+Résumé
+======
+
+Une animation est décrite en XML par des objets de dessin et au maximum un programme associé à chaque objet.
+Il faut lire ce XML, afficher les objets de dessin et executer les programmes.
+
+Le framework P5.js permet de dessiner des figures. Les figures ne sont pas des éléments HTML récupérables, et sont dessinés à chaque itération du canevas.
+Il faut donc un tableau de figures.
+
+Les programmes de chaque objet de dessin sont à exécuter en parallèle, mais leurs instructions sont séquentielles.
+Il faut donc un tableau de programmes.
+
+Ainsi, nous avons une classe par objet et par intruction, comme la version orginale codée en Java.
+Un programme principal lit un XML donné et met les objets du dessin dans un tableau associatif (identifiant : Object), ainsi que les programmes dans un tableau associatif (identifiant : Program).
+Les objets sont capable de se dessiner (en une méthode qui sera appelée par le programme principal), en appelant les fonctions de dessin de p5.js.
+
+<cf Changements effectués>

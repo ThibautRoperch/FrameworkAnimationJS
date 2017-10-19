@@ -1,0 +1,36 @@
+
+TODO
+====
+
+Pouvoir copier/coller des objets => wut ?
+
+Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilité de bouger à l'infini sur le tracé (revenir au débbut à chaque fois qu'il arrive à la fin)
+Un objet de type tracé, avec des presets, comme une sinusoidale
+
+Refaire le texte de création d'objet, comme dans index.html, 4. Créer ses propres objets
+
+Supprimer this.type des instructions si on s'en sert pas (dans les classes héritant de Instruction)
+
+Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir, et màj la dtd
+
+AnimatedObject::setAngle(value)
+AnimatedObject::getWidth()
+AnimatedObject::getHeight()
+SousClasse::draw(value en fonction de l'objet);
+
+Possibilité de donner le border radius de chaque coin pour un rectangle : border-radius = "[5, 10, 0, 0]", màj la dtd, à gérer avec setproperty
+
+Comment gérer le clique ? => wait() ;  lorsqu'on lit <click />, mouseClicked(), checker la position de la souris, si elle est dans la hitbox de l'élement, PAUSE = false.
+function wait() { setTimeout(function() { if (PAUSE) wait(); }, 10); }
+
+
+Questions
+=========
+
+Pourquoi avoir mis la valeur d'un texte dans un attribut, et sa référence (id) dans la balise ? Pas de raison particulière, on peut changer ça (+ màj DTD)
+Dans cpu_anim1.xml par exemple, le premier texte qui clignotte n'est pas dans le XML ; message automatique ? Non, balise "init"
+C'est quoi le @, dans des XML ? Saut de ligne
+
+Pourquoi avoir mis un état avec une cdc plutôt qu'un boolean "waiting" ? Pour que les liens entre les "signaux" des objets soient plus clairs en codant le XML
+
+À quoi sert l'élément extern dans la DTD ? 

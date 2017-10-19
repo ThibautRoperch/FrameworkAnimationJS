@@ -90,23 +90,36 @@ function read_xml_file(contents) {
 				for (c in fgcolor) fgcolor[c] = parseInt(fgcolor[c]);
 			var bgcolor = read_object.hasAttribute("bgcolor") ? read_object.getAttribute("bgcolor").split(",") : [0, 0, 0];
 				for (c in bgcolor) bgcolor[c] = parseInt(bgcolor[c]);
+			var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : false;
+			var bocolor = read_object.hasAttribute("bocolor") ? read_object.getAttribute("bocolor").split(",") : [0, 0, 0];
+				for (c in bocolor) bocolor[c] = parseInt(bocolor[c]);
+			var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : false;
 			var layer = parseInt(read_object.getAttribute("layer")) | 0;
+			var state = "normal";
 			var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : true;
-			var opacity = parseInt(read_object.getAttribute("opacity")) | 0;
+			var opacity = parseInt(read_object.getAttribute("opacity")) | 1;
 			LAYERS.add(opacity);
 			// Retrieve the others specific attributes and create the associated animated object
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");
 				var font = read_object.getAttribute("font");
 				var border = parseInt(read_object.getAttribute("border")) | 0;
-				var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : false;
 				var bocolor = read_object.hasAttribute("bocolor") ? read_object.getAttribute("bocolor").split(",") : [0, 0, 0];
 					for (c in bocolor) bocolor[c] = parseInt(bocolor[c]);
 				new_object = new Text(id, x, y, text, font, fgcolor, bgcolor, bocolor, "normal", border, bgtransparent, layer, visible, opacity);
+			} else if (type == "object_image") {
+				new_object = new Image(id, x, y, text, font, fgcolor, bgcolor, bocolor, "normal", border, bgtransparent, layer, visible, opacity);
+			} else if (type == "object_rectangle") {
+				new_object = new Rectangle(id, x, y, text, font, fgcolor, bgcolor, bocolor, "normal", border, bgtransparent, layer, visible, opacity);
+			} else if (type == "object_polygon") {
+				new_object = new Polygon(id, x, y, text, font, fgcolor, bgcolor, bocolor, "normal", border, bgtransparent, layer, visible, opacity);
+			} else if (type == "object_circle") {
+				new_object = new Circle(id, x, y, fgcolor, bgcolor, bocolor, bgtransparent, "normal", layer, visible, opacity);
+			} else if (type == "object_ellipse") {
+				new_object = new Ellipse(id, x, y, fgcolor, bgcolor, bocolor, bgtransparent, "normal", layer, visible, opacity);
 			}
 			OBJECTS.set(id, new_object);
 		}
-		console.log(OBJECTS);
 	}
 
 	// If the programs' node exists
@@ -159,10 +172,9 @@ function draw() {
 		background(BG_IMAGE);
 	}
 	
-	// fill(200); // colorie l'interieur des figures
-	// stroke(100, 1, 50); // colorie la bordure des figures
+	// fill(200); // colorie l'interieur des prochaines 	figures
+	// stroke(100, 1, 50); // colorie la bordure des prochaines figures
 
-	// ellipse(200, 100, 80, 80);
 	ellipse(0 + x, 200 - y, 80, 80);
 	x += 0.3;
 	if (x > 50) {
@@ -176,7 +188,6 @@ function draw() {
 	// Display objects of each layer, if they're set as visible
 	for (var layer of LAYERS) {
 		for (var object of OBJECTS.values()) {
-			console.log(object);
 			if (object.getLayer() == layer && object.getVisible()) {
 				object.draw();
 			}
@@ -203,8 +214,26 @@ function include_scripts() {
 		"js/Objects/Grid.js",
 		"js/Objects/Image.js",
 		"js/Objects/Polygon.js",
-		"js/Objects/Text.js"
+		"js/Objects/Text.js",
 		// Instructions
+		"js/Instructions/Instruction.js",
+		// "js/Instructions/Angle.js",
+		"js/Instructions/Blink.js",
+		// "js/Instructions/Center.js",
+		"js/Instructions/CenterX.js",
+		"js/Instructions/CenterY.js",
+		"js/Instructions/Click.js",
+		"js/Instructions/Down.js",
+		"js/Instructions/Left.js",
+		"js/Instructions/MoveTo.js",
+		"js/Instructions/Right.js",
+		"js/Instructions/SetProperty.js",
+		"js/Instructions/Sleep.js",
+		// "js/Instructions/State.js",
+		"js/Instructions/Trigger.js",
+		"js/Instructions/Up.js",
+		"js/Instructions/Visible.js",
+		"js/Instructions/Wait.js",
 	];
 
 	// var a = document.createElement("script");

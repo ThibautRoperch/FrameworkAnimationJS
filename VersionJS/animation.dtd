@@ -16,50 +16,85 @@
 <!ELEMENT object_text (#PCDATA) >
 <!ATTLIST object_text text CDATA #REQUIRED >
 <!ATTLIST object_text font CDATA #REQUIRED >
+<!ATTLIST object_text border CDATA #IMPLIED >
+<!ATTLIST object_text x CDATA #IMPLIED >
+<!ATTLIST object_text y CDATA #IMPLIED >
 <!ATTLIST object_text fgcolor CDATA #IMPLIED >
 <!ATTLIST object_text bgcolor CDATA #IMPLIED >
+<!ATTLIST object_text bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_text bocolor CDATA #IMPLIED >
-<!ATTLIST object_text border CDATA #IMPLIED >
-<!ATTLIST object_text transparency (true|false) #IMPLIED >
+<!ATTLIST object_text botransparent (true|false) #IMPLIED >
 <!ATTLIST object_text layer CDATA #IMPLIED >
+<!ATTLIST object_text visible (true|false) #IMPLIED >
+<!ATTLIST object_text opacity CDATA #IMPLIED >
 
 <!ELEMENT object_image (#PCDATA) >
-<!ATTLIST object_image image CDATA #REQUIRED >
-<!ATTLIST object_image fgcolor CDATA #IMPLIED >
-<!ATTLIST object_image bgcolor CDATA #IMPLIED >
-<!ATTLIST object_image layer CDATA #IMPLIED >
 <!ATTLIST object_image width CDATA #IMPLIED >
 <!ATTLIST object_image height CDATA #IMPLIED >
+<!ATTLIST object_image image CDATA #REQUIRED >
+<!ATTLIST object_image x CDATA #IMPLIED >
+<!ATTLIST object_image y CDATA #IMPLIED >
+<!ATTLIST object_image fgcolor CDATA #IMPLIED >
+<!ATTLIST object_image bgcolor CDATA #IMPLIED >
+<!ATTLIST object_image bgtransparent (true|false) #IMPLIED >
+<!ATTLIST object_image bocolor CDATA #IMPLIED >
+<!ATTLIST object_image botransparent (true|false) #IMPLIED >
+<!ATTLIST object_image layer CDATA #IMPLIED >
+<!ATTLIST object_image visible (true|false) #IMPLIED >
+<!ATTLIST object_image opacity CDATA #IMPLIED >
 
 <!ELEMENT object_rectangle (#PCDATA) >
 <!ATTLIST object_rectangle width CDATA #REQUIRED >
 <!ATTLIST object_rectangle height CDATA #REQUIRED >
+<!ATTLIST object_rectangle x CDATA #IMPLIED >
+<!ATTLIST object_rectangle y CDATA #IMPLIED >
 <!ATTLIST object_rectangle fgcolor CDATA #IMPLIED >
 <!ATTLIST object_rectangle bgcolor CDATA #IMPLIED >
+<!ATTLIST object_rectangle bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_rectangle bocolor CDATA #IMPLIED >
+<!ATTLIST object_rectangle botransparent (true|false) #IMPLIED >
 <!ATTLIST object_rectangle layer CDATA #IMPLIED >
+<!ATTLIST object_rectangle visible (true|false) #IMPLIED >
+<!ATTLIST object_rectangle opacity CDATA #IMPLIED >
 
 <!ELEMENT object_polygon (#PCDATA) >
 <!ATTLIST object_polygon coord_x CDATA #REQUIRED >
 <!ATTLIST object_polygon coord_y CDATA #REQUIRED >
+<!ATTLIST object_polygon x CDATA #IMPLIED >
+<!ATTLIST object_polygon y CDATA #IMPLIED >
 <!ATTLIST object_polygon fgcolor CDATA #IMPLIED >
 <!ATTLIST object_polygon bgcolor CDATA #IMPLIED >
+<!ATTLIST object_polygon bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_polygon bocolor CDATA #IMPLIED >
+<!ATTLIST object_polygon botransparent (true|false) #IMPLIED >
 <!ATTLIST object_polygon layer CDATA #IMPLIED >
+<!ATTLIST object_polygon visible (true|false) #IMPLIED >
+<!ATTLIST object_polygon opacity CDATA #IMPLIED >
 
-<!ELEMENT object_cicle (#PCDATA) >
+<!ELEMENT object_circle (#PCDATA) >
 <!ATTLIST object_circle rayon CDATA #REQUIRED >
+<!ATTLIST object_circle x CDATA #IMPLIED >
+<!ATTLIST object_circle y CDATA #IMPLIED >
 <!ATTLIST object_circle fgcolor CDATA #IMPLIED >
 <!ATTLIST object_circle bgcolor CDATA #IMPLIED >
+<!ATTLIST object_circle bgtransparent (true|false) #IMPLIED >
+<!ATTLIST object_circle bocolor CDATA #IMPLIED >
+<!ATTLIST object_circle botransparent (true|false) #IMPLIED >
 <!ATTLIST object_circle layer CDATA #IMPLIED >
+<!ATTLIST object_circle visible (true|false) #IMPLIED >
+<!ATTLIST object_circle opacity CDATA #IMPLIED >
 
 <!ELEMENT object_ellipse (#PCDATA) >
 <!ATTLIST object_ellipse width CDATA #REQUIRED >
 <!ATTLIST object_ellipse height CDATA #REQUIRED >
 <!ATTLIST object_ellipse fgcolor CDATA #IMPLIED >
 <!ATTLIST object_ellipse bgcolor CDATA #IMPLIED >
+<!ATTLIST object_ellipse bgtransparent (true|false) #IMPLIED >
+<!ATTLIST object_ellipse bocolor CDATA #IMPLIED >
+<!ATTLIST object_ellipse botransparent (true|false) #IMPLIED >
 <!ATTLIST object_ellipse layer CDATA #IMPLIED >
-<!ATTLIST object_ellipse transparency (true|false) #IMPLIED >
+<!ATTLIST object_ellipse visible (true|false) #IMPLIED >
+<!ATTLIST object_ellipse opacity CDATA #IMPLIED >
 
 <!ELEMENT object_extern (#PCDATA) >
 <!ATTLIST object_extern class CDATA #REQUIRED >
@@ -67,7 +102,7 @@
 
 <!ELEMENT programs (program+) >
 
-<!ELEMENT program (visible|label|setxy|setx|sety|moveto|wait|sleep|state|goto|trigger|up|down|left|right|angle|click|setproperty|blink|stop)+ >
+<!ELEMENT program (visible|label|moveto|wait|sleep|state|goto|trigger|up|down|left|right|angle|click|setproperty|blink|stop)+ >
 <!ATTLIST program assigned_to CDATA #REQUIRED >
 
 <!ELEMENT click EMPTY >
@@ -77,16 +112,6 @@
 
 <!ELEMENT label EMPTY >
 <!ATTLIST label value CDATA #REQUIRED >
-
-<!ELEMENT setxy EMPTY >
-<!ATTLIST setxy x CDATA #REQUIRED >
-<!ATTLIST setxy y CDATA #REQUIRED >
-
-<!ELEMENT setx EMPTY >
-<!ATTLIST setx x CDATA #REQUIRED >
-
-<!ELEMENT sety EMPTY >
-<!ATTLIST sety y CDATA #REQUIRED >
 
 <!ELEMENT moveto EMPTY >
 <!ATTLIST moveto x CDATA #REQUIRED >

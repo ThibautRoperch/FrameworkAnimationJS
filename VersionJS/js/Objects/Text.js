@@ -1,19 +1,13 @@
 class Text extends AnimatedObject {
-	constructor(id, x, y, text, font, fgcolor, bgcolor, bocolor, state, border, transparency, layer, visible, opacity) {
-		super(id, x, y, fgcolor, bgcolor, state, layer, visible, opacity);
+	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border) {
+        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
 		this.text = text;
-		this.bocolor = bocolor;
 		this.font = font;
 		this.border = border;
-		this.bgtransparent = bgtransparent;
 	}
 
 	getText() {
 		return this.text;
-	}
-
-	getBocolor() {
-		return this.bocolor;
 	}
 
 	getFont() {
@@ -24,16 +18,8 @@ class Text extends AnimatedObject {
 		return this.border;
 	}
 
-	getTransparency() {
-		return this.transparency;
-	}
-
 	setText(text) {
 		this.text = text;
-	}
-
-	setBocolor(bocolor) {
-		this.bocolor = bocolor;
 	}
 
 	setFont(font) {
@@ -42,10 +28,6 @@ class Text extends AnimatedObject {
 
 	setBorder(border) {
 		this.border = border;
-	}
-
-	setTransparency(transparency) {
-		this.transparency = transparency;
 	}
 
 	draw() {
