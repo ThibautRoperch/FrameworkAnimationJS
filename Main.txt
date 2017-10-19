@@ -107,8 +107,6 @@ On peut donner les coordonnées x et y de l'objet lors de sa création, 0 par d�
 On considère que tous les objets peuvent avoir une couleur de bordure
 
 Les instructions setx, sety, setxy, visible sont remplacées par l'instruction setproperty. DTD mise à jour en conséquence.
-Ajout des règles applet et div.loading dans le fichier css/css.css
-
 Ajout de l'attribut "opacity", qui est un nombre entre 0 et 1
 
 L'instruction <setproperty> est utilisée pour changer les attributs : x, y, visible (true|false), opacity (entre 0 et 1)

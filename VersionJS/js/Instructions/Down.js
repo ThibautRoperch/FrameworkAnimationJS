@@ -1,5 +1,8 @@
+/*
+*   This instruction move the object down of y by interval of interval_y at a rate of FRAME_RATE 
+*/
 class Down extends Instruction {
-    
+
     constructor(object, y, interval_y) {
         this.object = object;
         this.type = "Down";
