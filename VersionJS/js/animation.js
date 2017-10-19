@@ -91,7 +91,7 @@ function read_xml_file(contents) {
 				var font = read_object.getAttribute("font");
 				var border = read_object.hasAttribute("border") ? parseInt(read_object.getAttribute("border")) : 0;
 				var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : false;
-				new_object = new Text(id, x, y, text, font, fgcolor, bgcolor, bocolor, state, border, bgtransparent, layer, VISIBLE ICI ?);
+				new_object = new Text(id, x, y, text, font, fgcolor, bgcolor, bocolor, state, border, bgtransparent, layer, VISIBLE_A_METTRE_ICI_?);
 				console.log(new_object);
 				// BORDERCOLOR sur tous les objets ? si oui, BORDER sur tous les objets aussi
 				// Il manque VISIBLE dans le constructeur des objets
@@ -165,7 +165,12 @@ function draw() {
 	}
 
 	// TODO
-	// afficher les objets de chaque couche
+	// afficher les objets de chaque couche, sauf les objets ou obj.visible = false
+
+
+	// TOus les programmes où l'objet assoocié n'est pas dans l'etat normal, je continue pas le programme (while obj.etat == "normal")
+	// L'état peut etre : sleeping (<sleep>), l'état donné par <wait>, 
+	// Traiter <label>, <goto>, <stop>
 }
 
 
