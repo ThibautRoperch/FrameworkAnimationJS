@@ -70,6 +70,10 @@ Attribut opacity pour les objets (entre 0 et 1, un double, par défaut 1, pour g
 
 Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir. Valeurs very fast, fast, normal, slow, very slow
 
+AnimatedObject::setAngle(value)
+AnimatedObject::getWidth()
+AnimatedObject::getHeight()
+
 Conventions
 ===========
 
@@ -100,3 +104,4 @@ On peut donner les coordonnées x et y de l'objet lors de sa création, 0 par d�
 On considère que tous les objets peuvent avoir une couleur de bordure
 Les instructions setx, sety, setxy, visible sont remplacées par l'instruction setproperty. DTD mise à jour en conséquence.
 Ajout des règles applet et div.loading dans le fichier css/css.css
+

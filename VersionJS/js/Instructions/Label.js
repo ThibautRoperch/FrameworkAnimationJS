@@ -1,1 +1,0 @@
-class Label extends Instruction

@@ -1,4 +1,5 @@
 class Down extends Instruction {
+    
     constructor(object, y, interval_y) {
         this.object = object;
         this.type = "Down";

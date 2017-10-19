@@ -1,4 +1,5 @@
 class Wait extends Instruction {
+	
 	constuctor(object, state) {
 		this.object = object;
 		this.type = "Wait";

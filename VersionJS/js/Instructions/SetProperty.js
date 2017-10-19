@@ -1,4 +1,5 @@
 class SetProperty extends Instruction {
+
 	constructor(object, property, value) {
 		this.object = object;
 		this.type = "SetProperty";
@@ -34,6 +35,10 @@ class SetProperty extends Instruction {
 
 			case "bocolor":
 				this.object.setBocolor(this.value);
+				break;
+			
+			case "opacity":
+				this.object.setOpacity(this.value);
 				break;
 		}
 	}

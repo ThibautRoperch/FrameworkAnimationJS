@@ -1,4 +1,5 @@
 class Left extends Instruction{
+    
     constructor(object, x, interval_x) {
         this.object = object;
         this.type = "Left";
