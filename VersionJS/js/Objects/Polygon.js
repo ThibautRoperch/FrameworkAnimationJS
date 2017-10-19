@@ -1,6 +1,6 @@
 class Polygon extends AnimatedObject {
-	constructor(id, x, y, fgcolor, bgcolor, state, layer, width, height, bocolor) {
-        super(id, x, y, fgcolor, bgcolor, state, layer);
+	constructor(id, x, y, fgcolor, bgcolor, state, layer, width, height, bocolor, opacity) {
+        super(id, x, y, fgcolor, bgcolor, state, layer, opacity);
         this.width = width;
         this.height = height;
         this.bocolor = bocolor;
