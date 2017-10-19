@@ -73,6 +73,7 @@ Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30,
 AnimatedObject::setAngle(value)
 AnimatedObject::getWidth()
 AnimatedObject::getHeight()
+SousClasse::draw(value en fonction de l'objet);
 
 Conventions
 ===========

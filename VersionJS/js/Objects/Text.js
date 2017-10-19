@@ -1,6 +1,6 @@
 class Text extends AnimatedObject {
-	constructor(id, x, y, text, font, fgcolor, bgcolor, bocolor, state, border, transparency, layer) {
-		super(id, x, y, fgcolor, bgcolor, state, layer);
+	constructor(id, x, y, text, font, fgcolor, bgcolor, bocolor, state, border, transparency, layer, opacity) {
+		super(id, x, y, fgcolor, bgcolor, state, layer, opacity);
 		this.text = text;
 		this.bocolor = bocolor;
 		this.font = font;
