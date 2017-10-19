@@ -25,5 +25,9 @@ class Polygon extends AnimatedObject {
     setHeight(height) {
         this.height = height;
     }
+
+    setBocolor(bocolor) {
+        this.bocolor = bocolor;
+    }
     
 }

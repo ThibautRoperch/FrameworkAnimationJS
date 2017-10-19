@@ -39,8 +39,8 @@ class AnimatedObject {
 		return this.layer;
 	}
 
-	getVisibility() {
-		return this.visibility;
+	getVisible() {
+		return this.visible;
 	}
 
 	setId(id) {

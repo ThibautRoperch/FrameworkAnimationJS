@@ -17,6 +17,8 @@ Pourquoi avoir mis la valeur d'un texte dans un attribut, et sa référence (id)
 Dans cpu_anim1.xml par exemple, le premier texte qui clignotte n'est pas dans le XML ; message automatique ? 
 C'est quoi le @, dans des XML ? Saut de ligne
 
+À quoi sert l'élément extern dans la DTD ? 
+
 Technique
 =========
 
