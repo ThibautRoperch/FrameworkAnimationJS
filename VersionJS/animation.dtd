@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!ELEMENT animation (init?,background?,objects,programs) >
+
+<!ELEMENT init (start_button) >
+<!ELEMENT start_button EMPTY >
+<!ATTLIST start_button text CDATA #IMPLIED >
+<!ATTLIST start_button x CDATA #IMPLIED >
+<!ATTLIST start_button y CDATA #IMPLIED >
+<!ATTLIST start_button present (true|false) #IMPLIED >
+
+<!ELEMENT background (#PCDATA) >
+
+<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_extern)+ >
+
+<!ELEMENT object_text (#PCDATA) >
+<!ATTLIST object_text text CDATA #REQUIRED >
+<!ATTLIST object_text font CDATA #REQUIRED >
+<!ATTLIST object_text fgcolor CDATA #IMPLIED >
+<!ATTLIST object_text bgcolor CDATA #IMPLIED >
+<!ATTLIST object_text bocolor CDATA #IMPLIED >
+<!ATTLIST object_text border CDATA #IMPLIED >
+<!ATTLIST object_text transparency (true|false) #IMPLIED >
+<!ATTLIST object_text layer CDATA #IMPLIED >
+
+<!ELEMENT object_image (#PCDATA) >
+<!ATTLIST object_image image CDATA #REQUIRED >
+<!ATTLIST object_image fgcolor CDATA #IMPLIED >
+<!ATTLIST object_image bgcolor CDATA #IMPLIED >
+<!ATTLIST object_image layer CDATA #IMPLIED >
+<!ATTLIST object_image width CDATA #IMPLIED >
+<!ATTLIST object_image height CDATA #IMPLIED >
+
+<!ELEMENT object_rectangle (#PCDATA) >
+<!ATTLIST object_rectangle width CDATA #REQUIRED >
+<!ATTLIST object_rectangle height CDATA #REQUIRED >
+<!ATTLIST object_rectangle fgcolor CDATA #IMPLIED >
+<!ATTLIST object_rectangle bgcolor CDATA #IMPLIED >
+<!ATTLIST object_rectangle bocolor CDATA #IMPLIED >
+<!ATTLIST object_rectangle layer CDATA #IMPLIED >
+
+<!ELEMENT object_polygon (#PCDATA) >
+<!ATTLIST object_polygon coord_x CDATA #REQUIRED >
+<!ATTLIST object_polygon coord_y CDATA #REQUIRED >
+<!ATTLIST object_polygon fgcolor CDATA #IMPLIED >
+<!ATTLIST object_polygon bgcolor CDATA #IMPLIED >
+<!ATTLIST object_polygon bocolor CDATA #IMPLIED >
+<!ATTLIST object_polygon layer CDATA #IMPLIED >
+
+<!ELEMENT object_cicle (#PCDATA) >
+<!ATTLIST object_circle rayon CDATA #REQUIRED >
+<!ATTLIST object_circle fgcolor CDATA #IMPLIED >
+<!ATTLIST object_circle bgcolor CDATA #IMPLIED >
+<!ATTLIST object_circle layer CDATA #IMPLIED >
+
+<!ELEMENT object_ellipse (#PCDATA) >
+<!ATTLIST object_ellipse width CDATA #REQUIRED >
+<!ATTLIST object_ellipse height CDATA #REQUIRED >
+<!ATTLIST object_ellipse fgcolor CDATA #IMPLIED >
+<!ATTLIST object_ellipse bgcolor CDATA #IMPLIED >
+<!ATTLIST object_ellipse layer CDATA #IMPLIED >
+<!ATTLIST object_ellipse transparency (true|false) #IMPLIED >
+
+<!ELEMENT object_extern (#PCDATA) >
+<!ATTLIST object_extern class CDATA #REQUIRED >
+<!ATTLIST object_extern constructor CDATA #REQUIRED >
+
+<!ELEMENT programs (program+) >
+
+<!ELEMENT program (visible|label|setxy|setx|sety|moveto|wait|sleep|state|goto|trigger|up|down|left|right|angle|click|setproperty|blink|stop)+ >
+<!ATTLIST program assigned_to CDATA #REQUIRED >
+
+<!ELEMENT click EMPTY >
+
+<!ELEMENT visible EMPTY >
+<!ATTLIST visible value CDATA #REQUIRED >
+
+<!ELEMENT label EMPTY >
+<!ATTLIST label value CDATA #REQUIRED >
+
+<!ELEMENT setxy EMPTY >
+<!ATTLIST setxy x CDATA #REQUIRED >
+<!ATTLIST setxy y CDATA #REQUIRED >
+
+<!ELEMENT setx EMPTY >
+<!ATTLIST setx x CDATA #REQUIRED >
+
+<!ELEMENT sety EMPTY >
+<!ATTLIST sety y CDATA #REQUIRED >
+
+<!ELEMENT moveto EMPTY >
+<!ATTLIST moveto x CDATA #REQUIRED >
+<!ATTLIST moveto y CDATA #REQUIRED >
+<!ATTLIST moveto dx CDATA #REQUIRED >
+<!ATTLIST moveto dy CDATA #REQUIRED >
+<!ATTLIST moveto delay CDATA #REQUIRED >
+
+<!ELEMENT wait EMPTY >
+<!ATTLIST wait value CDATA #REQUIRED >
+
+<!ELEMENT sleep EMPTY >
+<!ATTLIST sleep value CDATA #REQUIRED >
+
+<!ELEMENT state EMPTY >
+<!ATTLIST state value CDATA #REQUIRED >
+
+<!ELEMENT trigger EMPTY >
+<!ATTLIST trigger object CDATA #REQUIRED >
+<!ATTLIST trigger value CDATA #REQUIRED >
+
+<!ELEMENT goto EMPTY >
+<!ATTLIST goto value CDATA #REQUIRED >
+
+<!ELEMENT up EMPTY >
+<!ATTLIST up y CDATA #REQUIRED >
+<!ATTLIST up dy CDATA #REQUIRED >
+
+<!ELEMENT down EMPTY >
+<!ATTLIST down y CDATA #REQUIRED >
+<!ATTLIST down dy CDATA #REQUIRED >
+
+<!ELEMENT left EMPTY >
+<!ATTLIST left x CDATA #REQUIRED >
+<!ATTLIST left dx CDATA #REQUIRED >
+
+<!ELEMENT right EMPTY >
+<!ATTLIST right x CDATA #REQUIRED >
+<!ATTLIST right dx CDATA #REQUIRED >
+
+<!ELEMENT angle EMPTY >
+<!ATTLIST angle degrees CDATA #REQUIRED >
+
+<!ELEMENT setproperty EMPTY >
+<!ATTLIST setproperty object CDATA #REQUIRED >
+<!ATTLIST setproperty property CDATA #REQUIRED >
+<!ATTLIST setproperty value CDATA #REQUIRED >
+
+<!ELEMENT blink EMPTY >
+<!ATTLIST blink times CDATA #REQUIRED >
+<!ATTLIST blink delay CDATA #REQUIRED >
+
+<!ELEMENT stop EMPTY >

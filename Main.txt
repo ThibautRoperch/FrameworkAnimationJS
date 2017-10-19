@@ -109,10 +109,10 @@ On considère que tous les objets peuvent avoir une couleur de bordure
 Les instructions setx, sety, setxy, visible sont remplacées par l'instruction setproperty. DTD mise à jour en conséquence.
 Ajout des règles applet et div.loading dans le fichier css/css.css
 
-Ajout de l'attribut "opacity", qui est un nombre entre 0 et 1
+Ajout de l'attribut "opacity", qui est un nombre entre 0 et 1.
 
-L'instruction <setproperty> est utilisée pour changer les attributs : x, y, visible (true|false), opacity (entre 0 et 1)
+L'instruction <setproperty> est utilisée pour changer les attributs : x, y, visible (true|false), opacity (entre 0 et 1).
 
 L'état par défaut d'un objet du dessin est "normal".
-L'instruction <click> est gérée de la façon suivante : l'état de l'objet devient "waiting_click", et quand un objet est cliqué, ca envoie un trigger avec la value "waiting_click"
+L'instruction <click> est gérée de la façon suivante : l'état de l'objet devient "waiting_click", et quand un objet est cliqué, ca envoie un trigger avec la value "waiting_click".
 Les instructions <label>, <goto>, <stop> sont gérées directement par le programme principal, sans créer d'objet Instruction.
