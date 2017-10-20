@@ -6,6 +6,6 @@ class Angle extends Instruction {
     }
 
     execute() {
-        this.object.setAngle(value);
+        this.object.setAngle(this.value);
     }
 }

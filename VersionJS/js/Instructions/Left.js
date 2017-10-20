@@ -4,8 +4,7 @@
 class Left extends Instruction{
 
     constructor(object, x, interval_x) {
-        this.object = object;
-        this.type = "Left";
+        super(object, "Left");
         this.x = x;
         this.interval_x = interval_x;
     }
