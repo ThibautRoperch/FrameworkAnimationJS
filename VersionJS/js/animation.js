@@ -208,10 +208,16 @@ function read_xml_file(contents) {
 	PARENT.removeChild(PARENT.getElementsByClassName("loading")[0]);
 
 	// Execute programs of the programs array
-	execute_animation();
+	for (o in OBJECTS) {
+		execute_animation(o, 0);
+	}
 }
 
-function execute_animation() {
+function execute_animation(object, instruction) {
+	// if () {
+
+	// }
+	// TODO
 	// Tous les programmes où l'objet assoocié n'est pas dans l'etat normal, je continue pas le programme (while obj.etat == "normal")
 	// L'état peut etre : sleeping (<sleep>), l'état donné par <wait>, 
 	// Traiter <label>, <goto>, <stop>
