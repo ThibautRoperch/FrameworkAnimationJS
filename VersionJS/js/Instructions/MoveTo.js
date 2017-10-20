@@ -4,8 +4,7 @@
 class MoveTo extends Instruction {
 
 	constructor(object, x, y, interval_x, interval_y, delay) {
-		this.object = object;
-		this.type = "MoveTo";
+		super(object, "MoveTo");
 		this.x = x;
 		this.y = y;
 		this.interval_x = interval_x;

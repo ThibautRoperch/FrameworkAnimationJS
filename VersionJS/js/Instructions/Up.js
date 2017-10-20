@@ -4,8 +4,7 @@
 class Up extends Instruction {
 
 	constructor(object, y, interval_y) {
-		this.object = object;
-		this.type = "Up";
+		super(object, "Up");
 		this.y = y;
 		this.interval_y = interval_y;
 	}
