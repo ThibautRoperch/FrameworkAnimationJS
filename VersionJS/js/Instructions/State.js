@@ -4,7 +4,7 @@
 class State extends Instruction {
 
     constructor(object, value) {
-        super(object , "State");
+        super(object);
         this.value = value;
     }
     

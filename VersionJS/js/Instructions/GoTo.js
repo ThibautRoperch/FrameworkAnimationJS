@@ -1,9 +1,14 @@
 class GoTo extends Instruction {
 
-    constructor(object) {
-        super(object, "GoTo")
+    constructor(object, value) {
+        super(object);
+        this.value = value;
     }
     
+    getValue() {
+        return this.value;
+    }
+
     execute() {}
 
 }

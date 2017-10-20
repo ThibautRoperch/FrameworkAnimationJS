@@ -1,13 +1,13 @@
 class Trigger extends Instruction {
     
     constructor(object, value) {
-        super(object, "Triger");
+        super(object);
         this.value = value
     }
 
     execute() {
         if(this.object.getState() == this.value) {
-            this.object.setTate("normal");
+            this.object.setTate(DEFAULT_STATE);
         }
     }
 }

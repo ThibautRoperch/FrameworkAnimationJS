@@ -4,7 +4,7 @@
 class CenterY extends Instruction {
 
     constructor(object){
-        super(object,"CenterY");
+        super(object);
     }
 
     execute(){

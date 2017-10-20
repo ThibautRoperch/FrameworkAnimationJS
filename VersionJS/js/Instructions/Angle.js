@@ -1,7 +1,7 @@
 class Angle extends Instruction {
     
     constructor(object, value) {
-        super(object, "Angle");
+        super(object);
         this.value = value;
     }
 
