@@ -270,8 +270,6 @@ function setup() {
 	}
 }
 
-x = 0;
-y = 0;
 function draw() {
 	clear();
 
@@ -283,16 +281,6 @@ function draw() {
 	
 	// fill(200); // colorie l'interieur des prochaines figures
 	// stroke(100, 1, 50); // colorie la bordure des prochaines figures
-
-	/*ellipse(0 + x, 200 - y, 80, 80);
-	x += 0.3;
-	if (x > 50) {
-		x = 0;
-		y += 50;
-	}
-	if (y >= 150) {
-		y = -100;
-	}*/
 
 	// Display objects of each layer, if they're set as visible
 	for (var layer of LAYERS) {

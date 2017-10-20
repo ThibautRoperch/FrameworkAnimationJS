@@ -5,20 +5,20 @@ class Polygon extends AnimatedObject {
         this.coord_y = coord_y;
     }
 
-    /*getWidth() {
-        return this.width;
+    getCoordx() {
+        return this.coord_x;
     }
 
-    getHeight() {
-        return this.height;
+    getCoordy() {
+        return this.coord_y;
     }
 
-    setWidth(width) {
-        this.width = width;
+    setCoordx(coord_x) {
+        this.coord_x = coord_x;
     }
 
-    setHeight(height) {
-        this.height = height;
-    }*/
+    setCoordy(coord_y) {
+        this.coord_y = coord_y;
+    }
     
 }
