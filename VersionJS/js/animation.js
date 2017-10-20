@@ -4,14 +4,20 @@
  * Global variables
  */
 
-var FRAME_RATE = 60; // frame per seconds
 var PARENT = null; // HTML node containing the canevas
+
+var FRAME_RATE = 60; // frame per seconds
+
 var WIDTH = 0; // width of the canevas, px
 var HEIGHT = 0; // height of the canevas, px
+
 var BG_IMAGE = null; // path of the background image (can be "" if there isn't background image)
 var OBJECTS = new Map(); // associative array containing drawing's objects, as object_identifier : Object
 var PROGRAMS = new Map() // associative array containing instructions' programs, as object_identifier : array of Instruction elements
+
 var LAYERS = new Set(); // set containing
+
+var DEFAULT_STATE = "normal";
 
 
 /**********************
@@ -95,7 +101,6 @@ function read_xml_file(contents) {
 			var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : false;
 			var layer = parseInt(read_object.getAttribute("layer")) | 0;
 			LAYERS.add(layer);
-			var state = "normal";
 			var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : true;
 			var opacity = parseInt(read_object.getAttribute("opacity")) | 1;
 			// Retrieve the others specific attributes and create the associated animated object
@@ -105,28 +110,28 @@ function read_xml_file(contents) {
 				var border = parseInt(read_object.getAttribute("border")) | 0;
 				var bocolor = read_object.hasAttribute("bocolor") ? read_object.getAttribute("bocolor").split(",") : [0, 0, 0];
 					for (c in bocolor) bocolor[c] = parseInt(bocolor[c]);
-				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border);
+				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, border);
 			} else if (type == "object_image") {
 				var width = parseInt(read_object.getAttribute("width")) | 100;
 				var height = parseInt(read_object.getAttribute("height")) | 100;
 				var image = read_object.getAttribute("image");
-				new_object = new Image(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height, image);
+				new_object = new Image(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height, image);
 			} else if (type == "object_rectangle") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
 				var round = parseInt(read_object.getAttribute("round")) | 0;
-				// new_object = new Rectangle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height, round); // TODO renommer Box en Rectangle
+				// new_object = new Rectangle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height, round); // TODO renommer Box en Rectangle
 			} else if (type == "object_polygon") {
 				var coord_x = parseInt(read_object.getAttribute("coord_x"));
 				var coord_y = parseInt(read_object.getAttribute("coord_y"));
-				new_object = new Polygon(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, coord_x, coord_y);
+				new_object = new Polygon(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, coord_x, coord_y);
 			} else if (type == "object_circle") {
 				var radius = parseInt(read_object.getAttribute("radius"));
-				// new_object = new Circle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, radius); // TODO revoir le constructeur
+				// new_object = new Circle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, radius); // TODO revoir le constructeur
 			} else if (type == "object_ellipse") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
-				new_object = new Ellipse(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height);
+				new_object = new Ellipse(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height);
 			}
 			OBJECTS.set(id, new_object);
 		}
@@ -137,7 +142,7 @@ function read_xml_file(contents) {
 		// Create and push each instruction's program in the programs' array
 		for (var read_program of programs_node.children) {
 			var object_id = read_program.getAttribute("assigned_to");
-			var instructions = new Array();
+			var program = new Array();
 			for (var read_instruction of read_program.children) {
 				var new_instruction = null;
 				// Retrieve ...
@@ -147,7 +152,7 @@ function read_xml_file(contents) {
 					new_instruction = new Click(OBJECTS.get(object_id));
 				} else if (type == "label") {
 					var value = read_instruction.getAttribute("value");
-					// new_instruction = new Label(OBJECTS.get(object_id), value); // TODO objet qui a un execute() vide
+					new_instruction = new Label(null, value);
 				} else if (type == "moveto") {
 					// TODO plein d'attributs
 					new_instruction = new MoveTo(OBJECTS.get(object_id));
@@ -166,7 +171,7 @@ function read_xml_file(contents) {
 					new_instruction = new Trigger(OBJECTS.get(object_id), object, value);
 				} else if (type == "goto") {
 					var value = read_instruction.getAttribute("value");
-					// new_instruction = new GoTo(OBJECTS.get(object_id), value); // TODO GoTo ou Goto ?
+					new_instruction = new GoTo(null, value);
 				} else if (type == "up") {
 					var y = parseInt(read_instruction.getAttribute("y"));
 					var dy = parseInt(read_instruction.getAttribute("dy"));
@@ -196,31 +201,51 @@ function read_xml_file(contents) {
 					var delay = parseInt(read_instruction.getAttribute("property"));
 					new_instruction = new Blink(OBJECTS.get(object_id), times, delay);
 				} else if (type == "stop") {
-					// new_instruction = new Stop(OBJECTS.get(object_id)); // TODO objet qui a un execute() vide
+					new_instruction = new Stop(null);
 				}
-				instructions.push(new_instruction);
+				program.push(new_instruction);
 			}
-			PROGRAMS.set(object_id, )
+			PROGRAMS.set(object_id, program);
 		}
 	}
 
 	// Remove the loading message
 	PARENT.removeChild(PARENT.getElementsByClassName("loading")[0]);
 
-	// Execute programs of the programs array
-	for (o in OBJECTS) {
-		execute_animation(o, 0);
+	// Execute programs of the programs array, as max 1 program per object
+	for (object_id of OBJECTS.keys()) {
+		if (PROGRAMS.get(object_id)) {
+			execute_program(object_id, 0, new Map());
+		}
 	}
 }
 
-function execute_animation(object, instruction) {
-	// if () {
+function execute_program(object_id, instruction_number, labels) { // objet Program contenant ces attributs
+	console.log("execution de l'instruction " + program[instruction_number]);
 
-	// }
-	// TODO
-	// Tous les programmes où l'objet assoocié n'est pas dans l'etat normal, je continue pas le programme (while obj.etat == "normal")
-	// L'état peut etre : sleeping (<sleep>), l'état donné par <wait>, 
-	// Traiter <label>, <goto>, <stop>
+	var program = PROGRAMS.get(object);
+	var instruction = program[instruction_number];
+	var continue_execution = instruction < (program.length - 1);
+	var next_instruction;
+
+	// Execute the instruction if the state of the object is the default one
+	if (object.getState() == DEFAULT_STATE) {  // TODO === ?
+		if (instruction.name == "Label") {
+			labels.set(instruction.getValue(), instruction_number + 1);
+		} else if (instruction.name == "GoTo") {
+			next_instruction = labels.get(instruction.getValue());
+		} else if (instruction.name == "Stop") {
+			var continue_execution = false;
+		} else {
+			instruction.execute();
+			next_instruction = instruction_number + 1;
+		}
+	}
+	if (continue_execution) {
+		setTimeout(function() {
+			execute_animation(object_id, next_instruction, labels);
+		}, 500);
+	}
 }
 
 
@@ -256,7 +281,7 @@ function draw() {
 		background(BG_IMAGE);
 	}
 	
-	// fill(200); // colorie l'interieur des prochaines 	figures
+	// fill(200); // colorie l'interieur des prochaines figures
 	// stroke(100, 1, 50); // colorie la bordure des prochaines figures
 
 	/*ellipse(0 + x, 200 - y, 80, 80);

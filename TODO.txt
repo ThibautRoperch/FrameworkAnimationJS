@@ -27,6 +27,8 @@ function wait() { setTimeout(function() { if (PAUSE) wait(); }, 10); }
 
 Récap des attributs de chaque objet (tableau ? graphe des classes ?)
 
+Faire l'objet repère
+
 Questions
 =========
 
@@ -37,3 +39,5 @@ C'est quoi le @, dans des XML ? Saut de ligne
 Pourquoi avoir mis un état avec une cdc plutôt qu'un boolean "waiting" ? Pour que les liens entre les "signaux" des objets soient plus clairs en codant le XML
 
 À quoi sert l'élément extern dans la DTD ? 
+
+fgcolor pour le polygone, l'ellipse, ... why ?
