@@ -91,19 +91,16 @@ function read_xml_file(contents) {
 			var id = read_object.textContent;
 			var x = parseInt(read_object.getAttribute("x")) | 0;
 			var y = parseInt(read_object.getAttribute("y")) | 0;
-			var fgcolor = read_object.hasAttribute("fgcolor") ? read_object.getAttribute("fgcolor").split(",") : [0, 0, 0];
-				for (c in fgcolor) fgcolor[c] = parseInt(fgcolor[c]);
-			var bgcolor = read_object.hasAttribute("bgcolor") ? read_object.getAttribute("bgcolor").split(",") : [0, 0, 0];
-				for (c in bgcolor) bgcolor[c] = parseInt(bgcolor[c]);
+			var fgcolor = read_object.hasAttribute("fgcolor") ? parseIntArray(read_object.getAttribute("fgcolor")) : [0, 0, 0];
+			var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
 			var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : false;
-			var bocolor = read_object.hasAttribute("bocolor") ? read_object.getAttribute("bocolor").split(",") : [0, 0, 0];
-				for (c in bocolor) bocolor[c] = parseInt(bocolor[c]);
+			var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
 			var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : false;
 			var layer = parseInt(read_object.getAttribute("layer")) | 0;
 			LAYERS.add(layer);
 			var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : true;
-			var opacity = parseInt(read_object.getAttribute("opacity")) | 1;
-			// Retrieve the others specific attributes and create the associated animated object
+			var opacity = parseFloat(read_object.getAttribute("opacity")) | 1;
+			// Retrieve the others specific attributes of the object and create the associated animated object
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");
 				var font = read_object.getAttribute("font");
@@ -120,14 +117,14 @@ function read_xml_file(contents) {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
 				var round = parseInt(read_object.getAttribute("round")) | 0;
-				// new_object = new Rectangle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height, round); // TODO renommer Box en Rectangle
+				new_object = new Rectangle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height, round);
 			} else if (type == "object_polygon") {
 				var coord_x = parseInt(read_object.getAttribute("coord_x"));
 				var coord_y = parseInt(read_object.getAttribute("coord_y"));
 				new_object = new Polygon(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, coord_x, coord_y);
 			} else if (type == "object_circle") {
 				var radius = parseInt(read_object.getAttribute("radius"));
-				// new_object = new Circle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, radius); // TODO revoir le constructeur
+				new_object = new Circle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, radius);
 			} else if (type == "object_ellipse") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
@@ -145,10 +142,25 @@ function read_xml_file(contents) {
 			var program = new Array();
 			for (var read_instruction of read_program.children) {
 				var new_instruction = null;
-				// Retrieve ...
+				// Retrieve the instruction's type
 				var type = read_instruction.nodeName;
-				// Retrieve ...
-				if (type == "click") {
+				// Retrieve the others specific attributes of the instruction and create the associated instruction
+				if (type == "setx") {
+					var x = read_instruction.getAttribute("x");
+					new_instruction = new SetProperty(OBJECTS.get(object_id), "x", x);
+				} else if (type == "sety") {
+					var y = read_instruction.getAttribute("y");
+					new_instruction = new SetProperty(OBJECTS.get(object_id), "y", y);
+				} else if (type == "setxy") {
+					var x = read_instruction.getAttribute("x");
+					var y = read_instruction.getAttribute("y");
+					new_instruction = new SetProperty(OBJECTS.get(object_id), "x", x);
+					program.push(new_instruction);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), "y", y);
+				} else if (type == "visible") {
+					var value = read_instruction.getAttribute("value") == "true" | false;
+					new_instruction = new SetProperty(OBJECTS.get(object_id), "visible", value);
+				} else if (type == "click") {
 					new_instruction = new Click(OBJECTS.get(object_id));
 				} else if (type == "label") {
 					var value = read_instruction.getAttribute("value");
@@ -194,7 +206,7 @@ function read_xml_file(contents) {
 				} else if (type == "setproperty") {
 					var object = read_instruction.getAttribute("object");
 					var property = read_instruction.getAttribute("property");
-					var value = read_instruction.getAttribute("value"); // TODO la value peut etre un entier, un bool, ou encore une cdc ; parseint dans le switch case setproperty
+					var value = read_instruction.getAttribute("value");
 					new_instruction = new SetProperty(OBJECTS.get(object_id), object, property, value);
 				} else if (type == "blink") {
 					var times = parseInt(read_instruction.getAttribute("object"));
@@ -203,6 +215,8 @@ function read_xml_file(contents) {
 				} else if (type == "stop") {
 					new_instruction = new Stop(null);
 				}
+				console.log(read_instruction);
+				console.log(new_instruction);
 				program.push(new_instruction);
 			}
 			PROGRAMS.set(object_id, program);
@@ -221,15 +235,16 @@ function read_xml_file(contents) {
 }
 
 function execute_program(object_id, instruction_number, labels) { // objet Program contenant ces attributs
-	console.log("execution de l'instruction " + program[instruction_number]);
-
-	var program = PROGRAMS.get(object);
+	var program = PROGRAMS.get(object_id);
+	console.log(program);
 	var instruction = program[instruction_number];
 	var continue_execution = instruction < (program.length - 1);
 	var next_instruction;
 
+	console.log("execution de l'instruction " + program[instruction_number]);
+	
 	// Execute the instruction if the state of the object is the default one
-	if (object.getState() == DEFAULT_STATE) {  // TODO === ?
+	if (OBJECTS.get(object_id).getState() == DEFAULT_STATE) {  // TODO === ?
 		if (instruction.name == "Label") {
 			labels.set(instruction.getValue(), instruction_number + 1);
 		} else if (instruction.name == "GoTo") {
@@ -294,7 +309,7 @@ function draw() {
 
 
 /**********************
- * Other functions 
+ * Others functions 
  */
 
 function include_scripts() {
@@ -303,10 +318,10 @@ function include_scripts() {
 		"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js",
 		// Objects
 		"js/Objects/AnimatedObject.js",
-		"js/Objects/Box.js",
 		"js/Objects/Grid.js",
 		"js/Objects/Image.js",
 		"js/Objects/Polygon.js",
+		"js/Objects/Rectangle.js",
 		"js/Objects/Text.js",
 		// Instructions
 		"js/Instructions/Instruction.js",
@@ -341,4 +356,14 @@ function include_scripts() {
 		script.src = s;
 		PARENT.appendChild(script);
 	}
+}
+
+function parseIntArray(string) {
+	var array = string.split(",");
+
+	for (i in array) {
+		array[i] = parseInt(array[i]);
+	}
+
+	return array;
 }

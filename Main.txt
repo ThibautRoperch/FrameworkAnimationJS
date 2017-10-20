@@ -78,7 +78,7 @@ Ces propriétés de l'objet image ont été modifiées :
 - width (largeur de l'image) : 100 par défaut
 - height (hauteur de l'image) : 100 par défaut
 
-Les instructions setx, sety, setxy, visible sont remplacées par l'instruction setproperty. DTD mise à jour en conséquence.
+Toutes les propriétés peuvent être modifiées par un programme en utilisant l'instruction <setproperty>.
 
 L'état par défaut d'un objet du dessin est "normal". Il peut être "sleeping", "waiting_click", ou l'état donné par l'instruction <wait>.
 L'instruction <click> est gérée de la façon suivante : l'état de l'objet devient "waiting_click", et quand un objet est cliqué, ca envoie un trigger avec la value "waiting_click".

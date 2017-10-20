@@ -1,6 +1,7 @@
-/*
-*	This instruction set the property of the object at a certain value
-*/
+/**
+ * This instruction set the property of the object at a certain value
+ */
+
 class SetProperty extends Instruction {
 
 	constructor(object, property, value) {
@@ -12,15 +13,15 @@ class SetProperty extends Instruction {
 	execute() {
 		switch(property) {
 			case "x":
-				this.object.setX(this.value);
+				this.object.setX(parseInt(this.value));
 				break;
 
 			case "y":
-				this.object.setX(this.value);
+				this.object.setY(parseInt(this.value));
 				break;
 
 			case "visible":
-				this.object.setText(this.value);
+				this.object.setVisible(this.value == "true" | false);
 				break;
 
 			case "text":
@@ -28,10 +29,14 @@ class SetProperty extends Instruction {
 				break;
 
 			case "fgcolor":
+				this.value = this.value.split(",");
+				for (c in this.value) this.value[c] = parseInt(this.value[c]);
 				this.object.setFgcolor(this.value);
 				break;
 
 			case "bgcolor":
+				this.value = this.value.split(",");
+				for (c in this.value) this.value[c] = parseInt(this.value[c]);
 				this.object.setBgcolor(this.value);
 				break;
 
@@ -44,12 +49,17 @@ class SetProperty extends Instruction {
 				break;
 
 			case "layer":
-				this.object.setLayer(this.value);
+				this.object.setLayer(parseInt(this.value));
 				break;
 
 			case "opacity":
-				this.object.setOpacity(this.value);
+				this.object.setOpacity(parseFloat(this.value));
+				break;
+			
+			default:
+				console.log("[SetProperty.js] Attribut '" + property + "' de l'instruction SetProperty inconnu");
 				break;
 		}
 	}
+
 }

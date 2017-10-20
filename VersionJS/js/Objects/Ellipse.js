@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 class Ellipse extends AnimatedObject {
     constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height) {
         super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);

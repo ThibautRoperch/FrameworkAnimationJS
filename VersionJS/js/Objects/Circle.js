@@ -1,4 +1,9 @@
+/**
+ * 
+ */
+
 class Circle extends Ellipse {
+       
     constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, radius) {
         super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, radius, radius);
         this.radius = radius;
@@ -13,8 +18,8 @@ class Circle extends Ellipse {
    }
 
    draw() {
-		fill(this.bgcolor);
-		ellipse(this.x, this.y, this.radius, this.radius);
+        fill(this.bgcolor);
+        ellipse(this.x, this.y, this.radius, this.radius);
    }
 
 }

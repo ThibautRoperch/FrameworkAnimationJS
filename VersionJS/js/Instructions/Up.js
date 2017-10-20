@@ -1,6 +1,7 @@
-/*
-*   This instruction move the object up of y by interval of interval_y at a rate of FRAME_RATE 
-*/
+/**
+ * This instruction move the object up of y by interval of interval_y at a rate of FRAME_RATE
+ */
+
 class Up extends Instruction {
 
 	constructor(object, y, interval_y) {

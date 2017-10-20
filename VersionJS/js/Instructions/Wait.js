@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 class Wait extends Instruction {
 	
 	constructor(object, state) {
@@ -7,6 +11,6 @@ class Wait extends Instruction {
 
 	execute() {
 		this.object.setState(this.expected_state);
-	
 	}
+	
 }

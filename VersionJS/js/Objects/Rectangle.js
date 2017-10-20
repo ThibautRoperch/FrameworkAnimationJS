@@ -1,4 +1,9 @@
+/**
+ * 
+ */
+
 class Rectangle extends AnimatedObject {
+    
 	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height, round) {
         super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
         this.width = width;

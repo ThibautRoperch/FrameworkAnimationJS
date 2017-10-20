@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 class Visible extends Instruction {
 	
 	constructor(object, visible) {
@@ -8,4 +12,5 @@ class Visible extends Instruction {
 	execute() {
 		this.object.setVisible(this.visible);
 	}
+	
 }

@@ -1,4 +1,9 @@
+/**
+ * 
+ */
+
 class Polygon extends AnimatedObject {
+    
 	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, coord_x, coord_y) {
         super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
         this.coord_x = coord_x;

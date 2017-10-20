@@ -105,8 +105,21 @@
 
 <!ELEMENT programs (program+) >
 
-<!ELEMENT program (click|label|moveto|wait|sleep|state|goto|trigger|up|down|left|right|angle|setproperty|blink|stop)+ >
+<!ELEMENT program (setx|sety|setxy|visible|click|label|moveto|wait|sleep|state|goto|trigger|up|down|left|right|angle|setproperty|blink|stop)+ >
 <!ATTLIST program assigned_to CDATA #REQUIRED >
+
+<!ELEMENT setx EMPTY >
+<!ATTLIST setx x CDATA #REQUIRED >
+
+<!ELEMENT sety EMPTY >
+<!ATTLIST sety y CDATA #REQUIRED >
+
+<!ELEMENT setxy EMPTY >
+<!ATTLIST setxy x CDATA #REQUIRED >
+<!ATTLIST setxy y CDATA #REQUIRED >
+
+<!ELEMENT visible EMPTY >
+<!ATTLIST visible value (true|false) #REQUIRED >
 
 <!ELEMENT click EMPTY >
 
