@@ -6,7 +6,7 @@ class Down extends Instruction {
     constructor(object, y, interval_y) {
         super(object);
         this.y = y;
-        this.interval_y = interval_Y;
+        this.interval_y = interval_y;
     }
     
     execute() {
