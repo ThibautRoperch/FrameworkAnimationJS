@@ -3,7 +3,7 @@
  */
 class Center extends Instruction {
 
-    construct(object) {
+    constructor(object) {
         super(object, "Center");
     }
     

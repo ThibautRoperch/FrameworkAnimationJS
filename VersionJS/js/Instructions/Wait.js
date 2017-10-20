@@ -1,6 +1,6 @@
 class Wait extends Instruction {
 	
-	constuctor(object, state) {
+	constructor(object, state) {
 		super(object,"wait");
 		this.expected_state = state;
 	}

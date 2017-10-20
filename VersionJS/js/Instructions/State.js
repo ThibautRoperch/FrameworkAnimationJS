@@ -3,7 +3,7 @@
 */
 class State extends Instruction {
 
-    construct(object, value) {
+    constructor(object, value) {
         super(object , "State");
         this.value = value;
     }
