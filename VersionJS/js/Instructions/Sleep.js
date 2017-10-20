@@ -4,14 +4,14 @@
 class Sleep extends Instruction {
 
     constructor(object, value) {
-        super(object, "Sleep");
+        super(object);
         this.value = value;
     }
 
     execute() {
-        this.object.setState("waiting_click");
+        this.object.setState("sleeping");
         setTimeout(function() {
-            this.object.setState("normal");
+            this.object.setState(DEFAULT_STATE);
         }, (FRAME_RATE/60)*this.value);
     }
 }

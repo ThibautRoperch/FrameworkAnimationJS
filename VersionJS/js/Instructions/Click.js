@@ -4,7 +4,7 @@
 class Click extends Instruction {
 
     constructor(object) {
-        super(object, "Click");
+        super(object);
     }
 
     execute() {

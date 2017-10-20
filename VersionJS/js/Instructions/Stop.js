@@ -1,7 +1,7 @@
 class Stop extends Instruction {
     
         constructor(object) {
-            super(object, "Stop")
+            super(object)
         }
         
         execute() {}

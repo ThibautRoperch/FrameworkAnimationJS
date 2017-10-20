@@ -13,7 +13,8 @@ class Circle extends Ellipse {
    }
 
    draw() {
-       ellipse(this.x, this.y, this.radius, this.radius);
+		fill(this.bgcolor);
+		ellipse(this.x, this.y, this.radius, this.radius);
    }
 
 }

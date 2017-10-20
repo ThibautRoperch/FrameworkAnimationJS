@@ -4,7 +4,7 @@
 class SetProperty extends Instruction {
 
 	constructor(object, property, value) {
-		super(object, "SetProperty");
+		super(object);
 		this.value = value;
 		this.property = property;
 	}

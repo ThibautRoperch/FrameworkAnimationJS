@@ -1,7 +1,7 @@
 class Visible extends Instruction {
 	
 	constructor(object, visible) {
-		super(object, "Visible");
+		super(object);
 		this.visible =  visible;
 	}
 

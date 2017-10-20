@@ -1,9 +1,14 @@
 class Label extends Instruction {
     
-        constructor(object) {
-            super(object, "Label")
+        constructor(object, value) {
+            super(object);
+            this.value = value;
         }
         
+        getValue() {
+            return this.value;
+        }
+
         execute() {}
     
     }

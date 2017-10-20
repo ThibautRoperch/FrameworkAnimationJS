@@ -3,8 +3,7 @@
 */
 class Instruction {
 
-	constructor(obj, type) {
+	constructor(obj) {
 		this.object = obj;
-		this.type = type;
 	}	
 }

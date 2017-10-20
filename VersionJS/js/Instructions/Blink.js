@@ -1,7 +1,7 @@
 class Blink extends Instruction {
 
     constructor(object, times, delay) {
-        super(object, "Blink");
+        super(object);
         this.times = times;
         this. delay = delay;
     }
