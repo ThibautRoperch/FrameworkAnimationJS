@@ -6,12 +6,12 @@ class SetProperty extends Instruction {
 
 	constructor(object, property, value) {
 		super(object);
-		this.value = value;
 		this.property = property;
+		this.value = value;
 	}
 
 	execute() {
-		switch(property) {
+		switch(this.property) {
 			case "x":
 				this.object.setX(parseInt(this.value));
 				break;
@@ -29,23 +29,19 @@ class SetProperty extends Instruction {
 				break;
 
 			case "fgcolor":
-				this.value = this.value.split(",");
-				for (c in this.value) this.value[c] = parseInt(this.value[c]);
-				this.object.setFgcolor(this.value);
+				this.object.setFgcolor(parseIntArray(this.value));
 				break;
 
 			case "bgcolor":
-				this.value = this.value.split(",");
-				for (c in this.value) this.value[c] = parseInt(this.value[c]);
-				this.object.setBgcolor(this.value);
+				this.object.setBgcolor(parseIntArray(this.value));
 				break;
 
 			case "bocolor":
-				this.object.setBocolor(this.value);
+				this.object.setBocolor(parseIntArray(this.value));
 				break;
 			
 			case "bgtransparent":
-				this.object.setBgtransparent(this.value);
+				this.object.setBgtransparent(this.value == "true" | false);
 				break;
 
 			case "layer":
@@ -57,7 +53,7 @@ class SetProperty extends Instruction {
 				break;
 			
 			default:
-				console.log("[SetProperty.js] Attribut '" + property + "' de l'instruction SetProperty inconnu");
+				console.log("[SetProperty.js] Attribut '" + property + "' de l'instruction SetProperty non pris en charge");
 				break;
 		}
 	}

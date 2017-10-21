@@ -6,10 +6,10 @@
 
 var PARENT = null; // HTML node containing the canevas
 
-var FRAME_RATE = 60; // frame per seconds
+var FRAME_RATE = 30; // frame per seconds
 
-var WIDTH = 0; // width of the canevas, px
-var HEIGHT = 0; // height of the canevas, px
+var WIDTH = 0; // width of the canevas, in px
+var HEIGHT = 0; // height of the canevas, in px
 
 var BG_IMAGE = null; // path of the background image (can be "" if there isn't background image)
 var OBJECTS = new Map(); // associative array containing drawing's objects, as object_identifier : Object
@@ -39,7 +39,7 @@ function load_animation(source, target_id, width, height) {
 	loading.innerHTML = "loading...";
 	PARENT.appendChild(loading);
 
-	// Include all other scripts
+	// Include all others scripts
 	include_scripts();
 
 	// Read the XML file using AJAX
@@ -166,8 +166,12 @@ function read_xml_file(contents) {
 					var value = read_instruction.getAttribute("value");
 					new_instruction = new Label(null, value);
 				} else if (type == "moveto") {
-					// TODO plein d'attributs
-					new_instruction = new MoveTo(OBJECTS.get(object_id));
+					var x = parseInt(read_instruction.getAttribute("x"));
+					var y = parseInt(read_instruction.getAttribute("y"));
+					var dx = parseInt(read_instruction.getAttribute("dx"));
+					var dy = parseInt(read_instruction.getAttribute("dy"));
+					var delay = parseInt(read_instruction.getAttribute("delay"));
+					new_instruction = new MoveTo(OBJECTS.get(object_id), x, y, dx, dy, delay);
 				} else if (type == "wait") {
 					var value = read_instruction.getAttribute("value");
 					new_instruction = new Wait(OBJECTS.get(object_id), value);
@@ -207,7 +211,7 @@ function read_xml_file(contents) {
 					var object = read_instruction.getAttribute("object");
 					var property = read_instruction.getAttribute("property");
 					var value = read_instruction.getAttribute("value");
-					new_instruction = new SetProperty(OBJECTS.get(object_id), object, property, value);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), property, value);
 				} else if (type == "blink") {
 					var times = parseInt(read_instruction.getAttribute("object"));
 					var delay = parseInt(read_instruction.getAttribute("property"));
@@ -215,8 +219,6 @@ function read_xml_file(contents) {
 				} else if (type == "stop") {
 					new_instruction = new Stop(null);
 				}
-				console.log(read_instruction);
-				console.log(new_instruction);
 				program.push(new_instruction);
 			}
 			PROGRAMS.set(object_id, program);
@@ -229,24 +231,24 @@ function read_xml_file(contents) {
 	// Execute programs of the programs array, as max 1 program per object
 	for (object_id of OBJECTS.keys()) {
 		if (PROGRAMS.get(object_id)) {
-			execute_program(object_id, 0, new Map());
+			execute_instructions(object_id, 0, new Map());
 		}
 	}
 }
 
-function execute_program(object_id, instruction_number, labels) { // objet Program contenant ces attributs
+function execute_instructions(object_id, instruction_number, labels) {
+	// Retrieve the program and the current instruction of the program
 	var program = PROGRAMS.get(object_id);
-	console.log(program);
 	var instruction = program[instruction_number];
-	var continue_execution = instruction < (program.length - 1);
-	var next_instruction;
 
-	console.log("execution de l'instruction " + program[instruction_number]);
-	
+	var continue_execution = instruction_number < (program.length - 1);
+	var next_instruction = instruction_number;
+
 	// Execute the instruction if the state of the object is the default one
-	if (OBJECTS.get(object_id).getState() == DEFAULT_STATE) {  // TODO === ?
+	if (OBJECTS.get(object_id).getState() == DEFAULT_STATE) {
 		if (instruction.name == "Label") {
 			labels.set(instruction.getValue(), instruction_number + 1);
+			next_instruction = instruction_number + 1;
 		} else if (instruction.name == "GoTo") {
 			next_instruction = labels.get(instruction.getValue());
 		} else if (instruction.name == "Stop") {
@@ -256,10 +258,11 @@ function execute_program(object_id, instruction_number, labels) { // objet Progr
 			next_instruction = instruction_number + 1;
 		}
 	}
+
 	if (continue_execution) {
 		setTimeout(function() {
-			execute_animation(object_id, next_instruction, labels);
-		}, 500);
+			execute_instructions(object_id, next_instruction, labels);
+		}, 1000);
 	}
 }
 
@@ -268,15 +271,19 @@ function execute_program(object_id, instruction_number, labels) { // objet Progr
  * P5.js drawing
  */
 
+var SALOPE;
+
 function setup() {
 	var canevas = createCanvas(WIDTH, HEIGHT);
 	canevas.parent(PARENT);
-	load_background();
 
 	// Try to load the background image while it is null
+	load_background();
 	function load_background() {
 		if (BG_IMAGE != null) {
-			if (BG_IMAGE != "") BG_IMAGE = loadImage(BG_IMAGE);
+			if (BG_IMAGE != "") {
+				BG_IMAGE = loadImage(BG_IMAGE);
+			}
 		} else {
 			setTimeout(function() {
 				load_background();
@@ -289,11 +296,11 @@ function draw() {
 	clear();
 
 	frameRate(FRAME_RATE);
-
-	if (BG_IMAGE != null) {
-		background(BG_IMAGE);
-	}
 	
+	if (BG_IMAGE != null) {
+		background(BG_IMAGE); // TODO marche pas, passer par objet image ?
+	}
+
 	// fill(200); // colorie l'interieur des prochaines figures
 	// stroke(100, 1, 50); // colorie la bordure des prochaines figures
 
@@ -346,10 +353,6 @@ function include_scripts() {
 		"js/Instructions/Visible.js",
 		"js/Instructions/Wait.js",
 	];
-
-	// var a = document.createElement("script");
-	// a.src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js";
-	// PARENT.appendChild(a);
 
 	for (s of scripts) {
 		var script = document.createElement("script");
