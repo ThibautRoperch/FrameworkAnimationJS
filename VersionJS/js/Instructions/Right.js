@@ -16,9 +16,25 @@ class Right extends Instruction {
 		
 			setTimeout(function() {
 		
-				this.execute();
+				this.execute(); // erreur : this.execute is not a function ; en effet, c'est une méthode de classe
 		
 			}, FRAME_RATE/60);
 		}
+
+		/*
+		// Faire pluôt un truc du style :
+		execute() {		
+			function azdijoaz() {
+				if (this.object.getX() < this.x) {
+					this.object.setX(this.object.getX()+this.interval_x);
+				
+					setTimeout(function() {
+						azdijoaz();
+					}, FRAME_RATE/60);
+				}
+			}
+		}
+		*/
 	}
+
 }

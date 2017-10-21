@@ -21,7 +21,7 @@ class SetProperty extends Instruction {
 				break;
 
 			case "visible":
-				this.object.setVisible(this.value == "true" | false);
+				this.object.setVisible(this.value == "true" ? true : false);
 				break;
 
 			case "text":

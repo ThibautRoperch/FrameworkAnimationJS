@@ -17,8 +17,6 @@ var PROGRAMS = new Map() // associative array containing instructions' programs,
 
 var LAYERS = new Set(); // set containing
 
-var DEFAULT_STATE = "normal";
-
 
 /**********************
  * Loading and execution functions
@@ -80,7 +78,7 @@ function read_xml_file(contents) {
 	} else {
 		BG_IMAGE = "";
 	}
-	
+
 	// If the objects' node exists
 	if (objects_node) {
 		// Create and push each object in the objects' array
@@ -93,26 +91,24 @@ function read_xml_file(contents) {
 			var y = parseInt(read_object.getAttribute("y")) | 0;
 			var fgcolor = read_object.hasAttribute("fgcolor") ? parseIntArray(read_object.getAttribute("fgcolor")) : [0, 0, 0];
 			var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
-			var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : false;
+			var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : true;
 			var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
-			var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : false;
+			var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : true;
 			var layer = parseInt(read_object.getAttribute("layer")) | 0;
 			LAYERS.add(layer);
-			var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : true;
+			var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : false;
 			var opacity = parseFloat(read_object.getAttribute("opacity")) | 1;
 			// Retrieve the others specific attributes of the object and create the associated animated object
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");
-				var font = read_object.getAttribute("font");
+				var font = read_object.getAttribute("font").split(",");
 				var border = parseInt(read_object.getAttribute("border")) | 0;
-				var bocolor = read_object.hasAttribute("bocolor") ? read_object.getAttribute("bocolor").split(",") : [0, 0, 0];
-					for (c in bocolor) bocolor[c] = parseInt(bocolor[c]);
 				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, border);
 			} else if (type == "object_image") {
 				var width = parseInt(read_object.getAttribute("width")) | 100;
 				var height = parseInt(read_object.getAttribute("height")) | 100;
 				var image = read_object.getAttribute("image");
-				new_object = new Image(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height, image);
+				new_object = new ImageFile(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height, image);
 			} else if (type == "object_rectangle") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
@@ -146,7 +142,7 @@ function read_xml_file(contents) {
 				var type = read_instruction.nodeName;
 				// Retrieve the others specific attributes of the instruction and create the associated instruction
 				if (type == "setx") {
-					var x = read_instruction.getAttribute("x");
+					var x = read_instruction.getAttribute("x"); // don't parse to an int, already did in SetProperty.execution()
 					new_instruction = new SetProperty(OBJECTS.get(object_id), "x", x);
 				} else if (type == "sety") {
 					var y = read_instruction.getAttribute("y");
@@ -158,7 +154,7 @@ function read_xml_file(contents) {
 					program.push(new_instruction);
 					new_instruction = new SetProperty(OBJECTS.get(object_id), "y", y);
 				} else if (type == "visible") {
-					var value = read_instruction.getAttribute("value") == "true" | false;
+					var value = read_instruction.getAttribute("value"); // don't parse to a boolean, already did in SetProperty.execution()
 					new_instruction = new SetProperty(OBJECTS.get(object_id), "visible", value);
 				} else if (type == "click") {
 					new_instruction = new Click(OBJECTS.get(object_id));
@@ -184,7 +180,7 @@ function read_xml_file(contents) {
 				} else if (type == "trigger") {
 					var object = read_instruction.getAttribute("object");
 					var value = read_instruction.getAttribute("value");
-					new_instruction = new Trigger(OBJECTS.get(object_id), object, value);
+					new_instruction = new Trigger(OBJECTS.get(object_id), OBJECTS.get(object), value);
 				} else if (type == "goto") {
 					var value = read_instruction.getAttribute("value");
 					new_instruction = new GoTo(null, value);
@@ -225,9 +221,6 @@ function read_xml_file(contents) {
 		}
 	}
 
-	// Remove the loading message
-	PARENT.removeChild(PARENT.getElementsByClassName("loading")[0]);
-
 	// Execute programs of the programs array, as max 1 program per object
 	for (object_id of OBJECTS.keys()) {
 		if (PROGRAMS.get(object_id)) {
@@ -246,12 +239,13 @@ function execute_instructions(object_id, instruction_number, labels) {
 
 	// Execute the instruction if the state of the object is the default one
 	if (OBJECTS.get(object_id).getState() == DEFAULT_STATE) {
-		if (instruction.name == "Label") {
+		var instruction_type = instruction.constructor.name;
+		if (instruction_type == "Label") {
 			labels.set(instruction.getValue(), instruction_number + 1);
 			next_instruction = instruction_number + 1;
-		} else if (instruction.name == "GoTo") {
+		} else if (instruction_type == "GoTo") {
 			next_instruction = labels.get(instruction.getValue());
-		} else if (instruction.name == "Stop") {
+		} else if (instruction_type == "Stop") {
 			var continue_execution = false;
 		} else {
 			instruction.execute();
@@ -262,7 +256,7 @@ function execute_instructions(object_id, instruction_number, labels) {
 	if (continue_execution) {
 		setTimeout(function() {
 			execute_instructions(object_id, next_instruction, labels);
-		}, 1000);
+		}, 10);
 	}
 }
 
@@ -271,25 +265,19 @@ function execute_instructions(object_id, instruction_number, labels) {
  * P5.js drawing
  */
 
-var SALOPE;
-
-function setup() {
-	var canevas = createCanvas(WIDTH, HEIGHT);
-	canevas.parent(PARENT);
-
-	// Try to load the background image while it is null
-	load_background();
-	function load_background() {
-		if (BG_IMAGE != null) {
-			if (BG_IMAGE != "") {
-				BG_IMAGE = loadImage(BG_IMAGE);
-			}
-		} else {
-			setTimeout(function() {
-				load_background();
-			}, 10);
-		}
+function preload() { // preload() runs once
+	if (BG_IMAGE != "") {
+		BG_IMAGE = loadImage(BG_IMAGE);
 	}
+}
+
+function setup() { // setup() waits until preload() is done
+	var canvas = createCanvas(WIDTH, HEIGHT);
+	canvas.mouseClicked(canvasClicked);
+	canvas.parent(PARENT);
+
+	// Remove the loading message
+	PARENT.removeChild(PARENT.getElementsByClassName("loading")[0]);
 }
 
 function draw() {
@@ -298,11 +286,8 @@ function draw() {
 	frameRate(FRAME_RATE);
 	
 	if (BG_IMAGE != null) {
-		background(BG_IMAGE); // TODO marche pas, passer par objet image ?
+		background(BG_IMAGE);
 	}
-
-	// fill(200); // colorie l'interieur des prochaines figures
-	// stroke(100, 1, 50); // colorie la bordure des prochaines figures
 
 	// Display objects of each layer, if they're set as visible
 	for (var layer of LAYERS) {
@@ -312,6 +297,25 @@ function draw() {
 			}
 		}
 	}
+}
+
+function canvasClicked() {
+	// console.clear();
+	// console.log("========================= " + mouseX + " " + mouseY + " ===========================");
+	// Get the visible objects that are under the cursor position
+	for (object of OBJECTS.values()) {
+		if (object.getVisible()) {
+			// console.log(object.id + " : entre " + object.minXposition() + " X " + object.maxXposition() + " et  " + object.minYposition() + " Y " + object.maxYposition());
+			if (mouseX >= object.minXposition() && mouseX <= object.maxXposition()
+			 && mouseY >= object.minYposition() && mouseY <= object.maxYposition()) {
+				// console.log("dedans");
+				new Trigger(null, object, WAITING_CLICK_STATE).execute();
+			}
+		}
+	}
+
+	// Prevent default
+	return false;
 }
 
 
@@ -326,7 +330,7 @@ function include_scripts() {
 		// Objects
 		"js/Objects/AnimatedObject.js",
 		"js/Objects/Grid.js",
-		"js/Objects/Image.js",
+		"js/Objects/ImageFile.js",
 		"js/Objects/Polygon.js",
 		"js/Objects/Rectangle.js",
 		"js/Objects/Text.js",

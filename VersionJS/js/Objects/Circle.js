@@ -18,7 +18,7 @@ class Circle extends Ellipse {
    }
 
    draw() {
-        fill(this.bgcolor);
+        // fill(this.bgcolor);
         ellipse(this.x, this.y, this.radius, this.radius);
    }
 

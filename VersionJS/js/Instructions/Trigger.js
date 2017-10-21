@@ -4,14 +4,15 @@
 
 class Trigger extends Instruction {
 	
-	constructor(object, value) {
+	constructor(object, target, value) {
 		super(object);
+		this.target = target;
 		this.value = value;
 	}
 
 	execute() {
-		if(this.object.getState() == this.value) {
-			this.object.setTate(DEFAULT_STATE);
+		if(this.target.getState() == this.value) {
+			this.target.setState(DEFAULT_STATE);
 		}
 	}
 	

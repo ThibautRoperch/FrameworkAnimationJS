@@ -2,16 +2,22 @@
  * 
  */
 
+// File-shared object's states
+var DEFAULT_STATE = "normal";
+var WAITING_CLICK_STATE = "waiting_click";
+var SLEEPING_STATE = "sleeping";
+var MOVING_STATE = "moving";
+
 class AnimatedObject {
    
     constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity) {
         this.id = id;
         this.x = x;
         this.y = y;
-        this.fgcolor = fgcolor;
-        this.bgcolor = bgcolor;
+        this.fgcolor = fgcolor; // r, g, b
+        this.bgcolor = bgcolor; // r, g, b
         this.bgtransparent = bgtransparent;
-        this.bocolor = bocolor;
+        this.bocolor = bocolor; // r, g, b
         this.botransparent = botransparent;
         this.state = state;
         this.layer = layer;
@@ -114,5 +120,11 @@ class AnimatedObject {
     setOpacity(opacity) {
         this.opacity = opacity;
     }
-    
+
+    draw() {
+        fill(this.fgcolor, this.opacity * 255);
+        if (this.botransparent) noStroke();
+        else stroke(this.bocolor, this.opacity * 255);
+    }
+
 }

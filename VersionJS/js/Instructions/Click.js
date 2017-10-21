@@ -9,7 +9,7 @@ class Click extends Instruction {
 	}
 
 	execute() {
-		this.object.setState("waiting_click");
+		this.object.setState(WAITING_CLICK_STATE);
 	}
 	
 }

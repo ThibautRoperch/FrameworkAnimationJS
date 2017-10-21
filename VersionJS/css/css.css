@@ -82,15 +82,16 @@ list-style: none;
 }
 
 applet {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: 1px solid silver;
+display:flex;
+flex-direction:row;
+align-items:center;
+padding:0;
+border:1px solid silver;
 }
 
 div.loading {
-    flex: 1;
-    height: auto;
-    text-align: center;
-    color: gray;
+flex:1;
+height:auto;
+text-align:center;
+color:gray;
 }

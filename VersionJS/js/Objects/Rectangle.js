@@ -8,7 +8,7 @@ class Rectangle extends AnimatedObject {
         super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
         this.width = width;
         this.height = height;
-        this.round = round; 
+        this.round = round; // tl, tr, bl, br
     }
     
     getWidth() {
@@ -39,4 +39,20 @@ class Rectangle extends AnimatedObject {
         rect(this.x, this.y, this.width, this.height, this.round[0], this.round[1], this.round[2], this.round[3]);
     }
 
+	minXposition() {
+		return this.x;
+	}
+
+	minYposition() {
+		return this.y - 11;
+	}
+
+	maxXposition() {
+		return this.x + this.text.length * 7;
+	}
+
+	maxYposition() {
+		return this.y + 5;
+    }
+    
 }

@@ -7,7 +7,7 @@ class Text extends AnimatedObject {
 	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border) {
         super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
 		this.text = text;
-		this.font = font;
+		this.font = font; // FontName, FontSize, FontWeight
 		this.border = border;
 	}
 
@@ -36,6 +36,27 @@ class Text extends AnimatedObject {
 	}
 
 	draw() {
-		text(this.text, this.x, this.y)
+		super.draw();
+		textFont(this.font[0]);
+		textSize(parseInt(this.font[1]));
+		textStyle(this.font[2] == "bold" ? BOLD : this.font[2] == "italic" ? ITALIC : NORMAL);
+		text(this.text, this.x, this.y);
 	}
+
+	minXposition() {
+		return this.x;
+	}
+
+	minYposition() {
+		return this.y - this.font[1];
+	}
+
+	maxXposition() {
+		return this.x + this.text.length * this.font[1] / 2;
+	}
+
+	maxYposition() {
+		return this.y + 5;
+	}
+	
 }

@@ -9,7 +9,7 @@ class Sleep extends Instruction {
 	}
 
 	execute() {
-		this.object.setState("sleeping");
+		this.object.setState(SLEEPING_STATE);
 		setTimeout(function() {
 			this.object.setState(DEFAULT_STATE);
 		}, (FRAME_RATE/60)*this.value);
