@@ -17,6 +17,8 @@
 <!ATTLIST object_text text CDATA #REQUIRED >
 <!ATTLIST object_text font CDATA #REQUIRED >
 <!ATTLIST object_text border CDATA #IMPLIED >
+<!ATTLIST object_text width CDATA #IMPLIED >
+<!ATTLIST object_text height CDATA #IMPLIED >
 <!ATTLIST object_text x CDATA #IMPLIED >
 <!ATTLIST object_text y CDATA #IMPLIED >
 <!ATTLIST object_text fgcolor CDATA #IMPLIED >
