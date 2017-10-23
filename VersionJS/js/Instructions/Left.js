@@ -11,14 +11,14 @@ class Left extends Instruction{
     execute() {
         this.object.setState(MOVING_STATE);
         left();
-        function left() {
-            if (this.object.getX() > this.x) {
+        function left(this) {
+            if (instruction.object.getX() > instruction.x) {
                 
-                    this.object.setX(this.object.getX()-this.interval_x);
+                instruction.object.setX(instruction.object.getX()-instruction.interval_x);
                 
                     setTimeout(function() {
                 
-                    left();
+                    left(instruction);
                 
                     }, FRAME_RATE/60);
             }

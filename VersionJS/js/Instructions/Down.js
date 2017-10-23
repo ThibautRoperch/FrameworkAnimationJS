@@ -12,16 +12,16 @@ class Down extends Instruction {
 	
 	execute() {
         this.object.setState(MOVING_STATE);
-        down();
-        function down() {
+        down(this);
+        function down(instruction) {
 
-            if (this.object.getY() > this.y) {
+            if (instruction.object.getY() > instruction.y) {
                 
-                this.object.setY(this.object.getY() - this.interval_y);
+                instruction.object.setY(instruction.object.getY() - instruction.interval_y);
                 
                 setTimeout(function() {
                 
-                    down();
+                    down(instruction);
                 
                 }, FRAME_RATE/60);
             }

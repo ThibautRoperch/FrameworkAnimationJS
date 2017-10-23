@@ -12,15 +12,15 @@ class Up extends Instruction {
 
 	execute() {
 		this.object.setState(MOVING_STATE);
-		//up();
-		function up() {
-			if (this.object.getY() < this.y) {
+		up(this);
+		function up(instruction) {
+			if (instuction.object.getY() < instruction.y) {
 				
-				this.object.setY(this.object.getY()+this.interval_y);
+				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
 			
 				setTimeout(function() {
 			
-					up();
+					up(instruction);
 			
 				}, FRAME_RATE/60);
 			}
