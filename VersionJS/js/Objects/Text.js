@@ -4,13 +4,23 @@
 
 class Text extends AnimatedObject {
 	
-	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border) {
+	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border, width, height) {
         super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
 		this.text = text;
 		this.font = font; // FontName, FontSize, FontWeight
 		this.border = border;
+		this.width = width;
+		this.height = height;
 	}
 
+	getWidth() {
+        return this.width;
+    }
+
+    getHeight() {
+        return this.height;
+	}
+	
 	getText() {
 		return this.text;
 	}
@@ -35,6 +45,14 @@ class Text extends AnimatedObject {
 		this.border = border;
 	}
 
+	setWidth(width) {
+        this.width = width;
+    }
+
+    setHeight(height) {
+        this.height = height;
+	}
+	
 	draw() {
 		super.draw();
 		// Background

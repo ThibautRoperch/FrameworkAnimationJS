@@ -11,12 +11,28 @@ class ImageFile extends AnimatedObject {
         this.image = image;
     }
 
+    getWidth() {
+        return this.width;
+    }
+
+    getHeight() {
+        return this.height;
+    }
+
     getImage() {
         return this.image;
     }
 
     setImage(image) {
         this.image = image;
+    }
+
+    setWidth(width) {
+        this.width = width;
+    }
+
+    setHeight(height) {
+        this.height = height;
     }
 
     draw() {
