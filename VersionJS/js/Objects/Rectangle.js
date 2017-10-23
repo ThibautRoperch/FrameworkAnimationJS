@@ -52,7 +52,7 @@ class Rectangle extends AnimatedObject {
 	}
 
 	maxYposition() {
-		return this.y + 5;
+		return this.y;
     }
     
 }

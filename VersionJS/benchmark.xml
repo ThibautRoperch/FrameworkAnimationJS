@@ -2,5 +2,8 @@
 	<background>
 		img/yellow_blue_linear_gradient.png
 	</background>
+	<objects>
+		<object_text text="aziodazod" font="Courier,18,bold" x="500" y="500" visible="true">jl</object_text>
+	</objects>
 
 </animation>

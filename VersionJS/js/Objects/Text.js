@@ -37,9 +37,14 @@ class Text extends AnimatedObject {
 
 	draw() {
 		super.draw();
+		// Background
+		// rect()
+		// Text's color, font, size and style
+		fill(this.fgcolor, this.opacity * 255);
 		textFont(this.font[0]);
 		textSize(parseInt(this.font[1]));
 		textStyle(this.font[2] == "bold" ? BOLD : this.font[2] == "italic" ? ITALIC : NORMAL);
+		// Display
 		text(this.text, this.x, this.y);
 	}
 
