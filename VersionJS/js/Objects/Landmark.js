@@ -63,6 +63,7 @@ class Landmark extends AnimatedObject {
     }
 
     draw() {
+        super.draw()
         line(this.x, this.y, this.x + this.width, this.y);
         line(this.x, this.y, this.x, this.y + this.height); 
         if(this.heigth > 0 && this.width > 0) {
