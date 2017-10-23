@@ -1,55 +1,56 @@
 /**
- * This instruction set the property of the object at a certain value
+ * This instruction set the property of the target at a certain value
  */
 
 class SetProperty extends Instruction {
 
-	constructor(object, property, value) {
+	constructor(object, target, property, value) {
 		super(object);
 		this.property = property;
 		this.value = value;
+		this.target = target;
 	}
 
 	execute() {
 		switch(this.property) {
 			case "x":
-				this.object.setX(parseInt(this.value));
+				this.target.setX(parseInt(this.value));
 				break;
 
 			case "y":
-				this.object.setY(parseInt(this.value));
+				this.target.setY(parseInt(this.value));
 				break;
 
 			case "visible":
-				this.object.setVisible(this.value == "true" ? true : false);
+				this.target.setVisible(this.value == "true" ? true : false);
 				break;
 
 			case "text":
-				this.object.setText(this.value);
+				this.target.setText(this.value);
 				break;
 
 			case "fgcolor":
-				this.object.setFgcolor(parseIntArray(this.value));
+				this.target.setFgcolor(parseIntArray(this.value));
 				break;
 
 			case "bgcolor":
-				this.object.setBgcolor(parseIntArray(this.value));
+				this.target.setBgcolor(parseIntArray(this.value));
 				break;
 
 			case "bocolor":
-				this.object.setBocolor(parseIntArray(this.value));
+				this.target.setBocolor(parseIntArray(this.value));
 				break;
 			
 			case "bgtransparent":
-				this.object.setBgtransparent(this.value == "true" | false);
+				this.target.setBgtransparent(this.value == "true" | false);
 				break;
 
 			case "layer":
-				this.object.setLayer(parseInt(this.value));
+				this.target.setLayer(parseInt(this.value));
 				break;
 
 			case "opacity":
-				this.object.setOpacity(parseFloat(this.value));
+				this.target.setOpacity(parseFloat(this.value));
 				break;
 			
 			default:
