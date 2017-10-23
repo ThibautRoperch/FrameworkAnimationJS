@@ -105,7 +105,7 @@
 
 <!ELEMENT programs (program+) >
 
-<!ELEMENT program (setx|sety|setxy|visible|click|label|moveto|wait|sleep|state|goto|trigger|up|down|left|right|angle|setproperty|blink|stop)+ >
+<!ELEMENT program (setx|sety|setxy|visible|click|label|moveto|wait|sleep|state|goto|trigger|up|down|left|right|angle|setproperty|blink|stop|center|centerx|centery)+ >
 <!ATTLIST program assigned_to CDATA #REQUIRED >
 
 <!ELEMENT setx EMPTY >
@@ -178,3 +178,9 @@
 <!ATTLIST blink delay CDATA #REQUIRED >
 
 <!ELEMENT stop EMPTY >
+
+<!ELEMENT center EMPTY >
+
+<!ELEMENT centery EMPTY >
+
+<!ELEMENT centerx EMPTY >
