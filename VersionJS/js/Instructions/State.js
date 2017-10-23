@@ -1,5 +1,5 @@
 /*
-*   T
+*   This inturction change the state of the object to the value gave by the indtruction
 */
 class State extends Instruction {
 

@@ -9,15 +9,20 @@ class Left extends Instruction{
         this.interval_x = interval_x;
     }
     execute() {
-        if (this.object.getX() > this.x) {
-            
-                this.object.setX(this.object.getX()-this.interval_x);
-            
-                setTimeout(function() {
-            
-                  this.execute();
-            
-                }, FRAME_RATE/60);
+        this.object.setState(MOVING_STATE);
+        //left();
+        function left() {
+            if (this.object.getX() > this.x) {
+                
+                    this.object.setX(this.object.getX()-this.interval_x);
+                
+                    setTimeout(function() {
+                
+                    left();
+                
+                    }, FRAME_RATE/60);
+            }
         }
+        this.object.setState(DEFAULT_STATE);
     }
 }

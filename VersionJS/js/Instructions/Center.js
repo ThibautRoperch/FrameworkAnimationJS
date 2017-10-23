@@ -1,4 +1,4 @@
-/**
+/*
  * This instruction center horizontaly and verticaly the object atached to it
  */
 

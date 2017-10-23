@@ -11,15 +11,20 @@ class Up extends Instruction {
 	}
 
 	execute() {
-		if (this.object.getY() < this.y) {
+		this.object.setState(MOVING_STATE);
+		//up();
+		function up() {
+			if (this.object.getY() < this.y) {
+				
+				this.object.setY(this.object.getY()+this.interval_y);
 			
-			this.object.setY(this.object.getY()+this.interval_y);
-		
-			setTimeout(function() {
-		
-				this.execute();
-		
-			}, FRAME_RATE/60);
+				setTimeout(function() {
+			
+					up();
+			
+				}, FRAME_RATE/60);
+			}
 		}
+		this.object.setState(DEFAULT_STATE);
 	}
 }
