@@ -1,6 +1,7 @@
-/*
-* This instruction move the object atached to it, at a precise position at interval and a delay
-*/
+/**
+ * This instruction move the object atached to it, at a precise position at interval and a delay
+ */
+
 class MoveTo extends Instruction {
 
 	constructor(object, x, y, interval_x, interval_y, delay) {
@@ -14,6 +15,7 @@ class MoveTo extends Instruction {
 
 	execute() {
 		this.object.setState(MOVING_STATE);
+
 		move(instruction);
 		function move(instruction) {
 			if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() > instruction.x)) {
@@ -22,9 +24,7 @@ class MoveTo extends Instruction {
 				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
 				
 				setTimeout(function() {
-		
 					move(instruction);
-		
 				}, (FRAME_RATE/60)*instruction.delay);
 			}
 			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() > instruction.x)) {
@@ -33,9 +33,7 @@ class MoveTo extends Instruction {
 				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
 		
 				setTimeout(function() {
-		
 					move(instruction);
-		
 				}, (FRAME_RATE/60)*instruction.delay);
 			}
 			else if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() < instruction.x)) {
@@ -44,9 +42,7 @@ class MoveTo extends Instruction {
 				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
 		
 				setTimeout(function() {
-		
 					move(instruction);
-		
 				}, (FRAME_RATE/60)*instruction.delay);
 			}
 			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() < instruction.x)) {
@@ -55,12 +51,12 @@ class MoveTo extends Instruction {
 				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
 			
 				setTimeout(function() {
-		
 					move(instruction);
-		
 				}, (FRAME_RATE/60)*this.delay);
 			}
 		}
+
 		this.object.setState(DEFAULT_STATE);
-	}	
+	}
+
 }

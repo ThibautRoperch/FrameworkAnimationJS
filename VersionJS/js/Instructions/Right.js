@@ -1,6 +1,7 @@
-/** 
-*	This instruction move the object right of x by interval of interval_x at a rate of FRAME_RATE 
-*/
+/**
+ * This instruction move the object right of x by interval of interval_x at a rate of FRAME_RATE
+ */
+
 class Right extends Instruction {
 
 	constructor(object, x, interval_x) {
@@ -15,7 +16,9 @@ class Right extends Instruction {
 		right(this);
 		function right(instruction) {
 			if (instruction.object.getX() < instruction.x) {
+
 				instruction.object.setX(instruction.object.getX() + instruction.interval_x);
+				
 				setTimeout(function() {
 					right(instruction);
 				}, FRAME_RATE/60);
