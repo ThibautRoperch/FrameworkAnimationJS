@@ -26,6 +26,7 @@ class Ellipse extends AnimatedObject {
     }
 
     draw() {
+        super.draw();
         ellipse(this.x, this.y, this.width, this.height);
     }
 
