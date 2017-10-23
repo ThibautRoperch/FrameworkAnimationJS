@@ -28,8 +28,6 @@ class Polygon extends AnimatedObject {
 
     draw() {
         super.draw();
-        // Il manque : radius, npoints
-        // En trop : coord_x, coord_y
         // var angle = TWO_PI / npoints;
         // beginShape();
         // for (var a = 0; a < TWO_PI; a += angle) {
