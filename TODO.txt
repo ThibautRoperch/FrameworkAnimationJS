@@ -32,7 +32,7 @@ On pourrait rajouter l'alignement du texte dans le XML, faisable avec textAlign(
 
 Préciser que la rotation est en degrés dans le main.txt
 
-Rectangle dans le texte, rotation dans animatedobject, demander la width et la height d'un objet texte (+ maj la dtd)
+Rectangle dans le texte, rotation dans animatedobject, demander la width et la height d'un objet texte (+ maj la dtd, anim.js, la class Txt)
 
 //up() dans Up.js (aussi dans down, legft, righ, moveto)
 

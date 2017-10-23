@@ -65,9 +65,12 @@ Ajout des règles applet et div.loading dans le fichier css/css.css
 
 On considère que tous les objets peuvent avoir une couleur de bordure.
 
+L'attribut "transparency" est remplacé par "bgtransparent".
+Les sauts de ligne se font avec \n (anciennement avec le caractère @).
+
 Les propriétés suivantes ont été ajoutées pour tous les objets :
 - visible (true|false, false par défaut) : l'objet est visible
-- bgtransparent (true|false, true par défaut) : le background est transparent (anciennement l'attribut "transparency")
+- bgtransparent (true|false, true par défaut) : le background est transparent (anciennement "transparency")
 - botransparent (true|false, true par défaut) : la bordure est transparente
 - opacity (nombre entre 0 et 1, 1 par défaut) : l'opacité de l'objet, utile lorsque des objets se superposent
 
@@ -75,6 +78,10 @@ La couleur par défaut de tous les objets a été modifiée :
 - fgcolor (couleur du premier plan) : rgb(0, 0, 0) par défaut
 - bgcolor (couleur de l'arrière plan) : rgb(0, 0, 0) par défaut
 - bocolor (couleur de la bordure) : rgb(0, 0, 0) par défaut
+
+Les propriétés suivantes ont été ajoutées pour l'objet texte :
+- width (entier supérieur à 0, 100 par défaut) : largeur de la boite contenant le texte
+- height (entier supérieur à 0, 20 par défaut) : hauteur de la boite contenant le texte
 
 La propriété suivante a été ajoutée pour l'objet rectangle :
 - round (entier supérieur à 0, 0 par défaut) : rayon du congé des coins du rectangle
@@ -91,6 +98,8 @@ L'instruction <click> est gérée de la façon suivante : l'état de l'objet dev
 Les instructions <label>, <goto>, <stop> sont propre à l'exécution du programme, elles n'agissent pas directement sur l'objet auquel le programme est associé.
 
 Le noeud <framerate> permet de changer la vitesse de rafraichissement du dessin : "very slow", "slow", "normal" (défaut), "fast", "very fast". DTD mise à jour en conséquence.
+
+La DTD a été mise à jour en conséquence.
 
 Résumé
 ======

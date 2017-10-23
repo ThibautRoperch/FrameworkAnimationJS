@@ -10,7 +10,7 @@ class Left extends Instruction{
     }
     execute() {
         this.object.setState(MOVING_STATE);
-        //left();
+        left();
         function left() {
             if (this.object.getX() > this.x) {
                 

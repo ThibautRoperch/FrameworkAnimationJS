@@ -12,7 +12,7 @@ class Down extends Instruction {
 	
 	execute() {
         this.object.setState(MOVING_STATE);
-        //down();
+        down();
         function down() {
 
             if (this.object.getY() > this.y) {
