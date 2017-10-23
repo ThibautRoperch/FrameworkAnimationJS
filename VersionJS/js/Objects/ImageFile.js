@@ -20,6 +20,7 @@ class ImageFile extends AnimatedObject {
     }
 
     draw() {
+        super.draw();
         image(this.image, this.x, this.y);
     }
 

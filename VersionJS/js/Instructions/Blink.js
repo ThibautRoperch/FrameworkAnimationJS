@@ -1,5 +1,5 @@
-/**
- * 
+/*
+ *  This instruction make the object blink at each Delay*frame rate, for Times iteration
  */
 
 class Blink extends Instruction {

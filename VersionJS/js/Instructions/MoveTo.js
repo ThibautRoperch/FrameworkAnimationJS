@@ -13,49 +13,54 @@ class MoveTo extends Instruction {
 	}
 
 	execute() {
-		if ((this.object.getY() > this.y) && (this.object.getX() > this.x)) {
+		this.object.setState(MOVING_STATE);
+		//move();
+		function move() {
+			if ((this.object.getY() > this.y) && (this.object.getX() > this.x)) {
+					
+				this.object.setY(this.object.getY()-this.interval_y);
+				this.object.setX(this.object.getX()-this.interval_x);
 				
-			this.object.setY(this.object.getY()-this.interval_y);
-			this.object.setX(this.object.getX()-this.interval_x);
-			
-			setTimeout(function() {
-	
-				this.execute();
-	
-			}, (FRAME_RATE/60)*this.delay);
-		}
-		else if ((this.object.getY() < this.y) && (this.object.getX() > this.x)) {
-				
-			this.object.setY(this.object.getY()+this.interval_y);
-			this.object.setX(this.object.getX()-this.interval_x);
-	
-			setTimeout(function() {
-	
-				this.execute();
-	
-			}, (FRAME_RATE/60)*this.delay);
-		}
-		else if ((this.object.getY() > this.y) && (this.object.getX() < this.x)) {
-				
-			this.object.setY(this.object.getY()-this.interval_y);
-			this.object.setX(this.object.getX()+this.interval_x);
-	
-			setTimeout(function() {
-	
-				this.execute();
-	
-			}, (FRAME_RATE/60)*this.delay);
-		}
-		else if ((this.object.getY() < this.y) && (this.object.getX() < this.x)) {
-				
-			this.object.setY(this.object.getY()+this.interval_y);
-			this.object.setX(this.object.getX()+this.interval_x);
+				setTimeout(function() {
 		
-			setTimeout(function() {
-	
-				this.execute();
-	
-			}, (FRAME_RATE/60)*this.delay);
+					move();
+		
+				}, (FRAME_RATE/60)*this.delay);
+			}
+			else if ((this.object.getY() < this.y) && (this.object.getX() > this.x)) {
+					
+				this.object.setY(this.object.getY()+this.interval_y);
+				this.object.setX(this.object.getX()-this.interval_x);
+		
+				setTimeout(function() {
+		
+					move();
+		
+				}, (FRAME_RATE/60)*this.delay);
+			}
+			else if ((this.object.getY() > this.y) && (this.object.getX() < this.x)) {
+					
+				this.object.setY(this.object.getY()-this.interval_y);
+				this.object.setX(this.object.getX()+this.interval_x);
+		
+				setTimeout(function() {
+		
+					move();
+		
+				}, (FRAME_RATE/60)*this.delay);
+			}
+			else if ((this.object.getY() < this.y) && (this.object.getX() < this.x)) {
+					
+				this.object.setY(this.object.getY()+this.interval_y);
+				this.object.setX(this.object.getX()+this.interval_x);
+			
+				setTimeout(function() {
+		
+					move();
+		
+				}, (FRAME_RATE/60)*this.delay);
+			}
 		}
-	}
+		this.object.setState(DEFAULT_STATE);
+	}	
 }
