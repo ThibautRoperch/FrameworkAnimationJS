@@ -65,29 +65,34 @@ class Landmark extends AnimatedObject {
     draw() {
         super.draw()
         stroke(this.bgcolor, this.opacity * 255);
-
-        line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
-        line(this.x, this.y + this.height, this.x, this.y);
         
         if(this.height > 0 && this.width > 0) {
+            line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
+            line(this.x, this.y + this.height, this.x, this.y);
             //texte x
             text(this.unitX, this.x + this.width/2, this.y + this.height + 25);
             //texte y (Ca serait bien d'orienter le texte)
             text(this.unitY, this.x - 50, this.y + this.height/2 );
         }
         else if(this.height < 0 && this.width > 0) { 
+            line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
+            line(this.x, this.y - this.height, this.x, this.y);
             //texte x
             text(this.unitX, this.x + this.width/2, this.y + 25);
             //texte y (Ca serait bien d'orienter le texte)
             text(this.unitY, this.x - 25, this.y - this.height/2 );
         }
         else if(this.height > 0 && this.width < 0) {
+            line(this.x, this.y - this.width, this.x - this.width, this.y - this.width);
+            line(this.x, this.y + this.height, this.x, this.y);
             //texte x
-            text(this.unitX, this.x + this.width/2, this.y - 25);
+            text(this.unitX, this.x - this.width/2, this.y + this.height + 25);
             //texte y (Ca serait bien d'orienter le texte)
-            text(this.unitY, this.x + this.width + 25, this.y + this.height/2 );
+            text(this.unitY, this.x - 50, this.y + this.height/2 );
         }
         else if(this.height < 0 && this.width < 0) {
+            line(this.x, this.y - this.width, this.x - this.width, this.y - this.width);
+            line(this.x, this.y - this.height, this.x, this.y);
             //texte x
             text(this.unitX, this.x + this.width/2, this.y + 25);
             //texte y (Ca serait bien d'orienter le texte)
