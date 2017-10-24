@@ -86,7 +86,7 @@ Les propriétés suivantes ont été ajoutées pour l'objet texte :
 - valignment (top|bottom|center|baseline, top par défaut) : alignement vertical du texte
 
 La propriété suivante a été ajoutée pour l'objet rectangle :
-- round (entier supérieur à 0, 0 par défaut) : rayon du congé des coins du rectangle
+- round (entiers supérieurs à 0, "0, 0, 0, 0" par défaut) : rayon du congé des coins du rectangle (haut gauche, haut droit, bas gauche, bas droit)
 
 Ces propriétés de l'objet image ont été modifiées :
 - width (largeur de l'image) : 100 par défaut

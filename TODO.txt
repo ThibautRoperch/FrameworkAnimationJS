@@ -13,10 +13,6 @@ Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30,
 
 XML de l'objet grille et màj DTD + à traiter dans le reader
 
-Possibilité de donner le border radius de chaque coin pour un rectangle : border-radius = "5, 10, 0, 0", màj la dtd
-on peut donner le borderradius directment lors de la cré de l'objet, et gérable avec setproperty
-màj le main.txt
-
 Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le XML d'un objet, avec valeurs par défaut en value)
 
 maj la dtd avec center et cie, attribut
