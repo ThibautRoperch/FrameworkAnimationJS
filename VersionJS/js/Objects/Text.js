@@ -83,7 +83,7 @@ class Text extends AnimatedObject {
 	draw() {
 		super.draw();
 		// Background
-		// rect()
+       	//rect(this.x, this.y, this.width, this.height); TODO 
 		// Remplacer @ par \n
 		// Text's color, font, size and style
 		fill(this.color, this.opacity * 255);
@@ -113,4 +113,9 @@ class Text extends AnimatedObject {
 		return this.y + 5;
 	}
 	
+	isCliked(x, y) {
+        if((x > this.x)&&(x < this.x + width)&&(y > this.y)&&(y < this.y + height))
+            return true;
+        return false;
+    }
 }

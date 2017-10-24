@@ -17,6 +17,12 @@ class Circle extends Ellipse {
        this.radius = radius;
    }
 
+   isClicked(x, y) {
+       x = this.x - x;
+       y = this.y - y;
+       distance = Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
+       return distance <= this.width/2;
+   }
    draw() {
         // fill(this.bgcolor);
         super.draw();
