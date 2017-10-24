@@ -8,6 +8,7 @@ class Up extends Instruction {
 		super(object);
 		this.y = y;
 		this.interval_y = interval_y;
+		this.destination = y+object.getY();
 	}
 
 	execute() {
@@ -15,7 +16,7 @@ class Up extends Instruction {
 
 		up(this);
 		function up(instruction) {
-			if (instruction.object.getY() < instruction.y) {
+			if (instruction.object.getY() < instruction.destination) {
 				
 				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
 			
