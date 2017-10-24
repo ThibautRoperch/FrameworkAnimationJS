@@ -215,7 +215,7 @@ function read_xml_file(contents) {
 					new_instruction = new Right(OBJECTS.get(object_id), x, dx);
 				} else if (type == "angle") {
 					var degrees = parseInt(read_instruction.getAttribute("degrees"));
-					new_instruction = new Angle(OBJECTS.get(object_id), degrees);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), degrees);
 				} else if (type == "setproperty") {
 					var object = read_instruction.getAttribute("object");
 					var property = read_instruction.getAttribute("property");
@@ -227,6 +227,12 @@ function read_xml_file(contents) {
 					new_instruction = new Blink(OBJECTS.get(object_id), times, delay);
 				} else if (type == "stop") {
 					new_instruction = new Stop(null);
+				} else if (type == "center") {
+					new_instruction = new Center(OBJECTS.get(object_id));
+				} else if (type == "centerx") {
+					new_instruction = new CenterX(OBJECTS.get(object_id));
+				} else if (type == "centery") {
+					new_instruction = new CenterY(OBJECTS.get(object_id));
 				}
 				program.push(new_instruction);
 			}
@@ -324,9 +330,10 @@ function canvasClicked() {
 				// console.log("dedans");
 				new Trigger(null, object, WAITING_CLICK_STATE).execute();
 			}
-			if (object.isClicked(mouseX, mouseY)) {
-				new Trigger(null, object, WAITING_CLICK_STATE).execute();
-			}
+			// TODO changer les hitbox des objets et remplacer le if ci dessus par celui ci :
+			// if (object.isClicked(mouseX, mouseY)) {
+			// 	new Trigger(null, object, WAITING_CLICK_STATE).execute();
+			// }
 		}
 	}
 

@@ -204,6 +204,7 @@
 
 <!ELEMENT center EMPTY >
 
+<!ELEMENT centerx EMPTY >
+
 <!ELEMENT centery EMPTY >
 
-<!ELEMENT centerx EMPTY >
