@@ -5,12 +5,14 @@
 class Text extends AnimatedObject {
 	
 	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border, width, height) {
-        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
+        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, horizontalalignment, verticalalignment);
 		this.text = text;
 		this.font = font; // FontName, FontSize, FontWeight
 		this.border = border;
 		this.width = width;
 		this.height = height;
+		this.horizontalalignment = horizontalalignment; 
+		this.verticalalignment = verticalalignment;
 	}
 
 	getWidth() {
@@ -33,6 +35,14 @@ class Text extends AnimatedObject {
 		return this.border;
 	}
 
+	getHorizontalalignment() {
+		return this.horizontalalignment;
+	}
+
+	getVerticalalignment() {
+		return this.verticalalignment;
+	}
+
 	setText(text) {
 		this.text = text;
 	}
@@ -53,6 +63,15 @@ class Text extends AnimatedObject {
         this.height = height;
 	}
 	
+
+	getHorizontalalignment(horizontalalignment) {
+		this.horizontalalignment = horizontalalignment;
+	}
+
+	getVerticalalignment(verticalalignment) {
+		this.verticalalignment = verticalalignment;
+	}
+
 	draw() {
 		super.draw();
 		// Background
@@ -62,6 +81,9 @@ class Text extends AnimatedObject {
 		textFont(this.font[0]);
 		textSize(parseInt(this.font[1]));
 		textStyle(this.font[2] == "bold" ? BOLD : this.font[2] == "italic" ? ITALIC : NORMAL);
+		// text alignment
+		textAlign(this.horizontalalignment == "right" ? RIGHT : this.horizontalalignment == "center" ? CENTER : LEFT,
+		this.verticalalignment == "center" ? CENTER : this.verticalalignment == "bottom" ? BOTTOM : this.verticalalignment == "baseline" ? BASELINE : TOP);
 		// Display
 		text(this.text, this.x, this.y);
 	}
