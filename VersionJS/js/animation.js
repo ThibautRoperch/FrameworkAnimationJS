@@ -98,6 +98,7 @@ function read_xml_file(contents) {
 			LAYERS.add(layer);
 			var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : false;
 			var opacity = parseFloat(read_object.getAttribute("opacity")) | 1;
+			var angle = parseInt(read_object.getAttribute("angle")) | 0;
 			// Retrieve the others specific attributes of the object and create the associated animated object
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");
@@ -105,28 +106,30 @@ function read_xml_file(contents) {
 				var border = parseInt(read_object.getAttribute("border")) | 0;
 				var width = parseInt(read_object.getAttribute("width")) | 100;
 				var height = parseInt(read_object.getAttribute("height")) | 30;
-				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, border, width, height);
+				var halignment = read_object.getAttribute("halignment") | "left";
+				var valignment = read_object.getAttribute("valignment") | "top";
+				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, border, width, height, halignment, valignment);
 			} else if (type == "object_image") {
 				var width = parseInt(read_object.getAttribute("width")) | 100;
 				var height = parseInt(read_object.getAttribute("height")) | 100;
 				var image = read_object.getAttribute("image");
-				new_object = new ImageFile(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height, image);
+				new_object = new ImageFile(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
 			} else if (type == "object_rectangle") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
 				var round = parseInt(read_object.getAttribute("round")) | 0;
-				new_object = new Rectangle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height, round);
+				new_object = new Rectangle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
 			} else if (type == "object_polygon") {
 				var coord_x = parseInt(read_object.getAttribute("coord_x"));
 				var coord_y = parseInt(read_object.getAttribute("coord_y"));
-				new_object = new Polygon(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, coord_x, coord_y);
+				new_object = new Polygon(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
 			} else if (type == "object_circle") {
 				var radius = parseInt(read_object.getAttribute("radius"));
-				new_object = new Circle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, radius);
+				new_object = new Circle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, radius);
 			} else if (type == "object_ellipse") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
-				new_object = new Ellipse(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height);
+				new_object = new Ellipse(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
 			} else if (type == "object_landmark") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));

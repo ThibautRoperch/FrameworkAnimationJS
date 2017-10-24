@@ -61,7 +61,7 @@ Les feuilles de style sont désormais dans le dossier css : <link rel="styleshee
 Il faut inclure le script animation.js dans chaque page contenant une animation : <script src="js/animation.js"></script>
 Pour charger une animation (charger un fichier XML, afficher les objets, lancer le programme) : load_animation("animation.xml", "target_node_id", <width>, <height>);
 
-Ajout des règles applet et div.loading dans le fichier css/css.css
+Ajout règles dans le fichier css/css.css.
 
 On considère que tous les objets peuvent avoir une couleur de bordure.
 
@@ -72,6 +72,7 @@ Les propriétés suivantes ont été ajoutées pour tous les objets :
 - bgtransparent (true|false, true par défaut) : le background est transparent (anciennement "transparency")
 - botransparent (true|false, true par défaut) : la bordure est transparente
 - opacity (nombre entre 0 et 1, 1 par défaut) : l'opacité de l'objet, utile lorsque des objets se superposent
+- angle (nombre entier, 0 par défaut) : la rotation de l'objet, angle exprimé en degrés
 
 La couleur par défaut de tous les objets a été modifiée :
 - fgcolor (couleur du premier plan) : rgb(0, 0, 0) par défaut
@@ -81,6 +82,8 @@ La couleur par défaut de tous les objets a été modifiée :
 Les propriétés suivantes ont été ajoutées pour l'objet texte :
 - width (entier supérieur à 0, 100 par défaut) : largeur de la boite contenant le texte
 - height (entier supérieur à 0, 20 par défaut) : hauteur de la boite contenant le texte
+- halignment (left|center|right, left par défaut) : alignement horizontal du texte
+- valignment (top|bottom|center|baseline, top par défaut) : alignement vertical du texte
 
 La propriété suivante a été ajoutée pour l'objet rectangle :
 - round (entier supérieur à 0, 0 par défaut) : rayon du congé des coins du rectangle
@@ -88,6 +91,9 @@ La propriété suivante a été ajoutée pour l'objet rectangle :
 Ces propriétés de l'objet image ont été modifiées :
 - width (largeur de l'image) : 100 par défaut
 - height (hauteur de l'image) : 100 par défaut
+
+Les objets suivants ont été ajoutés :
+- Landmark (repère) : width, height, scaleX, scaleY, unitX, unitY, et les attributs communs aux objets
 
 Toutes les propriétés peuvent être données lors de la création de l'objet et modifiées avec l'instruction <setproperty>
 (hormis la propriété "state" qui est modifiable avec des instructions spécifiques).
