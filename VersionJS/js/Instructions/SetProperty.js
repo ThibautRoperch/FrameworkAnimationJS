@@ -52,7 +52,15 @@ class SetProperty extends Instruction {
 			case "opacity":
 				this.target.setOpacity(parseFloat(this.value));
 				break;
-			
+
+			case "verticlal_alignment":
+				this.target.setVerticalalignment(value);
+				break;
+
+			case "horizontal_alignment":
+				this.target.setHorizontalalignment(value);
+				break;
+
 			default:
 				console.log("[SetProperty.js] Attribut '" + property + "' de l'instruction SetProperty non pris en charge");
 				break;

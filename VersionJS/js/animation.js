@@ -258,7 +258,6 @@ function execute_instructions(object_id, instruction_number, labels) {
 		} else if (instruction_type == "Stop") {
 			var continue_execution = false;
 		} else {
-			// console.log(instruction);
 			instruction.execute();
 			next_instruction = instruction_number + 1;
 		}
@@ -342,10 +341,10 @@ function include_scripts() {
 		"js/Objects/AnimatedObject.js",
 		"js/Objects/Grid.js",
 		"js/Objects/ImageFile.js",
+		"js/Objects/Landmark.js",
 		"js/Objects/Polygon.js",
 		"js/Objects/Rectangle.js",
 		"js/Objects/Text.js",
-		"js/Objects/Landmark.js",
 		// Instructions
 		"js/Instructions/Instruction.js",
 		"js/Instructions/Angle.js",
