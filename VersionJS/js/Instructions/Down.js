@@ -7,25 +7,25 @@ class Down extends Instruction {
 	constructor(object, y, interval_y) {
 		super(object);
 		this.y = y;
-		this.interval_y = interval_y;
+        this.interval_y = interval_y;
+        this.destination = object.getY() - y;
 	}
 	
 	execute() {
         this.object.setState(MOVING_STATE);
-        //down();
-        function down() {
 
-            if (this.object.getY() > this.y) {
+        down(this);
+        function down(instruction) {
+            if (instruction.object.getY() > instruction.destination) {
                 
-                this.object.setY(this.object.getY() - this.interval_y);
+                instruction.object.setY(instruction.object.getY() - instruction.interval_y);
                 
                 setTimeout(function() {
-                
-                    down();
-                
+                    down(instruction);
                 }, FRAME_RATE/60);
             }
         }
+
         this.object.setState(DEFAULT_STATE);
 	}
 

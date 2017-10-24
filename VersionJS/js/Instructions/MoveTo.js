@@ -1,6 +1,7 @@
-/*
-* This instruction move the object atached to it, at a precise position at interval and a delay
-*/
+/**
+ * This instruction move the object atached to it, at a precise position at interval and a delay
+ */
+
 class MoveTo extends Instruction {
 
 	constructor(object, x, y, interval_x, interval_y, delay) {
@@ -14,53 +15,48 @@ class MoveTo extends Instruction {
 
 	execute() {
 		this.object.setState(MOVING_STATE);
-		//move();
-		function move() {
-			if ((this.object.getY() > this.y) && (this.object.getX() > this.x)) {
+
+		move(instruction);
+		function move(instruction) {
+			if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() > instruction.x)) {
 					
-				this.object.setY(this.object.getY()-this.interval_y);
-				this.object.setX(this.object.getX()-this.interval_x);
+				instruction.object.setY(instruction.object.getY()-instruction.interval_y);
+				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
 				
 				setTimeout(function() {
-		
-					move();
-		
-				}, (FRAME_RATE/60)*this.delay);
+					move(instruction);
+				}, (FRAME_RATE/60)*instruction.delay);
 			}
-			else if ((this.object.getY() < this.y) && (this.object.getX() > this.x)) {
+			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() > instruction.x)) {
 					
-				this.object.setY(this.object.getY()+this.interval_y);
-				this.object.setX(this.object.getX()-this.interval_x);
+				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
+				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
 		
 				setTimeout(function() {
-		
-					move();
-		
-				}, (FRAME_RATE/60)*this.delay);
+					move(instruction);
+				}, (FRAME_RATE/60)*instruction.delay);
 			}
-			else if ((this.object.getY() > this.y) && (this.object.getX() < this.x)) {
+			else if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() < instruction.x)) {
 					
-				this.object.setY(this.object.getY()-this.interval_y);
-				this.object.setX(this.object.getX()+this.interval_x);
+				instruction.object.setY(instruction.object.getY()-instruction.interval_y);
+				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
 		
 				setTimeout(function() {
-		
-					move();
-		
-				}, (FRAME_RATE/60)*this.delay);
+					move(instruction);
+				}, (FRAME_RATE/60)*instruction.delay);
 			}
-			else if ((this.object.getY() < this.y) && (this.object.getX() < this.x)) {
+			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() < instruction.x)) {
 					
-				this.object.setY(this.object.getY()+this.interval_y);
-				this.object.setX(this.object.getX()+this.interval_x);
+				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
+				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
 			
 				setTimeout(function() {
-		
-					move();
-		
+					move(instruction);
 				}, (FRAME_RATE/60)*this.delay);
 			}
 		}
+
 		this.object.setState(DEFAULT_STATE);
-	}	
+	}
+
 }

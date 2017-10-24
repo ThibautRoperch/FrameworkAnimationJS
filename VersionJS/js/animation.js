@@ -103,7 +103,9 @@ function read_xml_file(contents) {
 				var text = read_object.getAttribute("text");
 				var font = read_object.getAttribute("font").split(",");
 				var border = parseInt(read_object.getAttribute("border")) | 0;
-				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, border);
+				var width = parseInt(read_object.getAttribute("width")) | 100;
+				var height = parseInt(read_object.getAttribute("height")) | 30;
+				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, border, width, height);
 			} else if (type == "object_image") {
 				var width = parseInt(read_object.getAttribute("width")) | 100;
 				var height = parseInt(read_object.getAttribute("height")) | 100;
@@ -151,19 +153,19 @@ function read_xml_file(contents) {
 				// Retrieve the others specific attributes of the instruction and create the associated instruction
 				if (type == "setx") {
 					var x = read_instruction.getAttribute("x"); // don't parse to an int, already did in SetProperty.execution()
-					new_instruction = new SetProperty(OBJECTS.get(object_id), "x", x);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), "x", x);
 				} else if (type == "sety") {
 					var y = read_instruction.getAttribute("y");
-					new_instruction = new SetProperty(OBJECTS.get(object_id), "y", y);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), "y", y);
 				} else if (type == "setxy") {
 					var x = read_instruction.getAttribute("x");
 					var y = read_instruction.getAttribute("y");
-					new_instruction = new SetProperty(OBJECTS.get(object_id), "x", x);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), "x", x);
 					program.push(new_instruction);
-					new_instruction = new SetProperty(OBJECTS.get(object_id), "y", y);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), "y", y);
 				} else if (type == "visible") {
 					var value = read_instruction.getAttribute("value"); // don't parse to a boolean, already did in SetProperty.execution()
-					new_instruction = new SetProperty(OBJECTS.get(object_id), "visible", value);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), "visible", value);
 				} else if (type == "click") {
 					new_instruction = new Click(OBJECTS.get(object_id));
 				} else if (type == "label") {
@@ -215,7 +217,7 @@ function read_xml_file(contents) {
 					var object = read_instruction.getAttribute("object");
 					var property = read_instruction.getAttribute("property");
 					var value = read_instruction.getAttribute("value");
-					new_instruction = new SetProperty(OBJECTS.get(object_id), property, value);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object), property, value);
 				} else if (type == "blink") {
 					var times = parseInt(read_instruction.getAttribute("object"));
 					var delay = parseInt(read_instruction.getAttribute("property"));
@@ -256,6 +258,7 @@ function execute_instructions(object_id, instruction_number, labels) {
 		} else if (instruction_type == "Stop") {
 			var continue_execution = false;
 		} else {
+			// console.log(instruction);
 			instruction.execute();
 			next_instruction = instruction_number + 1;
 		}

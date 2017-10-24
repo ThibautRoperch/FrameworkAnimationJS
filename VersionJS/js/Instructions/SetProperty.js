@@ -6,9 +6,9 @@ class SetProperty extends Instruction {
 
 	constructor(object, target, property, value) {
 		super(object);
+		this.target = target;
 		this.property = property;
 		this.value = value;
-		this.target = target;
 	}
 
 	execute() {

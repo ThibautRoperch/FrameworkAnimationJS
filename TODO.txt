@@ -26,13 +26,11 @@ Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le
 
 Faire l'objet repère
 
-Mettre le statut à MOVING_STATE quand l'objet bouge
-
 On pourrait rajouter l'alignement du texte dans le XML, faisable avec textAlign() en P5.js
 
 Préciser que la rotation est en degrés dans le main.txt
 
-Rectangle dans le texte, rotation dans animatedobject, demander la width et la height d'un objet texte (+ maj la dtd)
+Rectangle dans le texte, rotation dans animatedobject, demander la width et la height d'un objet texte (+ maj la dtd, anim.js, la class Txt)
 
 //up() dans Up.js (aussi dans down, legft, righ, moveto)
 
