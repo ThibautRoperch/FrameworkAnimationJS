@@ -341,10 +341,10 @@ function include_scripts() {
 		"js/Objects/AnimatedObject.js",
 		"js/Objects/Grid.js",
 		"js/Objects/ImageFile.js",
+		"js/Objects/Landmark.js",
 		"js/Objects/Polygon.js",
 		"js/Objects/Rectangle.js",
 		"js/Objects/Text.js",
-		"js/Objects/Landmark.js",
 		// Instructions
 		"js/Instructions/Instruction.js",
 		"js/Instructions/Angle.js",
