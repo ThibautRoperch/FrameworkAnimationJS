@@ -101,6 +101,24 @@
 <!ATTLIST object_ellipse visible (true|false) #IMPLIED >
 <!ATTLIST object_ellipse opacity CDATA #IMPLIED >
 
+<!ELEMENT object_landmark (#PCDATA) >
+<!ATTLIST object_landmark width CDATA #REQUIRED >
+<!ATTLIST object_landmark height CDATA #REQUIRED >
+<!ATTLIST object_landmark scaleX CDATA #REQUIRED >
+<!ATTLIST object_landmark scaleY CDATA #REQUIRED >
+<!ATTLIST object_landmark unitX CDATA #REQUIRED >
+<!ATTLIST object_landmark unitY CDATA #REQUIRED 
+<!ATTLIST object_landmark x CDATA #IMPLIED >
+<!ATTLIST object_landmark y CDATA #IMPLIED >
+<!ATTLIST object_landmark fgcolor CDATA #IMPLIED >
+<!ATTLIST object_landmark bgcolor CDATA #IMPLIED >
+<!ATTLIST object_landmark bgtransparent (true|false) #IMPLIED >
+<!ATTLIST object_landmark bocolor CDATA #IMPLIED >
+<!ATTLIST object_landmark botransparent (true|false) #IMPLIED >
+<!ATTLIST object_landmark layer CDATA #IMPLIED >
+<!ATTLIST object_landmark visible (true|false) #IMPLIED >
+<!ATTLIST object_landmark opacity CDATA #IMPLIED >
+
 <!ELEMENT object_extern (#PCDATA) >
 <!ATTLIST object_extern class CDATA #REQUIRED >
 <!ATTLIST object_extern constructor CDATA #REQUIRED >
