@@ -89,7 +89,6 @@ function read_xml_file(contents) {
 			var id = read_object.textContent;
 			var x = parseInt(read_object.getAttribute("x")) | 0;
 			var y = parseInt(read_object.getAttribute("y")) | 0;
-			var fgcolor = read_object.hasAttribute("fgcolor") ? parseIntArray(read_object.getAttribute("fgcolor")) : [0, 0, 0];
 			var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
 			var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : true;
 			var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
@@ -103,33 +102,34 @@ function read_xml_file(contents) {
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");
 				var font = read_object.getAttribute("font").split(",");
+				var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
 				var border = parseInt(read_object.getAttribute("border")) | 0;
-				var width = parseInt(read_object.getAttribute("width")) | 100;
-				var height = parseInt(read_object.getAttribute("height")) | 30;
+				var width = parseInt(read_object.getAttribute("width")) | 80;
+				var height = parseInt(read_object.getAttribute("height")) | 20;
 				var halignment = read_object.getAttribute("halignment") | "left";
 				var valignment = read_object.getAttribute("valignment") | "top";
-				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, border, width, height, halignment, valignment);
+				new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, color, border, width, height, halignment, valignment);
 			} else if (type == "object_image") {
 				var width = parseInt(read_object.getAttribute("width")) | 100;
 				var height = parseInt(read_object.getAttribute("height")) | 100;
 				var image = read_object.getAttribute("image");
-				new_object = new ImageFile(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
+				new_object = new ImageFile(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
 			} else if (type == "object_rectangle") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
 				var round = parseInt(read_object.getAttribute("round")) | 0;
-				new_object = new Rectangle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
+				new_object = new Rectangle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
 			} else if (type == "object_polygon") {
 				var coord_x = parseInt(read_object.getAttribute("coord_x"));
 				var coord_y = parseInt(read_object.getAttribute("coord_y"));
-				new_object = new Polygon(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
+				new_object = new Polygon(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
 			} else if (type == "object_circle") {
 				var radius = parseInt(read_object.getAttribute("radius"));
-				new_object = new Circle(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, radius);
+				new_object = new Circle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, radius);
 			} else if (type == "object_ellipse") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
-				new_object = new Ellipse(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
+				new_object = new Ellipse(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
 			} else if (type == "object_landmark") {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
@@ -137,7 +137,7 @@ function read_xml_file(contents) {
 				var scaleY = parseInt(read_object.getAttribute("scaleY"));
 				var unitX = read_object.getAttribute("unitX");
 				var unitY = read_object.getAttribute("unitY");
-				new_object = new Landmark(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, height, width, scaleX, scaleY, unitX, unitY);
+				new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, height, width, scaleX, scaleY, unitX, unitY);
 			}
 			OBJECTS.set(id, new_object);
 		}
@@ -215,7 +215,7 @@ function read_xml_file(contents) {
 					new_instruction = new Right(OBJECTS.get(object_id), x, dx);
 				} else if (type == "angle") {
 					var degrees = parseInt(read_instruction.getAttribute("degrees"));
-					new_instruction = new Angle(OBJECTS.get(object_id), degrees);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), degrees);
 				} else if (type == "setproperty") {
 					var object = read_instruction.getAttribute("object");
 					var property = read_instruction.getAttribute("property");
@@ -227,6 +227,12 @@ function read_xml_file(contents) {
 					new_instruction = new Blink(OBJECTS.get(object_id), times, delay);
 				} else if (type == "stop") {
 					new_instruction = new Stop(null);
+				} else if (type == "center") {
+					new_instruction = new Center(OBJECTS.get(object_id));
+				} else if (type == "centerx") {
+					new_instruction = new CenterX(OBJECTS.get(object_id));
+				} else if (type == "centery") {
+					new_instruction = new CenterY(OBJECTS.get(object_id));
 				}
 				program.push(new_instruction);
 			}
@@ -324,6 +330,10 @@ function canvasClicked() {
 				// console.log("dedans");
 				new Trigger(null, object, WAITING_CLICK_STATE).execute();
 			}
+			// TODO changer les hitbox des objets et remplacer le if ci dessus par celui ci :
+			// if (object.isClicked(mouseX, mouseY)) {
+			// 	new Trigger(null, object, WAITING_CLICK_STATE).execute();
+			// }
 		}
 	}
 
@@ -350,7 +360,6 @@ function include_scripts() {
 		"js/Objects/Text.js",
 		// Instructions
 		"js/Instructions/Instruction.js",
-		"js/Instructions/Angle.js",
 		"js/Instructions/Blink.js",
 		"js/Instructions/Center.js",
 		"js/Instructions/CenterX.js",
@@ -368,7 +377,6 @@ function include_scripts() {
 		"js/Instructions/Stop.js",
 		"js/Instructions/Trigger.js",
 		"js/Instructions/Up.js",
-		"js/Instructions/Visible.js",
 		"js/Instructions/Wait.js",
 	];
 

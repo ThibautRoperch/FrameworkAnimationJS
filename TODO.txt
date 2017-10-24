@@ -17,6 +17,13 @@ Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le
 
 maj la dtd avec center et cie, attribut
 
+objet qui se copie ; méthode de copie d'un objet pour chaque objet, dtd à faire
+
+a faire et mettre dans le main.txt :
+dimensionnement de la grille par rapport aux cases (et nb de col et lignes)
+nom des absices et ordonnées par défaut : ""
+tous les points d'ancrage sont en bas à gauche des objets
+
 Questions
 =========
 
@@ -26,5 +33,5 @@ C'est quoi le @, dans des XML ? Saut de ligne
 
 Pourquoi avoir mis un état avec une cdc plutôt qu'un boolean "waiting" ? Pour que les liens entre les "signaux" des objets soient plus clairs en codant le XML
 
-À quoi sert l'élément extern dans la DTD ? 
-fgcolor pour le polygone, l'ellipse, ... why ? La couleur de la bordure c'est fgcolor, la couleur du background c'est bgcolor, et bocolor c'est pour quoi ?
+À quoi sert l'élément extern dans la DTD ? Pour d'autres objets, tentative dont osef
+fgcolor pour le polygone, l'ellipse, ... why ? La couleur de la bordure c'est fgcolor, la couleur du background c'est bgcolor, et bocolor c'est pour quoi ? on oublie fgcolor

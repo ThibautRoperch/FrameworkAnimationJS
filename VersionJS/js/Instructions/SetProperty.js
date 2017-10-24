@@ -29,20 +29,24 @@ class SetProperty extends Instruction {
 				this.target.setText(this.value);
 				break;
 
-			case "fgcolor":
-				this.target.setFgcolor(parseIntArray(this.value));
+			case "color":
+				this.target.setColor(parseIntArray(this.value));
 				break;
 
 			case "bgcolor":
 				this.target.setBgcolor(parseIntArray(this.value));
 				break;
 
+			case "bgtransparent":
+				this.target.setBgtransparent(this.value == "true" | false);
+				break;
+
 			case "bocolor":
 				this.target.setBocolor(parseIntArray(this.value));
 				break;
 			
-			case "bgtransparent":
-				this.target.setBgtransparent(this.value == "true" | false);
+			case "botransparent":
+				this.target.setBotransparent(this.value == "true" | false);
 				break;
 
 			case "layer":
@@ -66,7 +70,7 @@ class SetProperty extends Instruction {
 				break;
 
 			default:
-				console.log("[SetProperty.js] Attribut '" + property + "' de l'instruction SetProperty non pris en charge");
+				console.log("[SetProperty.js] Attribut '" + this.property + "' de l'instruction SetProperty non pris en charge");
 				break;
 		}
 	}

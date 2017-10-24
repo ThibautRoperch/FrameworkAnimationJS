@@ -4,10 +4,11 @@
 
 class Text extends AnimatedObject {
 	
-	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border, width, height, halignment, valignment) {
-        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, color, border, width, height, halignment, valignment) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
 		this.text = text;
 		this.font = font; // FontName, FontSize, FontWeight
+		this.color = color; // r, g, b
 		this.border = border;
 		this.width = width;
 		this.height = height;
@@ -31,6 +32,10 @@ class Text extends AnimatedObject {
 		return this.font;
 	}
 
+	getColor () {
+		return this.color;
+	}
+
 	getBorder() {
 		return this.border;
 	}
@@ -49,6 +54,10 @@ class Text extends AnimatedObject {
 
 	setFont(font) {
 		this.font = font;
+	}
+
+	setColor(color) {
+		this.color = color;
 	}
 
 	setBorder(border) {
@@ -77,7 +86,7 @@ class Text extends AnimatedObject {
        	//rect(this.x, this.y, this.width, this.height); TODO 
 		// Remplacer @ par \n
 		// Text's color, font, size and style
-		fill(this.fgcolor, this.opacity * 255);
+		fill(this.color, this.opacity * 255);
 		textFont(this.font[0]);
 		textSize(parseInt(this.font[1]));
 		textStyle(this.font[2] == "bold" ? BOLD : this.font[2] == "italic" ? ITALIC : NORMAL);

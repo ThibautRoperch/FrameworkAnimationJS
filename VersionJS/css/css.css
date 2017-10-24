@@ -115,7 +115,7 @@ border-radius: 5px;
 cursor:pointer;
 }
 
-objects > *:hover, instructions > *:hover {
+object:hover, instruction:hover {
 opacity:1;
 border:1px solid rgba(0, 0, 0, 0.7);
 box-shadow:0 1px 0 1px rgba(0, 0, 0, 0.2);

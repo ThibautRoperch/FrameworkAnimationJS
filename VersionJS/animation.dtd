@@ -16,6 +16,7 @@
 <!ELEMENT object_text (#PCDATA) >
 <!ATTLIST object_text text CDATA #REQUIRED >
 <!ATTLIST object_text font CDATA #REQUIRED >
+<!ATTLIST object_text color CDATA #IMPLIED >
 <!ATTLIST object_text border CDATA #IMPLIED >
 <!ATTLIST object_text width CDATA #IMPLIED >
 <!ATTLIST object_text height CDATA #IMPLIED >
@@ -23,7 +24,6 @@
 <!ATTLIST object_text valignment (top|bottom|center|baseline) #IMPLIED >
 <!ATTLIST object_text x CDATA #IMPLIED >
 <!ATTLIST object_text y CDATA #IMPLIED >
-<!ATTLIST object_text fgcolor CDATA #IMPLIED >
 <!ATTLIST object_text bgcolor CDATA #IMPLIED >
 <!ATTLIST object_text bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_text bocolor CDATA #IMPLIED >
@@ -39,7 +39,6 @@
 <!ATTLIST object_image image CDATA #REQUIRED >
 <!ATTLIST object_image x CDATA #IMPLIED >
 <!ATTLIST object_image y CDATA #IMPLIED >
-<!ATTLIST object_image fgcolor CDATA #IMPLIED >
 <!ATTLIST object_image bgcolor CDATA #IMPLIED >
 <!ATTLIST object_image bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_image bocolor CDATA #IMPLIED >
@@ -55,7 +54,6 @@
 <!ATTLIST object_rectangle round CDATA #IMPLIED >
 <!ATTLIST object_rectangle x CDATA #IMPLIED >
 <!ATTLIST object_rectangle y CDATA #IMPLIED >
-<!ATTLIST object_rectangle fgcolor CDATA #IMPLIED >
 <!ATTLIST object_rectangle bgcolor CDATA #IMPLIED >
 <!ATTLIST object_rectangle bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_rectangle bocolor CDATA #IMPLIED >
@@ -70,7 +68,6 @@
 <!ATTLIST object_polygon coord_y CDATA #REQUIRED >
 <!ATTLIST object_polygon x CDATA #IMPLIED >
 <!ATTLIST object_polygon y CDATA #IMPLIED >
-<!ATTLIST object_polygon fgcolor CDATA #IMPLIED >
 <!ATTLIST object_polygon bgcolor CDATA #IMPLIED >
 <!ATTLIST object_polygon bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_polygon bocolor CDATA #IMPLIED >
@@ -84,7 +81,6 @@
 <!ATTLIST object_circle radius CDATA #REQUIRED >
 <!ATTLIST object_circle x CDATA #IMPLIED >
 <!ATTLIST object_circle y CDATA #IMPLIED >
-<!ATTLIST object_circle fgcolor CDATA #IMPLIED >
 <!ATTLIST object_circle bgcolor CDATA #IMPLIED >
 <!ATTLIST object_circle bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_circle bocolor CDATA #IMPLIED >
@@ -99,7 +95,6 @@
 <!ATTLIST object_ellipse height CDATA #REQUIRED >
 <!ATTLIST object_ellipse x CDATA #IMPLIED >
 <!ATTLIST object_ellipse y CDATA #IMPLIED >
-<!ATTLIST object_ellipse fgcolor CDATA #IMPLIED >
 <!ATTLIST object_ellipse bgcolor CDATA #IMPLIED >
 <!ATTLIST object_ellipse bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_ellipse bocolor CDATA #IMPLIED >
@@ -118,7 +113,6 @@
 <!ATTLIST object_landmark unitY CDATA #REQUIRED >
 <!ATTLIST object_landmark x CDATA #IMPLIED >
 <!ATTLIST object_landmark y CDATA #IMPLIED >
-<!ATTLIST object_landmark fgcolor CDATA #IMPLIED >
 <!ATTLIST object_landmark bgcolor CDATA #IMPLIED >
 <!ATTLIST object_landmark bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_landmark bocolor CDATA #IMPLIED >
@@ -210,6 +204,7 @@
 
 <!ELEMENT center EMPTY >
 
+<!ELEMENT centerx EMPTY >
+
 <!ELEMENT centery EMPTY >
 
-<!ELEMENT centerx EMPTY >
