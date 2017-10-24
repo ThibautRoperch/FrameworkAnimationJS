@@ -33,6 +33,7 @@ Point d'ancrage des objets de dessin fournis par P5.js :
 - arc			centre de l'objet
 - rect			en haut à gauche de l'objet
 - text			en bas à gauche de la ligne de base de l'objet
+Les coordonnées données dans le XML (attributs x et y) correspondent au point en bas à gauche de la boîte rectangulaire entourant l'objet.
 
 Conventions
 ===========
@@ -65,7 +66,8 @@ Ajout règles dans le fichier css/css.css.
 
 On considère que tous les objets peuvent avoir une couleur de bordure.
 
-L'attribut "transparency" est remplacé par "bgtransparent".
+L'attribut "transparency" est remplacé par "bgtransparent" pour tous les objets.
+L'attribut "fgcolor" est renommé par "color" pour l'objet texte, et par "bocolor" pour les autres objets.
 
 Les propriétés suivantes ont été ajoutées pour tous les objets :
 - visible (true|false, false par défaut) : l'objet est visible
@@ -73,9 +75,8 @@ Les propriétés suivantes ont été ajoutées pour tous les objets :
 - botransparent (true|false, true par défaut) : la bordure est transparente
 - opacity (nombre entre 0 et 1, 1 par défaut) : l'opacité de l'objet, utile lorsque des objets se superposent
 - angle (nombre, 0 par défaut) : la rotation de l'objet, angle exprimé en degrés
-
+ 
 La couleur par défaut de tous les objets a été modifiée :
-- fgcolor (couleur du premier plan) : rgb(0, 0, 0) par défaut
 - bgcolor (couleur de l'arrière plan) : rgb(0, 0, 0) par défaut
 - bocolor (couleur de la bordure) : rgb(0, 0, 0) par défaut
 
@@ -105,6 +106,8 @@ Les instructions <label>, <goto>, <stop> sont propre à l'exécution du programm
 Le noeud <framerate> permet de changer la vitesse de rafraichissement du dessin : "very slow", "slow", "normal" (défaut), "fast", "very fast". DTD mise à jour en conséquence.
 
 La DTD a été mise à jour en conséquence.
+
+<dupl_bject>
 
 Résumé
 ======

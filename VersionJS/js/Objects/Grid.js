@@ -4,8 +4,8 @@
 
 class Grid extends AnimatedObject {
     
-    constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, line, column, lineHeight, columnnHeight) {
-        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
+    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, line, column, lineHeight, columnnHeight) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
         this.line = line;
         this.column = column;
         this.lineHeight = lineHeight;

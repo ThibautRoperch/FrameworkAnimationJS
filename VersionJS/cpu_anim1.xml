@@ -6,49 +6,49 @@
   <objects>
     <object_text 
       text="mov eax,[100]" bgtransparent="false"
-      fgcolor="255,255,255"
+      color="255,255,255"
       bgcolor="0,0,128"
       font="Courier,12,bold">ins1</object_text>
     <object_text 
       text="mov ebx,[104]" bgtransparent="false"
-      fgcolor="255,255,255"
+      color="255,255,255"
       bgcolor="0,0,128"
       font="Courier,12,bold">ins2</object_text>
     <object_text 
       text="add eax,ebx" bgtransparent="false"
-      fgcolor="255,255,255"
+      color="255,255,255"
       bgcolor="0,0,128"
       font="Courier,12,bold">ins3</object_text>
     <object_text 
       text="mov [108],eax" bgtransparent="false"
-      fgcolor="255,255,255"
+      color="255,255,255"
       bgcolor="0,0,128"
       font="Courier,12,bold">ins4</object_text>
 
     <object_text 
       text="[100]=1" bgtransparent="false"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data1</object_text>
     <object_text 
       text="[104]=2" bgtransparent="false"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data2</object_text>
     <object_text 
       text="[108]=?" bgtransparent="false"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data3</object_text>
 
   <object_text 
       text="eax=?" bgtransparent="true"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">eax</object_text>
     <object_text 
       text="ebx=?" bgtransparent="true"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">ebx</object_text>
 
@@ -67,33 +67,33 @@
 
     <object_text 
       text="request [100]" bgtransparent="false"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request1</object_text>
     <object_text 
       text="request [104]" bgtransparent="false"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request2</object_text>
     <object_text 
       text="request eax" bgtransparent="false"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request31</object_text>
     <object_text 
       text="request ebx" bgtransparent="false"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request32</object_text>
     <object_text 
       text="request eax" bgtransparent="false"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,0"
       font="Courier,12,bold">data_request41</object_text>
 
     <object_text
       text="click on first instruction@to start"  bgtransparent="false"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bgcolor="255,255,255"
       font="Courier,12,bold">message</object_text>
 
@@ -109,9 +109,9 @@
     <program assigned_to="ins1">
       <setxy x="20" y="30" />
       <visible value="true" />
-      <setproperty object="ins1" property="fgcolor" value="255,255,0" />
+      <setproperty object="ins1" property="color" value="255,255,0" />
       <click />
-      <setproperty object="ins1" property="fgcolor" value="255,255,255" />
+      <setproperty object="ins1" property="color" value="255,255,255" />
       <setproperty object="message" property="text" value="" />
       <right x="80" dx="5" />
       <down y="80" dy="5" />
@@ -129,11 +129,11 @@
       <visible value="true" />
       <wait value="unlock" />
       <state value="normal" />
-      <setproperty object="ins2" property="fgcolor" value="255,255,0" />
+      <setproperty object="ins2" property="color" value="255,255,0" />
       <blink times="6" delay="20" />
       <click />
       <setproperty object="message" property="text" value="" />
-      <setproperty object="ins2" property="fgcolor" value="255,255,255" />
+      <setproperty object="ins2" property="color" value="255,255,255" />
       <right x="80" dx="5" />
       <down y="60" dy="5" />
       <right x="50" dx="5" />
@@ -150,11 +150,11 @@
       <visible value="true" />
       <wait value="unlock" />
       <state value="normal" />
-      <setproperty object="ins3" property="fgcolor" value="255,255,0" />
+      <setproperty object="ins3" property="color" value="255,255,0" />
       <blink times="6" delay="20" />
       <click />
       <setproperty object="message" property="text" value="" />
-      <setproperty object="ins3" property="fgcolor" value="255,255,255" />
+      <setproperty object="ins3" property="color" value="255,255,255" />
       <right x="80" dx="5" />
       <down y="40" dy="5" />
       <right x="50" dx="5" />
@@ -171,11 +171,11 @@
       <visible value="true" />
       <wait value="unlock" />
       <state value="normal" />
-      <setproperty object="ins4" property="fgcolor" value="255,255,0" />
+      <setproperty object="ins4" property="color" value="255,255,0" />
       <blink times="6" delay="20" />
       <click />
       <setproperty object="message" property="text" value="" />
-      <setproperty object="ins4" property="fgcolor" value="255,255,255" />
+      <setproperty object="ins4" property="color" value="255,255,255" />
       <right x="80" dx="5" />
       <down y="20" dy="5" />
       <right x="50" dx="5" />

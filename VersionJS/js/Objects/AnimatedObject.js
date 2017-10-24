@@ -10,11 +10,10 @@ var MOVING_STATE = "moving";
 
 class AnimatedObject {
    
-    constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle) {
+    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle) {
         this.id = id;
         this.x = x;
         this.y = y;
-        this.fgcolor = fgcolor; // r, g, b
         this.bgcolor = bgcolor; // r, g, b
         this.bgtransparent = bgtransparent;
         this.bocolor = bocolor; // r, g, b
@@ -36,10 +35,6 @@ class AnimatedObject {
 
     getY() {
         return this.y;
-    }
-
-    getFgcolor() {
-        return this.fgcolor;
     }
 
     getBgcolor() {
@@ -88,10 +83,6 @@ class AnimatedObject {
 
     setY(y) {
         this.y = y;
-    }
-
-    setFgcolor(fgcolor) {
-        this.fgcolor = fgcolor;
     }
 
     setBgcolor(bgcolor) {
