@@ -10,7 +10,7 @@ var MOVING_STATE = "moving";
 
 class AnimatedObject {
    
-    constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity) {
+    constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -23,6 +23,7 @@ class AnimatedObject {
         this.layer = layer;
         this.visible = visible;
         this.opacity = opacity;
+        this.angle = angle; // degrees
     }
 
     getId() {
@@ -73,6 +74,10 @@ class AnimatedObject {
         return this.opacity;
     }
 
+    getAngle() {
+        return this.angle;
+    }
+
     setId(id) {
         this.id = id;
     }
@@ -119,6 +124,10 @@ class AnimatedObject {
 
     setOpacity(opacity) {
         this.opacity = opacity;
+    }
+
+    setAngle(angle) {
+        this.angle = angle;
     }
 
     draw() {

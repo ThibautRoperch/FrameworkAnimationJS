@@ -66,6 +66,11 @@ class Landmark extends AnimatedObject {
         super.draw()
         stroke(this.bgcolor, this.opacity * 255);
         
+        fill(this.fgcolor, this.opacity * 255);
+		textFont(this.font[0]);
+		textSize(parseInt(this.font[1]));
+        textStyle(NORMAL);
+        
         if(this.height > 0 && this.width > 0) {
             line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
             line(this.x, this.y + this.height, this.x, this.y);

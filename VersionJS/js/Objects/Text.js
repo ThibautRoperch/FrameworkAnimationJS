@@ -4,15 +4,15 @@
 
 class Text extends AnimatedObject {
 	
-	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border, width, height) {
-        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, horizontalalignment, verticalalignment);
+	constructor(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, border, width, height, halignment, valignment) {
+        super(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
 		this.text = text;
 		this.font = font; // FontName, FontSize, FontWeight
 		this.border = border;
 		this.width = width;
 		this.height = height;
-		this.horizontalalignment = horizontalalignment; 
-		this.verticalalignment = verticalalignment;
+		this.halignment = halignment; 
+		this.valignment = valignment;
 	}
 
 	getWidth() {
@@ -35,12 +35,12 @@ class Text extends AnimatedObject {
 		return this.border;
 	}
 
-	getHorizontalalignment() {
-		return this.horizontalalignment;
+	getHalignment() {
+		return this.halignment;
 	}
 
-	getVerticalalignment() {
-		return this.verticalalignment;
+	getValignment() {
+		return this.valignment;
 	}
 
 	setText(text) {
@@ -62,14 +62,13 @@ class Text extends AnimatedObject {
     setHeight(height) {
         this.height = height;
 	}
-	
 
-	getHorizontalalignment(horizontalalignment) {
-		this.horizontalalignment = horizontalalignment;
+	getHalignment(halignment) {
+		this.halignment = halignment;
 	}
 
-	getVerticalalignment(verticalalignment) {
-		this.verticalalignment = verticalalignment;
+	getValignment(valignment) {
+		this.valignment = valignment;
 	}
 
 	draw() {
@@ -82,9 +81,9 @@ class Text extends AnimatedObject {
 		textFont(this.font[0]);
 		textSize(parseInt(this.font[1]));
 		textStyle(this.font[2] == "bold" ? BOLD : this.font[2] == "italic" ? ITALIC : NORMAL);
-		// text alignment
-		textAlign(this.horizontalalignment == "right" ? RIGHT : this.horizontalalignment == "center" ? CENTER : LEFT,
-		this.verticalalignment == "center" ? CENTER : this.verticalalignment == "bottom" ? BOTTOM : this.verticalalignment == "baseline" ? BASELINE : TOP);
+		// Text alignment
+		textAlign(this.halignment == "right" ? RIGHT : this.halignment == "center" ? CENTER : LEFT,
+		this.valignment == "center" ? CENTER : this.valignment == "bottom" ? BOTTOM : this.valignment == "baseline" ? BASELINE : TOP);
 		// Display
 		text(this.text, this.x, this.y);
 	}

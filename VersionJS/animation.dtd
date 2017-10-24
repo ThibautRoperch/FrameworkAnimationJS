@@ -11,7 +11,7 @@
 
 <!ELEMENT background (#PCDATA) >
 
-<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_extern)+ >
+<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_extern|object_landmark)+ >
 
 <!ELEMENT object_text (#PCDATA) >
 <!ATTLIST object_text text CDATA #REQUIRED >
@@ -19,6 +19,8 @@
 <!ATTLIST object_text border CDATA #IMPLIED >
 <!ATTLIST object_text width CDATA #IMPLIED >
 <!ATTLIST object_text height CDATA #IMPLIED >
+<!ATTLIST object_text halignment (left|center|right) #IMPLIED >
+<!ATTLIST object_text valignment (top|bottom|center|baseline) #IMPLIED >
 <!ATTLIST object_text x CDATA #IMPLIED >
 <!ATTLIST object_text y CDATA #IMPLIED >
 <!ATTLIST object_text fgcolor CDATA #IMPLIED >
@@ -29,6 +31,7 @@
 <!ATTLIST object_text layer CDATA #IMPLIED >
 <!ATTLIST object_text visible (true|false) #IMPLIED >
 <!ATTLIST object_text opacity CDATA #IMPLIED >
+<!ATTLIST object_text angle CDATA #IMPLIED >
 
 <!ELEMENT object_image (#PCDATA) >
 <!ATTLIST object_image width CDATA #IMPLIED >
@@ -44,6 +47,7 @@
 <!ATTLIST object_image layer CDATA #IMPLIED >
 <!ATTLIST object_image visible (true|false) #IMPLIED >
 <!ATTLIST object_image opacity CDATA #IMPLIED >
+<!ATTLIST object_image angle CDATA #IMPLIED >
 
 <!ELEMENT object_rectangle (#PCDATA) >
 <!ATTLIST object_rectangle width CDATA #REQUIRED >
@@ -59,6 +63,7 @@
 <!ATTLIST object_rectangle layer CDATA #IMPLIED >
 <!ATTLIST object_rectangle visible (true|false) #IMPLIED >
 <!ATTLIST object_rectangle opacity CDATA #IMPLIED >
+<!ATTLIST object_rectangle angle CDATA #IMPLIED >
 
 <!ELEMENT object_polygon (#PCDATA) >
 <!ATTLIST object_polygon coord_x CDATA #REQUIRED >
@@ -73,6 +78,7 @@
 <!ATTLIST object_polygon layer CDATA #IMPLIED >
 <!ATTLIST object_polygon visible (true|false) #IMPLIED >
 <!ATTLIST object_polygon opacity CDATA #IMPLIED >
+<!ATTLIST object_polygon angle CDATA #IMPLIED >
 
 <!ELEMENT object_circle (#PCDATA) >
 <!ATTLIST object_circle radius CDATA #REQUIRED >
@@ -86,6 +92,7 @@
 <!ATTLIST object_circle layer CDATA #IMPLIED >
 <!ATTLIST object_circle visible (true|false) #IMPLIED >
 <!ATTLIST object_circle opacity CDATA #IMPLIED >
+<!ATTLIST object_circle angle CDATA #IMPLIED >
 
 <!ELEMENT object_ellipse (#PCDATA) >
 <!ATTLIST object_ellipse width CDATA #REQUIRED >
@@ -100,6 +107,7 @@
 <!ATTLIST object_ellipse layer CDATA #IMPLIED >
 <!ATTLIST object_ellipse visible (true|false) #IMPLIED >
 <!ATTLIST object_ellipse opacity CDATA #IMPLIED >
+<!ATTLIST object_ellipse angle CDATA #IMPLIED >
 
 <!ELEMENT object_landmark (#PCDATA) >
 <!ATTLIST object_landmark width CDATA #REQUIRED >
@@ -107,7 +115,7 @@
 <!ATTLIST object_landmark scaleX CDATA #REQUIRED >
 <!ATTLIST object_landmark scaleY CDATA #REQUIRED >
 <!ATTLIST object_landmark unitX CDATA #REQUIRED >
-<!ATTLIST object_landmark unitY CDATA #REQUIRED 
+<!ATTLIST object_landmark unitY CDATA #REQUIRED >
 <!ATTLIST object_landmark x CDATA #IMPLIED >
 <!ATTLIST object_landmark y CDATA #IMPLIED >
 <!ATTLIST object_landmark fgcolor CDATA #IMPLIED >
@@ -118,6 +126,7 @@
 <!ATTLIST object_landmark layer CDATA #IMPLIED >
 <!ATTLIST object_landmark visible (true|false) #IMPLIED >
 <!ATTLIST object_landmark opacity CDATA #IMPLIED >
+<!ATTLIST object_landmark angle CDATA #IMPLIED >
 
 <!ELEMENT object_extern (#PCDATA) >
 <!ATTLIST object_extern class CDATA #REQUIRED >
