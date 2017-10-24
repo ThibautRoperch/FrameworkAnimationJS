@@ -11,7 +11,7 @@
 
 <!ELEMENT background (#PCDATA) >
 
-<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_extern)+ >
+<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_extern|object_landmark)+ >
 
 <!ELEMENT object_text (#PCDATA) >
 <!ATTLIST object_text text CDATA #REQUIRED >
@@ -19,6 +19,8 @@
 <!ATTLIST object_text border CDATA #IMPLIED >
 <!ATTLIST object_text width CDATA #IMPLIED >
 <!ATTLIST object_text height CDATA #IMPLIED >
+<!ATTLIST object_text halignment CDATA #IMPLIED >
+<!ATTLIST object_text valignment CDATA #IMPLIED >
 <!ATTLIST object_text x CDATA #IMPLIED >
 <!ATTLIST object_text y CDATA #IMPLIED >
 <!ATTLIST object_text fgcolor CDATA #IMPLIED >
@@ -107,7 +109,7 @@
 <!ATTLIST object_landmark scaleX CDATA #REQUIRED >
 <!ATTLIST object_landmark scaleY CDATA #REQUIRED >
 <!ATTLIST object_landmark unitX CDATA #REQUIRED >
-<!ATTLIST object_landmark unitY CDATA #REQUIRED 
+<!ATTLIST object_landmark unitY CDATA #REQUIRED >
 <!ATTLIST object_landmark x CDATA #IMPLIED >
 <!ATTLIST object_landmark y CDATA #IMPLIED >
 <!ATTLIST object_landmark fgcolor CDATA #IMPLIED >

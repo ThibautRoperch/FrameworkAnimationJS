@@ -53,12 +53,12 @@ class SetProperty extends Instruction {
 				this.target.setOpacity(parseFloat(this.value));
 				break;
 
-			case "verticlal_alignment":
-				this.target.setVerticalalignment(value);
+			case "halignment":
+				this.target.setHalignment(this.value);
 				break;
 
-			case "horizontal_alignment":
-				this.target.setHorizontalalignment(value);
+			case "valignment":
+				this.target.setValignment(this.value);
 				break;
 
 			default:

@@ -105,7 +105,9 @@ function read_xml_file(contents) {
 				var border = parseInt(read_object.getAttribute("border")) | 0;
 				var width = parseInt(read_object.getAttribute("width")) | 100;
 				var height = parseInt(read_object.getAttribute("height")) | 30;
-				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, border, width, height);
+				var halignment = read_object.getAttribute("halignment") | "left";
+				var valignment = read_object.getAttribute("valignment") | "top";
+				new_object = new Text(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, border, width, height, halignment, valignment);
 			} else if (type == "object_image") {
 				var width = parseInt(read_object.getAttribute("width")) | 100;
 				var height = parseInt(read_object.getAttribute("height")) | 100;
