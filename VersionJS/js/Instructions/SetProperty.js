@@ -29,6 +29,10 @@ class SetProperty extends Instruction {
 				this.target.setText(this.value);
 				break;
 
+			case "color":
+				this.target.setColor(parseIntArray(this.value));
+				break;
+
 			case "bgcolor":
 				this.target.setBgcolor(parseIntArray(this.value));
 				break;
@@ -66,7 +70,7 @@ class SetProperty extends Instruction {
 				break;
 
 			default:
-				console.log("[SetProperty.js] Attribut '" + property + "' de l'instruction SetProperty non pris en charge");
+				console.log("[SetProperty.js] Attribut '" + this.property + "' de l'instruction SetProperty non pris en charge");
 				break;
 		}
 	}

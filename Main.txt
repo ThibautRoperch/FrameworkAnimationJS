@@ -67,7 +67,7 @@ Ajout règles dans le fichier css/css.css.
 On considère que tous les objets peuvent avoir une couleur de bordure.
 
 L'attribut "transparency" est remplacé par "bgtransparent" pour tous les objets.
-L'attribut "fgcolor" est renommé par "color" pour l'objet texte, et par "bocolor" pour les autres objets.
+L'attribut "fgcolor" est renommé par "color" pour l'objet texte (rgb(0, 0, 0) par défaut), et par "bocolor" pour les autres objets.
 
 Les propriétés suivantes ont été ajoutées pour tous les objets :
 - visible (true|false, false par défaut) : l'objet est visible
