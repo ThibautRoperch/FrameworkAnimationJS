@@ -7,7 +7,8 @@ class Down extends Instruction {
 	constructor(object, y, interval_y) {
 		super(object);
 		this.y = y;
-		this.interval_y = interval_y;
+        this.interval_y = interval_y;
+        this.destination = object.getY() - y;
 	}
 	
 	execute() {
@@ -15,7 +16,7 @@ class Down extends Instruction {
 
         down(this);
         function down(instruction) {
-            if (instruction.object.getY() > instruction.y) {
+            if (instruction.object.getY() > instruction.destination) {
                 
                 instruction.object.setY(instruction.object.getY() - instruction.interval_y);
                 

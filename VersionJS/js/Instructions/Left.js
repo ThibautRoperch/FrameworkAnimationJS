@@ -8,6 +8,7 @@ class Left extends Instruction {
         super(object);
         this.x = x;
         this.interval_x = interval_x;
+        this.destination = object.getX()-x
     }
 
     execute() {
@@ -15,7 +16,7 @@ class Left extends Instruction {
 
         left(this);
         function left(instruction) {
-            if (instruction.object.getX() > instruction.x) {
+            if (instruction.object.getX() > instruction.destination) {
                 
                 instruction.object.setX(instruction.object.getX()-instruction.interval_x);
                 

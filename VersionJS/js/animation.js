@@ -127,6 +127,14 @@ function read_xml_file(contents) {
 				var width = parseInt(read_object.getAttribute("width"));
 				var height = parseInt(read_object.getAttribute("height"));
 				new_object = new Ellipse(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, width, height);
+			} else if (type == "object_landmark") {
+				var width = parseInt(read_object.getAttribute("width"));
+				var height = parseInt(read_object.getAttribute("height"));
+				var scaleX = parseInt(read_object.getAttribute("scaleX"));
+				var scaleY = parseInt(read_object.getAttribute("scaleY"));
+				var unitX = read_object.getAttribute("unitX");
+				var unitY = read_object.getAttribute("unitY");
+				new_object = new Landmark(id, x, y, fgcolor, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, height, width, scaleX, scaleY, unitX, unitY);
 			}
 			OBJECTS.set(id, new_object);
 		}
@@ -336,6 +344,7 @@ function include_scripts() {
 		"js/Objects/Polygon.js",
 		"js/Objects/Rectangle.js",
 		"js/Objects/Text.js",
+		"js/Objects/Landmark.js",
 		// Instructions
 		"js/Instructions/Instruction.js",
 		"js/Instructions/Angle.js",
