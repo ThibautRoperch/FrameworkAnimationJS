@@ -107,7 +107,6 @@ class AnimatedObject {
 
     setState(state) {
         this.state = state;
-        console.log(this.id + " : chgmt effectué : " + state);
     }
 
     setLayer(layer) {
