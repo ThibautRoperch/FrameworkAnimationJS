@@ -31,7 +31,7 @@ Point d'ancrage des objets de dessin fournis par P5.js :
 - canevas		en haut à gauche
 - ellipse		centre de l'objet
 - arc			centre de l'objet
-- rec			en haut à gauche de l'objet
+- rect			en haut à gauche de l'objet
 - text			en bas à gauche de la ligne de base de l'objet
 
 Conventions
@@ -66,7 +66,6 @@ Ajout des règles applet et div.loading dans le fichier css/css.css
 On considère que tous les objets peuvent avoir une couleur de bordure.
 
 L'attribut "transparency" est remplacé par "bgtransparent".
-Les sauts de ligne se font avec \n (anciennement avec le caractère @).
 
 Les propriétés suivantes ont été ajoutées pour tous les objets :
 - visible (true|false, false par défaut) : l'objet est visible

@@ -22,7 +22,7 @@ class Up extends Instruction {
 			
 				setTimeout(function() {
 					up(instruction);
-				}, FRAME_RATE/60);
+				}, FRAME_RATE);
 			}
 		}
 

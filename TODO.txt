@@ -24,17 +24,13 @@ màj le main.txt
 
 Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le XML d'un objet, avec valeurs par défaut en value)
 
-Faire l'objet repère
-
 On pourrait rajouter l'alignement du texte dans le XML, faisable avec textAlign() en P5.js
 
 Préciser que la rotation est en degrés dans le main.txt
 
 Rectangle dans le texte, rotation dans animatedobject, demander la width et la height d'un objet texte (+ maj la dtd, anim.js, la class Txt)
 
-//up() dans Up.js (aussi dans down, legft, righ, moveto)
-
-maj la dtd avec center et cie
+maj la dtd avec center et cie, instruction et attribut
 
 Questions
 =========
