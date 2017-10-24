@@ -25,6 +25,13 @@ class Ellipse extends AnimatedObject {
         this.height = height;
     }
 
+    isClicked(x, y) { //probably false
+        x = this.x - x;
+        y = this.y - y;
+        distance = Math.pow(x/(width/2),2) + Math.pow(y/(height/2),2);
+        return distance <= 1;
+    }
+
     draw() {
         super.draw();
         ellipse(this.x, this.y, this.width, this.height);

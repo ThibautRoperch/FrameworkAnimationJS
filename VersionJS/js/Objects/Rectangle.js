@@ -54,5 +54,10 @@ class Rectangle extends AnimatedObject {
 	maxYposition() {
 		return this.y;
     }
+    isCliked(x, y) {
+        if((x > this.x)&&(x < this.x + width)&&(y > this.y)&&(y < this.y + height))
+            return true;
+        return false;
+    }
     
 }
