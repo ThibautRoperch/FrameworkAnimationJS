@@ -13,24 +13,13 @@ Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30,
 
 XML de l'objet grille et màj DTD + à traiter dans le reader
 
-AnimatedObject::setAngle(value)
-AnimatedObject::getWidth()
-AnimatedObject::getHeight()
-SousClasse::draw(value en fonction de l'objet);
-
 Possibilité de donner le border radius de chaque coin pour un rectangle : border-radius = "5, 10, 0, 0", màj la dtd
 on peut donner le borderradius directment lors de la cré de l'objet, et gérable avec setproperty
 màj le main.txt
 
 Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le XML d'un objet, avec valeurs par défaut en value)
 
-On pourrait rajouter l'alignement du texte dans le XML, faisable avec textAlign() en P5.js
-
-Préciser que la rotation est en degrés dans le main.txt
-
-Rectangle dans le texte, rotation dans animatedobject, demander la width et la height d'un objet texte (+ maj la dtd, anim.js, la class Txt)
-
-maj la dtd avec center et cie, instruction et attribut
+maj la dtd avec center et cie, attribut
 
 Questions
 =========
