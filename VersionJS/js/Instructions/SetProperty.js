@@ -52,6 +52,10 @@ class SetProperty extends Instruction {
 			case "opacity":
 				this.target.setOpacity(parseFloat(this.value));
 				break;
+			
+			case "angle":
+				this.target.setAngle(parseFloat(this.value));
+				break;
 
 			case "halignment":
 				this.target.setHalignment(this.value);

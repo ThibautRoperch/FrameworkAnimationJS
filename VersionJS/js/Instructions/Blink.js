@@ -11,12 +11,14 @@ class Blink extends Instruction {
 	}
 
 	execute() {
-		// TODO refaire avec une fonction, comme Up/Down/Sleep/etc...
-		for(i = 0 ; i < times; i++) {
-			this.object.setVisible(true);
-			setTimeout(function() {
-				this.object.setVisible(false);	
-			}, FRAME_RATE*this.delay);
+		blink(this,0);
+		function blink(instruction, nbfois) {
+			instruction.object.setVisible(!instruction.object.getVisible());
+			if(nbfois < instruction.times) {	
+				setTimeout(function() {
+					blink(instruction, nbfois++);	
+				}, FRAME_RATE*instruction.delay);
+			}	
 		}
 	}
 	
