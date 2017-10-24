@@ -9,6 +9,6 @@ class State extends Instruction {
     }
     
     execute() {
-        this.object.setState(value);
+        this.object.setState(this.value);
     }
 }
