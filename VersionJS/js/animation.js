@@ -98,7 +98,7 @@ function read_xml_file(contents) {
 			LAYERS.add(layer);
 			var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : false;
 			var opacity = parseFloat(read_object.getAttribute("opacity")) | 1;
-			var angle = parseInt(read_object.getAttribute("angle")) | 0;
+			var angle = parseFloat(read_object.getAttribute("angle")) | 0;
 			// Retrieve the others specific attributes of the object and create the associated animated object
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");

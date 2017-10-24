@@ -72,7 +72,7 @@ Les propriétés suivantes ont été ajoutées pour tous les objets :
 - bgtransparent (true|false, true par défaut) : le background est transparent (anciennement "transparency")
 - botransparent (true|false, true par défaut) : la bordure est transparente
 - opacity (nombre entre 0 et 1, 1 par défaut) : l'opacité de l'objet, utile lorsque des objets se superposent
-- angle (nombre entier, 0 par défaut) : la rotation de l'objet, angle exprimé en degrés
+- angle (nombre, 0 par défaut) : la rotation de l'objet, angle exprimé en degrés
 
 La couleur par défaut de tous les objets a été modifiée :
 - fgcolor (couleur du premier plan) : rgb(0, 0, 0) par défaut
