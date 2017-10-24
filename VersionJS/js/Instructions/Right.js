@@ -8,7 +8,7 @@ class Right extends Instruction {
 		super(object);
 		this.x = x;
 		this.interval_x = interval_x;
-		this.destination = x + object.getX();
+		this.destination = x - object.getX();
 	}
 	
 	execute() {
@@ -16,9 +16,9 @@ class Right extends Instruction {
 
 		right(this);
 		function right(instruction) {
-			if (instruction.object.getX() < instruction.destination) {
+			if (instruction.object.getX() > instruction.destination) {
 
-				instruction.object.setX(instruction.object.getX() + instruction.interval_x);
+				instruction.object.setX(instruction.object.getX() - instruction.interval_x);
 
 				setTimeout(function() {
 					right(instruction);
