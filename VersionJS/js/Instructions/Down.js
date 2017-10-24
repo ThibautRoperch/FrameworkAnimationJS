@@ -8,7 +8,7 @@ class Down extends Instruction {
 		super(object);
 		this.y = y;
         this.interval_y = interval_y;
-        this.destination = object.getY() - y;
+        this.destination = object.getY() + y;
 	}
 	
 	execute() {
@@ -16,9 +16,9 @@ class Down extends Instruction {
 
         down(this);
         function down(instruction) {
-            if (instruction.object.getY() > instruction.destination) {
+            if (instruction.object.getY() < instruction.destination) {
                 
-                instruction.object.setY(instruction.object.getY() - instruction.interval_y);
+                instruction.object.setY(instruction.object.getY() + instruction.interval_y);
                 
                 setTimeout(function() {
                     down(instruction);
