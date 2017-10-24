@@ -16,7 +16,7 @@ class Blink extends Instruction {
 			this.object.setVisible(true);
 			setTimeout(function() {
 				this.object.setVisible(false);	
-			}, (FRAME_RATE/60)*this.delay);
+			}, FRAME_RATE*this.delay);
 		}
 	}
 	

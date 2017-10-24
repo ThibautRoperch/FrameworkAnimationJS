@@ -22,7 +22,7 @@ class Right extends Instruction {
 
 				setTimeout(function() {
 					right(instruction);
-				}, FRAME_RATE/60);
+				}, FRAME_RATE);
 			}
 		}
 

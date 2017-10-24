@@ -22,7 +22,7 @@ class Down extends Instruction {
                 
                 setTimeout(function() {
                     down(instruction);
-                }, FRAME_RATE/60);
+                }, FRAME_RATE);
             }
         }
 
