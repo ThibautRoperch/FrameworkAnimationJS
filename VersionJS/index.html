@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 	<meta charset="UTF-8">
@@ -14,71 +14,71 @@
 		<h1>Animation</h1>
 
 	</header>
-	
+
 	<section>
-		<h2>Description de l'animation (XML)</h2>
-
-		<p>Ce fichier est au format XML, la DTD qui lui correspond est <a href="animation.dtd">animation.dtd</a></p>
-		<p>Le fichier XML se compose de 5 parties :</p>
-		
-		<ul>
-			<li><b>framerate</b> : permet de modifier la vitesse de l'animation</li>
-			<li><b>init ?</b> : </li>
-			<li><b>background</b> : permet de spécifier une image de fond</li>
-			<li><b>objects</b> : permet de décrire les différents objets de l'animation</li>
-			<li><b>programs</b> : permet de décrire les actions associées aux objets</li>
-		</ul>
 
 		<article>
-			<h3>Objets</h3>
-
-			<objects>
-				<objet>Texte</objet>
-				<objet>Image</objet>
-				<objet>Rectangle</objet>
-				<objet>Polygone</objet>
-				<objet>Cercle</objet>
-				<objet>Ellipse</objet>
-				<objet>Repère</objet>
-				<objet>Grille (pas encore implémenté)</objet>
-			</objects>
+			<h2>1. Description</h2>		
+			
+			<p>Le dossier <tt>js</tt> contient un framework JavaScript, basé sur la librairie <a href="https://p5js.org/">P5.js</a>, permettant de réaliser de petites animations à des fins de démonstrations pédagogiques.</p>
 		</article>
 
 		<article>
-			<h3>Instruction</h3>
+			<h2>2. Utilisation</h2>
 
-			<instructions>
-				<category>
-					<instruction>Changer la position X</instruction>
-					<instruction>Changer la position Y</instruction>
-					<instruction>Changer les positions X et Y</instruction>
-					<instruction>Centrer</instruction>
-					<instruction>Centrer en X</instruction>
-					<instruction>Centrer en Y</instruction>
-					<instruction>Modifier la visibilité</instruction>
-					<instruction>Modifier une propriété</instruction>
-				</category>
-				<category>
-					<instruction>Déplacer vers un point</instruction>
-					<instruction>Déplacer vers le haut</instruction>
-					<instruction>Déplacer vers le bas</instruction>
-					<instruction>Déplacer vers la gauche</instruction>
-					<instruction>Déplacer vers la droite</instruction>
-					<instruction>Pivoter</instruction>
-					<instruction>Clignoter</instruction>
-				</category>
-				<category>
-					<instruction>Attendre un click</instruction>
-					<instruction>Attendre une valeur</instruction>
-					<instruction>Envoyer une valeur</instruction>
-				</category>
-				<category>
-					<instruction>Enregistrer un label</instruction>
-					<instruction>Aller au label</instruction>
-					<instruction>Arrêter le programme</instruction>
-			</instructions>
+			<p>Le contenu du dossier <tt>js</tt> doit être accessible et son arborescence inchangée.</p>
+			<p>Inclure le fichier <a href="js/animation.js"><tt>animation.js</tt></a> dans chaque fichier contenant une animation.</p>
+			<p>Le script suivant permet de charger l'animation contenue dans le fichier <tt>animation.xml</tt> et de l'afficher dans la balise ayant pour <code>id</code> <tt>anim1</tt>  :</p>
+			<pre>
+<code>
+	&lt;script&gt;<br>
+		load_animation("animation.xml", "anim1", 1600, 900);<br>
+	&lt;/script&gt;
+</code>
+			</pre>
 
+			<p>Vous pouvez modifier les paramètres suivants :</p>
+			
+			<ul>
+				<li><tt>animation.xml</tt> : il s'agit du fichier qui décrit l'animation</li>
+				<li><tt>anim1</tt> : il s'agit de l'<code>id</code> de la balise HMTL dans laquelle sera affichée l'animation</li>
+				<li><tt>1600</tt> : largeur en pixels de l'espace occupé par l'animation</li>
+				<li><tt>900</tt> : hauteur en pixels de l'espace occupé par l'animation</li>
+			</ul>
 		</article>
+
+		<article>
+			<h2>3. Fichier de description de l'animation</h2>
+
+			<p>Ce fichier est au format XML, la DTD qui lui correspond est <a href="animation.dtd"><tt>animation.dtd</a></tt>.</p>
+			<p>Le fichier XML se compose de 5 parties :</p>
+			
+			<ul>
+				<li><b>framerate</b> : permet de modifier la vitesse de l'animation</li>
+				<li><b>init ?</b> : </li>
+				<li><b>background</b> : permet de spécifier une image de fond</li>
+				<li><b>objects</b> : permet de décrire les différents objets de l'animation</li>
+				<li><b>programs</b> : permet de décrire les actions associées aux objets</li>
+			</ul>
+		</article>
+
+		<article>
+			<h3>3.1 Les objets</h3>
+
+			<p>Les attributs communs à tous les objets sont les suivants :</p>
+
+			<ul>
+				<li>a</li>
+				<li>cb</li>
+				<li></li>
+			</ul>
+		</article>
+
+		<article>
+			<h3>3.2 Les programmes</h3>
+				
+		</article>
+
 	</section>
 
 </body>

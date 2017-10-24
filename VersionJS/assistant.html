@@ -1,0 +1,69 @@
+<objects>
+    <object>Texte</object>
+    <object>Image</object>
+    <object>Rectangle</object>
+    <object>Polygone</object>
+    <object>Cercle</object>
+    <object>Ellipse</object>
+    <object>Repère</object>
+    <object>Grille (pas encore implémenté)</object>
+</objects>
+
+<instructions>
+    <category>
+        <instruction>Changer la position X</instruction>
+        <instruction>Changer la position Y</instruction>
+        <instruction>Changer les positions X et Y</instruction>
+        <instruction>Centrer</instruction>
+        <instruction>Centrer en X</instruction>
+        <instruction>Centrer en Y</instruction>
+        <instruction>Modifier la visibilité</instruction>
+        <instruction>Modifier une propriété</instruction>
+    </category>
+    <category>
+        <instruction>Déplacer vers un point</instruction>
+        <instruction>Déplacer vers le haut</instruction>
+        <instruction>Déplacer vers le bas</instruction>
+        <instruction>Déplacer vers la gauche</instruction>
+        <instruction>Déplacer vers la droite</instruction>
+        <instruction>Pivoter</instruction>
+        <instruction>Clignoter</instruction>
+    </category>
+    <category>
+        <instruction>Attendre un click</instruction>
+        <instruction>Attendre une valeur</instruction>
+        <instruction>Envoyer une valeur</instruction>
+    </category>
+    <category>
+        <instruction>Enregistrer un label</instruction>
+        <instruction>Aller au label</instruction>
+        <instruction>Arrêter le programme</instruction>
+</instructions>
+
+
+objects, instructions, category {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+instructions {
+    flex-direction: column;
+}
+
+object, instruction {
+    min-width: 100px;
+    margin: 10px 15px;
+    padding: 15px 10px;
+    text-align: center;
+    color:rgba(0, 0, 0, 0.8);
+    background:white;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+object:hover, instruction:hover {
+opacity:1;
+border:1px solid rgba(0, 0, 0, 0.7);
+box-shadow:0 1px 0 1px rgba(0, 0, 0, 0.2);
+}

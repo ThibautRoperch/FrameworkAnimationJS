@@ -104,7 +104,7 @@ function read_xml_file(contents) {
 				var font = read_object.getAttribute("font").split(",");
 				var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
 				var border = parseInt(read_object.getAttribute("border")) | 0;
-				var width = parseInt(read_object.getAttribute("width")) | 80;
+				var width = parseInt(read_object.getAttribute("width")) | parseInt(font[1]);
 				var height = parseInt(read_object.getAttribute("height")) | 20;
 				var halignment = read_object.getAttribute("halignment") | "left";
 				var valignment = read_object.getAttribute("valignment") | "top";
@@ -352,6 +352,8 @@ function include_scripts() {
 		"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js",
 		// Objects
 		"js/Objects/AnimatedObject.js",
+		"js/Objects/Ellipse.js",
+		"js/Objects/Circle.js",
 		"js/Objects/Grid.js",
 		"js/Objects/ImageFile.js",
 		"js/Objects/Landmark.js",
