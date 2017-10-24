@@ -11,6 +11,7 @@ class Blink extends Instruction {
 	}
 
 	execute() {
+		// TODO refaire avec une fonction, comme Up/Down/Sleep/etc...
 		for(i = 0 ; i < times; i++) {
 			this.object.setVisible(true);
 			setTimeout(function() {

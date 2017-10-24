@@ -19,7 +19,7 @@ class MoveTo extends Instruction {
 		move(instruction);
 		function move(instruction) {
 			if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() > instruction.x)) {
-					
+				
 				instruction.object.setY(instruction.object.getY()-instruction.interval_y);
 				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
 				

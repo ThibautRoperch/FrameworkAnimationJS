@@ -250,7 +250,6 @@ function execute_instructions(object_id, instruction_number, labels) {
 		} else if (instruction_type == "Stop") {
 			var continue_execution = false;
 		} else {
-			// console.log(instruction);
 			instruction.execute();
 			next_instruction = instruction_number + 1;
 		}

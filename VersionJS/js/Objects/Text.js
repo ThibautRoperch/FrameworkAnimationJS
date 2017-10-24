@@ -57,6 +57,7 @@ class Text extends AnimatedObject {
 		super.draw();
 		// Background
 		// rect()
+		// Remplacer @ par \n
 		// Text's color, font, size and style
 		fill(this.fgcolor, this.opacity * 255);
 		textFont(this.font[0]);

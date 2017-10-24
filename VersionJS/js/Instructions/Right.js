@@ -15,10 +15,10 @@ class Right extends Instruction {
 
 		right(this);
 		function right(instruction) {
-			if (instruction.object.getX() < instruction.x) {
+			if (instruction.object.getX() < instruction.x) { //  < instruction.object.getX() + instruction.x
 
 				instruction.object.setX(instruction.object.getX() + instruction.interval_x);
-				
+
 				setTimeout(function() {
 					right(instruction);
 				}, FRAME_RATE/60);
