@@ -4,11 +4,10 @@
 
 class Up extends Instruction {
 
-	constructor(object, y, interval_y) {
+	constructor(object, distance, interval) {
 		super(object);
-		this.y = y;
-		this.interval_y = interval_y;
-		this.destination = y-object.getY();
+		this.distance = distance;
+		this.interval = interval;
 	}
 
 	execute() {
@@ -16,17 +15,19 @@ class Up extends Instruction {
 
 		up(this);
 		function up(instruction) {
-			if (instruction.object.getY() > instruction.destination) {
+			if (instruction.distance > 0) {
 				
-				instruction.object.setY(instruction.object.getY() - instruction.interval_y);
-			
+				instruction.object.setY(instruction.object.getY() - instruction.interval);
+				instruction.distance -= instruction.interval;
+				
 				setTimeout(function() {
 					up(instruction);
 				}, FRAME_RATE);
+			} else {
+				instruction.object.setState(DEFAULT_STATE);
 			}
 		}
 
-		this.object.setState(DEFAULT_STATE);
 	}
 	
 }

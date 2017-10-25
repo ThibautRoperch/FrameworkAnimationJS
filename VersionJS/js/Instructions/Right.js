@@ -4,11 +4,10 @@
 
 class Right extends Instruction {
 
-	constructor(object, x, interval_x) {
+	constructor(object, distance, interval) {
 		super(object);
-		this.x = x;
-		this.interval_x = interval_x;
-		this.destination = x - object.getX();
+		this.distance = distance;
+		this.interval = interval;
 	}
 	
 	execute() {
@@ -16,17 +15,18 @@ class Right extends Instruction {
 
 		right(this);
 		function right(instruction) {
-			if (instruction.object.getX() > instruction.destination) {
+			if (instruction.distance > 0) {
 
-				instruction.object.setX(instruction.object.getX() - instruction.interval_x);
-
+				instruction.object.setX(instruction.object.getX() + instruction.interval);
+                instruction.distance -= instruction.interval;
+				
 				setTimeout(function() {
 					right(instruction);
 				}, FRAME_RATE);
+			} else {
+				instruction.object.setState(DEFAULT_STATE);				
 			}
 		}
-
-		this.object.setState(DEFAULT_STATE);		
 	}
 
 }
