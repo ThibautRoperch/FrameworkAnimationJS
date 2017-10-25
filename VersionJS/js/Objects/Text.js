@@ -4,8 +4,8 @@
 
 class Text extends AnimatedObject {
 	
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, text, font, color, border, width, height, halignment, valignment) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, text, font, color, border, width, height, halignment, valignment) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
 		this.text = text;
 		this.font = font; // FontName, FontSize, FontWeight
 		this.color = color; // r, g, b
@@ -103,4 +103,29 @@ class Text extends AnimatedObject {
         return false;
 	}
 	
+	toXml() {
+        
+        var text = document.createElement("object_text");
+        text.setAttribute("id", this.id); 
+        text.setAttribute("x", this.x);
+        text.setAttribute("y",this.y);
+        text.setAttribute("bgcolor", this.bgcolor); // r, g, b
+        text.setAttribute("bgtransparent", this.bgtransparent);
+        text.setAttribute("bocolor", this.bocolor); // r, g, b
+        text.setAttribute("botransparent", this.botransparent);
+        text.setAttribute("state", this.state);
+        text.setAttribute("layer", this.layer);
+        text.setAttribute("visible", this.visible);
+        text.setAttribute("opacity", this.opacity);
+        text.setAttribute("angle", this.angle); // degrees
+        text.setAttribute("text", this.text);
+		text.setAttribute("font", this.font); // FontName, FontSize, FontWeight
+		text.setAttribute("color", this.color); // r, g, b
+		text.setAttribute("border", this.border);
+		text.setAttribute("width", this.width);
+		text.setAttribute("height", this.height);
+		text.setAttribute("halignment",this.halignment); 
+		text.setAttribute("valignment", this.valignment);
+        return text;
+    }
 }
