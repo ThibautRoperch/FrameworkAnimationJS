@@ -145,6 +145,14 @@ function read_xml_file(contents) {
 				var unitX = read_object.getAttribute("unitX");
 				var unitY = read_object.getAttribute("unitY");
 				new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, height, width, scaleX, scaleY, unitX, unitY);
+			} else if (type == "object_copy") {
+				var copy = OBJECTS.get(id).toXml();
+				if (copy == null) {
+					console.log("[animation.js] L'objet " + id + " à copier n'existe pas");
+				} else {
+					// for (attribut of copy.)
+					objects_node.appendChild(copy);
+				}
 			}
 			OBJECTS.set(id, new_object);
 		}
@@ -158,6 +166,7 @@ function read_xml_file(contents) {
 			var program = new Array();
 			for (var read_instruction of read_program.children) {
 				var new_instruction = null;
+				// console.log(read_instruction);
 				// Retrieve the instruction's type
 				var type = read_instruction.nodeName;
 				// Retrieve the others specific attributes of the instruction and create the associated instruction
@@ -332,7 +341,7 @@ function canvasClicked() {
 	// Get the visible objects that are under the cursor position
 	for (object of OBJECTS.values()) {
 		if (object.getVisible()) {
-			// TODO changer les hitbox des objets et remplacer le if ci dessus par celui ci :
+			if (object.isClicked(mouseX, mouseY)) {
 				new Trigger(null, object, WAITING_CLICK_STATE).execute();
 			}
 		}
