@@ -32,7 +32,7 @@ Point d'ancrage des objets de dessin fournis par P5.js :
 - ellipse		centre de l'objet
 - arc			centre de l'objet
 - rect			en haut à gauche de l'objet
-- text			en bas à gauche de la ligne de base de l'objet
+- text			en haut à gauche de la ligne de base de l'objet
 Les coordonnées données dans le XML (attributs x et y) correspondent au point en bas à gauche de la boîte rectangulaire entourant l'objet.
 
 Conventions
@@ -77,12 +77,12 @@ Les propriétés suivantes ont été ajoutées pour tous les objets :
 - angle (nombre, 0 par défaut) : la rotation de l'objet, angle exprimé en degrés
  
 La couleur par défaut de tous les objets a été modifiée :
-- bgcolor (couleur de l'arrière plan) : rgb(0, 0, 0) par défaut
-- bocolor (couleur de la bordure) : rgb(0, 0, 0) par défaut
+- bgcolor (couleur de l'arrière plan) : rgb(255, 255, 255) par défaut
+- bocolor (couleur de la bordure) : rgb(255, 255, 255) par défaut
 
 Les propriétés suivantes ont été ajoutées pour l'objet texte :
-- width (entier supérieur à 0, 100 par défaut) : largeur de la boite contenant le texte
-- height (entier supérieur à 0, 20 par défaut) : hauteur de la boite contenant le texte
+- width (entier supérieur à 0, la largeur du texte par défaut) : largeur de la boite contenant le texte
+- height (entier supérieur à 0, la hauteur du texte par défaut) : hauteur de la boite contenant le texte
 - halignment (left|center|right, left par défaut) : alignement horizontal du texte
 - valignment (top|bottom|center|baseline, top par défaut) : alignement vertical du texte
 

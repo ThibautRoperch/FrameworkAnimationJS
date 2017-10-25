@@ -83,40 +83,12 @@ list-style: none;
 
 /* Added properties */
 
-applet {
-display:flex;
-flex-direction:row;
-align-items:center;
-padding:0;
-border:1px solid silver;
+tt {
+margin:0 2px;
+color:rgb(167, 14, 14);
 }
 
-div.loading {
-flex:1;
-height:auto;
-text-align:center;
-color:gray;
-}
-
-objects, instructions {
-display:flex;
-flex-wrap:wrap;
-}
-
-objects > *, instructions > * {
-min-width: 100px;
-margin:10px 20px;
-padding-top:15px;
-padding-bottom:15px;
-text-align:center;
-color:rgba(0, 0, 0, 0.8);
-border:1px solid rgba(0, 0, 0, 0.5);
-border-radius: 5px;
-cursor:pointer;
-}
-
-object:hover, instruction:hover {
-opacity:1;
-border:1px solid rgba(0, 0, 0, 0.7);
-box-shadow:0 1px 0 1px rgba(0, 0, 0, 0.2);
+ul.associative tt {
+display:inline-block;
+min-width:100px;
 }

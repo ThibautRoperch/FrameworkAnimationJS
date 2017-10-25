@@ -2,12 +2,14 @@
 TODO
 ====
 
-Pouvoir copier/coller des objets => wut ?
-
 Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilité de bouger à l'infini sur le tracé (revenir au débbut à chaque fois qu'il arrive à la fin)
 Un objet de type tracé, avec des presets, comme une sinusoidale
 
 Refaire le texte de création d'objet, comme dans index.html, 4. Créer ses propres objets
+1. màj la dtd
+2. nouvelle classe en suivant la structure des autres
+3. ajouter le fichier dans les includes de animation.js
+3. ajouter le case dans animation.js
 
 Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir, et màj la dtd
 
