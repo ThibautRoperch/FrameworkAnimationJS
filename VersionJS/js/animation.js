@@ -30,14 +30,21 @@ function load_animation(source, target_id, width, height) {
 	// Resize the target node
 	PARENT.style.width = WIDTH + "px";
 	PARENT.style.height = HEIGHT + "px";
+	PARENT.style.display = "flex";
+	PARENT.style.flexDirection = "row";
+	PARENT.style.alignItems = "center";
+	PARENT.style.padding ="0";
 
 	// Display a loading message while the objects are beeing created
 	var loading = document.createElement("div");
 	loading.className = "loading";
 	loading.innerHTML = "loading...";
+	loading.style.flex = "1";
+	loading.style.textAlign = "center";
+	loading.style.color = "gray";
 	PARENT.appendChild(loading);
 
-	// Include all others scripts
+	// Include others scripts
 	include_scripts();
 
 	// Read the XML file using AJAX
@@ -89,9 +96,9 @@ function read_xml_file(contents) {
 			var id = read_object.textContent;
 			var x = parseInt(read_object.getAttribute("x")) | 0;
 			var y = parseInt(read_object.getAttribute("y")) | 0;
-			var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
+			var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [255, 255, 255];
 			var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : true;
-			var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
+			var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [255, 255, 255];
 			var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : true;
 			var layer = parseInt(read_object.getAttribute("layer")) | 0;
 			LAYERS.add(layer);
@@ -104,10 +111,10 @@ function read_xml_file(contents) {
 				var font = read_object.getAttribute("font").split(",");
 				var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
 				var border = parseInt(read_object.getAttribute("border")) | 0;
-				var width = parseInt(read_object.getAttribute("width")) | parseInt(font[1]);
-				var height = parseInt(read_object.getAttribute("height")) | 20;
-				var halignment = read_object.getAttribute("halignment") | "left";
-				var valignment = read_object.getAttribute("valignment") | "top";
+				var width = parseInt(read_object.getAttribute("width")) | text.length * (parseInt(font[1])/2 + 1);
+				var height = parseInt(read_object.getAttribute("height")) | parseInt(font[1]) + 8;
+				var halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
+				var valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
 				new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, color, border, width, height, halignment, valignment);
 			} else if (type == "object_image") {
 				var width = parseInt(read_object.getAttribute("width")) | 100;
@@ -324,16 +331,10 @@ function canvasClicked() {
 	// Get the visible objects that are under the cursor position
 	for (object of OBJECTS.values()) {
 		if (object.getVisible()) {
-			// console.log(object.id + " : entre " + object.minXposition() + " X " + object.maxXposition() + " et  " + object.minYposition() + " Y " + object.maxYposition());
-			if (mouseX >= object.minXposition() && mouseX <= object.maxXposition()
-			 && mouseY >= object.minYposition() && mouseY <= object.maxYposition()) {
-				// console.log("dedans");
+			// TODO changer les hitbox des objets et remplacer le if ci dessus par celui ci :
+			if (object.isClicked(mouseX, mouseY)) {
 				new Trigger(null, object, WAITING_CLICK_STATE).execute();
 			}
-			// TODO changer les hitbox des objets et remplacer le if ci dessus par celui ci :
-			// if (object.isClicked(mouseX, mouseY)) {
-			// 	new Trigger(null, object, WAITING_CLICK_STATE).execute();
-			// }
 		}
 	}
 

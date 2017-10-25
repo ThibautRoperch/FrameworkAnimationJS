@@ -83,8 +83,8 @@ class Text extends AnimatedObject {
 	draw() {
 		super.draw();
 		// Background
-       	//rect(this.x, this.y, this.width, this.height); TODO 
-		// Remplacer @ par \n
+       	rect(this.x, this.y, this.width, this.height); 
+		// Remplacer les @ par \n TODO
 		// Text's color, font, size and style
 		fill(this.color, this.opacity * 255);
 		textFont(this.font[0]);
@@ -94,28 +94,13 @@ class Text extends AnimatedObject {
 		textAlign(this.halignment == "right" ? RIGHT : this.halignment == "center" ? CENTER : LEFT,
 		this.valignment == "center" ? CENTER : this.valignment == "bottom" ? BOTTOM : this.valignment == "baseline" ? BASELINE : TOP);
 		// Display
-		text(this.text, this.x, this.y);
-	}
-
-	minXposition() {
-		return this.x;
-	}
-
-	minYposition() {
-		return this.y - this.font[1];
-	}
-
-	maxXposition() {
-		return this.x + this.text.length * this.font[1] / 2;
-	}
-
-	maxYposition() {
-		return this.y + 5;
+		text(this.text, this.x + 2, this.y + 4);
 	}
 	
-	isCliked(x, y) {
-        if((x > this.x)&&(x < this.x + width)&&(y > this.y)&&(y < this.y + height))
+	isClicked(x, y) {
+		if((x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height))
             return true;
         return false;
-    }
+	}
+	
 }

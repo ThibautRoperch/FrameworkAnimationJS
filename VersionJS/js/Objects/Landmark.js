@@ -104,5 +104,11 @@ class Landmark extends AnimatedObject {
             text(this.unitY, this.x + this.width + 25, this.y + this.height/2 );
         }
     }
+
+    isClicked() {
+		if((x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height))
+            return true;
+        return false;
+    }
     
 }

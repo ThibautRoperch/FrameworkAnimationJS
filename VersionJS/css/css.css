@@ -88,22 +88,7 @@ margin:0 2px;
 color:rgb(167, 14, 14);
 }
 
-applet {
-display:flex;
-flex-direction:row;
-align-items:center;
-padding:0;
-border:1px solid silver;
-}
-
-div.loading {
-flex:1;
-height:auto;
-text-align:center;
-color:gray;
-}
-
 ul.associative tt {
-    display: inline-block;
-    min-width: 100px;
+display:inline-block;
+min-width:100px;
 }
