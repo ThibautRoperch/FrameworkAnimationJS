@@ -6,8 +6,8 @@ class Polygon extends AnimatedObject {
     
 	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, coord_x, coord_y) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
-        this.coord_x = coord_x;
-        this.coord_y = coord_y;
+        this.coord_x = coord_x; // x coords' list
+        this.coord_y = coord_y; // y coords' list
     }
 
     getCoordx() {
@@ -57,4 +57,5 @@ class Polygon extends AnimatedObject {
         polygon.setAttribute("coord_y", this.coord_y);
         return polygon;
     }
+
 }

@@ -28,6 +28,7 @@ class Circle extends Ellipse {
        distance = Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
        return distance <= this.width/2;
    }
+
    toXml() {
        var circle = document.createElement("object_circle");
        circle.setAttribute("id", this.id); 
@@ -45,4 +46,5 @@ class Circle extends Ellipse {
        circle.setAttribute("radius", this.radius);
        return circle;
    }
+
 }

@@ -12,8 +12,12 @@ class Text extends AnimatedObject {
 		this.border = border;
 		this.width = width;
 		this.height = height;
-		this.halignment = halignment; 
+		this.halignment = halignment;
 		this.valignment = valignment;
+
+		this.real_width;
+		this.real_height;
+		this.computeRealDimension();
 	}
 
 	getWidth() {
@@ -50,6 +54,7 @@ class Text extends AnimatedObject {
 
 	setText(text) {
 		this.text = text;
+		this.computeRealDimension();
 	}
 
 	setFont(font) {
@@ -66,10 +71,12 @@ class Text extends AnimatedObject {
 
 	setWidth(width) {
         this.width = width;
+		this.computeRealDimension();
     }
 
     setHeight(height) {
         this.height = height;
+		this.computeRealDimension();
 	}
 
 	getHalignment(halignment) {
@@ -80,10 +87,15 @@ class Text extends AnimatedObject {
 		this.valignment = valignment;
 	}
 
+	computeRealDimension() {
+		this.real_width = (this.width == -1) ? this.text.length * (parseInt(this.font[1])/2 + 1) + 2 : this.width;
+		this.real_height = (this.height == -1) ? parseInt(this.font[1]) + 8 : this.height;
+	}
+
 	draw() {
 		super.draw();
 		// Background
-       	rect(this.x, this.y, this.width, this.height); 
+       	rect(this.x, this.y, this.real_width, this.real_height); 
 		// Remplacer les @ par \n TODO
 		// Text's color, font, size and style
 		fill(this.color, this.opacity * 255);
@@ -98,7 +110,7 @@ class Text extends AnimatedObject {
 	}
 	
 	isClicked(x, y) {
-		if((x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height))
+		if((x >= this.x) && (x <= this.x + this.real_width) && (y >= this.y) && (y <= this.y + this.real_height))
             return true;
         return false;
 	}
@@ -128,4 +140,9 @@ class Text extends AnimatedObject {
 		text.setAttribute("valignment", this.valignment);
         return text;
     }
+
+    clone() {
+		return new Text(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.border, this.width, this.height, this.halignment, this.valignment);
+	}
+	
 }

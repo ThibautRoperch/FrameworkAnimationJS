@@ -111,11 +111,11 @@ function read_xml_file(contents) {
 				var font = read_object.getAttribute("font").split(",");
 				var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
 				var border = parseInt(read_object.getAttribute("border")) | 0;
-				var width = parseInt(read_object.getAttribute("width")) | text.length * (parseInt(font[1])/2 + 1);
-				var height = parseInt(read_object.getAttribute("height")) | parseInt(font[1]) + 8;
+				var width = parseInt(read_object.getAttribute("width")) | -1;
+				var height = parseInt(read_object.getAttribute("height")) | -1;
 				var halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
 				var valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-				new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, color, border, width, height, halignment, valignment);
+				new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, border, width, height, halignment, valignment);
 			} else if (type == "object_image") {
 				var width = parseInt(read_object.getAttribute("width")) | 100;
 				var height = parseInt(read_object.getAttribute("height")) | 100;
@@ -144,15 +144,21 @@ function read_xml_file(contents) {
 				var scaleY = parseInt(read_object.getAttribute("scaleY"));
 				var unitX = read_object.getAttribute("unitX");
 				var unitY = read_object.getAttribute("unitY");
-				new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, height, width, scaleX, scaleY, unitX, unitY);
+				new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY);
 			} else if (type == "object_copy") {
-				var copy = OBJECTS.get(id).toXml();
-				if (copy == null) {
-					console.log("[animation.js] L'objet " + id + " à copier n'existe pas");
+				var object = read_object.getAttribute("object");
+				var initial_object = OBJECTS.get(object);
+				if (initial_object == null) {
+					console.log("[animation.js] L'objet " + object + " à copier n'existe pas");
 				} else {
-					// for (attribut of copy.)
-					objects_node.appendChild(copy);
+					new_object = initial_object.clone();
+					new_object.setId(id);
+					for (var i = 1; i < read_object.attributes.length; ++i) { // i = 1 in order to avoid the first attribute (which is "object")
+						new SetProperty(new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
+					}
 				}
+				console.log(initial_object);
+				console.log(new_object);
 			}
 			OBJECTS.set(id, new_object);
 		}
