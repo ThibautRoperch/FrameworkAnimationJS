@@ -4,8 +4,8 @@
 
 class Polygon extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, coord_x, coord_y) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, coord_x, coord_y) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
         this.coord_x = coord_x;
         this.coord_y = coord_y;
     }
@@ -38,4 +38,23 @@ class Polygon extends AnimatedObject {
         // endShape(CLOSE);
     }
     
+    toXml() {
+        
+        var polygon = document.createElement("object_polygon");
+        polygon.setAttribute("id", this.id); 
+        polygon.setAttribute("x", this.x);
+        polygon.setAttribute("y",this.y);
+        polygon.setAttribute("bgcolor", this.bgcolor);
+        polygon.setAttribute("bgtransparent", this.bgtransparent);
+        polygon.setAttribute("bocolor", this.bocolor);
+        polygon.setAttribute("botransparent", this.botransparent);
+        polygon.setAttribute("state", this.state);
+        polygon.setAttribute("layer", this.layer);
+        polygon.setAttribute("visible", this.visible);
+        polygon.setAttribute("opacity", this.opacity);
+        polygon.setAttribute("angle", this.angle); 
+        polygon.setAttribute("coord_x", this.coord_x);
+        polygon.setAttribute("coord_y", this.coord_y);
+        return polygon;
+    }
 }

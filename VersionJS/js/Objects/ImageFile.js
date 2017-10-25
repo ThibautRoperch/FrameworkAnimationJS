@@ -4,8 +4,8 @@
 
 class ImageFile extends AnimatedObject {
     
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height, image) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
+    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
         this.width = width;
         this.height = height;
         this.image = image;
@@ -46,4 +46,25 @@ class ImageFile extends AnimatedObject {
         return false;
     }
     
+    toXml() {
+        
+        var image = document.createElement("object_image");
+        image.setAttribute("id", this.id); 
+        image.setAttribute("x", this.x);
+        image.setAttribute("y",this.y);
+        image.setAttribute("bgcolor", this.bgcolor); // r, g, b
+        image.setAttribute("bgtransparent", this.bgtransparent);
+        image.setAttribute("bocolor", this.bocolor); // r, g, b
+        image.setAttribute("botransparent", this.botransparent);
+        image.setAttribute("state", this.state);
+        image.setAttribute("layer", this.layer);
+        image.setAttribute("visible", this.visible);
+        image.setAttribute("opacity", this.opacity);
+        image.setAttribute("angle", this.angle); // degrees
+        image.setAttribute("width", this.width);
+        image.setAttribute("height", this.height);
+        image.setAttribute("image", this.image);
+        return image;
+
+    }
 }

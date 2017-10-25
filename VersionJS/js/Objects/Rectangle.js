@@ -4,8 +4,8 @@
 
 class Rectangle extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height, round) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, round) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
         this.width = width;
         this.height = height;
         this.round = round; // tl, tr, bl, br
@@ -61,4 +61,24 @@ class Rectangle extends AnimatedObject {
         return false;
     }
     
+    toXml() {
+        
+        var rectangle = document.createElement("object_rectangle");
+        rectangle.setAttribute("id", this.id); 
+        rectangle.setAttribute("x", this.x);
+        rectangle.setAttribute("y",this.y);
+        rectangle.setAttribute("bgcolor", this.bgcolor); 
+        rectangle.setAttribute("bgtransparent", this.bgtransparent);
+        rectangle.setAttribute("bocolor", this.bocolor); 
+        rectangle.setAttribute("botransparent", this.botransparent);
+        rectangle.setAttribute("state", this.state);
+        rectangle.setAttribute("layer", this.layer);
+        rectangle.setAttribute("visible", this.visible);
+        rectangle.setAttribute("opacity", this.opacity);
+        rectangle.setAttribute("angle", this.angle); 
+        rectangle.setAttribute("width", this.width);
+        rectangle.setAttribute("height", this.height);
+        rectangle.setAttribute("round", this.round);
+        return rectangle;
+    }
 }

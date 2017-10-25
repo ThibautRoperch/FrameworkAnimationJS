@@ -4,8 +4,8 @@
 
 class Landmark extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, height, width, scaleX, scaleY, unitX, unitY) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity);
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
         this.height = height;
         this.width = width;
         this.scaleX = scaleX;
@@ -136,4 +136,27 @@ class Landmark extends AnimatedObject {
         return false;
     }
     
+    toXml() {
+        
+        var landmark = document.createElement("object_landmark");
+        landmark.setAttribute("id", this.id); 
+        landmark.setAttribute("x", this.x);
+        landmark.setAttribute("y",this.y);
+        landmark.setAttribute("bgcolor", this.bgcolor); // r, g, b
+        landmark.setAttribute("bgtransparent", this.bgtransparent);
+        landmark.setAttribute("bocolor", this.bocolor); // r, g, b
+        landmark.setAttribute("botransparent", this.botransparent);
+        landmark.setAttribute("state", this.state);
+        landmark.setAttribute("layer", this.layer);
+        landmark.setAttribute("visible", this.visible);
+        landmark.setAttribute("opacity", this.opacity);
+        landmark.setAttribute("angle", this.angle); // degrees
+        landmark.setAttribute("width", this.width);
+        landmark.setAttribute("height", this.height);
+        landmark.setAttribute("scalex", this.scaleX);
+        landmark.setAttribute("scaley", this.scaleY);
+        landmark.setAttribute("unitx", this.unitX);
+        landmark.setAttribute("unity", this.unitY);
+        return landmark;
+    }
 }
