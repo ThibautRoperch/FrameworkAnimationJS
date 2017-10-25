@@ -11,13 +11,15 @@ class Blink extends Instruction {
 	}
 
 	execute() {
-		blink(this,0);
-		function blink(instruction, nbfois) {
+		blink(this, 0);
+		function blink(instruction, blinked_times) {
+
 			instruction.object.setVisible(!instruction.object.getVisible());
-			if(nbfois < instruction.times) {	
+
+			if(blinked_times < instruction.times) {	
 				setTimeout(function() {
-					blink(instruction, nbfois++);	
-				}, FRAME_RATE*instruction.delay);
+					blink(instruction, blinked_times++);	
+				}, FRAME_RATE * instruction.delay);
 			}	
 		}
 	}

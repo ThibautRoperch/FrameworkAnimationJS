@@ -274,6 +274,7 @@ function execute_instructions(object_id, instruction_number, labels) {
 		} else if (instruction_type == "Stop") {
 			var continue_execution = false;
 		} else {
+			// console.log(instruction.constructor.name);
 			instruction.execute();
 			next_instruction = instruction_number + 1;
 		}
@@ -332,7 +333,6 @@ function canvasClicked() {
 	for (object of OBJECTS.values()) {
 		if (object.getVisible()) {
 			// TODO changer les hitbox des objets et remplacer le if ci dessus par celui ci :
-			if (object.isClicked(mouseX, mouseY)) {
 				new Trigger(null, object, WAITING_CLICK_STATE).execute();
 			}
 		}

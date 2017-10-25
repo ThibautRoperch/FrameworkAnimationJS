@@ -82,6 +82,8 @@ class Text extends AnimatedObject {
 
 	draw() {
 		super.draw();
+		// Compute width and height
+		text.length * (parseInt(font[1])/2 + 1)
 		// Background
        	rect(this.x, this.y, this.width, this.height); 
 		// Remplacer les @ par \n TODO
