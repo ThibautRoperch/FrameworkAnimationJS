@@ -24,6 +24,8 @@ a faire et mettre dans le main.txt :
 dimensionnement de l'objet grille par rapport aux dimensions d'une case cases (et nb de col et lignes)
 pour le repere, le nom des absices et ordonnées par défaut est ""
 
+fait la metode de clone de tous les objets
+
 Questions
 =========
 

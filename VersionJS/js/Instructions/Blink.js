@@ -8,23 +8,27 @@ class Blink extends Instruction {
 		super(object);
 		this.times = times;
 		this.delay = delay;
-		this.visible_before;
+
+		this.initial_opacity;
+		this.visible_opacity;
 	}
 
 	execute() {
-		this.visible_before = this.object.getVisible();
-		
+		this.initial_opacity = this.object.getOpacity();
+		this.visible_opacity = this.object.getOpacity() == 0 ? 1 : this.object.getOpacity();
+
 		blink(this, 0);
 		function blink(instruction, blinked_times) {
 
-			instruction.object.setVisible(!instruction.object.getVisible());
+			if (instruction.object.getOpacity() == 0) instruction.object.setOpacity(instruction.visible_opacity);
+			else instruction.object.setOpacity(0);
 
 			if (blinked_times < instruction.times && (instruction.object.getState() == DEFAULT_STATE || instruction.object.getState() == WAITING_CLICK_STATE)) {
 				setTimeout(function() {
-					blink(instruction, ++blinked_times);	
-				}, LOOP_DELAY * instruction.delay);
+					blink(instruction, ++blinked_times);
+				}, instruction.delay * 20);
 			} else {
-				instruction.object.setVisible(instruction.visible_before);
+				instruction.object.setOpacity(instruction.initial_opacity);
 			}
 		}
 	}

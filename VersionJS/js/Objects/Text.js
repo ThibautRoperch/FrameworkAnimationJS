@@ -91,14 +91,14 @@ class Text extends AnimatedObject {
 		this.real_width = (this.width == -1) ? this.text.length * (parseInt(this.font[1])/2 + 1) + 2 : this.width;
 		this.real_height = (this.height == -1) ? parseInt(this.font[1]) + 8 : this.height;
 	}
-
+	
 	draw() {
 		super.draw();
 		// Background
        	rect(this.x, this.y, this.real_width, this.real_height); 
 		// Remplacer les @ par \n TODO
 		// Text's color, font, size and style
-		fill(this.color, this.opacity * 255);
+		fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
 		textFont(this.font[0]);
 		textSize(parseInt(this.font[1]));
 		textStyle(this.font[2] == "bold" ? BOLD : this.font[2] == "italic" ? ITALIC : NORMAL);

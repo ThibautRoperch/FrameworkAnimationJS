@@ -67,7 +67,7 @@ Ajout règles dans le fichier css/css.css.
 On considère que tous les objets peuvent avoir une couleur de bordure.
 
 L'attribut "transparency" est remplacé par "bgtransparent" pour tous les objets.
-L'attribut "fgcolor" est renommé par "color" pour l'objet texte (rgb(0, 0, 0) par défaut), et par "bocolor" pour les autres objets.
+L'attribut "fgcolor" est renommé par "color" pour l'objet texte (toujours rgb(255, 255, 255) par défaut), et par "bocolor" pour les autres objets.
 
 Les propriétés suivantes ont été ajoutées pour tous les objets :
 - visible (true|false, false par défaut) : l'objet est visible
@@ -75,10 +75,6 @@ Les propriétés suivantes ont été ajoutées pour tous les objets :
 - botransparent (true|false, true par défaut) : la bordure est transparente
 - opacity (nombre entre 0 et 1, 1 par défaut) : l'opacité de l'objet, utile lorsque des objets se superposent
 - angle (nombre, 0 par défaut) : la rotation de l'objet, angle exprimé en degrés
- 
-La couleur par défaut de tous les objets a été modifiée :
-- bgcolor (couleur de l'arrière plan) : rgb(255, 255, 255) par défaut
-- bocolor (couleur de la bordure) : rgb(255, 255, 255) par défaut
 
 Les propriétés suivantes ont été ajoutées pour l'objet texte :
 - width (entier supérieur à 0, la largeur du texte par défaut) : largeur de la boite contenant le texte
@@ -113,6 +109,8 @@ o---> x
 |
 v
 y
+
+L'instruction <blink> change l'opacité de l'objet plutôt que sa visibilité ; ainsi, l'objet est cliquable l'orsqu'il clignote, même pendant ses frames insiviblité.
 
 Résumé
 ======

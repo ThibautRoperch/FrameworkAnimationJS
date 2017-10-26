@@ -98,9 +98,9 @@ function read_xml_file(contents) {
 			var id = read_object.textContent;
 			var x = parseInt(read_object.getAttribute("x")) | 0;
 			var y = parseInt(read_object.getAttribute("y")) | 0;
-			var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [255, 255, 255];
+			var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
 			var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : true;
-			var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [255, 255, 255];
+			var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
 			var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : true;
 			var layer = parseInt(read_object.getAttribute("layer")) | 0;
 			LAYERS.add(layer);
@@ -111,7 +111,7 @@ function read_xml_file(contents) {
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");
 				var font = read_object.getAttribute("font").split(",");
-				var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
+				var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
 				var border = parseInt(read_object.getAttribute("border")) | 0;
 				var width = parseInt(read_object.getAttribute("width")) | -1;
 				var height = parseInt(read_object.getAttribute("height")) | -1;
@@ -210,7 +210,7 @@ function read_xml_file(contents) {
 					new_instruction = new Sleep(OBJECTS.get(object_id), value);
 				} else if (type == "state") {
 					var value = read_instruction.getAttribute("value");
-					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), "state", value);
+					new_instruction = new State(OBJECTS.get(object_id), value);
 				} else if (type == "trigger") {
 					var object = read_instruction.getAttribute("object");
 					var value = read_instruction.getAttribute("value");
@@ -276,6 +276,7 @@ function execute_instructions(object_id, instruction_number, labels) {
 
 	var next_instruction = instruction_number;
 	var continue_execution = true;
+	if (instruction.object.id == "ins3_decode" && instruction.constructor.name == "Wait") console.log("ins3_decode attend la valeur " + instruction.expected_state);
 	
 	// Execute the instruction if the state of the object is the default one
 	if (OBJECTS.get(object_id).getState() == DEFAULT_STATE) {
@@ -297,7 +298,7 @@ function execute_instructions(object_id, instruction_number, labels) {
 	if (continue_execution) {
 		setTimeout(function() {
 			execute_instructions(object_id, next_instruction, labels);
-		}, 10);
+		}, 1);
 	}
 }
 
@@ -378,6 +379,8 @@ function speed(speed) {
 		case "very fast":
 			LOOP_DELAY = 0;
 			break;
+		default:
+			console.log("Unrecognized speed, availables values are 'very slow', 'slow', 'normal', 'fast', 'very fast'.");
 	}
 }
 

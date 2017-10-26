@@ -124,10 +124,10 @@ class AnimatedObject {
     draw() {
         // Fill the object
         if (this.bgtransparent) fill(0, 0);
-        else fill(this.bgcolor, this.opacity * 255);
+        else fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255); // fill([r, g, b], opacity) doesn't work :)
         // Border
         if (this.botransparent) noStroke();
-        else stroke(this.bocolor, this.opacity * 255);
+        else stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
         // Rotation
         // todo, si la rotation est possible (tests en cours)
     }

@@ -25,10 +25,6 @@ class SetProperty extends Instruction {
 				this.target.setVisible(this.value == "true" ? true : false);
 				break;
 
-			case "state":
-				this.target.setState(this.value);
-				break;
-
 			case "text":
 				this.target.setText(this.value);
 				break;

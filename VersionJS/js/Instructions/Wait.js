@@ -10,6 +10,12 @@ class Wait extends Instruction {
 	}
 
 	execute() {
+		/*// If the object is already in the expected state that means that the trigger instruction did the wait one work, so switch the object into the default state
+		if (this.object.getState() == this.expected_state) {
+			this.object.setState(DEFAULT_STATE);
+		} else {
+			this.object.setState(this.expected_state);
+		}*/
 		this.object.setState(this.expected_state);
 	}
 	

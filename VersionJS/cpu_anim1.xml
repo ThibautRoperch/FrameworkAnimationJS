@@ -164,6 +164,7 @@
       <trigger object="ins3_decode" value="decode_ins3" />
       <wait value="unlock" />
       <visible value="false" />
+          <trigger object="ins3_decode" value="unlock" />
     </program>
 
     <program assigned_to="ins4">
