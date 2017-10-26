@@ -1,5 +1,5 @@
 /**
- * This instruction move the object right of x by interval of interval_x at a rate of FRAME_RATE
+ * This instruction move the object right of x by interval of interval_x at a speed of LOOP_DELAY
  */
 
 class Right extends Instruction {
@@ -22,7 +22,7 @@ class Right extends Instruction {
 				
 				setTimeout(function() {
 					right(instruction);
-				}, FRAME_RATE);
+				}, LOOP_DELAY);
 			} else {
 				instruction.object.setState(DEFAULT_STATE);				
 			}

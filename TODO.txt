@@ -5,27 +5,24 @@ TODO
 Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilité de bouger à l'infini sur le tracé (revenir au débbut à chaque fois qu'il arrive à la fin)
 Un objet de type tracé, avec des presets, comme une sinusoidale
 
+Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le XML d'un objet, avec valeurs par défaut en value)
+
 Refaire le texte de création d'objet, comme dans index.html, 4. Créer ses propres objets
 1. màj la dtd
 2. nouvelle classe en suivant la structure des autres
 3. ajouter le fichier dans les includes de animation.js
 3. ajouter le case dans animation.js
 
-Nouveau noeud XML permettant de changer le framerate du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir, et màj la dtd
+maj la dtd avec center et compagnie, comme attribut d'objet
 
-XML de l'objet grille et màj DTD + à traiter dans le reader
+Nouveau noeud XML permettant de changer la speed du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir, et màj la dtd
+very slow, slow, normal, fast, very fast
 
-Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le XML d'un objet, avec valeurs par défaut en value)
-
-maj la dtd avec center et cie, attribut
-
-objet qui se copie ; méthode de copie d'un objet pour chaque objet, dtd à faire (dtd ligne 129: un objet prenant un objet en attribut obligatoirement,
-puis tous les autres attributs de tous les objets sont disponibles)
+object_copy : dtd à faire (dtd ligne 129: un objet prenant un objet en attribut obligatoirement, puis tous les autres attributs de tous les objets sont disponibles)
 
 a faire et mettre dans le main.txt :
-dimensionnement de la grille par rapport aux cases (et nb de col et lignes)
-nom des absices et ordonnées par défaut : ""
-tous les points d'ancrage sont en bas à gauche des objets
+dimensionnement de l'objet grille par rapport aux dimensions d'une case cases (et nb de col et lignes)
+pour le repere, le nom des absices et ordonnées par défaut est ""
 
 Questions
 =========

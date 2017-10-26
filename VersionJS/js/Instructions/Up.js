@@ -1,5 +1,5 @@
 /**
- * This instruction move the object up of y by interval of interval_y at a rate of FRAME_RATE
+ * This instruction move the object up of y by interval of interval_y at a rate of LOOP_DELAY
  */
 
 class Up extends Instruction {
@@ -22,7 +22,7 @@ class Up extends Instruction {
 				
 				setTimeout(function() {
 					up(instruction);
-				}, FRAME_RATE);
+				}, LOOP_DELAY);
 			} else {
 				instruction.object.setState(DEFAULT_STATE);
 			}

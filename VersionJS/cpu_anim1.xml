@@ -96,9 +96,7 @@
       color="0,0,0"
       bgcolor="255,255,255"
       font="Courier,12,bold">message</object_text>
-
-<object_copy object="message">message2</object_copy>
-
+      
   </objects>
   
   <programs> 

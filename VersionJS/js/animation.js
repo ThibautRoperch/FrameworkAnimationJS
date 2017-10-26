@@ -6,7 +6,8 @@
 
 var PARENT = null; // HTML node containing the canevas
 
-var FRAME_RATE = 30; // frame per seconds
+var FRAME_RATE = 60; // frame per seconds
+var LOOP_DELAY;
 
 var WIDTH = 0; // width of the canevas, in px
 var HEIGHT = 0; // height of the canevas, in px
@@ -26,6 +27,7 @@ function load_animation(source, target_id, width, height) {
 	PARENT = document.getElementById(target_id);
 	WIDTH = width;
 	HEIGHT = height;
+	speed("very fast");
 
 	// Resize the target node
 	PARENT.style.width = WIDTH + "px";
@@ -62,15 +64,15 @@ function read_xml_file(contents) {
 	var parser = new DOMParser();
 	var root = parser.parseFromString(contents ,"text/xml");
 
-	// Retrieve init, background, objects and programs nodes
-	var framerate_node = root.getElementsByTagName("framerate")[0];
+	// Retrieve sped, init, background, objects and programs nodes
+	var speed_node = root.getElementsByTagName("speed")[0];
 	var init_node = root.getElementsByTagName("init")[0];
 	var background_node = root.getElementsByTagName("background")[0];
 	var objects_node = root.getElementsByTagName("objects")[0];
 	var programs_node = root.getElementsByTagName("programs")[0];
 
-	// If the framerate node node exists
-	if (framerate_node) {
+	// If the speed node node exists
+	if (speed_node) {
 		// TODO
 	}
 
@@ -157,8 +159,6 @@ function read_xml_file(contents) {
 						new SetProperty(new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
 					}
 				}
-				console.log(initial_object);
-				console.log(new_object);
 			}
 			OBJECTS.set(id, new_object);
 		}
@@ -172,7 +172,6 @@ function read_xml_file(contents) {
 			var program = new Array();
 			for (var read_instruction of read_program.children) {
 				var new_instruction = null;
-				// console.log(read_instruction);
 				// Retrieve the instruction's type
 				var type = read_instruction.nodeName;
 				// Retrieve the others specific attributes of the instruction and create the associated instruction
@@ -211,7 +210,7 @@ function read_xml_file(contents) {
 					new_instruction = new Sleep(OBJECTS.get(object_id), value);
 				} else if (type == "state") {
 					var value = read_instruction.getAttribute("value");
-					new_instruction = new State(OBJECTS.get(object_id), value);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), "state", value);
 				} else if (type == "trigger") {
 					var object = read_instruction.getAttribute("object");
 					var value = read_instruction.getAttribute("value");
@@ -237,15 +236,15 @@ function read_xml_file(contents) {
 					new_instruction = new Right(OBJECTS.get(object_id), x, dx);
 				} else if (type == "angle") {
 					var degrees = parseInt(read_instruction.getAttribute("degrees"));
-					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), degrees);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), "angle", degrees);
 				} else if (type == "setproperty") {
 					var object = read_instruction.getAttribute("object");
 					var property = read_instruction.getAttribute("property");
 					var value = read_instruction.getAttribute("value");
 					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object), property, value);
 				} else if (type == "blink") {
-					var times = parseInt(read_instruction.getAttribute("object"));
-					var delay = parseInt(read_instruction.getAttribute("property"));
+					var times = parseInt(read_instruction.getAttribute("times"));
+					var delay = parseInt(read_instruction.getAttribute("delay"));
 					new_instruction = new Blink(OBJECTS.get(object_id), times, delay);
 				} else if (type == "stop") {
 					new_instruction = new Stop(null);
@@ -275,9 +274,9 @@ function execute_instructions(object_id, instruction_number, labels) {
 	var program = PROGRAMS.get(object_id);
 	var instruction = program[instruction_number];
 
-	var continue_execution = instruction_number < (program.length - 1);
 	var next_instruction = instruction_number;
-
+	var continue_execution = true;
+	
 	// Execute the instruction if the state of the object is the default one
 	if (OBJECTS.get(object_id).getState() == DEFAULT_STATE) {
 		var instruction_type = instruction.constructor.name;
@@ -289,9 +288,9 @@ function execute_instructions(object_id, instruction_number, labels) {
 		} else if (instruction_type == "Stop") {
 			var continue_execution = false;
 		} else {
-			// console.log(instruction.constructor.name);
 			instruction.execute();
 			next_instruction = instruction_number + 1;
+			continue_execution = next_instruction < program.length;
 		}
 	}
 
@@ -361,6 +360,26 @@ function canvasClicked() {
 /**********************
  * Others functions 
  */
+
+function speed(speed) {
+	switch (speed) {
+		case "very slow":
+			LOOP_DELAY = 60;
+			break;
+		case "slow":
+			LOOP_DELAY = 45;
+			break;
+		case "normal":
+			LOOP_DELAY = 30;
+			break;
+		case "fast":
+			LOOP_DELAY = 15;
+			break;
+		case "very fast":
+			LOOP_DELAY = 0;
+			break;
+	}
+}
 
 function include_scripts() {
 	scripts = [

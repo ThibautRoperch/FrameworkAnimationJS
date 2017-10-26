@@ -15,7 +15,7 @@ class Sleep extends Instruction {
 		function sleep(instruction) {
 			setTimeout(function() {
 				instruction.object.setState(DEFAULT_STATE);
-			}, FRAME_RATE*instruction.value);
+			}, LOOP_DELAY*instruction.value);
 		}
 	}
 	
