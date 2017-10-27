@@ -148,10 +148,10 @@ function read_xml_file(contents) {
 				var unitY = read_object.getAttribute("unitY");
 				new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY);
 			} else if (type == "object_copy") {
-				var object = read_object.getAttribute("object");
-				var initial_object = OBJECTS.get(object);
+				var idcopy = read_object.getAttribute("idcopy");
+				var initial_object = OBJECTS.get(idcopy);
 				if (initial_object == null) {
-					console.log("[animation.js] L'objet " + object + " à copier n'existe pas");
+					console.log("[animation.js] L'objet " + idcopy + " à copier n'existe pas");
 				} else {
 					new_object = initial_object.clone();
 					new_object.setId(id);

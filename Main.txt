@@ -112,8 +112,6 @@ y
 
 L'instruction <blink> change l'opacité de l'objet plutôt que sa visibilité ; ainsi, l'objet est cliquable l'orsqu'il clignote, même pendant ses frames insiviblité.
 
-On peut commenter le XML avec #, comme le permet la version Java (classe ProgramReader).
-
 Résumé
 ======
 

@@ -127,7 +127,6 @@
 <!ATTLIST object_extern constructor CDATA #REQUIRED >
 
 <!ELEMENT object_copy (#PCDATA) >
-
 <!ATTLIST object_copy idcopy CDATA #REQUIRED>
 <!ATTLIST object_copy text CDATA #IMPLIED >
 <!ATTLIST object_copy font CDATA #IMPLIED >
@@ -137,16 +136,6 @@
 <!ATTLIST object_copy height CDATA #IMPLIED >
 <!ATTLIST object_copy halignment (left|center|right) #IMPLIED >
 <!ATTLIST object_copy valignment (top|bottom|center|baseline) #IMPLIED >
-<!ATTLIST object_copy x CDATA #IMPLIED >
-<!ATTLIST object_copy y CDATA #IMPLIED >
-<!ATTLIST object_copy bgcolor CDATA #IMPLIED >
-<!ATTLIST object_copy bgtransparent (true|false) #IMPLIED >
-<!ATTLIST object_copy bocolor CDATA #IMPLIED >
-<!ATTLIST object_copy botransparent (true|false) #IMPLIED >
-<!ATTLIST object_copy layer CDATA #IMPLIED >
-<!ATTLIST object_copy visible (true|false) #IMPLIED >
-<!ATTLIST object_copy opacity CDATA #IMPLIED >
-<!ATTLIST object_copy angle CDATA #IMPLIED >
 <!ATTLIST object_copy image CDATA #IMPLIED >
 <!ATTLIST object_copy round CDATA #IMPLIED >
 <!ATTLIST object_copy coord_x CDATA #IMPLIED >
@@ -158,6 +147,16 @@
 <!ATTLIST object_copy unitY CDATA #IMPLIED >
 <!ATTLIST object_copy class CDATA #IMPLIED >
 <!ATTLIST object_copy constructor CDATA #IMPLIED >
+<!ATTLIST object_copy x CDATA #IMPLIED >
+<!ATTLIST object_copy y CDATA #IMPLIED >
+<!ATTLIST object_copy bgcolor CDATA #IMPLIED >
+<!ATTLIST object_copy bgtransparent (true|false) #IMPLIED >
+<!ATTLIST object_copy bocolor CDATA #IMPLIED >
+<!ATTLIST object_copy botransparent (true|false) #IMPLIED >
+<!ATTLIST object_copy layer CDATA #IMPLIED >
+<!ATTLIST object_copy visible (true|false) #IMPLIED >
+<!ATTLIST object_copy opacity CDATA #IMPLIED >
+<!ATTLIST object_copy angle CDATA #IMPLIED >
 
 
 <!ELEMENT speed ("very slow"|"slow"|"normal"|"fast"|"very fast") >
