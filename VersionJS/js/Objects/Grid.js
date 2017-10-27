@@ -4,44 +4,44 @@
 
 class Grid extends AnimatedObject {
     
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity,angle, line, column, lineHeight, columnnHeight) {
+    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity,angle, lines, columns, lineHeight, columnHeight) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
-        this.line = line;
-        this.column = column;
+        this.lines = lines;
+        this.columns = columns;
         this.lineHeight = lineHeight;
-        this.columnnHeight = columnnHeight;
+        this.columnHeight = columnHeight;
     }
 
-    getline() {
-        return this.line;
+    getlines() {
+        return this.lines;
     }
 
     getLineHeight() {
         return this.lineHeight;
     }
 
-    getColumn() {
-        return this.column;
+    getColumns() {
+        return this.columns;
     }
 
     getColumnHeight() {
-        return this.columnnHeight;
+        return this.columnHeight;
     }
 
-    setLine(line) {
-        this.line = line;
+    setLines(lines) {
+        this.lines = lines;
     }
 
     setLineHeight(lineHeight) {
         return this.lineHeight = lineHeight;
     }
 
-    setColumn(column) {
-        this.column = column;
+    setColumns(columns) {
+        this.columns = columns;
     }
 
     setColumnHeight(columnnHeight) {
-        this.columnnHeight = columnnHeight;
+        this.columnHeight = columnHeight;
     }
 
     isClicked() {
@@ -71,4 +71,9 @@ class Grid extends AnimatedObject {
         grid.setAttribute("columnHeight", this.columnnHeight);
         return grid;
     }
+
+    clone() {
+        return new ImageFile(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.lines, this.columns, this.image);
+    }
+
 }

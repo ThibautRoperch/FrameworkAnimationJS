@@ -7,24 +7,17 @@ Un objet de type tracé, avec des presets, comme une sinusoidale
 
 Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le XML d'un objet, avec valeurs par défaut en value)
 
+Montrer qu'on a compris le code. Exemple : en java, y'a une factory qui créé les objets, nous c'est le parser qui s'en occupe (schémas côte à côte)
+
 Refaire le texte de création d'objet, comme dans index.html, 4. Créer ses propres objets
 1. màj la dtd
 2. nouvelle classe en suivant la structure des autres
 3. ajouter le fichier dans les includes de animation.js
 3. ajouter le case dans animation.js
 
-maj la dtd avec center et compagnie, comme attribut d'objet
-
-Nouveau noeud XML permettant de changer la speed du dessin ; par défaut 30, max à 60, min à 0 ou à 1, faut voir, et màj la dtd
-very slow, slow, normal, fast, very fast
-
-object_copy : dtd à faire (dtd ligne 129: un objet prenant un objet en attribut obligatoirement, puis tous les autres attributs de tous les objets sont disponibles)
-
 a faire et mettre dans le main.txt :
 dimensionnement de l'objet grille par rapport aux dimensions d'une case cases (et nb de col et lignes)
 pour le repere, le nom des absices et ordonnées par défaut est ""
-
-fait la metode de clone de tous les objets
 
 Questions
 =========
@@ -37,3 +30,5 @@ Pourquoi avoir mis un état avec une cdc plutôt qu'un boolean "waiting" ? Pour 
 
 À quoi sert l'élément extern dans la DTD ? Pour d'autres objets, tentative dont osef
 fgcolor pour le polygone, l'ellipse, ... why ? La couleur de la bordure c'est fgcolor, la couleur du background c'est bgcolor, et bocolor c'est pour quoi ? on oublie fgcolor
+
+Comment le programme java peut fonctionner pour l'exemple cpu_anim1 ? On remarque que dans ls XML l'objet ins3_decode a 3 <wait>, mais seulement 2 <trigger object="ins3_decode" le concernent

@@ -67,4 +67,9 @@ class ImageFile extends AnimatedObject {
         return image;
 
     }
+
+    clone() {
+        return new ImageFile(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.image);
+    }
+
 }
