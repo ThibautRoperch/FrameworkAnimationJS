@@ -38,6 +38,10 @@ class Polygon extends AnimatedObject {
         // endShape(CLOSE);
     }
     
+    isClicked(x, y) {
+        
+    }
+    
     toXml() {
         
         var polygon = document.createElement("object_polygon");
@@ -56,6 +60,10 @@ class Polygon extends AnimatedObject {
         polygon.setAttribute("coord_x", this.coord_x);
         polygon.setAttribute("coord_y", this.coord_y);
         return polygon;
+    }
+
+    clone() {
+        return new Polygon(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.coord_x, this.coord_y);
     }
 
 }

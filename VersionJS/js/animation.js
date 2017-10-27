@@ -276,7 +276,6 @@ function execute_instructions(object_id, instruction_number, labels) {
 
 	var next_instruction = instruction_number;
 	var continue_execution = true;
-	if (instruction.object.id == "ins3_decode" && instruction.constructor.name == "Wait") console.log("ins3_decode attend la valeur " + instruction.expected_state);
 	
 	// Execute the instruction if the state of the object is the default one
 	if (OBJECTS.get(object_id).getState() == DEFAULT_STATE) {
@@ -342,8 +341,6 @@ function draw() {
 }
 
 function canvasClicked() {
-	// console.clear();
-	// console.log("========================= " + mouseX + " " + mouseY + " ===========================");
 	// Get the visible objects that are under the cursor position
 	for (object of OBJECTS.values()) {
 		if (object.getVisible()) {

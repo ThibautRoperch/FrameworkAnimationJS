@@ -18,7 +18,6 @@ class Trigger extends Instruction {
 		} else if (this.target.getState() == DEFAULT_STATE) {
 			this.target.setState(this.value);
 		}*/
-		if (this.object != null) console.log("TRIGGER : " + this.object.id + " envoie " + this.value + " à " + this.target.id + " qui a la valeur " + this.target.getState());
 		if (this.target.getState() == this.value) {
 			this.target.setState(DEFAULT_STATE);
 		}

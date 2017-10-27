@@ -159,4 +159,9 @@ class Landmark extends AnimatedObject {
         landmark.setAttribute("unity", this.unitY);
         return landmark;
     }
+
+    clone() {
+        return new Landmark(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.scaleX, this.scaleY, this.unitX, this.unitY);
+    }
+
 }
