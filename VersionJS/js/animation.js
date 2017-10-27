@@ -73,7 +73,7 @@ function read_xml_file(contents) {
 
 	// If the speed node node exists
 	if (speed_node) {
-		// TODO
+		speed(speed_node.textContent);
 	}
 
 	// If the init's node exists

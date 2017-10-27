@@ -4,7 +4,7 @@
 
 class Ellipse extends AnimatedObject {
     
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, width, height) {
+    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
         this.width = width;
         this.height = height;
@@ -31,12 +31,13 @@ class Ellipse extends AnimatedObject {
         ellipse(this.x, this.y, this.width, this.height);
     }
 
-    isClicked(x, y) { //probably false
+    isClicked(x, y) { //probably false // TODO à vérifier
         x = this.x - x;
         y = this.y - y;
         distance = Math.pow(x/(width/2),2) + Math.pow(y/(height/2),2);
         return distance <= 1;
     }
+
     toXml() {
 
        var ellipse = document.createElement("object_ellipse");
@@ -56,4 +57,9 @@ class Ellipse extends AnimatedObject {
        ellipse.setAttribute("height", this.height)
        return ellipse;
     }
+
+    clone() {
+        return new Ellipse(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height);
+    }
+
 }

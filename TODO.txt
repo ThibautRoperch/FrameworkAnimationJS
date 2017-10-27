@@ -6,6 +6,7 @@ Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilit�
 Un objet de type tracé, avec des presets, comme une sinusoidale
 
 Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le XML d'un objet, avec valeurs par défaut en value)
+Possibilité de déplacer les objets dans un canevas
 
 Montrer qu'on a compris le code. Exemple : en java, y'a une factory qui créé les objets, nous c'est le parser qui s'en occupe (schémas côte à côte)
 

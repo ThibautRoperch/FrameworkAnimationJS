@@ -4,48 +4,48 @@
 
 class Grid extends AnimatedObject {
     
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity,angle, lines, columns, lineHeight, columnHeight) {
+    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity,angle, lines, columns, line_height, column_width) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
         this.lines = lines;
         this.columns = columns;
-        this.lineHeight = lineHeight;
-        this.columnHeight = columnHeight;
+        this.line_height = line_height;
+        this.column_width = column_width;
     }
 
     getlines() {
         return this.lines;
     }
 
-    getLineHeight() {
-        return this.lineHeight;
+    getline_height() {
+        return this.line_height;
     }
 
     getColumns() {
         return this.columns;
     }
 
-    getColumnHeight() {
-        return this.columnHeight;
+    getcolumn_width() {
+        return this.column_width;
     }
 
     setLines(lines) {
         this.lines = lines;
     }
 
-    setLineHeight(lineHeight) {
-        return this.lineHeight = lineHeight;
+    setline_height(line_height) {
+        return this.line_height = line_height;
     }
 
     setColumns(columns) {
         this.columns = columns;
     }
 
-    setColumnHeight(columnnHeight) {
-        this.columnHeight = columnHeight;
+    setcolumn_width(column_width) {
+        this.column_width = column_width;
     }
 
     isClicked() {
-        if((x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height))
+        if((x >= this.x) && (x <= this.columns * this.column_width) && (y >= this.y) && (y <= this.lines * this.line_height))
             return true;
         return false;        
     }
@@ -67,13 +67,13 @@ class Grid extends AnimatedObject {
         grid.setAttribute("angle", this.angle); // degrees
         grid.setAttribute("line", this.line);
         grid.setAttribute("column", this.column);
-        grid.setAttribute("lineHeight", this.lineHeight);
-        grid.setAttribute("columnHeight", this.columnnHeight);
+        grid.setAttribute("line_height", this.line_height);
+        grid.setAttribute("column_width", this.column_width);
         return grid;
     }
 
     clone() {
-        return new ImageFile(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.lines, this.columns, this.image);
+        return new Grid(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.lines, this.columns, this.line_height, this.column_width);
     }
 
 }

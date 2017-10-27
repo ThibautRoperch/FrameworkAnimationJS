@@ -47,4 +47,8 @@ class Circle extends Ellipse {
        return circle;
    }
 
+    clone() {
+        return new Circle(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.radius);
+    }
+
 }
