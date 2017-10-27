@@ -107,10 +107,10 @@
 <!ELEMENT object_landmark (#PCDATA) >
 <!ATTLIST object_landmark width CDATA #REQUIRED >
 <!ATTLIST object_landmark height CDATA #REQUIRED >
-<!ATTLIST object_landmark scaleX CDATA #REQUIRED >
-<!ATTLIST object_landmark scaleY CDATA #REQUIRED >
-<!ATTLIST object_landmark unitX CDATA #REQUIRED >
-<!ATTLIST object_landmark unitY CDATA #REQUIRED >
+<!ATTLIST object_landmark scaleX CDATA #IMPLIED >
+<!ATTLIST object_landmark scaleY CDATA #IMPLIED >
+<!ATTLIST object_landmark unitX CDATA #IMPLIED >
+<!ATTLIST object_landmark unitY CDATA #IMPLIED >
 <!ATTLIST object_landmark x CDATA #IMPLIED >
 <!ATTLIST object_landmark y CDATA #IMPLIED >
 <!ATTLIST object_landmark bgcolor CDATA #IMPLIED >
@@ -125,6 +125,42 @@
 <!ELEMENT object_extern (#PCDATA) >
 <!ATTLIST object_extern class CDATA #REQUIRED >
 <!ATTLIST object_extern constructor CDATA #REQUIRED >
+
+<!ELEMENT object_copy (#PCDATA) >
+
+<!ATTLIST object_copy idcopy CDATA #REQUIRED>
+<!ATTLIST object_copy text CDATA #IMPLIED >
+<!ATTLIST object_copy font CDATA #IMPLIED >
+<!ATTLIST object_copy color CDATA #IMPLIED >
+<!ATTLIST object_copy border CDATA #IMPLIED >
+<!ATTLIST object_copy width CDATA #IMPLIED >
+<!ATTLIST object_copy height CDATA #IMPLIED >
+<!ATTLIST object_copy halignment (left|center|right) #IMPLIED >
+<!ATTLIST object_copy valignment (top|bottom|center|baseline) #IMPLIED >
+<!ATTLIST object_copy x CDATA #IMPLIED >
+<!ATTLIST object_copy y CDATA #IMPLIED >
+<!ATTLIST object_copy bgcolor CDATA #IMPLIED >
+<!ATTLIST object_copy bgtransparent (true|false) #IMPLIED >
+<!ATTLIST object_copy bocolor CDATA #IMPLIED >
+<!ATTLIST object_copy botransparent (true|false) #IMPLIED >
+<!ATTLIST object_copy layer CDATA #IMPLIED >
+<!ATTLIST object_copy visible (true|false) #IMPLIED >
+<!ATTLIST object_copy opacity CDATA #IMPLIED >
+<!ATTLIST object_copy angle CDATA #IMPLIED >
+<!ATTLIST object_copy image CDATA #IMPLIED >
+<!ATTLIST object_copy round CDATA #IMPLIED >
+<!ATTLIST object_copy coord_x CDATA #IMPLIED >
+<!ATTLIST object_copy coord_y CDATA #IMPLIED >
+<!ATTLIST object_copy radius CDATA #IMPLIED >
+<!ATTLIST object_copy scaleX CDATA #IMPLIED >
+<!ATTLIST object_copy scaleY CDATA #IMPLIED >
+<!ATTLIST object_copy unitX CDATA #IMPLIED >
+<!ATTLIST object_copy unitY CDATA #IMPLIED >
+<!ATTLIST object_copy class CDATA #IMPLIED >
+<!ATTLIST object_copy constructor CDATA #IMPLIED >
+
+
+<!ELEMENT speed ("very slow"|"slow"|"normal"|"fast"|"very fast") >
 
 <!ELEMENT programs (program+) >
 
