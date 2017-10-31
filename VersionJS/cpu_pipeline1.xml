@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE animation SYSTEM "animation.dtd">
+<animation>
+  <background>img/pipeline_back2.png</background>
+
+  <objects>
+
+    <object_text 	
+      text="Click on i1 to start" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,0,0">message</object_text>
+
+    <object_text 	
+      text="i1" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="255,255,255"
+      bgcolor="250,245,250">I1</object_text>
+
+    <object_text 	
+      text="F1" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,0,0"
+      bgcolor="250,245,250">P1</object_text>
+
+    <object_text 	
+      text="instruction 1@completed@after 5 ns" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,0,128"
+      bgcolor="250,245,250">message1</object_text>
+
+    <object_text 	
+      text="i2" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="255,255,255"
+      bgcolor="250,245,250">I2</object_text>
+
+    <object_text 	
+      text="F2" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,0,0"
+      bgcolor="250,245,250">P2</object_text>
+
+    <object_text 	
+      text="instruction 2@completed@after 10 ns" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,0,128"
+      bgcolor="250,245,250">message2</object_text>
+
+    <object_text 	
+      text="i3" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="255,255,255"
+      bgcolor="250,245,250">I3</object_text>
+
+    <object_text 	
+      text="F3" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,0,0"
+      bgcolor="250,245,250">P3</object_text>
+
+    <object_text 	
+      text="instruction 3@completed@after 15 ns" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,0,128"
+      bgcolor="250,245,250">message3</object_text>
+
+
+    <object_text 	
+      text="Fetch" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="82,82,246"
+      bgcolor="250,245,250">FETCH</object_text>
+
+    <object_text 	
+      text="Decode" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,204,255"
+      bgcolor="250,245,250">DECODE</object_text>
+
+    <object_text 	
+      text="Load Op" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="108,234,170"
+      bgcolor="250,245,250">LOAD</object_text>
+
+    <object_text 	
+      text="Execute" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,128,0"
+      bgcolor="250,245,250">EXECUTE</object_text>
+
+    <object_text 	
+      text="Write" 
+      font="Courier,12,bold"
+      bgtransparent="true"
+      color="0,255,0"
+      bgcolor="250,245,250">WRITE</object_text>
+
+    <object_text
+      text="F1"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="82,82,246">F1</object_text>
+
+    <object_text
+      text="D1"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="0,204,255">D1</object_text>
+
+    <object_text
+      text="L1"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="108,234,170">L1</object_text>
+
+    <object_text
+      text="E1"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="0,128,0">E1</object_text>
+
+    <object_text
+      text="W1"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="0,255,0">W1</object_text>
+
+
+    <object_text
+      text="F2"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="82,82,246">F2</object_text>
+
+    <object_text
+      text="D2"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="0,204,255">D2</object_text>
+
+    <object_text
+      text="L2"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="108,234,170">L2</object_text>
+
+    <object_text
+      text="E2"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="0,128,0">E2</object_text>
+
+    <object_text
+      text="W2"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="0,255,0">W2</object_text>
+
+
+
+    <object_text
+      text="F3"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="82,82,246">F3</object_text>
+
+    <object_text
+      text="D3"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="0,204,255">D3</object_text>
+
+    <object_text
+      text="L3"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="108,234,170">L3</object_text>
+
+    <object_text
+      text="E3"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="0,128,0">E3</object_text>
+
+    <object_text
+      text="W3"
+      font="Courier,12,bold"
+      bgtransparent="false"
+      color="255,255,255"
+      bgcolor="0,255,0">W3</object_text>
+
+  </objects>
+  
+ 
+
+  <programs>
+
+    <program assigned_to="message">
+      <setxy x="150" y="10" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <visible value="false" />
+      <setproperty object="message" property="text" value="!!" />
+      <state value="wait" />
+    </program>
+
+    <program assigned_to="FETCH">
+      <visible value="true" />
+      <setxy x="163" y="106" />
+    </program>
+
+    <program assigned_to="DECODE">
+      <visible value="true" />
+      <setxy x="163" y="131" />
+    </program>
+
+    <program assigned_to="LOAD">
+      <visible value="true" />
+      <setxy x="163" y="156" />
+    </program>
+
+    <program assigned_to="EXECUTE">
+      <visible value="true" />
+      <setxy x="163" y="181" />
+    </program>
+
+    <program assigned_to="WRITE">
+      <visible value="true" />
+      <setxy x="163" y="206" />
+    </program>
+
+    <program assigned_to="I1">
+      <visible value="true" />
+      <setxy x="50" y="25" />
+      <click />
+      <trigger object="message" value="unlock" />
+      <right x="28" dx="1" />
+      <down  y="80" dy="4" />
+      <trigger object="P1" value="unlock1" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P1" value="unlock2" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P1" value="unlock3" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P1" value="unlock4" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P1" value="unlock5" />
+      <visible value="false" />
+    </program>
+
+    <program assigned_to="P1">
+      <wait value="unlock1" />
+      <setxy x="230" y="104" />
+      <visible value="true" />
+      <wait value="unlock2" />
+      <setproperty object="P1" property="text" value="D1" />
+      <setxy x="255" y="129" />
+      <trigger object="F1" value="unlock" />
+      <wait value="unlock3" />
+      <setproperty object="P1" property="text" value="L1" />
+      <setxy x="280" y="154" />
+      <trigger object="D1" value="unlock" />
+      <wait value="unlock4" />
+      <setproperty object="P1" property="text" value="E1" />
+      <setxy x="305" y="179" />
+      <trigger object="L1" value="unlock" />
+      <wait value="unlock5" />
+      <setproperty object="P1" property="text" value="W1" />
+      <setxy x="330" y="204" />
+      <trigger object="E1" value="unlock" />
+      <sleep value="40" />
+      <trigger object="message1" value="unlock5" />
+      <trigger object="I2" value="go" />
+      <visible value="false" />
+      <trigger object="W1" value="unlock" />
+    </program>
+      
+    <program assigned_to="message1">
+      <wait value="unlock5" />
+      <setxy x="230" y="50" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="I2">
+      <wait value="go" />
+      <sleep value="60" />
+      <visible value="true" />
+      <blink times="6" delay="20" />
+      <setxy x="50" y="25" />
+      <right x="28" dx="1" />
+      <down  y="80" dy="4" />
+      <trigger object="P2" value="unlock1" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P2" value="unlock2" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P2" value="unlock3" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P2" value="unlock4" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P2" value="unlock5" />
+      <visible value="false" />
+      <trigger object="I3" value="go" />
+    </program>
+
+    <program assigned_to="P2">
+      <wait value="unlock1" />
+      <setxy x="355" y="104" />
+      <visible value="true" />
+      <wait value="unlock2" />
+      <setproperty object="P2" property="text" value="D2" />
+      <setxy x="380" y="129" />
+      <trigger object="F2" value="unlock" />
+      <wait value="unlock3" />
+      <setproperty object="P2" property="text" value="L2" />
+      <setxy x="405" y="154" />
+      <trigger object="D2" value="unlock" />
+      <wait value="unlock4" />
+      <setproperty object="P2" property="text" value="E2" />
+      <setxy x="430" y="179" />
+      <trigger object="L2" value="unlock" />
+      <wait value="unlock5" />
+      <setproperty object="P2" property="text" value="W2" />
+      <setxy x="455" y="204" />
+      <trigger object="E2" value="unlock" />
+      <sleep value="40" />
+      <trigger object="message2" value="unlock5" />
+      <trigger object="I3" value="go" />
+      <visible value="false" />
+      <trigger object="W2" value="unlock" />
+    </program>
+      
+    <program assigned_to="message2">
+      <wait value="unlock5" />
+      <setxy x="360" y="50" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="I3">
+      <wait value="go" />
+      <sleep value="60" />
+      <visible value="true" />
+      <blink times="6" delay="20" />
+      <setxy x="50" y="25" />
+      <right x="28" dx="1" />
+      <down  y="80" dy="4" />
+      <trigger object="P3" value="unlock1" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P3" value="unlock2" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P3" value="unlock3" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P3" value="unlock4" />
+      <sleep value="60" />
+      <down y="25" dy="1" />
+      <trigger object="P3" value="unlock5" />
+      <visible value="false" />
+    </program>
+
+    <program assigned_to="P3">
+      <wait value="unlock1" />
+      <setxy x="480" y="104" />
+      <visible value="true" />
+      <wait value="unlock2" />
+      <setproperty object="P3" property="text" value="D3" />
+      <setxy x="505" y="129" />
+      <trigger object="F3" value="unlock" />
+      <wait value="unlock3" />
+      <setproperty object="P3" property="text" value="L3" />
+      <setxy x="530" y="154" />
+      <trigger object="D3" value="unlock" />
+      <wait value="unlock4" />
+      <setproperty object="P3" property="text" value="E3" />
+      <setxy x="555" y="179" />
+      <trigger object="L3" value="unlock" />
+      <wait value="unlock5" />
+      <setproperty object="P3" property="text" value="W3" />
+      <setxy x="580" y="204" />
+      <trigger object="E3" value="unlock" />
+      <sleep value="40" />
+      <trigger object="message3" value="unlock5" />
+      <visible value="false" />
+      <trigger object="W3" value="unlock" />
+    </program>
+      
+    <program assigned_to="message3">
+      <wait value="unlock5" />
+      <setxy x="480" y="50" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="F1">
+      <wait value="unlock" />
+      <setxy x="230" y="104" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="D1">
+      <wait value="unlock" />
+      <setxy x="255" y="129" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="L1">
+      <wait value="unlock" />
+      <setxy x="280" y="154" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="E1">
+      <wait value="unlock" />
+      <setxy x="305" y="179" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="W1">
+      <wait value="unlock" />
+      <setxy x="330" y="204" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="F3">
+      <wait value="unlock" />
+      <setxy x="480" y="104" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="D3">
+      <wait value="unlock" />
+      <setxy x="505" y="129" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="L3">
+      <wait value="unlock" />
+      <setxy x="530" y="154" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="E3">
+      <wait value="unlock" />
+      <setxy x="555" y="179" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="W3">
+      <wait value="unlock" />
+      <setxy x="580" y="204" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+
+    <program assigned_to="F2">
+      <wait value="unlock" />
+      <setxy x="355" y="104" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="D2">
+      <wait value="unlock" />
+      <setxy x="380" y="129" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="L2">
+      <wait value="unlock" />
+      <setxy x="405" y="154" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="E2">
+      <wait value="unlock" />
+      <setxy x="430" y="179" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+    <program assigned_to="W2">
+      <wait value="unlock" />
+      <setxy x="455" y="204" />
+      <wait value="unlock" />
+      <visible value="true" />
+    </program>
+
+
+  </programs>
+</animation>

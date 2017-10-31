@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE animation SYSTEM "animation.dtd">
+<animation>
+  <init>
+    <start_button present="false" />
+  </init>
+
+  <background>img/cpu_mono_core.png</background>
+
+  <objects>
+    <object_text
+      text="Press on i1 to start"
+      font="Courier,12,bold"
+      color="0,0,0"
+      border="2"
+      bgtransparent="true">Message</object_text>
+
+    <object_text
+      text="i1"
+      font="Courier,12,bold"
+      bgcolor="255,127,0"
+      color="0,0,0"
+      border="2"
+      bgtransparent="false">I1</object_text>
+
+    <object_text
+      text="i2"
+      font="Courier,12,bold"
+      bgcolor="255,127,0"
+      color="0,0,0"
+      border="2"
+      bgtransparent="false">I2</object_text>
+
+    <object_text
+      text="i3"
+      font="Courier,12,bold"
+      bgcolor="255,127,0"
+      color="0,0,0"
+      border="2"
+      bgtransparent="false">I3</object_text>
+
+    <object_text
+      text="i4"
+      font="Courier,12,bold"
+      bgcolor="255,127,0"
+      color="0,0,0"
+      border="2"
+      bgtransparent="false">I4</object_text>
+
+    <object_text
+      text="j1"
+      font="Courier,12,bold"
+      bgcolor="0,102,204"
+      color="255,255,255"
+      border="2"
+      bgtransparent="false">J1</object_text>
+
+    <object_text
+      text="j2"
+      font="Courier,12,bold"
+      bgcolor="0,102,204"
+      color="255,255,255"
+      border="2"
+      bgtransparent="false">J2</object_text>
+
+    <object_text
+      text="j3"
+      font="Courier,12,bold"
+      bgcolor="0,102,204"
+      color="255,255,255"
+      border="2"
+      bgtransparent="false">J3</object_text>
+
+    <object_text
+      text="j4"
+      font="Courier,12,bold"
+      bgcolor="0,102,204"
+      color="255,255,255"
+      border="2"
+      bgtransparent="false">J4</object_text>
+
+  </objects>
+
+  <programs>
+
+    <program assigned_to="Message">
+      <setxy x="20" y="20" />
+      <visible value="true" />
+      <wait value="i1_clicked" />
+      <visible value="false" />
+    </program>
+
+    <program assigned_to="I1">
+      <setxy x="100" y="77" />
+      <visible value="true" />
+      <click />
+      <trigger object="Message" value="i1_clicked" />
+      <right x="135" dx="5" />
+      <down y="40" dy="1" />
+      <trigger object="J1" value="unlock" />
+      <right x="375" dx="2" />
+    </program>
+
+    <program assigned_to="I2">
+      <setxy x="75" y="77" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <right x="160" dx="5" />
+      <down y="40" dy="1" />
+      <trigger object="J2" value="unlock" />
+      <right x="325" dx="2" />
+    </program>
+
+    <program assigned_to="I3">
+      <setxy x="50" y="77" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <right x="185" dx="5" />
+      <down y="40" dy="1" />
+      <trigger object="J3" value="unlock" />
+      <right x="275" dx="2" />
+    </program>
+
+    <program assigned_to="I4">
+      <setxy x="25" y="77" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <right x="210" dx="5" />
+      <down y="40" dy="1" />
+      <trigger object="J4" value="unlock" />
+      <right x="225" dx="2" />
+    </program>
+
+    <program assigned_to="J1">
+      <setxy x="100" y="157" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <right x="135" dx="5" />
+      <up y="40" dy="1" />
+      <trigger object="I2" value="unlock" />
+      <right x="350" dx="2" />
+    </program>
+
+    <program assigned_to="J2">
+      <setxy x="75" y="157" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <right x="160" dx="5" />
+      <up y="40" dy="1" />
+      <trigger object="I3" value="unlock" />
+      <right x="300" dx="2" />
+    </program>
+
+    <program assigned_to="J3">
+      <setxy x="50" y="157" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <right x="185" dx="5" />
+      <up y="40" dy="1" />
+      <trigger object="I4" value="unlock" />
+      <right x="250" dx="2" />
+    </program>
+
+    <program assigned_to="J4">
+      <setxy x="25" y="157" />
+      <visible value="true" />
+      <wait value="unlock" />
+      <right x="210" dx="5" />
+      <up y="40" dy="1" />
+      <right x="200" dx="2" />
+    </program>
+
+  </programs>
+
+</animation>

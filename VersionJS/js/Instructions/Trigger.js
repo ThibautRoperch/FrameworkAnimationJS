@@ -10,7 +10,7 @@ class Trigger extends Instruction {
 		this.value = value;
 	}
 
-	execute() {
+	execute() {
 		/*// If the expected value of the target is the same as the sent one, switch the target into the default state
 		// But if the sent value arrives before the expected one, switch the target into the sent value, the wait instruction will switch the target int default state
 		if (this.target.getState() == this.value) {
