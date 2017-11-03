@@ -112,11 +112,13 @@ y
 
 L'instruction <blink> change l'opacité de l'objet plutôt que sa visibilité ; ainsi, l'objet est cliquable l'orsqu'il clignote, même pendant ses frames insiviblité.
 
+Le chemin du background donné dans le XML est relatif au fichier XML (ou absolu).
+
 Résumé
 ======
 
 Une animation est décrite en XML par des objets de dessin et au maximum un programme associé à chaque objet.
-Il faut lire ce XML, afficher les objets de dessin et executer les programmes.
+Il faut lire ce XML, afficher les objets de dessin et exécuter les programmes.
 
 Le framework P5.js permet de dessiner des figures. Les figures ne sont pas des éléments HTML récupérables, et sont dessinés à chaque itération du canevas.
 Il faut donc un tableau de figures.

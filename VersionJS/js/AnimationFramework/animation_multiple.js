@@ -15,7 +15,7 @@ function load_animation(source_file, target_id, width, height) {
 	var parent = document.getElementById(target_id);
 	
 	// Create the animation
-	var animation = new Animation(parent, width, height);
+	var animation = new Animation(source_file, parent, width, height);
 	ANIMATIONS.push(animation);
 
 	// Read the animation's XML file using AJAX
@@ -152,7 +152,9 @@ function parseIntArray(string) {
 
 class Animation {
 
-    constructor(parent, width, height) {
+    constructor(source_file, parent, width, height) {
+        this.source_file = source_file; // path of the XML source file
+        
         this.parent = parent; // HTML node containing the canevas
         this.width = width; // width of the canevas, in px
         this.height = height; // height of the canevas, in px
@@ -223,6 +225,9 @@ class Animation {
         // If the background's node exists
         if (background_node) {
             this.bg_image = background_node.textContent;
+            // The image path is relative to the source file's one
+            var source_file_path = this.source_file.substr(0, this.source_file.lastIndexOf("/") + 1);
+            this.bg_image = source_file_path + this.bg_image;
         } else {
             this.bg_image = "";
         }

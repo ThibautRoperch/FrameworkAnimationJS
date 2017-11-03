@@ -4,29 +4,32 @@
  * Global variables
  */
 
+var SOURCE_FILE = ""; // path of the XML source file
+
 var PARENT = null; // HTML node containing the canevas
-
-var FRAME_RATE = 60; // frame per seconds
-var LOOP_DELAY; // delay between two intruction's move
-
 var WIDTH = 0; // width of the canevas, in px
 var HEIGHT = 0; // height of the canevas, in px
 
-var BG_IMAGE = null; // path of the background image (can be "" if there isn't background image)
 var OBJECTS = new Map(); // associative array containing drawing's objects, as object_identifier : Object
 var PROGRAMS = new Map() // associative array containing instructions' programs, as object_identifier : array of Instruction elements
-
 var LAYERS = new Set(); // set containing the differents objects' layers
 
+var BG_IMAGE = null; // path of the background image (can be "" if there isn't background image)
+var FRAME_RATE = 60; // frame per seconds
+var LOOP_DELAY; // delay between two intruction's move
 
 /**********************
  * Loading and execution functions
  */
 
-function load_animation(source_file, target_id, width, height) {
+ 
+function load_animation(target_id, width, height) {
+	SOURCE_FILE = source_file;
+
 	PARENT = document.getElementById(target_id);
 	WIDTH = width;
 	HEIGHT = height;
+
 	speed("very fast");
 
 	// Resize the target node
@@ -53,7 +56,7 @@ function load_animation(source_file, target_id, width, height) {
 			read_xml_file(xhr.responseText);
 		}
 	};
-	xhr.open("GET", source_file, true);
+	xhr.open("GET", SOURCE_FILE, true);
 	xhr.send();
 }
 
@@ -81,10 +84,9 @@ function read_xml_file(contents) {
 	// If the background's node exists
 	if (background_node) {
 		BG_IMAGE = background_node.textContent;
-		// TODO si le fichier BG_IMAGE existe pas (cc AJAX, ou autre), tester sa présence dans le dossier où est contenu source_file
-		// -> strcut dans source_file, last index of "/"
-		// Faire les tests avec TEST.hmtl, dans lequel on charge les fichiers VersionJS/xxx.xml
-		// mettre source_file en variable globale
+		// The image path is relative to the source file's one
+		var source_file_path = SOURCE_FILE.substr(0, SOURCE_FILE.lastIndexOf("/") + 1);
+		BG_IMAGE = source_file_path + BG_IMAGE;
 	} else {
 		BG_IMAGE = "";
 	}
