@@ -3,7 +3,7 @@
 <head>
 <title>Animation CPU - without Pipeline</title>
 <link rel="stylesheet" type="text/css" href="css.css" /> 
-<script src="js/animation.js"></script>
+<script src="js/AnimationFramework/animation.js"></script>
 </head>
 
 <body>
@@ -27,7 +27,8 @@
 
 <applet id="cpu_pipeline1">
 	<script>
-	  load_animation("cpu_pipeline1.xml", "cpu_pipeline1", 639, 300);
+		include_animation_files("js/AnimationFramework/");
+		load_animation("cpu_pipeline1.xml", "cpu_pipeline1", 639, 275);
 	</script>
 </applet>
 

@@ -37,10 +37,11 @@ class ImageFile extends AnimatedObject {
 
     draw() {
         super.draw();
-        image(this.image, this.x, this.y);
+        var loaded_image = loadImage(this.image);
+        image(loaded_image, this.x, this.y);
     }
 
-    isCliked(x, y) {
+    isClicked(x, y) {
 		if((x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height))
             return true;
         return false;

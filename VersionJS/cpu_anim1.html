@@ -3,7 +3,7 @@
 <head>
 <title>Animation CPU</title>
 <link rel="stylesheet" type="text/css" href="css/css.css" />
-<script src="js/animation.js"></script>
+<script src="js/AnimationFramework/animation.js"></script>
 </head>
 
 <body>
@@ -109,6 +109,7 @@ mov [108],eax ; mettre le résultat dans c<br />
 
 <applet id="cpu_anim1">
   <script>
+		include_animation_files("js/AnimationFramework/");
     load_animation("cpu_anim1.xml", "cpu_anim1", 692, 378);
   </script>
 </applet>

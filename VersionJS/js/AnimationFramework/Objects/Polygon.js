@@ -28,6 +28,7 @@ class Polygon extends AnimatedObject {
 
     draw() {
         super.draw();
+        // traduire la string en array d'int dans animation.js
         // var angle = TWO_PI / npoints;
         // beginShape();
         // for (var a = 0; a < TWO_PI; a += angle) {

@@ -16,7 +16,7 @@ class MoveTo extends Instruction {
 	execute() {
 		this.object.setState(MOVING_STATE);
 
-		move(instruction);
+		move(this);
 		function move(instruction) {
 			if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() > instruction.x)) {
 				

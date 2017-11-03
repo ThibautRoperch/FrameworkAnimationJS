@@ -26,14 +26,17 @@
 		<article>
 			<h2>2. Utilisation</h2>
 
-			<p>Le contenu du dossier <tt>js</tt> doit être accessible et son arborescence inchangée.</p>
-			<p>Inclure le fichier <a href="js/animation.js"><tt>animation.js</tt></a> dans chaque fichier contenant une animation.</p>
+			<p>Le contenu du dossier <tt>js/AnimationFramework</tt> doit être accessible et son arborescence inchangée.</p>
+			<p>Il faut inclure le fichier <a href="js/AnimationFramework/animation.js"><tt>animation.js</tt></a> dans chaque fichier contenant une animation.</p>
+			<p>Le chemin du dossier contenant le framework doit être précisé avant de charger les fichiers les animations.</p>
 			<p>Le script suivant permet de charger l'animation contenue dans le fichier <tt>animation.xml</tt> et de l'afficher dans la balise ayant pour <code>id</code> <tt>anim1</tt>  :</p>
 			<pre>
 <code>
-	&lt;script&gt;<br>
-		load_animation("animation.xml", "anim1", 1600, 900);<br>
-	&lt;/script&gt;
+  &lt;script src="js/AnimationFramework/animation.js"&gt;&lt;/script&gt;<br>
+  &lt;script&gt;
+  include_animation_files("js/AnimationFramework/");
+  load_animation("animation.xml", "anim1", 1600, 900);
+  &lt;/script&gt;
 </code>
 			</pre>
 
@@ -68,9 +71,6 @@
 			<p>Les attributs communs à tous les objets sont les suivants :</p>
 
 			<ul>
-				<li>a</li>
-				<li>cb</li>
-				<li></li>
 			</ul>
 		</article>
 
@@ -84,3 +84,24 @@
 </body>
 
 </html>
+
+<script>
+
+function list_dtd_subelements(element, source_file, target_id) {
+	// Read the DTD file using AJAX
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+			read_dtd_file(xhr.responseText);
+		}
+	};
+	xhr.open("GET", source_file, true);
+	xhr.send();
+}
+
+function read_dtd_file(contents) {
+	var parser = new DOMParser();
+	var root = parser.parseFromString(contents ,"text/xml");
+}
+
+</script>

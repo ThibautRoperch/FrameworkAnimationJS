@@ -7,7 +7,7 @@
 var PARENT = null; // HTML node containing the canevas
 
 var FRAME_RATE = 60; // frame per seconds
-var LOOP_DELAY;
+var LOOP_DELAY; // delay between two intruction's move
 
 var WIDTH = 0; // width of the canevas, in px
 var HEIGHT = 0; // height of the canevas, in px
@@ -16,14 +16,14 @@ var BG_IMAGE = null; // path of the background image (can be "" if there isn't b
 var OBJECTS = new Map(); // associative array containing drawing's objects, as object_identifier : Object
 var PROGRAMS = new Map() // associative array containing instructions' programs, as object_identifier : array of Instruction elements
 
-var LAYERS = new Set(); // set containing
+var LAYERS = new Set(); // set containing the differents objects' layers
 
 
 /**********************
  * Loading and execution functions
  */
 
-function load_animation(source, target_id, width, height) {
+function load_animation(source_file, target_id, width, height) {
 	PARENT = document.getElementById(target_id);
 	WIDTH = width;
 	HEIGHT = height;
@@ -46,9 +46,6 @@ function load_animation(source, target_id, width, height) {
 	loading.style.color = "gray";
 	PARENT.appendChild(loading);
 
-	// Include others scripts
-	include_scripts();
-
 	// Read the XML file using AJAX
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -56,7 +53,7 @@ function load_animation(source, target_id, width, height) {
 			read_xml_file(xhr.responseText);
 		}
 	};
-	xhr.open("GET", source, true);
+	xhr.open("GET", source_file, true);
 	xhr.send();
 }
 
@@ -84,6 +81,10 @@ function read_xml_file(contents) {
 	// If the background's node exists
 	if (background_node) {
 		BG_IMAGE = background_node.textContent;
+		// TODO si le fichier BG_IMAGE existe pas (cc AJAX, ou autre), tester sa présence dans le dossier où est contenu source_file
+		// -> strcut dans source_file, last index of "/"
+		// Faire les tests avec TEST.hmtl, dans lequel on charge les fichiers VersionJS/xxx.xml
+		// mettre source_file en variable globale
 	} else {
 		BG_IMAGE = "";
 	}
@@ -326,6 +327,7 @@ function draw() {
 
 	frameRate(FRAME_RATE);
 	
+	// Display the background image
 	if (BG_IMAGE != null) {
 		background(BG_IMAGE);
 	}
@@ -381,46 +383,47 @@ function speed(speed) {
 	}
 }
 
-function include_scripts() {
+function include_animation_files(path) {
+	path += "/";
 	scripts = [
 		// p5.js
 		"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js",
 		// Objects
-		"js/Objects/AnimatedObject.js",
-		"js/Objects/Ellipse.js",
-		"js/Objects/Circle.js",
-		"js/Objects/Grid.js",
-		"js/Objects/ImageFile.js",
-		"js/Objects/Landmark.js",
-		"js/Objects/Polygon.js",
-		"js/Objects/Rectangle.js",
-		"js/Objects/Text.js",
+		path + "Objects/AnimatedObject.js",
+		path + "Objects/Ellipse.js",
+		path + "Objects/Circle.js",
+		path + "Objects/Grid.js",
+		path + "Objects/ImageFile.js",
+		path + "Objects/Landmark.js",
+		path + "Objects/Polygon.js",
+		path + "Objects/Rectangle.js",
+		path + "Objects/Text.js",
 		// Instructions
-		"js/Instructions/Instruction.js",
-		"js/Instructions/Blink.js",
-		"js/Instructions/Center.js",
-		"js/Instructions/CenterX.js",
-		"js/Instructions/CenterY.js",
-		"js/Instructions/Click.js",
-		"js/Instructions/Down.js",
-		"js/Instructions/GoTo.js",
-		"js/Instructions/Label.js",
-		"js/Instructions/Left.js",
-		"js/Instructions/MoveTo.js",
-		"js/Instructions/Right.js",
-		"js/Instructions/SetProperty.js",
-		"js/Instructions/Sleep.js",
-		"js/Instructions/State.js",
-		"js/Instructions/Stop.js",
-		"js/Instructions/Trigger.js",
-		"js/Instructions/Up.js",
-		"js/Instructions/Wait.js",
+		path + "Instructions/Instruction.js",
+		path + "Instructions/Blink.js",
+		path + "Instructions/Center.js",
+		path + "Instructions/CenterX.js",
+		path + "Instructions/CenterY.js",
+		path + "Instructions/Click.js",
+		path + "Instructions/Down.js",
+		path + "Instructions/GoTo.js",
+		path + "Instructions/Label.js",
+		path + "Instructions/Left.js",
+		path + "Instructions/MoveTo.js",
+		path + "Instructions/Right.js",
+		path + "Instructions/SetProperty.js",
+		path + "Instructions/Sleep.js",
+		path + "Instructions/State.js",
+		path + "Instructions/Stop.js",
+		path + "Instructions/Trigger.js",
+		path + "Instructions/Up.js",
+		path + "Instructions/Wait.js",
 	];
 
 	for (s of scripts) {
 		var script = document.createElement("script");
 		script.src = s;
-		PARENT.appendChild(script);
+		document.lastChild.appendChild(script);
 	}
 }
 

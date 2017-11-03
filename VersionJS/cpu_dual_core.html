@@ -3,7 +3,7 @@
 <head>
 <title>Mono Tache</title>
 <link rel="stylesheet" type="text/css" href="css.css" />
-<script src="js/animation.js"></script>
+<script src="js/AnimationFramework/animation.js"></script>
 </head>
 
 <body>
@@ -12,7 +12,8 @@
 
 <applet id="cpu_dual_core">
 	<script>
-	  load_animation("cpu_dual_core.xml", "cpu_dual_core", 640, 505);
+		include_animation_files("js/AnimationFramework/");
+		load_animation("cpu_dual_core.xml", "cpu_dual_core", 640, 480);
 	</script>
 </applet>
 
