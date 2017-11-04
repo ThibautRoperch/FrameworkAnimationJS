@@ -21,11 +21,11 @@ class Text extends AnimatedObject {
 	}
 
 	getWidth() {
-        return this.width;
+        return this.real_width;
     }
 
     getHeight() {
-        return this.height;
+        return this.real_height;
 	}
 	
 	getText() {
@@ -88,8 +88,8 @@ class Text extends AnimatedObject {
 	}
 
 	computeRealDimension() {
-		this.real_width = (this.width == -1) ? this.text.length * (parseInt(this.font[1])/2 + 1) + 2 : this.width;
-		this.real_height = (this.height == -1) ? parseInt(this.font[1]) + 8 : this.height;
+		this.real_width = (this.width == undefined) ? this.text.length * (parseInt(this.font[1])/2 + 1) + 2 : this.width;
+		this.real_height = (this.height == undefined) ? parseInt(this.font[1]) + 8 : this.height;
 	}
 	
 	draw() {

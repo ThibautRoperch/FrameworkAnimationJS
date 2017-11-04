@@ -25,7 +25,7 @@ class MoveTo extends Instruction {
 				
 				setTimeout(function() {
 					move(instruction);
-				}, instruction.delay * 20);
+				}, instruction.delay * 20 * (parseFloat(LOOP_DELAY) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() > instruction.x)) {
 					
@@ -34,7 +34,7 @@ class MoveTo extends Instruction {
 		
 				setTimeout(function() {
 					move(instruction);
-				}, instruction.delay * 20);
+				}, instruction.delay * 20 * (parseFloat(LOOP_DELAY) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() < instruction.x)) {
 					
@@ -43,7 +43,7 @@ class MoveTo extends Instruction {
 		
 				setTimeout(function() {
 					move(instruction);
-				}, instruction.delay * 20);
+				}, instruction.delay * 20 * (parseFloat(LOOP_DELAY) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() < instruction.x)) {
 					
@@ -52,7 +52,7 @@ class MoveTo extends Instruction {
 			
 				setTimeout(function() {
 					move(instruction);
-				}, instruction.delay * 20);
+				}, instruction.delay * 20 * (parseFloat(LOOP_DELAY) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 		}
 

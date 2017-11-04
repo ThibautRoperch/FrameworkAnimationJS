@@ -1,6 +1,7 @@
-/*
-*   This instruction set the object to a waiting state for a certain number of frame cycle 
-*/
+/**
+ * This instruction set the object to a waiting state for a certain number of frame cycle
+ */
+
 class Sleep extends Instruction {
 
 	constructor(object, value) {
@@ -15,7 +16,7 @@ class Sleep extends Instruction {
 		function sleep(instruction) {
 			setTimeout(function() {
 				instruction.object.setState(DEFAULT_STATE);
-			}, instruction.value * 20);
+			}, instruction.value * 20 * (parseFloat(LOOP_DELAY) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 		}
 	}
 	

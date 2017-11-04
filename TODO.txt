@@ -33,3 +33,7 @@ Pourquoi avoir mis un état avec une cdc plutôt qu'un boolean "waiting" ? Pour 
 fgcolor pour le polygone, l'ellipse, ... why ? La couleur de la bordure c'est fgcolor, la couleur du background c'est bgcolor, et bocolor c'est pour quoi ? on oublie fgcolor
 
 Comment le programme java peut fonctionner pour l'exemple cpu_anim1 ? On remarque que dans ls XML l'objet ins3_decode a 3 <wait>, mais seulement 2 <trigger object="ins3_decode" le concernent
+Modification apportée ligne 167
+
+exemple_animation.xml : le polygone ne se voit pas dans l'animation ; ajout de 3 propriétés au polygone pour que ca fonctionne, lignes 28/29/30
+faire ces modifs dans la version java aussi, voir si c'est mieux

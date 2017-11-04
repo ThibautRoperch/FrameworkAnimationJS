@@ -1,5 +1,4 @@
 
-
 /**********************
  * Global variables
  */
@@ -15,15 +14,18 @@ var PROGRAMS = new Map() // associative array containing instructions' programs,
 var LAYERS = new Set(); // set containing the differents objects' layers
 
 var BG_IMAGE = null; // path of the background image (can be "" if there isn't background image)
-var FRAME_RATE = 60; // frame per seconds
-var LOOP_DELAY; // delay between two intruction's move
+var FRAME_RATE = 60; // frames displayed per second
+var LOOP_DELAY; // speed of the animation, one frame's duration (ms)
+var LOOP_DELAY_MAX = 60; // lowest speed of the animation, one frame's duration (ms)
+var LOOP_DELAY_MIN = 0; // highest speed of the animation, one frame's duration (ms)
+
 
 /**********************
  * Loading and execution functions
  */
 
  
-function load_animation(target_id, width, height) {
+function load_animation(source_file, target_id, width, height) {
 	SOURCE_FILE = source_file;
 
 	PARENT = document.getElementById(target_id);
@@ -116,14 +118,14 @@ function read_xml_file(contents) {
 				var font = read_object.getAttribute("font").split(",");
 				var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
 				var border = parseInt(read_object.getAttribute("border")) | 0;
-				var width = parseInt(read_object.getAttribute("width")) | -1;
-				var height = parseInt(read_object.getAttribute("height")) | -1;
+				var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
+				var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
 				var halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
 				var valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
 				new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, border, width, height, halignment, valignment);
 			} else if (type == "object_image") {
-				var width = parseInt(read_object.getAttribute("width")) | 100;
-				var height = parseInt(read_object.getAttribute("height")) | 100;
+				var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
+				var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
 				var image = read_object.getAttribute("image");
 				new_object = new ImageFile(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
 			} else if (type == "object_rectangle") {
@@ -132,8 +134,8 @@ function read_xml_file(contents) {
 				var round = parseInt(read_object.getAttribute("round")) | 0;
 				new_object = new Rectangle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
 			} else if (type == "object_polygon") {
-				var coord_x = parseInt(read_object.getAttribute("coord_x"));
-				var coord_y = parseInt(read_object.getAttribute("coord_y"));
+				var coord_x = parseIntArray(read_object.getAttribute("coord_x"));
+				var coord_y = parseIntArray(read_object.getAttribute("coord_y"));
 				new_object = new Polygon(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
 			} else if (type == "object_circle") {
 				var radius = parseInt(read_object.getAttribute("radius"));
@@ -366,19 +368,19 @@ function canvasClicked() {
 function speed(speed) {
 	switch (speed) {
 		case "very slow":
-			LOOP_DELAY = 60;
+			LOOP_DELAY = LOOP_DELAY_MAX;
 			break;
 		case "slow":
-			LOOP_DELAY = 45;
+			LOOP_DELAY = LOOP_DELAY_MAX * 0.75 + LOOP_DELAY-MIN * 0.25;
 			break;
 		case "normal":
-			LOOP_DELAY = 30;
+			LOOP_DELAY = LOOP_DELAY_MAX * 0.50 + LOOP_DELAY-MIN * 0.50;
 			break;
 		case "fast":
-			LOOP_DELAY = 15;
+			LOOP_DELAY = LOOP_DELAY_MAX * 0.25 + LOOP_DELAY-MIN * 0.75;
 			break;
 		case "very fast":
-			LOOP_DELAY = 0;
+			LOOP_DELAY = LOOP_DELAY_MIN;
 			break;
 		default:
 			console.log("Unrecognized speed, availables values are 'very slow', 'slow', 'normal', 'fast', 'very fast'.");

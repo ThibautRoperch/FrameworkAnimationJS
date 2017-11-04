@@ -26,7 +26,7 @@ class Blink extends Instruction {
 			if (blinked_times < instruction.times && (instruction.object.getState() == DEFAULT_STATE || instruction.object.getState() == WAITING_CLICK_STATE)) {
 				setTimeout(function() {
 					blink(instruction, ++blinked_times);
-				}, instruction.delay * 20);
+				}, instruction.delay * 20 * (parseFloat(LOOP_DELAY) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			} else {
 				instruction.object.setOpacity(instruction.initial_opacity);
 			}

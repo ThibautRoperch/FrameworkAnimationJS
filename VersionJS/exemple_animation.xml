@@ -8,9 +8,9 @@
     <object_text 
       text="click this text@to start" 
       font="Courier,12,bold"
-      transparency="false"
+      bgtransparent="false"
       bgcolor="255,255,255"
-      fgcolor="0,0,0"
+      color="0,0,0"
       bocolor="0,0,128"
       layer="1">Texte</object_text>
 
@@ -23,8 +23,11 @@
     <object_polygon
       coord_x="10,10,0,15,30,20,20,10"
       coord_y=" 0,10,10,20,10,10,0,0"
-      fgcolor="255,0,0"
+      bocolor="255,0,0"
       bgcolor="0,128,0"
+        bgtransparent="false"
+        botransparent="false"
+        visible="false"
       >Polygone</object_polygon>
 
   </objects>
