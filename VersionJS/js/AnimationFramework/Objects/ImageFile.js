@@ -9,6 +9,7 @@ class ImageFile extends AnimatedObject {
         this.width = width;
         this.height = height;
         this.image = image;
+        this.loaded_image;
     }
 
     getWidth() {
@@ -35,10 +36,13 @@ class ImageFile extends AnimatedObject {
         this.height = height;
     }
 
+    loadImage() {
+        this.loaded_image = loadImage(this.image);
+    }
+
     draw() {
         super.draw();
-        var loaded_image = loadImage(this.image);
-        image(loaded_image, this.x, this.y);
+        image(this.loaded_image, this.x, this.y);
     }
 
     isClicked(x, y) {

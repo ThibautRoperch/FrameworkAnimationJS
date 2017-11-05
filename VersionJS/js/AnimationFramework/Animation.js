@@ -14,7 +14,8 @@ class Animation {
         this.objects = new Map(); // associative array containing drawing's objects, as object_identifier : Object
         this.programs = new Map() // associative array containing instructions' programs, as object_identifier : array of Instruction elements
         this.layers = new Set(); // set containing the differents objects' layers
-
+        this.objects_image = new Array(); // array containing image objects
+        
         this.canvas = null;
         this.bg_image = null; // path of the background image (can be "" if there isn't background image)
         this.loop_delay = 10; // delay between two intruction's move // TODO a donner au constructeur d'une instruction
@@ -118,6 +119,7 @@ class Animation {
                     var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                     var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     var image = read_object.getAttribute("image");
+                    this.objects_image.push(id);
                     new_object = new ImageFile(id, x, y, bgcolor, botransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
                 } else if (type == "object_rectangle") {
                     var width = parseInt(read_object.getAttribute("width"));
@@ -303,6 +305,10 @@ class Animation {
     preload() {
         if (this.bg_image != "") {
             this.bg_image = loadImage(this.bg_image);
+        }
+        
+        for (var object_id of OBJECTS_IMAGE) {
+            OBJECTS.get(object_id).loadImage();
         }
     }
 

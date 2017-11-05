@@ -12,6 +12,7 @@ var HEIGHT = 0; // height of the canevas, in px
 var OBJECTS = new Map(); // associative array containing drawing's objects, as object_identifier : Object
 var PROGRAMS = new Map() // associative array containing instructions' programs, as object_identifier : array of Instruction elements
 var LAYERS = new Set(); // set containing the differents objects' layers
+var OBJECTS_IMAGE = new Array(); // array containing image objects
 
 var BG_IMAGE = null; // path of the background image (can be "" if there isn't background image)
 var FRAME_RATE = 60; // frames displayed per second
@@ -127,6 +128,7 @@ function read_xml_file(contents) {
 				var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
 				var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
 				var image = read_object.getAttribute("image");
+				OBJECTS_IMAGE.push(id);
 				new_object = new ImageFile(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
 			} else if (type == "object_rectangle") {
 				var width = parseInt(read_object.getAttribute("width"));
@@ -314,6 +316,10 @@ function execute_instructions(object_id, instruction_number, labels) {
 function preload() { // preload() runs once
 	if (BG_IMAGE != "") {
 		BG_IMAGE = loadImage(BG_IMAGE);
+	}
+
+	for (var object_id of OBJECTS_IMAGE) {
+		OBJECTS.get(object_id).loadImage();
 	}
 }
 
