@@ -1,5 +1,5 @@
 /**
- * 
+ * Animation class
  */
 
 class Animation {
@@ -26,7 +26,7 @@ class Animation {
         this.parent.style.display = "flex";
         this.parent.style.flexDirection = "row";
         this.parent.style.alignItems = "center";
-        this.parent.style.padding ="0";
+        this.parent.style.padding = "0";
     }
 
     /**
@@ -113,7 +113,7 @@ class Animation {
                     var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                     var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     var halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
-                    var valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
+					var valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
                     new_object = new Text(id, x, y, bgcolor, botransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, border, width, height, halignment, valignment);
                 } else if (type == "object_image") {
                     var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
@@ -303,17 +303,19 @@ class Animation {
     }
 
     preload() {
+        // Load the backround image
         if (this.bg_image != "") {
             this.bg_image = loadImage(this.bg_image);
         }
-        
-        for (var object_id of OBJECTS_IMAGE) {
-            OBJECTS.get(object_id).loadImage();
+		
+		// Load animation's images
+        for (var object_id of this.objects_image) {
+            this.objects.get(object_id).loadImage();
         }
     }
 
-    setup() {
-        this.canvas = createCanvas(this.width, this.height);
+    setup(drawing) {
+        this.canvas = drawing.createCanvas(this.width, this.height);
         this.canvas.mouseClicked(canvasClicked);
         this.canvas.parent(this.parent);
 
@@ -321,10 +323,10 @@ class Animation {
         this.parent.removeChild(this.parent.getElementsByClassName("loading")[0]);
     }
 
-    draw() {
+    draw(drawing) {
 		// Display the background image
         if (this.bg_image != null) {
-            this.canvas.background(this.bg_image);
+            drawing.background(this.bg_image);
         }
 
         // Display objects of each layer, if they're set as visible
