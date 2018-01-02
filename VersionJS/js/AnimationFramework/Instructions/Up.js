@@ -1,13 +1,14 @@
 /**
- * This instruction move the object up of y by interval of interval_y at a rate of LOOP_DELAY
+ * This instruction move the object up of y by interval of interval_y at a rate of loop_delay
  */
 
 class Up extends Instruction {
 
-	constructor(object, distance, interval) {
+	constructor(object, distance, interval, loop_delay) {
 		super(object);
 		this.distance = distance;
 		this.interval = interval;
+		this.loop_delay = loop_delay;
 	}
 
 	execute() {
@@ -22,7 +23,7 @@ class Up extends Instruction {
 				
 				setTimeout(function() {
 					up(instruction);
-				}, LOOP_DELAY);
+				}, instruction.loop_delay);
 			} else {
 				instruction.object.setState(DEFAULT_STATE);
 			}

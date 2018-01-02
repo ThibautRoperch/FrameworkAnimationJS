@@ -114,6 +114,8 @@ L'instruction <blink> change l'opacité de l'objet plutôt que sa visibilité ; 
 
 Le chemin du background donné dans le XML est relatif au fichier XML (ou absolu).
 
+Passage en *instanciation-case* -> il faut dessiner les objets sur un dessin, et non plus directement dans le default canvas.
+
 Résumé
 ======
 

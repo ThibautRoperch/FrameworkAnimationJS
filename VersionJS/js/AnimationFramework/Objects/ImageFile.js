@@ -36,13 +36,13 @@ class ImageFile extends AnimatedObject {
         this.height = height;
     }
 
-    loadImage() {
-        this.loaded_image = loadImage(this.image);
+    loadImage(drawing) {
+        this.loaded_image = drawing.loadImage(this.image);
     }
 
-    draw() {
-        super.draw();
-        image(this.loaded_image, this.x, this.y);
+    draw(drawing) {
+        super.draw(drawing);
+        drawing.image(this.loaded_image, this.x, this.y);
     }
 
     isClicked(x, y) {

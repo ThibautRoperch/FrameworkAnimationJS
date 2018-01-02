@@ -26,17 +26,17 @@ class Polygon extends AnimatedObject {
         this.coord_y = coord_y;
     }
 
-    draw() {
-        super.draw();
-        beginShape();
+    draw(drawing) {
+        super.draw(drawing);
+        drawing.beginShape();
         for (var i = 0; i < this.coord_x.length; ++i) {
-            vertex(this.coord_x[i], this.coord_y[i]);
+            drawing.vertex(this.coord_x[i], this.coord_y[i]);
         }
-        endShape(CLOSE);
+        drawing.endShape(drawing.CLOSE);
     }
     
     isClicked(x, y) {
-        
+        // TODO
     }
     
     toXml() {

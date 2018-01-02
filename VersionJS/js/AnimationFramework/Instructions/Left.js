@@ -1,13 +1,14 @@
 /**
- * This instruction move the object left of x by interval of interval_x at a speed of LOOP_DELAY
+ * This instruction move the object left of x by interval of interval_x at a speed of loop_delay
  */
 
 class Left extends Instruction {
 
-	constructor(object, distance, interval) {
+	constructor(object, distance, interval, loop_delay) {
 		super(object);
 		this.distance = distance;
 		this.interval = interval;
+		this.loop_delay = loop_delay;
 	}
 
 	execute() {
@@ -22,7 +23,7 @@ class Left extends Instruction {
 
 				setTimeout(function() {
 					left(instruction);
-				}, LOOP_DELAY);
+				}, instruction.loop_delay);
 			} else {
 				instruction.object.setState(DEFAULT_STATE);
 			}

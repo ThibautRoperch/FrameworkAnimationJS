@@ -44,6 +44,11 @@ class Grid extends AnimatedObject {
         this.column_width = column_width;
     }
 
+    draw(drawing) {
+        super.draw(drawing);
+        // TODO
+    }
+
     isClicked() {
         if((x >= this.x) && (x <= this.columns * this.column_width) && (y >= this.y) && (y <= this.lines * this.line_height))
             return true;

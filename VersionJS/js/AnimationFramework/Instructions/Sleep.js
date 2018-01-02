@@ -4,9 +4,10 @@
 
 class Sleep extends Instruction {
 
-	constructor(object, value) {
+	constructor(object, value, loop_delay) {
 		super(object);
 		this.value = value;
+		this.loop_delay = loop_delay;
 	}
 
 	execute() {
@@ -16,7 +17,7 @@ class Sleep extends Instruction {
 		function sleep(instruction) {
 			setTimeout(function() {
 				instruction.object.setState(DEFAULT_STATE);
-			}, instruction.value * 20 * (parseFloat(LOOP_DELAY) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+			}, instruction.value * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 		}
 	}
 	

@@ -18,7 +18,7 @@ class Animation {
         
         this.canvas = null;
         this.bg_image = null; // path of the background image (can be "" if there isn't background image)
-        this.loop_delay = 10; // delay between two intruction's move // TODO a donner au constructeur d'une instruction
+        this.loop_delay = 10; // delay between two intruction's move
 
         // Resize the target node
         this.parent.style.width = this.width + "px";
@@ -96,7 +96,7 @@ class Animation {
                 var x = parseInt(read_object.getAttribute("x")) | 0;
                 var y = parseInt(read_object.getAttribute("y")) | 0;
                 var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
-                var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : true;
+                var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : true;
                 var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
                 var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : true;
                 var layer = parseInt(read_object.getAttribute("layer")) | 0;
@@ -114,29 +114,29 @@ class Animation {
                     var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     var halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
 					var valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-                    new_object = new Text(id, x, y, bgcolor, botransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, border, width, height, halignment, valignment);
+                    new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, border, width, height, halignment, valignment);
                 } else if (type == "object_image") {
                     var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                     var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     var image = read_object.getAttribute("image");
                     this.objects_image.push(id);
-                    new_object = new ImageFile(id, x, y, bgcolor, botransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
+                    new_object = new ImageFile(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
                 } else if (type == "object_rectangle") {
                     var width = parseInt(read_object.getAttribute("width"));
                     var height = parseInt(read_object.getAttribute("height"));
                     var round = parseInt(read_object.getAttribute("round")) | 0;
-                    new_object = new Rectangle(id, x, y, bgcolor, botransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
+                    new_object = new Rectangle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
                 } else if (type == "object_polygon") {
                     var coord_x = parseIntArray(read_object.getAttribute("coord_x"));
                     var coord_y = parseIntArray(read_object.getAttribute("coord_y"));
-                    new_object = new Polygon(id, x, y, bgcolor, botransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
+                    new_object = new Polygon(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
                 } else if (type == "object_circle") {
                     var radius = parseInt(read_object.getAttribute("radius"));
-                    new_object = new Circle(id, x, y, bgcolor, botransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, radius);
+                    new_object = new Circle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, radius);
                 } else if (type == "object_ellipse") {
                     var width = parseInt(read_object.getAttribute("width"));
                     var height = parseInt(read_object.getAttribute("height"));
-                    new_object = new Ellipse(id, x, y, bgcolor, botransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
+                    new_object = new Ellipse(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
                 } else if (type == "object_landmark") {
                     var width = parseInt(read_object.getAttribute("width"));
                     var height = parseInt(read_object.getAttribute("height"));
@@ -144,12 +144,12 @@ class Animation {
                     var scaleY = parseInt(read_object.getAttribute("scaleY"));
                     var unitX = read_object.getAttribute("unitX");
                     var unitY = read_object.getAttribute("unitY");
-                    new_object = new Landmark(id, x, y, bgcolor, botransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY);
+                    new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY);
                 } else if (type == "object_copy") {
                     var idcopy = read_object.getAttribute("idcopy");
                     var initial_object = this.objects.get(idcopy);
                     if (initial_object == null) {
-                        console.log("[animation.js] L'objet " + idcopy + " à copier n'existe pas");
+                        console.log("[Animation.js] L'objet " + idcopy + " à copier n'existe pas");
                     } else {
                         new_object = initial_object.clone();
                         new_object.setId(id);
@@ -199,13 +199,13 @@ class Animation {
                         var dx = parseInt(read_instruction.getAttribute("dx"));
                         var dy = parseInt(read_instruction.getAttribute("dy"));
                         var delay = parseInt(read_instruction.getAttribute("delay"));
-                        new_instruction = new MoveTo(this.objects.get(object_id), x, y, dx, dy, delay);
+                        new_instruction = new MoveTo(this.objects.get(object_id), x, y, dx, dy, delay, this.loop_delay);
                     } else if (type == "wait") {
                         var value = read_instruction.getAttribute("value");
                         new_instruction = new Wait(this.objects.get(object_id), value);
                     } else if (type == "sleep") {
                         var value = parseInt(read_instruction.getAttribute("value"));
-                        new_instruction = new Sleep(this.objects.get(object_id), value);
+                        new_instruction = new Sleep(this.objects.get(object_id), value, this.loop_delay);
                     } else if (type == "state") {
                         var value = read_instruction.getAttribute("value");
                         new_instruction = new State(this.objects.get(object_id), value);
@@ -219,19 +219,19 @@ class Animation {
                     } else if (type == "up") {
                         var y = parseInt(read_instruction.getAttribute("y"));
                         var dy = parseInt(read_instruction.getAttribute("dy"));
-                        new_instruction = new Up(this.objects.get(object_id), y, dy);
+                        new_instruction = new Up(this.objects.get(object_id), y, dy, this.loop_delay);
                     } else if (type == "down") {
                         var y = parseInt(read_instruction.getAttribute("y"));
                         var dy = parseInt(read_instruction.getAttribute("dy"));
-                        new_instruction = new Down(this.objects.get(object_id), y, dy);
+                        new_instruction = new Down(this.objects.get(object_id), y, dy, this.loop_delay);
                     } else if (type == "left") {
                         var x = parseInt(read_instruction.getAttribute("x"));
                         var dx = parseInt(read_instruction.getAttribute("dx"));
-                        new_instruction = new Left(this.objects.get(object_id), x, dx);
+                        new_instruction = new Left(this.objects.get(object_id), x, dx, this.loop_delay);
                     } else if (type == "right") {
                         var x = parseInt(read_instruction.getAttribute("x"));
                         var dx = parseInt(read_instruction.getAttribute("dx"));
-                        new_instruction = new Right(this.objects.get(object_id), x, dx);
+                        new_instruction = new Right(this.objects.get(object_id), x, dx, this.loop_delay);
                     } else if (type == "angle") {
                         var degrees = parseInt(read_instruction.getAttribute("degrees"));
                         new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "angle", degrees);
@@ -243,7 +243,7 @@ class Animation {
                     } else if (type == "blink") {
                         var times = parseInt(read_instruction.getAttribute("times"));
                         var delay = parseInt(read_instruction.getAttribute("delay"));
-                        new_instruction = new Blink(this.objects.get(object_id), times, delay);
+                        new_instruction = new Blink(this.objects.get(object_id), times, delay, this.loop_delay);
                     } else if (type == "stop") {
                         new_instruction = new Stop(null);
                     } else if (type == "center") {
@@ -302,21 +302,21 @@ class Animation {
         }
     }
 
-    preload() {
+    preload(drawing) {
         // Load the backround image
         if (this.bg_image != "") {
-            this.bg_image = loadImage(this.bg_image);
+            this.bg_image = drawing.loadImage(this.bg_image);
         }
 		
 		// Load animation's images
         for (var object_id of this.objects_image) {
-            this.objects.get(object_id).loadImage();
+            this.objects.get(object_id).loadImage(drawing);
         }
     }
 
     setup(drawing) {
         this.canvas = drawing.createCanvas(this.width, this.height);
-        this.canvas.mouseClicked(canvasClicked);
+        // this.canvas.mouseClicked(this.canvasClicked);
         this.canvas.parent(this.parent);
 
         // Remove the loading message
@@ -333,17 +333,17 @@ class Animation {
         for (var layer of this.layers) {
             for (var object of this.objects.values()) {
                 if (object.getLayer() == layer && object.getVisible()) {
-                    object.draw();
+                    object.draw(drawing);
                 }
             }
         }
     }
 
-    canvasClicked(mouse_x, mouse_y) {
+    canvasClicked(drawing) {
         // Get the visible objects that are under the cursor position
         for (var object of this.objects.values()) {
             if (object.getVisible()) {
-                if (object.isClicked(mouse_x, mouse_y)) {
+                if (object.isClicked(drawing.mouseX, drawing.mouseY)) {
                     new Trigger(null, object, WAITING_CLICK_STATE).execute();
                 }
             }

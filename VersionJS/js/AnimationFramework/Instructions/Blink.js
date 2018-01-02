@@ -4,13 +4,15 @@
 
 class Blink extends Instruction {
 
-	constructor(object, times, delay) {
+	constructor(object, times, delay, loop_delay) {
 		super(object);
 		this.times = times;
 		this.delay = delay;
 
 		this.initial_opacity;
 		this.visible_opacity;
+
+		this.loop_delay = loop_delay;
 	}
 
 	execute() {
@@ -26,7 +28,7 @@ class Blink extends Instruction {
 			if (blinked_times < instruction.times && (instruction.object.getState() == DEFAULT_STATE || instruction.object.getState() == WAITING_CLICK_STATE)) {
 				setTimeout(function() {
 					blink(instruction, ++blinked_times);
-				}, instruction.delay * 20 * (parseFloat(LOOP_DELAY) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			} else {
 				instruction.object.setOpacity(instruction.initial_opacity);
 			}

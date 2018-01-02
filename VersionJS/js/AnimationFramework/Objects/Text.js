@@ -92,21 +92,21 @@ class Text extends AnimatedObject {
 		this.real_height = (this.height == undefined) ? parseInt(this.font[1]) + 8 : this.height;
 	}
 	
-	draw() {
-		super.draw();
+	draw(drawing) {
+		super.draw(drawing);
 		// Background
-       	rect(this.x, this.y, this.real_width, this.real_height); 
+       	drawing.rect(this.x, this.y, this.real_width, this.real_height); 
 		// Remplacer les @ par \n TODO
 		// Text's color, font, size and style
-		fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
-		textFont(this.font[0]);
-		textSize(parseInt(this.font[1]));
-		textStyle(this.font[2] == "bold" ? BOLD : this.font[2] == "italic" ? ITALIC : NORMAL);
+		drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
+		drawing.textFont(this.font[0]);
+		drawing.textSize(parseInt(this.font[1]));
+		drawing.textStyle(this.font[2] == "bold" ? drawing.BOLD : this.font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
 		// Text alignment
-		textAlign(this.halignment == "right" ? RIGHT : this.halignment == "center" ? CENTER : LEFT,
-		this.valignment == "center" ? CENTER : this.valignment == "bottom" ? BOTTOM : this.valignment == "baseline" ? BASELINE : TOP);
+		drawing.textAlign(this.halignment == "right" ? drawing.RIGHT : this.halignment == "center" ? drawing.CENTER : drawing.LEFT,
+		this.valignment == "center" ? drawing.CENTER : this.valignment == "bottom" ? drawing.BOTTOM : this.valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
 		// Display
-		text(this.text, this.x + 2, this.y + 4);
+		drawing.text(this.text, this.x + 2, this.y + 4);
 	}
 	
 	isClicked(x, y) {
