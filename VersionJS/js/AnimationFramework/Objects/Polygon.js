@@ -36,7 +36,7 @@ class Polygon extends AnimatedObject {
     }
     
     isClicked(x, y) {
-        // TODO
+        // TODO définir une hitbox rectangulaire si c'est trop relou (trouver le min et le max de x et de y parmi les points)
     }
     
     toXml() {
