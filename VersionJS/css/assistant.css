@@ -1,0 +1,135 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+    
+body {
+    color: rgba(0, 0, 0, 0.8);
+    background: silver;
+}
+
+body header {
+    width: 100%;
+    margin-bottom: 20px;
+    background: blueviolet;
+}
+
+body section, body header div {
+    width: 75%;
+    margin: auto;    
+    padding: 20px;
+}
+
+body section {
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+h2 {
+    margin: 10px 0;
+    font-size: 18px;
+    border-bottom: 2px solid gray;
+}
+
+objects, #objects {
+    min-height: 10px;
+}
+
+objects {
+    display: flex;
+    flex-direction: row;
+}
+    
+objects > * {
+    flex: 1;
+    margin-right: 15px;
+}
+
+objects > *:last-child {
+    margin-right: 0;
+}
+
+#objects {
+    display: flex;
+    margin-bottom: 20px;
+    flex-direction: column;
+    list-style-type : none;
+    background: white;
+}
+
+#objects li {
+    display: flex;
+    flex-direction: column;
+}
+
+#objects li header {
+    display: flex;
+    padding: 10px 5%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+#objects li header:hover {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+#objects li header > * {
+    flex: 1;
+}
+
+#objects li section {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid silver;
+    border-top: 0;
+}
+
+#objects li section.hidden, #objects li section {
+    display: none;
+}
+
+#objects li section.displayed {
+    display: flex;
+}
+
+#objects li section article {
+    flex: 1;
+    display: flex;
+    padding: 20px 30px;
+    flex-direction: column;
+}
+
+#objects li section article:first-child {
+    flex: 0.35;
+    border-right: 1px solid silver;
+}
+
+#objects li section article property {
+    display: flex;
+    flex-direction: row;
+}
+
+#objects li section article property > * {
+    flex: 1;
+    text-align: right;
+}
+
+#objects li section article property label {
+    text-align: left;
+}
+
+button {
+    height: 40px;
+    color: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}

@@ -59,7 +59,7 @@ Changements effectués
 =====================
 
 Les feuilles de style sont désormais dans le dossier css : <link rel="stylesheet" type="text/css" href="css/css.css" />
-Il faut inclure le script animation.js dans chaque page contenant une animation : <script src="js/animation.js"></script>
+Il faut inclure le script animation_controller.js dans chaque page contenant une animation : <script src="js/animation_controller.js"></script>
 Pour charger une animation (charger un fichier XML, afficher les objets, lancer le programme) : load_animation("animation.xml", "target_node_id", <width>, <height>);
 
 Ajout règles dans le fichier css/css.css.

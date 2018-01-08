@@ -13,8 +13,8 @@ Montrer qu'on a compris le code. Exemple : en java, y'a une factory qui créé l
 Refaire le texte de création d'objet, comme dans index.html, 4. Créer ses propres objets
 1. màj la dtd
 2. nouvelle classe en suivant la structure des autres
-3. ajouter le fichier dans les includes de animation.js
-3. ajouter le case dans animation.js
+3. ajouter le fichier dans les includes de animation_controller.js
+3. ajouter le case dans animation_controller.js
 
 a faire et mettre dans le main.txt :
 dimensionnement de l'objet grille par rapport aux dimensions d'une case cases (et nb de col et lignes)
