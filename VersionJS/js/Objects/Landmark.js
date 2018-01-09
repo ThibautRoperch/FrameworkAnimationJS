@@ -70,10 +70,8 @@ class Landmark extends AnimatedObject {
 		textSize(12);
         textStyle(NORMAL);
         angleMode(DEGREES);
-        var axis1;       //Vector utilisé pour effectuer la rotation : à placer au milieu du texte
-        var axis2;
-        var i;
-        if(this.height > 0 && this.width > 0) {
+
+        if(this.height > 0 && this.width > 0) {     // Repère =  |_
             line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
             line(this.x, this.y + this.height, this.x, this.y);
             //texte x
@@ -89,8 +87,8 @@ class Landmark extends AnimatedObject {
             // Dessin des triangles 
             triangle(this.x -20, this.y, this.x+20, this.y, this.x, this.y - 20);
             triangle(this.x + this.width, this.y + this.height +20 , this.x + this.width, this.y + this.height -20, this.x + this.width + 20, this.x + this.width );
-        }
-        else if(this.height < 0 && this.width > 0) { 
+        }                                                   //          __
+        else if(this.height < 0 && this.width > 0) {        // Repère = |
             line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
             line(this.x + this.width, this.y - this.height, this.x + this.width, this.y);
             //texte x
@@ -101,8 +99,8 @@ class Landmark extends AnimatedObject {
             rotate(90);
             //texte y
             text(this.unitY, 0, 0);
-        }
-        else if(this.height > 0 && this.width < 0) {
+        }                                               //           
+        else if(this.height > 0 && this.width < 0) {    // Repère = _|  
             line(this.x, this.y - this.width, this.x - this.width, this.y - this.width);
             line(this.x - this.width, this.y + this.height, this.x - this.width, this.y); 
             //texte x
@@ -117,8 +115,8 @@ class Landmark extends AnimatedObject {
             text(this.unitY, 0, 0);
             //pop();
             
-        }
-        else if(this.height < 0 && this.width < 0) {
+        }                                                    //           __
+        else if(this.height < 0 && this.width < 0) {         // Repère =    |
             line(this.x, this.y - this.width, this.x - this.width, this.y - this.width);
             line(this.x, this.y - this.height, this.x, this.y);
             //texte x

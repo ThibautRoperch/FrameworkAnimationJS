@@ -50,4 +50,15 @@ class Grid extends AnimatedObject {
         return false;        
     }
 
+    draw() {
+        super.draw();
+        
+        for(this.line; this.line>0; --this.line) {
+            for(this.column; this.column>0; --this.column) {
+                line()
+            }
+        }
+    
+    }
+
 }
