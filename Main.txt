@@ -59,7 +59,7 @@ Changements effectués
 =====================
 
 Les feuilles de style sont désormais dans le dossier css : <link rel="stylesheet" type="text/css" href="css/css.css" />
-Il faut inclure le script animation.js dans chaque page contenant une animation : <script src="js/animation.js"></script>
+Il faut inclure le script animation_controller.js dans chaque page contenant une animation : <script src="js/animation_controller.js"></script>
 Pour charger une animation (charger un fichier XML, afficher les objets, lancer le programme) : load_animation("animation.xml", "target_node_id", <width>, <height>);
 
 Ajout règles dans le fichier css/css.css.
@@ -67,7 +67,7 @@ Ajout règles dans le fichier css/css.css.
 On considère que tous les objets peuvent avoir une couleur de bordure.
 
 L'attribut "transparency" est remplacé par "bgtransparent" pour tous les objets.
-L'attribut "fgcolor" est renommé par "color" pour l'objet texte (rgb(0, 0, 0) par défaut), et par "bocolor" pour les autres objets.
+L'attribut "fgcolor" est renommé par "color" pour l'objet texte (toujours rgb(255, 255, 255) par défaut), et par "bocolor" pour les autres objets.
 
 Les propriétés suivantes ont été ajoutées pour tous les objets :
 - visible (true|false, false par défaut) : l'objet est visible
@@ -75,10 +75,6 @@ Les propriétés suivantes ont été ajoutées pour tous les objets :
 - botransparent (true|false, true par défaut) : la bordure est transparente
 - opacity (nombre entre 0 et 1, 1 par défaut) : l'opacité de l'objet, utile lorsque des objets se superposent
 - angle (nombre, 0 par défaut) : la rotation de l'objet, angle exprimé en degrés
- 
-La couleur par défaut de tous les objets a été modifiée :
-- bgcolor (couleur de l'arrière plan) : rgb(255, 255, 255) par défaut
-- bocolor (couleur de la bordure) : rgb(255, 255, 255) par défaut
 
 Les propriétés suivantes ont été ajoutées pour l'objet texte :
 - width (entier supérieur à 0, la largeur du texte par défaut) : largeur de la boite contenant le texte
@@ -90,11 +86,12 @@ La propriété suivante a été ajoutée pour l'objet rectangle :
 - round (entiers supérieurs à 0, "0, 0, 0, 0" par défaut) : rayon du congé des coins du rectangle (haut gauche, haut droit, bas gauche, bas droit)
 
 Ces propriétés de l'objet image ont été modifiées :
-- width (largeur de l'image) : 100 par défaut
-- height (hauteur de l'image) : 100 par défaut
+- width (largeur de l'image) : largeur de l'image par défaut
+- height (hauteur de l'image) : hauteur de l'image par défaut
 
 Les objets suivants ont été ajoutés :
-- Landmark (repère) : width, height, scaleX, scaleY, unitX, unitY, et les attributs communs aux objets
+- object_landmark (repère) : width, height, scaleX, scaleY, unitX, unitY, et les attributs communs aux objets
+- object_copy (objet copieur) : object l'id de l'objet à copier, et les attributs communs aux objets
 
 Toutes les propriétés peuvent être données lors de la création de l'objet et modifiées avec l'instruction <setproperty>
 (hormis la propriété "state" qui est modifiable avec des instructions spécifiques).
@@ -103,17 +100,27 @@ L'état par défaut d'un objet du dessin est "normal". Il peut être "sleeping",
 L'instruction <click> est gérée de la façon suivante : l'état de l'objet devient "waiting_click" ; lorsqu'un objet est cliqué, une instruction trigger est créée et exécutée avec la value "waiting_click".
 Les instructions <label>, <goto>, <stop> sont propre à l'exécution du programme, elles n'agissent pas directement sur l'objet auquel le programme est associé.
 
-Le noeud <framerate> permet de changer la vitesse de rafraichissement du dessin : "very slow", "slow", "normal" (défaut), "fast", "very fast". DTD mise à jour en conséquence.
+Le noeud <speed> permet de changer la vitesse de rafraichissement du dessin : "very slow", "slow", "normal" (défaut), "fast", "very fast". DTD mise à jour en conséquence.
 
 La DTD a été mise à jour en conséquence.
 
-<dupl_bject>
+Le point d'ancrage des objets et du canevas est en haut à gauche :
+o---> x
+|
+v
+y
+
+L'instruction <blink> change l'opacité de l'objet plutôt que sa visibilité ; ainsi, l'objet est cliquable l'orsqu'il clignote, même pendant ses frames insiviblité.
+
+Le chemin du background donné dans le XML est relatif au fichier XML (ou absolu).
+
+Passage en *instanciation-case* -> il faut dessiner les objets sur un dessin, et non plus directement dans le default canvas.
 
 Résumé
 ======
 
 Une animation est décrite en XML par des objets de dessin et au maximum un programme associé à chaque objet.
-Il faut lire ce XML, afficher les objets de dessin et executer les programmes.
+Il faut lire ce XML, afficher les objets de dessin et exécuter les programmes.
 
 Le framework P5.js permet de dessiner des figures. Les figures ne sont pas des éléments HTML récupérables, et sont dessinés à chaque itération du canevas.
 Il faut donc un tableau de figures.

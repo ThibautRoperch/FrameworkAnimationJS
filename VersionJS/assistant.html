@@ -1,69 +1,48 @@
-<objects>
-    <object>Texte</object>
-    <object>Image</object>
-    <object>Rectangle</object>
-    <object>Polygone</object>
-    <object>Cercle</object>
-    <object>Ellipse</object>
-    <object>Repère</object>
-    <object>Grille (pas encore implémenté)</object>
-</objects>
+<!DOCTYPE html>
+<html lang="en">
 
-<instructions>
-    <category>
-        <instruction>Changer la position X</instruction>
-        <instruction>Changer la position Y</instruction>
-        <instruction>Changer les positions X et Y</instruction>
-        <instruction>Centrer</instruction>
-        <instruction>Centrer en X</instruction>
-        <instruction>Centrer en Y</instruction>
-        <instruction>Modifier la visibilité</instruction>
-        <instruction>Modifier une propriété</instruction>
-    </category>
-    <category>
-        <instruction>Déplacer vers un point</instruction>
-        <instruction>Déplacer vers le haut</instruction>
-        <instruction>Déplacer vers le bas</instruction>
-        <instruction>Déplacer vers la gauche</instruction>
-        <instruction>Déplacer vers la droite</instruction>
-        <instruction>Pivoter</instruction>
-        <instruction>Clignoter</instruction>
-    </category>
-    <category>
-        <instruction>Attendre un click</instruction>
-        <instruction>Attendre une valeur</instruction>
-        <instruction>Envoyer une valeur</instruction>
-    </category>
-    <category>
-        <instruction>Enregistrer un label</instruction>
-        <instruction>Aller au label</instruction>
-        <instruction>Arrêter le programme</instruction>
-</instructions>
+<head>
+	<meta charset="UTF-8">
+	<title>Assistant</title>
+	<link rel="stylesheet" href="css/assistant.css">
+	<script src="js/AnimationFramework/animation_controller.js"></script>
+</head>
 
+<body>
+	<header>
+		<div>
+			save, ...
+		</div>
+	</header>
 
-objects, instructions, category {
-    display: flex;
-    flex-wrap: wrap;
-}
+	<section>
 
-instructions {
-    flex-direction: column;
-}
+		<h2>Animation objects</h2>
 
-object, instruction {
-    min-width: 100px;
-    margin: 10px 15px;
-    padding: 15px 10px;
-    text-align: center;
-    color:rgba(0, 0, 0, 0.8);
-    background:white;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    cursor: pointer;
-}
+		<ul id="objects">
+		<!-- <button onclick="new_instruction('17')">Add an instruction</button> -->
+		</ul>
 
-object:hover, instruction:hover {
-opacity:1;
-border:1px solid rgba(0, 0, 0, 0.7);
-box-shadow:0 1px 0 1px rgba(0, 0, 0, 0.2);
-}
+		<h2>Add a new object</h2>
+		
+		<objects>
+			<button onclick="new_object(this)">Text</button>
+			<button onclick="new_object(this)">ImageFile</button>
+			<button onclick="new_object(this)">Rectangle</button>
+			<button onclick="new_object(this)">Polygon</button>
+			<button onclick="new_object(this)">Circle</button>
+			<button onclick="new_object(this)">Ellipse</button>
+			<button onclick="new_object(this)">Landmark</button>
+			<button onclick="new_object(this)">Grid</button>
+		</objects>
+
+	</section>
+
+</body>
+</html>
+
+<script src="js/assistant.js"></script>
+
+<script>
+include_animation_files("js/AnimationFramework/");
+</script>

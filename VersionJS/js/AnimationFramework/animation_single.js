@@ -1,31 +1,39 @@
 
-
 /**********************
  * Global variables
  */
 
+var SOURCE_FILE = ""; // path of the XML source file
+
 var PARENT = null; // HTML node containing the canevas
-
-var FRAME_RATE = 30; // frame per seconds
-
 var WIDTH = 0; // width of the canevas, in px
 var HEIGHT = 0; // height of the canevas, in px
 
-var BG_IMAGE = null; // path of the background image (can be "" if there isn't background image)
 var OBJECTS = new Map(); // associative array containing drawing's objects, as object_identifier : Object
 var PROGRAMS = new Map() // associative array containing instructions' programs, as object_identifier : array of Instruction elements
+var LAYERS = new Set(); // set containing the differents objects' layers
+var OBJECTS_IMAGE = new Array(); // array containing image objects
 
-var LAYERS = new Set(); // set containing
+var BG_IMAGE = null; // path of the background image (can be "" if there isn't background image)
+var FRAME_RATE = 60; // frames displayed per second
+var LOOP_DELAY; // speed of the animation, one frame's duration (ms)
+var LOOP_DELAY_MAX = 60; // lowest speed of the animation, one frame's duration (ms)
+var LOOP_DELAY_MIN = 0; // highest speed of the animation, one frame's duration (ms)
 
 
 /**********************
  * Loading and execution functions
  */
 
-function load_animation(source, target_id, width, height) {
+ 
+function load_animation(source_file, target_id, width, height) {
+	SOURCE_FILE = source_file;
+
 	PARENT = document.getElementById(target_id);
 	WIDTH = width;
 	HEIGHT = height;
+
+	speed("very fast");
 
 	// Resize the target node
 	PARENT.style.width = WIDTH + "px";
@@ -44,9 +52,6 @@ function load_animation(source, target_id, width, height) {
 	loading.style.color = "gray";
 	PARENT.appendChild(loading);
 
-	// Include others scripts
-	include_scripts();
-
 	// Read the XML file using AJAX
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -54,7 +59,7 @@ function load_animation(source, target_id, width, height) {
 			read_xml_file(xhr.responseText);
 		}
 	};
-	xhr.open("GET", source, true);
+	xhr.open("GET", SOURCE_FILE, true);
 	xhr.send();
 }
 
@@ -62,16 +67,16 @@ function read_xml_file(contents) {
 	var parser = new DOMParser();
 	var root = parser.parseFromString(contents ,"text/xml");
 
-	// Retrieve init, background, objects and programs nodes
-	var framerate_node = root.getElementsByTagName("framerate")[0];
+	// Retrieve sped, init, background, objects and programs nodes
+	var speed_node = root.getElementsByTagName("speed")[0];
 	var init_node = root.getElementsByTagName("init")[0];
 	var background_node = root.getElementsByTagName("background")[0];
 	var objects_node = root.getElementsByTagName("objects")[0];
 	var programs_node = root.getElementsByTagName("programs")[0];
 
-	// If the framerate node node exists
-	if (framerate_node) {
-		// TODO
+	// If the speed node node exists
+	if (speed_node) {
+		speed(speed_node.textContent);
 	}
 
 	// If the init's node exists
@@ -82,6 +87,9 @@ function read_xml_file(contents) {
 	// If the background's node exists
 	if (background_node) {
 		BG_IMAGE = background_node.textContent;
+		// The image path is relative to the source file's one
+		var source_file_path = SOURCE_FILE.substr(0, SOURCE_FILE.lastIndexOf("/") + 1);
+		BG_IMAGE = source_file_path + BG_IMAGE;
 	} else {
 		BG_IMAGE = "";
 	}
@@ -96,9 +104,9 @@ function read_xml_file(contents) {
 			var id = read_object.textContent;
 			var x = parseInt(read_object.getAttribute("x")) | 0;
 			var y = parseInt(read_object.getAttribute("y")) | 0;
-			var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [255, 255, 255];
+			var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
 			var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : true;
-			var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [255, 255, 255];
+			var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
 			var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : true;
 			var layer = parseInt(read_object.getAttribute("layer")) | 0;
 			LAYERS.add(layer);
@@ -109,17 +117,18 @@ function read_xml_file(contents) {
 			if (type == "object_text") {
 				var text = read_object.getAttribute("text");
 				var font = read_object.getAttribute("font").split(",");
-				var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
+				var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
 				var border = parseInt(read_object.getAttribute("border")) | 0;
-				var width = parseInt(read_object.getAttribute("width")) | text.length * (parseInt(font[1])/2 + 1);
-				var height = parseInt(read_object.getAttribute("height")) | parseInt(font[1]) + 8;
+				var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
+				var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
 				var halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
 				var valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-				new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, text, font, color, border, width, height, halignment, valignment);
+				new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, border, width, height, halignment, valignment);
 			} else if (type == "object_image") {
-				var width = parseInt(read_object.getAttribute("width")) | 100;
-				var height = parseInt(read_object.getAttribute("height")) | 100;
+				var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
+				var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
 				var image = read_object.getAttribute("image");
+				OBJECTS_IMAGE.push(id);
 				new_object = new ImageFile(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
 			} else if (type == "object_rectangle") {
 				var width = parseInt(read_object.getAttribute("width"));
@@ -127,8 +136,8 @@ function read_xml_file(contents) {
 				var round = parseInt(read_object.getAttribute("round")) | 0;
 				new_object = new Rectangle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
 			} else if (type == "object_polygon") {
-				var coord_x = parseInt(read_object.getAttribute("coord_x"));
-				var coord_y = parseInt(read_object.getAttribute("coord_y"));
+				var coord_x = parseIntArray(read_object.getAttribute("coord_x"));
+				var coord_y = parseIntArray(read_object.getAttribute("coord_y"));
 				new_object = new Polygon(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
 			} else if (type == "object_circle") {
 				var radius = parseInt(read_object.getAttribute("radius"));
@@ -144,7 +153,19 @@ function read_xml_file(contents) {
 				var scaleY = parseInt(read_object.getAttribute("scaleY"));
 				var unitX = read_object.getAttribute("unitX");
 				var unitY = read_object.getAttribute("unitY");
-				new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, height, width, scaleX, scaleY, unitX, unitY);
+				new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY);
+			} else if (type == "object_copy") {
+				var idcopy = read_object.getAttribute("idcopy");
+				var initial_object = OBJECTS.get(idcopy);
+				if (initial_object == null) {
+					console.log("[animation.js] L'objet " + idcopy + " à copier n'existe pas");
+				} else {
+					new_object = initial_object.clone();
+					new_object.setId(id);
+					for (var i = 1; i < read_object.attributes.length; ++i) { // i = 1 in order to avoid the first attribute (which is "object")
+						new SetProperty(new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
+					}
+				}
 			}
 			OBJECTS.set(id, new_object);
 		}
@@ -222,15 +243,15 @@ function read_xml_file(contents) {
 					new_instruction = new Right(OBJECTS.get(object_id), x, dx);
 				} else if (type == "angle") {
 					var degrees = parseInt(read_instruction.getAttribute("degrees"));
-					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), degrees);
+					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object_id), "angle", degrees);
 				} else if (type == "setproperty") {
 					var object = read_instruction.getAttribute("object");
 					var property = read_instruction.getAttribute("property");
 					var value = read_instruction.getAttribute("value");
 					new_instruction = new SetProperty(OBJECTS.get(object_id), OBJECTS.get(object), property, value);
 				} else if (type == "blink") {
-					var times = parseInt(read_instruction.getAttribute("object"));
-					var delay = parseInt(read_instruction.getAttribute("property"));
+					var times = parseInt(read_instruction.getAttribute("times"));
+					var delay = parseInt(read_instruction.getAttribute("delay"));
 					new_instruction = new Blink(OBJECTS.get(object_id), times, delay);
 				} else if (type == "stop") {
 					new_instruction = new Stop(null);
@@ -260,9 +281,9 @@ function execute_instructions(object_id, instruction_number, labels) {
 	var program = PROGRAMS.get(object_id);
 	var instruction = program[instruction_number];
 
-	var continue_execution = instruction_number < (program.length - 1);
 	var next_instruction = instruction_number;
-
+	var continue_execution = true;
+	
 	// Execute the instruction if the state of the object is the default one
 	if (OBJECTS.get(object_id).getState() == DEFAULT_STATE) {
 		var instruction_type = instruction.constructor.name;
@@ -276,13 +297,14 @@ function execute_instructions(object_id, instruction_number, labels) {
 		} else {
 			instruction.execute();
 			next_instruction = instruction_number + 1;
+			continue_execution = next_instruction < program.length;
 		}
 	}
 
 	if (continue_execution) {
 		setTimeout(function() {
 			execute_instructions(object_id, next_instruction, labels);
-		}, 10);
+		}, 1);
 	}
 }
 
@@ -294,6 +316,10 @@ function execute_instructions(object_id, instruction_number, labels) {
 function preload() { // preload() runs once
 	if (BG_IMAGE != "") {
 		BG_IMAGE = loadImage(BG_IMAGE);
+	}
+
+	for (var object_id of OBJECTS_IMAGE) {
+		OBJECTS.get(object_id).loadImage();
 	}
 }
 
@@ -311,6 +337,7 @@ function draw() {
 
 	frameRate(FRAME_RATE);
 	
+	// Display the background image
 	if (BG_IMAGE != null) {
 		background(BG_IMAGE);
 	}
@@ -326,12 +353,9 @@ function draw() {
 }
 
 function canvasClicked() {
-	// console.clear();
-	// console.log("========================= " + mouseX + " " + mouseY + " ===========================");
 	// Get the visible objects that are under the cursor position
 	for (object of OBJECTS.values()) {
 		if (object.getVisible()) {
-			// TODO changer les hitbox des objets et remplacer le if ci dessus par celui ci :
 			if (object.isClicked(mouseX, mouseY)) {
 				new Trigger(null, object, WAITING_CLICK_STATE).execute();
 			}
@@ -347,46 +371,69 @@ function canvasClicked() {
  * Others functions 
  */
 
-function include_scripts() {
+function speed(speed) {
+	switch (speed) {
+		case "very slow":
+			LOOP_DELAY = LOOP_DELAY_MAX;
+			break;
+		case "slow":
+			LOOP_DELAY = LOOP_DELAY_MAX * 0.75 + LOOP_DELAY-MIN * 0.25;
+			break;
+		case "normal":
+			LOOP_DELAY = LOOP_DELAY_MAX * 0.50 + LOOP_DELAY-MIN * 0.50;
+			break;
+		case "fast":
+			LOOP_DELAY = LOOP_DELAY_MAX * 0.25 + LOOP_DELAY-MIN * 0.75;
+			break;
+		case "very fast":
+			LOOP_DELAY = LOOP_DELAY_MIN;
+			break;
+		default:
+			console.log("Unrecognized speed, availables values are 'very slow', 'slow', 'normal', 'fast', 'very fast'.");
+	}
+}
+
+function include_animation_files(path) {
+	path += "/";
 	scripts = [
 		// p5.js
 		"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js",
 		// Objects
-		"js/Objects/AnimatedObject.js",
-		"js/Objects/Ellipse.js",
-		"js/Objects/Circle.js",
-		"js/Objects/Grid.js",
-		"js/Objects/ImageFile.js",
-		"js/Objects/Landmark.js",
-		"js/Objects/Polygon.js",
-		"js/Objects/Rectangle.js",
-		"js/Objects/Text.js",
+		path + "Objects/AnimatedObject.js",
+		path + "Objects/Ellipse.js",
+		path + "Objects/Circle.js",
+		path + "Objects/Grid.js",
+		path + "Objects/ImageFile.js",
+		path + "Objects/Landmark.js",
+		path + "Objects/Polygon.js",
+		path + "Objects/Rectangle.js",
+		path + "Objects/Text.js",
 		// Instructions
-		"js/Instructions/Instruction.js",
-		"js/Instructions/Blink.js",
-		"js/Instructions/Center.js",
-		"js/Instructions/CenterX.js",
-		"js/Instructions/CenterY.js",
-		"js/Instructions/Click.js",
-		"js/Instructions/Down.js",
-		"js/Instructions/GoTo.js",
-		"js/Instructions/Label.js",
-		"js/Instructions/Left.js",
-		"js/Instructions/MoveTo.js",
-		"js/Instructions/Right.js",
-		"js/Instructions/SetProperty.js",
-		"js/Instructions/Sleep.js",
-		"js/Instructions/State.js",
-		"js/Instructions/Stop.js",
-		"js/Instructions/Trigger.js",
-		"js/Instructions/Up.js",
-		"js/Instructions/Wait.js",
+		path + "Instructions/Instruction.js",
+		path + "Instructions/Blink.js",
+		path + "Instructions/Center.js",
+		path + "Instructions/CenterX.js",
+		path + "Instructions/CenterY.js",
+		path + "Instructions/Click.js",
+		path + "Instructions/Down.js",
+		path + "Instructions/GoTo.js",
+		path + "Instructions/Label.js",
+		path + "Instructions/Left.js",
+		path + "Instructions/MoveTo.js",
+		path + "Instructions/Right.js",
+		path + "Instructions/SetProperty.js",
+		path + "Instructions/Sleep.js",
+		path + "Instructions/State.js",
+		path + "Instructions/Stop.js",
+		path + "Instructions/Trigger.js",
+		path + "Instructions/Up.js",
+		path + "Instructions/Wait.js",
 	];
 
 	for (s of scripts) {
 		var script = document.createElement("script");
 		script.src = s;
-		PARENT.appendChild(script);
+		document.lastChild.appendChild(script);
 	}
 }
 

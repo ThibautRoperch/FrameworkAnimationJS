@@ -4,19 +4,20 @@
 
 class MoveTo extends Instruction {
 
-	constructor(object, x, y, interval_x, interval_y, delay) {
+	constructor(object, x, y, interval_x, interval_y, delay, loop_delay) {
 		super(object);
 		this.x = x;
 		this.y = y;
 		this.interval_x = interval_x;
 		this.interval_y = interval_y;
 		this.delay = delay;
+		this.loop_delay = loop_delay;
 	}
 
 	execute() {
 		this.object.setState(MOVING_STATE);
 
-		move(instruction);
+		move(this);
 		function move(instruction) {
 			if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() > instruction.x)) {
 				
@@ -25,7 +26,7 @@ class MoveTo extends Instruction {
 				
 				setTimeout(function() {
 					move(instruction);
-				}, FRAME_RATE*instruction.delay);
+				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() > instruction.x)) {
 					
@@ -34,7 +35,7 @@ class MoveTo extends Instruction {
 		
 				setTimeout(function() {
 					move(instruction);
-				}, FRAME_RATE*instruction.delay);
+				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() < instruction.x)) {
 					
@@ -43,7 +44,7 @@ class MoveTo extends Instruction {
 		
 				setTimeout(function() {
 					move(instruction);
-				}, FRAME_RATE*instruction.delay);
+				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() < instruction.x)) {
 					
@@ -52,7 +53,7 @@ class MoveTo extends Instruction {
 			
 				setTimeout(function() {
 					move(instruction);
-				}, FRAME_RATE*this.delay);
+				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 		}
 
