@@ -6,50 +6,52 @@
 }
     
 body {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 100px;
+    padding-left: 50px;
+    padding-right: 70px;
     color: rgba(0, 0, 0, 0.8);
     background: silver;
 }
 
+body section, body aside {
+    display: flex;
+    padding: 20px;    
+    flex-direction: column;
+    background: white;
+}
+
 body header {
+    position: fixed;
+    top: 0;
     width: 100%;
     margin-bottom: 20px;
     background: blueviolet;
 }
 
-body section, body header div {
-    width: 75%;
+body header div {
     margin: auto;    
     padding: 20px;
 }
 
 body section {
-    display: flex;
-    flex-direction: column;
-    background: white;
+    width: 60%;
+}
+
+body aside {
+    width: 30%;
 }
 
 h2 {
-    margin: 10px 0;
+    margin: 15px 0;
+    padding-bottom: 5px;
     font-size: 18px;
     border-bottom: 2px solid gray;
 }
 
-objects, #objects {
-    min-height: 10px;
-}
-
-objects {
-    display: flex;
-    flex-direction: row;
-}
-    
-objects > * {
-    flex: 1;
-    margin-right: 15px;
-}
-
-objects > *:last-child {
-    margin-right: 0;
+h2:first-child {
+    margin-top: 0;
 }
 
 #objects {
@@ -65,61 +67,102 @@ objects > *:last-child {
     flex-direction: column;
 }
 
-#objects li header {
+#objects li headerobj {
     display: flex;
     padding: 10px 5%;
     border: 1px solid rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
-#objects li header:hover {
+#objects li headerobj:hover {
     border: 1px solid rgba(0, 0, 0, 0.4);
     box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
 }
 
-#objects li header > * {
+#objects li headerobj > * {
     flex: 1;
 }
 
-#objects li section {
+#objects li headerobj arrow {
+    text-align: right;
+}
+
+#objects li sectionobj {
     display: flex;
     flex-direction: row;
     border: 1px solid silver;
     border-top: 0;
 }
 
-#objects li section.hidden, #objects li section {
+#objects li sectionobj.hidden, #objects li sectionobj {
     display: none;
 }
 
-#objects li section.displayed {
+#objects li sectionobj.displayed {
     display: flex;
 }
 
-#objects li section article {
+#objects li sectionobj article {
     flex: 1;
     display: flex;
-    padding: 20px 30px;
     flex-direction: column;
 }
 
-#objects li section article:first-child {
-    flex: 0.35;
+#objects li sectionobj article:first-child {
+    flex: 0.7;
     border-right: 1px solid silver;
 }
 
-#objects li section article property {
+#objects li sectionobj article property {
     display: flex;
     flex-direction: row;
+    margin-bottom: 5px;
+    padding: 5px 5px 5px 15px;
+    transition: all .1s ease-in-out;
 }
 
-#objects li section article property > * {
+#objects li sectionobj article property:last-child {
+    margin-bottom: 0;
+}
+
+#objects li sectionobj article property:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#objects li sectionobj article property > * {
     flex: 1;
     text-align: right;
 }
 
-#objects li section article property label {
+#objects li sectionobj article property label {
+    line-height: 200%;
     text-align: left;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+objects, instructions {
+    display: flex;
+    flex-direction: row;
+}
+
+instructions {
+    padding: 5px;
+    margin-top: 5px;
+    border-top: 1px solid silver;
+}
+
+objects > * {
+    flex: 1;
+    margin-right: 15px;
+}
+
+instructions > * {
+    flex: 1;    
+    margin-right: 5px;
+}
+
+objects > *:last-child, instructions > *:last-child {
+    margin-right: 0;
 }
 
 button {
@@ -132,4 +175,8 @@ button {
 
 button:hover {
     background: rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    border: 1px solid silver;
 }

@@ -316,7 +316,6 @@ class Animation {
 
     setup(drawing) {
         this.canvas = drawing.createCanvas(this.width, this.height);
-        // this.canvas.mouseClicked(this.canvasClicked);
         this.canvas.parent(this.parent);
 
         // Remove the loading message
