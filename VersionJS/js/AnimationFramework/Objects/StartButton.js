@@ -2,44 +2,50 @@
  * 
  */
 
-class Rectangle extends AnimatedObject {
+class StartButton extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, round) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
-        this.width = width;
-        this.height = height;
-        this.round = round; // tl, tr, bl, br
+	constructor(x, y, text, present) {
+        super(null, x, y, [255, 255, 255], false, [0, 0, 0], false, DEFAULT_STATE, null, true, 1, 0);
+        this.text = text;
+        this.present = present;
+
+        this.font_size = 12;
+        this.width = this.text.length * (parseInt(this.font_size) / 2 + 1) + 2;
+        this.height = this.font_size + 13;
     }
     
-    getWidth() {
-        return this.width;
+    getText() {
+        return this.text;
+    }
+    
+    getPresent() {
+        return this.present;
     }
 
-    getHeight() {
-        return this.height;
+    setText(text) {
+        this.text = text;
     }
 
-    getRound() {
-        return this.round;
-    }
-
-    setWidth(width) {
-        this.width = width;
-    }
-
-    setHeight(height) {
-        this.height = height;
-    }
-
-    setRound(bocolor) {
-        this.bocolor = round;
+    setPresent(present) {
+        this.present = present;
     }
 
     draw(drawing) {
-        super.draw(drawing);
-        drawing.rect(this.x, this.y, this.width, this.height, this.round[0], this.round[1], this.round[2], this.round[3]);
+		super.draw(drawing);
+        // Background
+       	drawing.rect(this.x - this.width / 2 + 2, this.y - this.height / 2 + 2, this.width, this.height); 
+		// Remplacer les @ par \n TODO p-ê utiliser textLeading (https://p5js.org/reference/#/p5/textLeading)
+        // Text's color, size and style
+        drawing.noStroke();
+		drawing.fill(0, 0, 255, 255);
+		drawing.textSize(this.font_size);
+		drawing.textStyle(drawing.NORMAL);
+		// Text alignment
+		drawing.textAlign(drawing.CENTER, drawing.CENTER);
+		// Display
+		drawing.text(this.text, this.x + 2, this.y + 4);
     }
-    
+
     isCliked(x, y) {
 		if((x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height))
             return true;

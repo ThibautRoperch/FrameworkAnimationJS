@@ -98,6 +98,7 @@ class Text extends AnimatedObject {
        	drawing.rect(this.x, this.y, this.real_width, this.real_height); 
 		// Remplacer les @ par \n TODO p-ê utiliser textLeading (https://p5js.org/reference/#/p5/textLeading)
 		// Text's color, font, size and style
+		drawing.noStroke();
 		drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
 		drawing.textFont(this.font[0]);
 		drawing.textSize(parseInt(this.font[1]));

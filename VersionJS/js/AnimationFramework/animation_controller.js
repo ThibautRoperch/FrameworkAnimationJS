@@ -127,6 +127,7 @@ function include_animation_files(path) {
 		path + "Objects/Landmark.js",
 		path + "Objects/Polygon.js",
 		path + "Objects/Rectangle.js",
+		path + "Objects/StartButton.js",
 		path + "Objects/Text.js",
 		// Instructions
 		path + "Instructions/Instruction.js",
