@@ -42,7 +42,11 @@ class ImageFile extends AnimatedObject {
 
     draw(drawing) {
         super.draw(drawing);
-        drawing.image(this.loaded_image, this.x, this.y);
+        if (this.width == undefined || this.height == undefined) {
+            drawing.image(this.loaded_image, this.x, this.y);
+        } else {
+            drawing.image(this.loaded_image, this.x, this.y, this.width, this.height);
+        }
     }
 
     isClicked(x, y) {

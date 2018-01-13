@@ -21,9 +21,7 @@ class Animation {
         this.loop_delay = 10; // delay between two intruction's move
 
         this.start_button = new StartButton(this.width / 2, this.height / 2, "Click me to start", true);
-        // TODO détailler les valeurs par défaut dans le main.txt
-        // centré par défaut
-        // TODO faire blink the startbutton
+        new Blink(this.start_button, 6, 60, this.loop_delay).execute();
 
         // Resize the target node
         this.parent.style.width = this.width + "px";
@@ -339,17 +337,18 @@ class Animation {
             drawing.background(this.bg_image);
         }
 
-        // Display objects of each layer, if they're set as visible
-        for (var layer of this.layers) {
-            for (var object of this.objects.values()) {
-                if (object.getLayer() == layer && object.getVisible()) {
-                    object.draw(drawing);
-                }
-            }
-        }
-
+        // Display the start button if it has to
         if (this.start_button.getPresent()) {
             this.start_button.draw(drawing);
+        } else {
+            // Display objects of each layer, if they're set as visible
+            for (var layer of this.layers) {
+                for (var object of this.objects.values()) {
+                    if (object.getLayer() == layer && object.getVisible()) {
+                        object.draw(drawing);
+                    }
+                }
+            }
         }
     }
 
@@ -361,6 +360,10 @@ class Animation {
                     new Trigger(null, object, WAITING_CLICK_STATE).execute();
                 }
             }
+        }
+
+        if (this.start_button.getPresent() && this.start_button.isClicked(drawing.mouseX, drawing.mouseY)) {
+            this.start_button.setPresent(false);
         }
 	}
 

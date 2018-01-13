@@ -37,7 +37,7 @@ class StartButton extends AnimatedObject {
 		// Remplacer les @ par \n TODO p-ê utiliser textLeading (https://p5js.org/reference/#/p5/textLeading)
         // Text's color, size and style
         drawing.noStroke();
-		drawing.fill(0, 0, 255, 255);
+        drawing.fill(0, 0, 255, this.opacity * 255);
 		drawing.textSize(this.font_size);
 		drawing.textStyle(drawing.NORMAL);
 		// Text alignment
@@ -46,8 +46,8 @@ class StartButton extends AnimatedObject {
 		drawing.text(this.text, this.x + 2, this.y + 4);
     }
 
-    isCliked(x, y) {
-		if((x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height))
+    isClicked(x, y) {
+		if((x >= this.x - this.width / 2 + 2) && (x <= this.x + this.width / 2 + 2) && (y >= this.y - this.height / 2 + 2) && (y <= this.y + this.height / 2 + 2))
             return true;
         return false;
     }

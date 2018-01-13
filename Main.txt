@@ -104,6 +104,8 @@ Le noeud <speed> permet de changer la vitesse de rafraichissement du dessin : "v
 
 La DTD a été mise à jour en conséquence.
 
+L'objet start_button du noeud <init> est par défaut visible, centré dans la fenêtre, et contient le texte "Click me to start" (ça ne change pas par rapport à la version Java).
+
 Le point d'ancrage des objets et du canevas est en haut à gauche :
 o---> x
 |
