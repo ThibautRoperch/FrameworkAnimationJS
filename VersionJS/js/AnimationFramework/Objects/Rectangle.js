@@ -31,8 +31,8 @@ class Rectangle extends AnimatedObject {
         this.height = height;
     }
 
-    setRound(bocolor) {
-        this.bocolor = round;
+    setRound(round) {
+        this.round = round;
     }
 
     draw(drawing) {

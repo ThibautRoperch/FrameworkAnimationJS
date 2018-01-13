@@ -163,7 +163,7 @@ class Animation {
                         new_object = initial_object.clone();
                         new_object.setId(id);
                         for (var i = 1; i < read_object.attributes.length; ++i) { // i = 1 in order to avoid the first attribute (which is "object")
-                            new SetProperty(new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
+                            new SetProperty(null, new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
                         }
                     }
                 }
