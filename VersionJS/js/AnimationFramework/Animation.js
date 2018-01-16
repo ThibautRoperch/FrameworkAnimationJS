@@ -20,6 +20,9 @@ class Animation {
         this.bg_image = null; // path of the background image (can be "" if there isn't background image)
         this.loop_delay = 10; // delay between two intruction's move
 
+        this.start_button = new StartButton(this.width / 2, this.height / 2, "Click me to start", true);
+        new Blink(this.start_button, 6, 60, this.loop_delay).execute();
+
         // Resize the target node
         this.parent.style.width = this.width + "px";
         this.parent.style.height = this.height + "px";
@@ -72,7 +75,13 @@ class Animation {
 
         // If the init's node exists
         if (init_node) {
-            // TODO
+            var start_node = init_node.getElementsByTagName("start_button")[0];
+            if (start_node) {
+                if (start_node.hasAttribute("text")) this.start_button.setText(start_node.hasAttribute("text"));
+                if (start_node.hasAttribute("x")) this.start_button.setX(start_node.getAttribute("x"));
+                if (start_node.hasAttribute("y")) this.start_button.setY(start_node.getAttribute("y"));
+                if (start_node.hasAttribute("present") && start_node.getAttribute("present") == "false") this.start_button.setPresent(false);
+            }
         }
 
         // If the background's node exists
@@ -154,7 +163,7 @@ class Animation {
                         new_object = initial_object.clone();
                         new_object.setId(id);
                         for (var i = 1; i < read_object.attributes.length; ++i) { // i = 1 in order to avoid the first attribute (which is "object")
-                            new SetProperty(new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
+                            new SetProperty(null, new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
                         }
                     }
                 }
@@ -272,11 +281,11 @@ class Animation {
         var program = this.programs.get(object_id);
         var instruction = program[instruction_number];
 
-        var next_instruction = instruction_number;
-        var continue_execution = true;
+        var next_instruction = instruction_number; // the next instruction is by default the current one
+        var continue_execution = true; // this programme will by default continue
         
         // Execute the instruction if the state of the object is the default one
-        if (this.objects.get(object_id).getState() == DEFAULT_STATE) {
+        if (!this.start_button.getPresent() && this.objects.get(object_id).getState() == DEFAULT_STATE) {
             var instruction_type = instruction.constructor.name;
             if (instruction_type == "Label") {
                 labels.set(instruction.getValue(), instruction_number + 1);
@@ -328,11 +337,16 @@ class Animation {
             drawing.background(this.bg_image);
         }
 
-        // Display objects of each layer, if they're set as visible
-        for (var layer of this.layers) {
-            for (var object of this.objects.values()) {
-                if (object.getLayer() == layer && object.getVisible()) {
-                    object.draw(drawing);
+        // Display the start button if it has to
+        if (this.start_button.getPresent()) {
+            this.start_button.draw(drawing);
+        } else {
+            // Display objects of each layer, if they're set as visible
+            for (var layer of this.layers) {
+                for (var object of this.objects.values()) {
+                    if (object.getLayer() == layer && object.getVisible()) {
+                        object.draw(drawing);
+                    }
                 }
             }
         }
@@ -346,6 +360,10 @@ class Animation {
                     new Trigger(null, object, WAITING_CLICK_STATE).execute();
                 }
             }
+        }
+
+        if (this.start_button.getPresent() && this.start_button.isClicked(drawing.mouseX, drawing.mouseY)) {
+            this.start_button.setPresent(false);
         }
 	}
 

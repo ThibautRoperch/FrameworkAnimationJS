@@ -38,6 +38,22 @@ function new_object(object_dom) {
 			arrow.innerHTML = "\\/";
 			header.appendChild(arrow);
 	li.appendChild(header);
+
+	// init default attributs
+	var x = 0;
+	var y = 0;
+	var bgcolor = [0,0,0]; // r, g, b
+	var bgtransparent = true;
+	var bocolor = [0,0,0]; // r, g, b
+	var botransparent = true;
+	var state = DEFAULT_STATE;
+	var layer = 0;
+	var visible = false;
+	var opacity = 1;
+	var angle = 0;
+	var width = 50;
+	var height = 50;
+
 	var section = document.createElement("sectionobj");
 		// Properties
 		var article1 = document.createElement("article");
@@ -49,7 +65,7 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "number";
-					input.placeholder = "0";
+					input.placeholder = x;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
@@ -61,7 +77,7 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "number";
-					input.placeholder = "0";
+					input.placeholder = y;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
@@ -73,7 +89,7 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "text";
-					input.placeholder = "0,0,0";
+					input.placeholder = bgcolor;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
@@ -104,7 +120,7 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "text";
-					input.placeholder = "0,0,0";
+					input.placeholder = bocolor;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
@@ -135,7 +151,7 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "number";
-					input.placeholder = "0";
+					input.placeholder = layer;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
@@ -180,7 +196,7 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "number";
-					input.placeholder = "0";
+					input.placeholder = angle;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
@@ -203,6 +219,7 @@ function new_object(object_dom) {
 	// switch case
 	switch (object_dom.innerHTML) {
 		case "Text":
+			// text
 			property = document.createElement("property");
 				property.className = "text";
 				label = document.createElement("label");
@@ -213,23 +230,47 @@ function new_object(object_dom) {
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
-			object = new Text(obj_id, 0, 0, [0, 0, 0], true, [0, 0, 0], true, DEFAULT_STATE, 0, false, 1, 0); // todo
-			break;
-		case "Image":
+			// font
+			var font = ["Courier", 14, "normal"];
 			property = document.createElement("property");
-			property.className = "image";
-			label = document.createElement("label");
-				label.innerHTML = "image";
-				property.appendChild(label);
-			input = document.createElement("input");
-				input.type = "file";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
-			article1.appendChild(property);
-			object = new ImageFile(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image); //todo
-			break;
-
-		case "Rectangle":
+				property.className = "font";
+				label = document.createElement("label");
+					label.innerHTML = "font";
+					property.appendChild(label);
+				input = document.createElement("input");
+					input.type = "text";
+					input.value = font;
+					input.onchange = function() { change_property(obj_id, this); };
+					property.appendChild(input);
+				article1.appendChild(property);
+			// color
+			var color = [255, 255, 255];
+			property = document.createElement("property");
+				property.className = "color";
+				label = document.createElement("label");
+					label.innerHTML = "color";
+					property.appendChild(label);
+				input = document.createElement("input");
+					input.type = "text";
+					input.placeholder = color;
+					input.onchange = function() { change_property(obj_id, this); };
+					property.appendChild(input);
+				article1.appendChild(property);
+			// border
+			var border = 0;
+			property = document.createElement("property");
+				property.className = "border";
+				label = document.createElement("label");
+					label.innerHTML = "border";
+					property.appendChild(label);
+				input = document.createElement("input");
+					input.type = "number";
+					input.placeholder = border;
+					input.onchange = function() { change_property(obj_id, this); };
+					property.appendChild(input);
+				article1.appendChild(property);
+			// width
+			var width = undefined;
 			property = document.createElement("property");
 				property.className = "width";
 				label = document.createElement("label");
@@ -237,11 +278,12 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "number";
-					input.value = "50";
-					input.required = "required";
+					input.placeholder = width;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
+			// height
+			var height = undefined;
 			property = document.createElement("property");
 				property.className = "height";
 				label = document.createElement("label");
@@ -249,11 +291,107 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "number";
-					input.value = "50";
+					input.placeholder = height;
+					input.onchange = function() { change_property(obj_id, this); };
+					property.appendChild(input);
+				article1.appendChild(property);
+			// halignment
+			var halignment = "left";
+			property = document.createElement("property");
+				property.className = "halignment";
+				label = document.createElement("label");
+					label.innerHTML = "halignment";
+					property.appendChild(label);
+				input = document.createElement("input");
+					input.type = "text";
+					input.placeholder = halignment;
+					input.onchange = function() { change_property(obj_id, this); };
+					property.appendChild(input);
+				article1.appendChild(property);
+			// valignment
+			var valignment = "top";
+			property = document.createElement("property");
+				property.className = "valignment";
+				label = document.createElement("label");
+					label.innerHTML = "valignment";
+					property.appendChild(label);
+				input = document.createElement("input");
+					input.type = "text";
+					input.placeholder = valignment;
+					input.onchange = function() { change_property(obj_id, this); };
+					property.appendChild(input);
+				article1.appendChild(property);
+			object = new Text(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, "", font, color, border, width, height, halignment, valignment);
+			break;
+		case "Image":
+			// width
+			property = document.createElement("property");
+			property.className = "width";
+			label = document.createElement("label");
+				label.innerHTML = "width";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			// height
+			property = document.createElement("property");
+			property.className = "height";
+			label = document.createElement("label");
+				label.innerHTML = "height";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			// image
+			property.appendChild(input);
+			property = document.createElement("property");
+			property.className = "image";
+			label = document.createElement("label");
+				label.innerHTML = "image";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "file";
+				input.required = "required";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			object = new ImageFile(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, undefined, undefined, image); 
+			break;
+		case "Rectangle":
+			// width
+			var width = 33;
+			property = document.createElement("property");
+				property.className = "width";
+				label = document.createElement("label");
+					label.innerHTML = "width";
+					property.appendChild(label);
+				input = document.createElement("input");
+					input.type = "number";
+					input.value = width;
 					input.required = "required";
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
+			// height
+			var height = 10;
+			property = document.createElement("property");
+				property.className = "height";
+				label = document.createElement("label");
+					label.innerHTML = "height";
+					property.appendChild(label);
+				input = document.createElement("input");
+					input.type = "number";
+					input.value = height;
+					input.required = "required";
+					input.onchange = function() { change_property(obj_id, this); };
+					property.appendChild(input);
+				article1.appendChild(property);
+			// round
+			var round = [0, 0, 0, 0];
 			property = document.createElement("property");
 				property.className = "round";
 				label = document.createElement("label");
@@ -261,77 +399,224 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "text";
-					input.placeholder = "0,0,0,0";
+					input.placeholder = round;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
-			object = new Rectangle(obj_id, 0, 0, [0, 0, 0], true, [0, 0, 0], true, DEFAULT_STATE, 0, false, 1, 0, 50, 50, [0, 0, 0, 0]);
-			console.log(object);
+			object = new Rectangle(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, round);
 			break;
 		case "Polygon":
+			// coord_x
+			var coord_x = [];
 			property = document.createElement("property");
-			property.className = "polygon";
-			label = document.createElement("label");
-				label.innerHTML = "polygon";
-				property.appendChild(label);
-			input = document.createElement("input");
-				input.type = "text";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
-			article1.appendChild(property);
-			object = new Polygon(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image); //todo
+				property.className = "coord_x";
+				label = document.createElement("label");
+					label.innerHTML = "coord_x";
+					property.appendChild(label);
+				input = document.createElement("input");
+					input.type = "text"
+					input.value = "";
+					input.required = "required";
+					input.onchange = function() { change_property(obj_id, this); };
+					property.appendChild(input);
+				article1.appendChild(property);
+			// coord_y
+			var coord_y = [];
+			property = document.createElement("property");
+				property.className = "coord_y";
+				label = document.createElement("label");
+					label.innerHTML = "coord_y";
+					property.appendChild(label);
+				input = document.createElement("input");
+					input.type = "text";
+					input.value = "";
+					input.required = "required";
+					input.onchange = function() { change_property(obj_id, this); };
+					property.appendChild(input);
+				article1.appendChild(property);	
+			object = new Polygon(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, coord_x, coord_y); 
 			break;
 		case "Circle":
+			// radius
+			var radius = 10;
 			property = document.createElement("property");
-			property.className = "circle";
+			property.className = "radius";
 			label = document.createElement("label");
-				label.innerHTML = "circle";
+				label.innerHTML = "radius";
 				property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "text";
+				input.type = "number";
+				input.value = "10";
+				input.required = "required";
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Circle(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image); //todo
+			object = new Circle(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, radius, radius); 
 			break;
 		case "Ellipse":
+			// width
 			property = document.createElement("property");
-			property.className = "ellipse";
+			property.className = "width";
 			label = document.createElement("label");
-				label.innerHTML = "ellipse";
+				label.innerHTML = "width";
 				property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "text";
+				input.type = "number";
+				input.value = "50";
+				input.required = "required";
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Ellipse(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image); //todo
+			// height
+			property = document.createElement("property");
+			property.className = "height";
+			label = document.createElement("label");
+				label.innerHTML = "height";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.value = "50";
+				input.required = "required";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			object = new Ellipse(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height); 
 			break;
-		case "Landmark":
+		case "Landmark":			
+			// width
 			property = document.createElement("property");
-			property.className = "landmark";
+			property.className = "width";
 			label = document.createElement("label");
-				label.innerHTML = "landmark";
+				label.innerHTML = "width";
 				property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "text";
+				input.type = "number";
+				input.value = "50";
+				input.required = "required";
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Landmark(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image); //todo
+			// height
+			property = document.createElement("property");
+			property.className = "height";
+			label = document.createElement("label");
+				label.innerHTML = "height";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.value = "50";
+				input.required = "required";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			// scaleX
+			var scaleX = 1;
+			property = document.createElement("property");
+			property.className = "scaleX";
+			label = document.createElement("label");
+				label.innerHTML = "scaleX";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.value = "1";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			// scaleY
+			var scaleY = 1;
+			property = document.createElement("property");
+			property.className = "scaleY";
+			label = document.createElement("label");
+				label.innerHTML = "scaleY";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.value = "1";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			// unitX
+			var unitX = "cm";
+			property = document.createElement("property");
+			property.className = "unitX";
+			label = document.createElement("label");
+				label.innerHTML = "unitX";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "text";
+				input.value = "cm";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			// unitY
+			var unitiY = "cm"
+			property = document.createElement("property");
+			property.className = "unitY";
+			label = document.createElement("label");
+				label.innerHTML = "unitY";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "text";
+				input.value = "cm";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			object = new Landmark(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, scaleX, scaleY, unitX, unitY); 
 			break;
 		case "Grid":
+			// column
+			var column = 3;
 			property = document.createElement("property");
-			property.className = "grid";
+			property.className = "column";
 			label = document.createElement("label");
-				label.innerHTML = "grid";
+				label.innerHTML = "column";
 				property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "text";
+				input.type = "number";
+				input.value = "3";
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Grid(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image); //todo
+			// line
+			var line = 4;
+			property = document.createElement("property");
+			property.className = "line";
+			label = document.createElement("label");
+				label.innerHTML = "line";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.value = "4";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			// column_width
+			var column_width = 15;
+			property = document.createElement("property");
+			property.className = "column_width";
+			label = document.createElement("label");
+				label.innerHTML = "column_width";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.value = "15";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			// line_height
+			var line_height = 10;
+			property = document.createElement("property");
+			property.className = "line_height";
+			label = document.createElement("label");
+				label.innerHTML = "line_height";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.value = "10";
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
+			object = new Grid(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, lines, columns, line_height, column_width); //todo
 			break;
 	}
 
@@ -344,17 +629,7 @@ function new_instruction(object_id, object_dom) {
 }
 
 function change_property(object_id, property_dom) {
-	console.log(property_dom.value);
-	
-// pour les reponses booleenes, on va récupérer des valeurs "true" et "falses" (chaines de caractères), donc traitement préalable
-// pour l'opacité, on va récup une valeur entre 0 et 100 à transformer en une valeur entre 0 et 1
-
-	switch (property_dom.className) {
-		case "x":
-			objects_array[object_id].setX(property_dom.value);
-			break;
-	}
-
+	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
 	draw_animation();
 }
 
@@ -385,6 +660,8 @@ var drawing_dom = document.getElementById("drawing");
 function draw_animation() {
 	var layers = new Set();
 
+	drawing_dom.removeChild(drawing_dom.firstChild);
+
 	new p5(function(draw_ref) {
 
 		draw_ref.preload = function() { // preload function runs once
@@ -411,15 +688,12 @@ function draw_animation() {
 		draw_ref.draw = function() {
 			draw_ref.clear();
 
-			draw_ref.frameRate(60);
+			draw_ref.frameRate(60); // 60 fps
 			
 			// Display the background image
 			// if (BG_IMAGE != null) {
 			// 	background(BG_IMAGE);
 			// }
-
-			draw_ref.fill(3);
-			draw_ref.rect(100, 50, 75, 75);
 
 			// Display objects of each layer, if they're set as visible
 			for (var layer of layers) {

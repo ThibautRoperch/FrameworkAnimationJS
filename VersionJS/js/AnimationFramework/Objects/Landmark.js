@@ -69,8 +69,8 @@ class Landmark extends AnimatedObject {
         
 		drawing.textFont("courrier");
 		drawing.textSize(12);
-        drawing.textStyle(NORMAL);
-        drawing.angleMode(DEGREES);
+        drawing.textStyle(drawing.NORMAL);
+        drawing.angleMode(drawing.DEGREES);
 
         var axis1;       //Vector utilisé pour effectuer la rotation : à placer au milieu du texte
         var axis2;

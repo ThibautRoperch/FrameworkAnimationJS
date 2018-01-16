@@ -5,14 +5,14 @@
 	<objects>
 		<object_text text="aziodazod" font="Courier,28,bold" x="0" y="0" visible="true" angle="30">jl</object_text>
 		  
-	 <object_landmark 
-	 	x="100" y="100"
-		visible="true"
-		bgtransparent="false"
-		height="500" width="500"
-		scaleX="100" scaleY="100"
-		unitX="patate" unitY="cm"> test
-	 </object_landmark>
+		<object_landmark 
+			x="100" y="100"
+			visible="true"
+			bgtransparent="false"
+			height="500" width="500"
+			scaleX="100" scaleY="100"
+			unitX="patate" unitY="cm"> test
+		</object_landmark>
 
 	</objects>
 
