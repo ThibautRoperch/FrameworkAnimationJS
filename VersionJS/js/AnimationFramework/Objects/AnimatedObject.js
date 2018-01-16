@@ -130,6 +130,16 @@ class AnimatedObject {
         else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
         // Rotation
         // todo, si la rotation est possible (tests en cours par bob)
+        
+        drawing.push();        //sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
+            //translate(this.x - 50, this.y + this.height/2);
+            drawing.rotate(-30);
+            drawing.text(this.unitY,0, 0);
+        drawing.pop();
+
+        // Dessin des triangles 
+        
+    
     }
 
 }

@@ -3,7 +3,7 @@
 		img/yellow_blue_linear_gradient.png
 	</background>
 	<objects>
-		<object_text text="aziodazod" font="Courier,28,bold" x="0" y="0" visible="true">jl</object_text>
+		<object_text text="aziodazod" font="Courier,28,bold" x="0" y="0" visible="true" angle="30">jl</object_text>
 		  
 	 <object_landmark 
 	 	x="100" y="100"
