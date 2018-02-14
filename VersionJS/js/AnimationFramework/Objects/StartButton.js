@@ -71,9 +71,5 @@ class StartButton extends AnimatedObject {
         rectangle.setAttribute("round", this.round);
         return rectangle;
     }
-    
-    clone() {
-        return new Text(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.round);
-    }
 
 }

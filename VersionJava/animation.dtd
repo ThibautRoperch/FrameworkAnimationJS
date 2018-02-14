@@ -61,14 +61,6 @@
 <!ATTLIST object_ellipse layer CDATA #IMPLIED >
 <!ATTLIST object_ellipse transparency (true|false) #IMPLIED >
 
-<!ELEMENT object_landmark (#PCDATA) >
-<!ATTLIST object_landmark width CDATA #REQUIRED >
-<!ATTLIST object_landmark height CDATA #REQUIRED >
-<!ATTLIST object_landmark scaleX CDATA #IMPLIED >
-<!ATTLIST object_landmark scaleY CDATA #IMPLIED >
-<!ATTLIST object_landmark unitX CDATA #IMPLIED >
-<!ATTLIST object_landmark unitY (true|false) #IMPLIED >
-
 <!ELEMENT object_extern (#PCDATA) >
 <!ATTLIST object_extern class CDATA #REQUIRED >
 <!ATTLIST object_extern constructor CDATA #REQUIRED >

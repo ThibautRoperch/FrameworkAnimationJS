@@ -58,61 +58,16 @@ class MyClass {
 Changements effectués
 =====================
 
+Voir le compte rendu
+
+Précisions
+==========
+
 Les feuilles de style sont désormais dans le dossier css : <link rel="stylesheet" type="text/css" href="css/css.css" />
 Il faut inclure le script animation_controller.js dans chaque page contenant une animation : <script src="js/animation_controller.js"></script>
 Pour charger une animation (charger un fichier XML, afficher les objets, lancer le programme) : load_animation("animation.xml", "target_node_id", <width>, <height>);
 
 Ajout règles dans le fichier css/css.css.
-
-On considère que tous les objets peuvent avoir une couleur de bordure.
-
-L'attribut "transparency" est remplacé par "bgtransparent" pour tous les objets.
-L'attribut "fgcolor" est renommé par "color" pour l'objet texte (toujours rgb(255, 255, 255) par défaut), et par "bocolor" pour les autres objets.
-
-Les propriétés suivantes ont été ajoutées pour tous les objets :
-- visible (true|false, false par défaut) : l'objet est visible
-- bgtransparent (true|false, true par défaut) : le background est transparent (anciennement "transparency")
-- botransparent (true|false, true par défaut) : la bordure est transparente
-- opacity (nombre entre 0 et 1, 1 par défaut) : l'opacité de l'objet, utile lorsque des objets se superposent
-- angle (nombre, 0 par défaut) : la rotation de l'objet, angle exprimé en degrés
-
-Les propriétés suivantes ont été ajoutées pour l'objet texte :
-- width (entier supérieur à 0, la largeur du texte par défaut) : largeur de la boite contenant le texte
-- height (entier supérieur à 0, la hauteur du texte par défaut) : hauteur de la boite contenant le texte
-- halignment (left|center|right, left par défaut) : alignement horizontal du texte
-- valignment (top|bottom|center|baseline, top par défaut) : alignement vertical du texte
-
-La propriété suivante a été ajoutée pour l'objet rectangle :
-- round (entiers supérieurs à 0, "0, 0, 0, 0" par défaut) : rayon du congé des coins du rectangle (haut gauche, haut droit, bas gauche, bas droit)
-
-Ces propriétés de l'objet image ont été modifiées :
-- width (largeur de l'image) : largeur de l'image par défaut
-- height (hauteur de l'image) : hauteur de l'image par défaut
-
-Les objets suivants ont été ajoutés :
-- object_landmark (repère) : width, height, scaleX, scaleY, unitX, unitY, et les attributs communs aux objets
-- object_copy (objet copieur) : object l'id de l'objet à copier, et les attributs communs aux objets
-
-Toutes les propriétés peuvent être données lors de la création de l'objet et modifiées avec l'instruction <setproperty>
-(hormis la propriété "state" qui est modifiable avec des instructions spécifiques).
-
-L'état par défaut d'un objet du dessin est "normal". Il peut être "sleeping", "waiting_click", "moving", ou l'état donné par une instruction <wait>.
-L'instruction <click> est gérée de la façon suivante : l'état de l'objet devient "waiting_click" ; lorsqu'un objet est cliqué, une instruction trigger est créée et exécutée avec la value "waiting_click".
-Les instructions <label>, <goto>, <stop> sont propre à l'exécution du programme, elles n'agissent pas directement sur l'objet auquel le programme est associé.
-
-Le noeud <speed> permet de changer la vitesse de rafraichissement du dessin : "very slow", "slow", "normal" (défaut), "fast", "very fast". DTD mise à jour en conséquence.
-
-La DTD a été mise à jour en conséquence.
-
-L'objet start_button du noeud <init> est par défaut visible, centré dans la fenêtre, et contient le texte "Click me to start" (ça ne change pas par rapport à la version Java).
-
-Le point d'ancrage des objets et du canevas est en haut à gauche :
-o---> x
-|
-v
-y
-
-L'instruction <blink> change l'opacité de l'objet plutôt que sa visibilité ; ainsi, l'objet est cliquable l'orsqu'il clignote, même pendant ses frames insiviblité.
 
 Le chemin du background donné dans le XML est relatif au fichier XML (ou absolu).
 
@@ -133,5 +88,3 @@ Il faut donc un tableau de programmes.
 Ainsi, nous avons une classe par objet et par intruction, comme la version orginale codée en Java.
 Un programme principal lit un XML donné et met les objets du dessin dans un tableau associatif (identifiant : Object), ainsi que les programmes dans un tableau associatif (identifiant : Program).
 Les objets sont capable de se dessiner (en une méthode qui sera appelée par le programme principal), en appelant les fonctions de dessin de p5.js.
-
-<cf Changements effectués>

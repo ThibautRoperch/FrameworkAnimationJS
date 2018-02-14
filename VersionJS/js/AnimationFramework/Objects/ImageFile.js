@@ -4,11 +4,11 @@
 
 class ImageFile extends AnimatedObject {
     
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image) {
+    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image_path) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
         this.width = width;
         this.height = height;
-        this.image = image;
+        this.image_path = image_path;
         this.loaded_image;
     }
 
@@ -20,12 +20,12 @@ class ImageFile extends AnimatedObject {
         return this.height;
     }
 
-    getImage() {
-        return this.image;
+    getImagePath() {
+        return this.image_path;
     }
 
-    setImage(image) {
-        this.image = image;
+    setImagePath(image_path) {
+        this.image_path = image_path;
     }
 
     setWidth(width) {
@@ -37,7 +37,7 @@ class ImageFile extends AnimatedObject {
     }
 
     loadImage(drawing) {
-        this.loaded_image = drawing.loadImage(this.image);
+        this.loaded_image = drawing.loadImage(this.image_path);
     }
 
     draw(drawing) {
@@ -56,7 +56,6 @@ class ImageFile extends AnimatedObject {
     }
     
     toXml() {
-        
         var image = document.createElement("object_image");
         image.setAttribute("id", this.id); 
         image.setAttribute("x", this.x);
@@ -72,13 +71,12 @@ class ImageFile extends AnimatedObject {
         image.setAttribute("angle", this.angle); // degrees
         image.setAttribute("width", this.width);
         image.setAttribute("height", this.height);
-        image.setAttribute("image", this.image);
+        image.setAttribute("image", this.image_path);
         return image;
-
     }
 
     clone() {
-        return new ImageFile(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.image);
+        return new ImageFile(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.image_path);
     }
 
 }

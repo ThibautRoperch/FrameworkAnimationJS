@@ -129,7 +129,7 @@ class AnimatedObject {
         if (this.botransparent) drawing.noStroke();
         else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
         // Rotation
-        // todo, si la rotation est possible (tests en cours par bob)
+        // difficile à faire
     }
 
 }
