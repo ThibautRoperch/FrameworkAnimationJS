@@ -2,13 +2,10 @@
  * This instruction move the object right of x by interval of interval_x at a speed of loop_delay
  */
 
-class Right extends Instruction {
+class Right extends SimpleMovement {
 
 	constructor(object, distance, interval, loop_delay) {
-		super(object);
-		this.distance = distance;
-		this.interval = interval;
-		this.loop_delay = loop_delay;
+		super(object, distance, interval, loop_delay);
 	}
 	
 	execute() {

@@ -1,5 +1,5 @@
 /**
- * 
+ * This instruction stops the current program
  */
 
 class Stop extends Instruction {

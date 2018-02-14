@@ -216,6 +216,7 @@ class Animation {
                         var value = parseInt(read_instruction.getAttribute("value"));
                         new_instruction = new Sleep(this.objects.get(object_id), value, this.loop_delay);
                     } else if (type == "state") {
+                        console.log("Attention, instruction state dépréciée");
                         var value = read_instruction.getAttribute("value");
                         new_instruction = new State(this.objects.get(object_id), value);
                     } else if (type == "trigger") {

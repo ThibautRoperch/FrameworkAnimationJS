@@ -230,7 +230,7 @@
       <wait value="unlock" />
       <visible value="false" />
       <setproperty object="message" property="text" value="!!" />
-      <state value="wait" />
+      <!--<state value="wait" />-->
     </program>
 
     <program assigned_to="FETCH">

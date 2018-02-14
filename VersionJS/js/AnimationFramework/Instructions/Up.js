@@ -2,13 +2,10 @@
  * This instruction move the object up of y by interval of interval_y at a rate of loop_delay
  */
 
-class Up extends Instruction {
+class Up extends SimpleMovement {
 
 	constructor(object, distance, interval, loop_delay) {
-		super(object);
-		this.distance = distance;
-		this.interval = interval;
-		this.loop_delay = loop_delay;
+		super(object, distance, interval, loop_delay);
 	}
 
 	execute() {

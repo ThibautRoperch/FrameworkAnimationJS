@@ -131,6 +131,7 @@ function include_animation_files(path) {
 		path + "Objects/Text.js",
 		// Instructions
 		path + "Instructions/Instruction.js",
+		path + "Instructions/SimpleMovement.js",
 		path + "Instructions/Blink.js",
 		path + "Instructions/Center.js",
 		path + "Instructions/CenterX.js",
