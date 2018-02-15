@@ -199,7 +199,7 @@ function new_object(object_dom) {
 					input.placeholder = angle;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
-				article1.appendChild(property);
+				// article1.appendChild(property);
 			section.appendChild(article1);
 		// Instructions
 		var article2 = document.createElement("article");
@@ -212,7 +212,7 @@ function new_object(object_dom) {
 						instructions.appendChild(button);
 				}
 				article2.appendChild(instructions);
-			section.appendChild(article2);
+			//section.appendChild(article2); // TODO enlever pour mettre les instructions
 		li.appendChild(section);
 	objects_list.appendChild(li);
 
@@ -549,7 +549,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// unitY
-			var unitiY = "cm"
+			var unitY = "cm";
 			property = document.createElement("property");
 			property.className = "unitY";
 			label = document.createElement("label");
@@ -564,8 +564,8 @@ function new_object(object_dom) {
 			object = new Landmark(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, scaleX, scaleY, unitX, unitY); 
 			break;
 		case "Grid":
-			// column
-			var column = 3;
+			// columns
+			var columns = 3;
 			property = document.createElement("property");
 			property.className = "column";
 			label = document.createElement("label");
@@ -577,8 +577,8 @@ function new_object(object_dom) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			// line
-			var line = 4;
+			// lines
+			var lines = 4;
 			property = document.createElement("property");
 			property.className = "line";
 			label = document.createElement("label");
@@ -660,7 +660,9 @@ var drawing_dom = document.getElementById("drawing");
 function draw_animation() {
 	var layers = new Set();
 
-	drawing_dom.removeChild(drawing_dom.firstChild);
+	if (drawing_dom.hasChildNodes()) {
+		drawing_dom.removeChild(drawing_dom.firstChild);
+	};
 
 	new p5(function(draw_ref) {
 
@@ -681,7 +683,7 @@ function draw_animation() {
 		}
 
 		draw_ref.setup = function() { // setup function waits until preload one is done
-			canvas = draw_ref.createCanvas(400, 200);
+			canvas = draw_ref.createCanvas(parseInt(document.getElementById("width").value), parseInt(document.getElementById("height").value));
 			canvas.parent(drawing_dom);
 		}
 		

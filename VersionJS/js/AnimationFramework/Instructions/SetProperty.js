@@ -46,7 +46,7 @@ class SetProperty extends Instruction {
 				this.target.setAngle(parseInt(this.value));
 				break;
 
-			// text, image, rectangle, ellipse
+			// text, image, rectangle, ellipse, landmark
 			case "width":
 				this.target.setWidth(parseInt(this.value));
 				break;
@@ -86,19 +86,44 @@ class SetProperty extends Instruction {
 
 			// polygon
 			case "coord_x":
-				this.target.setCoordx(parseIntArray(this.value()));
+				this.target.setCoordx(parseIntArray(this.value));
 				break;
 			case "coord_y":
-				this.target.setCoordx(parseIntArray(this.value()));
+				this.target.setCoordx(parseIntArray(this.value));
 				break;
 
 			// circle
 			case "radius":
-				this.target.setRadius(parseInt(this.value()));
+				this.target.setRadius(parseInt(this.value));
 				break;
 
-			// TODO propriétés du landmark
-			// TODO propriétés de la grid
+			// landmark
+			case "scaleX":
+				this.target.setScaleX(parseInt(this.value));
+				break;
+			case "scaleY":
+				this.target.setScaleY(parseInt(this.value));
+				break;
+			case "unitX":
+				this.target.setUnitX(parseInt(this.value));
+				break;
+			case "unitY":
+				this.target.setUnitY(parseInt(this.value));
+				break;
+
+			// grid
+			case "lines":
+				this.target.setLines(parseInt(this.value));
+				break;
+			case "columns":
+				this.target.setColumns(parseInt(this.value));
+				break;
+			case "line_height":
+				this.target.setLine_height(parseInt(this.value));
+				break;
+			case "column_width":
+				this.target.setColumn_width(parseInt(this.value));
+				break;
 
 			default:
 				console.log("[SetProperty.js] The attribute '" + this.property + "' of the SetProperty instruction is unknown.");

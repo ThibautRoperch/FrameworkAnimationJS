@@ -95,7 +95,8 @@ class Text extends AnimatedObject {
 	draw(drawing) {
 		super.draw(drawing);
 		// Background
-       	drawing.rect(this.x, this.y, this.real_width, this.real_height); 
+		drawing.rect(this.x, this.y, this.real_width, this.real_height);
+		// this.text.
 		// Remplacer les @ par \n TODO p-ê utiliser textLeading (https://p5js.org/reference/#/p5/textLeading)
 		// Text's color, font, size and style
 		if (this.border == 0) drawing.noStroke();

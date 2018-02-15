@@ -12,7 +12,8 @@
 
 	<header>
 		<div>
-			save, ...
+			<h1>Assistant graphique</h1>
+			<a href="#">Exporter l'animation</a>
 		</div>
 	</header>
 
@@ -43,10 +44,18 @@
 		<article>
 			<h2>Animation properties</h2>
 			
-			Mettre des trucs
+			<dimension>
+				Largeur : <input onchange="draw_animation()" id="width" type="number" value="400" /> px
+			</dimension>
+			<dimension>
+				Hauteur : <input onchange="draw_animation()" id="height" type="number" value="200" /> px
+			</dimension>
 		</article>
 
-		<article id="drawing">
+		<article>
+			<h2>Preview</h2>
+
+			<div id="drawing"></div>
 		</article>
 	</aside>
 

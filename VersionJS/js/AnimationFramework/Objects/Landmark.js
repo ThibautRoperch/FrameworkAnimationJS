@@ -139,7 +139,6 @@ class Landmark extends AnimatedObject {
     }
     
     toXml() {
-        
         var landmark = document.createElement("object_landmark");
         landmark.setAttribute("id", this.id); 
         landmark.setAttribute("x", this.x);

@@ -6,20 +6,11 @@ Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilit�
 Un objet de type tracé, avec des presets, comme une sinusoidale
 trajectoire (type, et en fonction du type : points si c'est une multiligne, width height si c'est une sinusoidale)
 
-Récap des attributs de chaque objet (graphe des classes, page HMTL qui donne le XML d'un objet, avec valeurs par défaut en value)
-Possibilité de déplacer les objets dans un canevas
-
-Montrer qu'on a compris le code. Exemple : en java, y'a une factory qui créé les objets, nous c'est le parser qui s'en occupe (schémas côte à côte)
-
-Refaire le texte de création d'objet, comme dans index.html, 4. Créer ses propres objets
+Refaire le texte de création d'objet, comme dans index.html, 4. Créer ses propres objets :
 1. màj la dtd
 2. nouvelle classe en suivant la structure des autres
 3. ajouter le fichier dans les includes de animation_controller.js
 3. ajouter le case dans animation_controller.js
-
-a faire et mettre dans le main.txt :
-dimensionnement de l'objet grille par rapport aux dimensions d'une case cases (et nb de col et lignes)
-pour le repere, le nom des absices et ordonnées par défaut est ""
 
 Questions
 =========
@@ -37,4 +28,3 @@ Comment le programme java peut fonctionner pour l'exemple cpu_anim1 ? On remarqu
 Modification apportée ligne 167
 
 exemple_animation.xml : le polygone ne se voit pas dans l'animation ; ajout de 3 propriétés au polygone pour que ca fonctionne, lignes 28/29/30
-faire ces modifs dans la version java aussi, voir si c'est mieux

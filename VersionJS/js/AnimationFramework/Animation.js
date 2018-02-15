@@ -18,7 +18,7 @@ class Animation {
         
         this.canvas = null;
         this.bg_image = null; // path of the background image (can be "" if there isn't background image)
-        this.loop_delay = 10; // delay between two intruction's move
+        this.loop_delay = speed("normal"); // delay between two intruction's move
 
         this.start_button = new StartButton(this.width / 2, this.height / 2, "Click me to start", true);
         new Blink(this.start_button, 6, 60, this.loop_delay).execute();
@@ -154,6 +154,12 @@ class Animation {
                     var unitX = read_object.getAttribute("unitX");
                     var unitY = read_object.getAttribute("unitY");
                     new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY);
+                } else if (type == "object_grid") {
+                    var lines = parseInt(read_object.getAttribute("lines"));
+                    var columns = parseInt(read_object.getAttribute("columns"));
+                    var line_height = parseInt(read_object.getAttribute("line_height"));
+                    var column_width = parseInt(read_object.getAttribute("column_width"));
+                    new_object = new Grid(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, lines, columns, line_height, column_width);
                 } else if (type == "object_copy") {
                     var idcopy = read_object.getAttribute("idcopy");
                     var initial_object = this.objects.get(idcopy);

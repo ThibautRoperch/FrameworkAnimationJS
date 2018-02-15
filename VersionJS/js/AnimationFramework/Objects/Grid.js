@@ -4,7 +4,7 @@
 
 class Grid extends AnimatedObject {
     
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity,angle, lines, columns, line_height, column_width) {
+    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, lines, columns, line_height, column_width) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
         this.lines = lines;
         this.columns = columns;
@@ -12,11 +12,11 @@ class Grid extends AnimatedObject {
         this.column_width = column_width;
     }
 
-    getlines() {
+    getLines() {
         return this.lines;
     }
 
-    getline_height() {
+    getLine_height() {
         return this.line_height;
     }
 
@@ -24,7 +24,7 @@ class Grid extends AnimatedObject {
         return this.columns;
     }
 
-    getcolumn_width() {
+    getColumn_width() {
         return this.column_width;
     }
 
@@ -32,7 +32,7 @@ class Grid extends AnimatedObject {
         this.lines = lines;
     }
 
-    setline_height(line_height) {
+    setLine_height(line_height) {
         return this.line_height = line_height;
     }
 
@@ -40,13 +40,15 @@ class Grid extends AnimatedObject {
         this.columns = columns;
     }
 
-    setcolumn_width(column_width) {
+    setColumn_width(column_width) {
         this.column_width = column_width;
     }
 
     draw(drawing) {
         super.draw(drawing);
-        // TODO
+        for (i = 0; i < lines + 1; ++i) {
+            // drawing.
+        }
     }
 
     isClicked() {
@@ -56,7 +58,6 @@ class Grid extends AnimatedObject {
     }
 
     toXml() {
-        
         var grid = document.createElement("object_grid");
         grid.setAttribute("id", this.id); 
         grid.setAttribute("x", this.x);

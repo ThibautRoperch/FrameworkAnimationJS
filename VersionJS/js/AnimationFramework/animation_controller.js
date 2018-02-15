@@ -93,13 +93,13 @@ function speed(speed) {
 			loop_delay = LOOP_DELAY_MAX;
 			break;
 		case "slow":
-			loop_delay = LOOP_DELAY_MAX * 0.75 + LOOP_DELAY-MIN * 0.25;
+			loop_delay = LOOP_DELAY_MAX * 0.75 + LOOP_DELAY_MIN * 0.25;
 			break;
 		case "normal":
-			loop_delay = LOOP_DELAY_MAX * 0.50 + LOOP_DELAY-MIN * 0.50;
+			loop_delay = LOOP_DELAY_MAX * 0.50 + LOOP_DELAY_MIN * 0.50;
 			break;
 		case "fast":
-			loop_delay = LOOP_DELAY_MAX * 0.25 + LOOP_DELAY-MIN * 0.75;
+			loop_delay = LOOP_DELAY_MAX * 0.25 + LOOP_DELAY_MIN * 0.75;
 			break;
 		case "very fast":
 			loop_delay = LOOP_DELAY_MIN;

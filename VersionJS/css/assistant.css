@@ -12,7 +12,7 @@ body {
     padding-left: 50px;
     padding-right: 70px;
     color: rgba(0, 0, 0, 0.8);
-    background: silver;
+    background: rgba(0, 0, 0, 0.13);
 }
 
 body section, body aside {
@@ -31,8 +31,30 @@ body header {
 }
 
 body header div {
-    margin: auto;    
-    padding: 20px;
+    display: flex;
+    padding: 0 20px;
+}
+
+body header div * {
+    line-height: 60px;
+    margin: 0 20px;
+}
+
+body header div h1 {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+body header div a {
+    display: flex;
+    padding: 0 20px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.2s ease;
+}
+
+body header div a:hover {
+    background: rgba(255, 255, 255, 0.24);
 }
 
 body section {
@@ -41,6 +63,15 @@ body section {
 
 body aside {
     width: 30%;
+}
+
+body aside article {
+    display: flex;
+    flex-direction: column;
+}
+
+body aside article dimension {
+    margin-bottom: 15px;
 }
 
 h2 {
@@ -109,7 +140,7 @@ h2:first-child {
 }
 
 #objects li sectionobj article:first-child {
-    flex: 0.7;
+    flex: 1;
     border-right: 1px solid silver;
 }
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE animation SYSTEM "animation.dtd">
 <animation>
+  <speed>fast</speed>
+
   <background>img/cpu8086simple.png</background>
 
   <objects>
