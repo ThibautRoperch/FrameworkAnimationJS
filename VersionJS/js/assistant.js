@@ -647,6 +647,12 @@ function reduce(object_id) {
 	object_dom.getElementsByTagName("arrow")[0].innerHTML = "\\/";
 }
 
+function to_xml() {
+	console.log("--------------------------------\n");
+	for (var object of objects_array) {
+		console.log(object.toXml());
+	}
+}
 
 /**********************
  * P5.js drawing

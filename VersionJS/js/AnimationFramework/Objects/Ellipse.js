@@ -28,7 +28,7 @@ class Ellipse extends AnimatedObject {
 
     draw(drawing) {
         super.draw(drawing);
-        drawing.ellipse(this.x, this.y, this.width, this.height);
+        drawing.ellipse(this.x + this.width / 2, this.y + this.height / 2, this.width, this.height);
     }
 
     isClicked(x, y) { //probably false // TODO à vérifier
