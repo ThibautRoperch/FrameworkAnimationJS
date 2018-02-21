@@ -46,12 +46,16 @@ class Grid extends AnimatedObject {
 
     draw(drawing) {
         super.draw(drawing);
-        for (i = 0; i < lines + 1; ++i) {
-            // drawing.
+        drawing.rect(this.x, this.y, this.column_width * this.columns, this.line_height * this.lines);
+        for (var i = 1; i < this.lines; ++i) {
+            drawing.line(this.x, this.y + i * this.line_height, this.x + this.column_width * this.columns, this.y + i * this.line_height);
+        }
+        for (var i = 1; i < this.columns; ++i) {
+            drawing.line(this.x + i * this.column_width, this.y, this.x + i * this.column_width, this.y + this.line_height * this.lines);
         }
     }
 
-    isClicked() {
+    isClicked(x, y) {
         if((x >= this.x) && (x <= this.columns * this.column_width) && (y >= this.y) && (y <= this.lines * this.line_height))
             return true;
         return false;        

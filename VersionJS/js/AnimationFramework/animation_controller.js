@@ -1,3 +1,9 @@
+/**********************
+* Classes (to modify)
+*/
+
+var OBJECT_CLASSES = ["AnimatedObject", "Ellipse", "Circle", "Grid", "ImageFile", "Landmark", "Polygon", "Rectangle", "StartButton", "Text"];
+var INSTRUCTION_CLASSES = ["Instruction", "SimpleMovement", "Blink", "Center", "CenterX", "CenterY", "Click", "Down", "GoTo", "Label", "Left", "MoveTo", "Right", "SetProperty", "Sleep", "State", "Stop", "Trigger", "Up", "Wait"];
 
 /**********************
  * Global variables
@@ -18,10 +24,23 @@ function load_animation(source_file, target_id, width, height) {
     // Check if animation files are included
     if (!ANIMATION_FILES_INCLUDED) {
         console.log("Animation files are not included. Include them by this way :\n<script>include_animation_files(\"path/of/AnimationFramework/\");</script>");
-    }
+	}
+	
+	// Check if object classes are loaded
+	var objects_classes_loaded = true;
+	for (obj_cl of OBJECT_CLASSES) {
+		objects_classes_loaded = objects_classes_loaded & typeof(obj_cl) !== "undefined";
+	}
+	
+	// Check if instruction classes are loaded
+	var instruction_classes_loaded = true;
+	for (instr_cl of INSTRUCTION_CLASSES) {
+		instruction_classes_loaded = instruction_classes_loaded & typeof(instr_cl) !== "undefined";
+	}
 
-    // Loop with delay until main animation classes are not loaded
-    if (typeof(p5) === "undefined" || typeof(Animation) === "undefined") {
+	// Loop with delay until main animation classes are not loaded
+
+    if (typeof(p5) === "undefined" || typeof(Animation) === "undefined" || !objects_classes_loaded) {
         setTimeout(function() {
             load_animation(source_file, target_id, width, height);
         }, 50);
@@ -117,40 +136,18 @@ function include_animation_files(path) {
 		// p5.js
         "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js",
         // Animation
-        path + "Animation.js",
-        // Objects
-		path + "Objects/AnimatedObject.js",
-		path + "Objects/Ellipse.js",
-		path + "Objects/Circle.js",
-		path + "Objects/Grid.js",
-		path + "Objects/ImageFile.js",
-		path + "Objects/Landmark.js",
-		path + "Objects/Polygon.js",
-		path + "Objects/Rectangle.js",
-		path + "Objects/StartButton.js",
-		path + "Objects/Text.js",
-		// Instructions
-		path + "Instructions/Instruction.js",
-		path + "Instructions/SimpleMovement.js",
-		path + "Instructions/Blink.js",
-		path + "Instructions/Center.js",
-		path + "Instructions/CenterX.js",
-		path + "Instructions/CenterY.js",
-		path + "Instructions/Click.js",
-		path + "Instructions/Down.js",
-		path + "Instructions/GoTo.js",
-		path + "Instructions/Label.js",
-		path + "Instructions/Left.js",
-		path + "Instructions/MoveTo.js",
-		path + "Instructions/Right.js",
-		path + "Instructions/SetProperty.js",
-		path + "Instructions/Sleep.js",
-		path + "Instructions/State.js",
-		path + "Instructions/Stop.js",
-		path + "Instructions/Trigger.js",
-		path + "Instructions/Up.js",
-		path + "Instructions/Wait.js",
+		path + "Animation.js"
 	];
+	
+	// Objects
+	for (obj_cl of OBJECT_CLASSES) {
+		scripts.push(path + "Objects/" + obj_cl + ".js");
+	}
+
+	// Instructions
+	for (instr_cl of INSTRUCTION_CLASSES) {
+		scripts.push(path + "Instructions/" + instr_cl + ".js");
+	}
 
 	for (s of scripts) {
 		var script = document.createElement("script");

@@ -1,10 +1,16 @@
 <animation>
+	<init>
+    	<start_button present="false" />
+	</init>
+
 	<background>
 		img/yellow_blue_linear_gradient.png
 	</background>
+	
 	<objects>
 		<object_text text="aziodazod" font="Courier,28,bold" x="0" y="0" visible="true" angle="30">jl</object_text>
-		  
+		<object_grid visible="true" botransparent="false" lines="3" columns="8" line_height="100" column_width="40" x="350" y="150">LA GRILLE</object_grid>
+
 		<object_landmark 
 			x="100" y="100"
 			visible="true"
