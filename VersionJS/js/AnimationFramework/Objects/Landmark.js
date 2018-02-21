@@ -65,8 +65,9 @@ class Landmark extends AnimatedObject {
     draw(drawing) {
         super.draw(drawing);
 
-        drawing.stroke(this.bgcolor, this.opacity * 255);
-        
+        // Forcer la bordure pour les éléments du repère
+        drawing.stroke(this.bocolor, this.opacity * 255);
+
 		drawing.textFont("courrier");
 		drawing.textSize(12);
         drawing.textStyle(drawing.NORMAL);
@@ -78,23 +79,30 @@ class Landmark extends AnimatedObject {
         if(this.height > 0 && this.width > 0) {
             drawing.line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
             drawing.line(this.x, this.y + this.height, this.x, this.y);
+            // Dessin des triangles 
+            drawing.triangle(this.x - this.width * 0.02, this.y, this.x + this.width * 0.02, this.y, this.x, this.y - this.height * 0.04);
+            drawing.triangle(this.x + this.width, this.y + this.height + this.height * 0.02, this.x + this.width, this.y + this.height - this.height * 0.02, this.x + this.width + this.width * 0.04, this.y + this.height);
+            // Enlever la bordure pour les textes et forcer l'arrière-plan
+            if (this.botransparent) drawing.noStroke();
+            else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
+            drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
             //texte x
             drawing.text(this.unitX, this.x + this.width/2, this.y + this.height + 25);
             //texte y (Ca serait bien d'orienter le texte)
 
             drawing.push();        //sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
-                drawing.translate(this.x - 50, this.y + this.height/2);
+                drawing.translate(this.x - 20, this.y + this.height/2);
                 drawing.rotate(-90);
                 drawing.text(this.unitY,0, 0);
             drawing.pop();
-
-            // Dessin des triangles 
-            drawing.triangle(this.x -20, this.y, this.x+20, this.y, this.x, this.y - 20);
-            drawing.triangle(this.x + this.width, this.y + this.height +20 , this.x + this.width, this.y + this.height -20, this.x + this.width + 20, this.x + this.width);
         }
         else if(this.height < 0 && this.width > 0) { 
             drawing.line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
             drawing.line(this.x + this.width, this.y - this.height, this.x + this.width, this.y);
+            // Enlever la bordure pour les textes et forcer l'arrière-plan
+            if (this.botransparent) drawing.noStroke();
+            else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
+            drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
             //texte x
             drawing.text(this.unitX, this.x + this.width/2, this.y + this.width + 25);
             
@@ -102,11 +110,17 @@ class Landmark extends AnimatedObject {
             darwing.translate(this.x + this.width + 20, this.y - this.height/2);
             darwing.rotate(90);
             //texte y
+            if (this.botransparent) drawing.noStroke();
+            else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
             drawing.text(this.unitY, 0, 0);
         }
         else if(this.height > 0 && this.width < 0) {
             drawing.line(this.x - this.width, this.y + this.height, this.x - this.width, this.y); 
             drawing.line(this.x, this.y - this.width, this.x - this.width, this.y - this.width);
+            // Enlever la bordure pour les textes et forcer l'arrière-plan
+            if (this.botransparent) drawing.noStroke();
+            else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
+            drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
             //texte x
             drawing.text(this.unitX, this.x - this.width/2, this.y + this.height + 25);
             //texte y (Ca serait bien d'orienter le texte)
@@ -118,11 +132,14 @@ class Landmark extends AnimatedObject {
             drawing.rotate(-90);
             drawing.text(this.unitY, 0, 0);
             //drawing.pop();
-            
         }
         else if(this.height < 0 && this.width < 0) {
             drawing.line(this.x, this.y - this.width, this.x - this.width, this.y - this.width);
             drawing.line(this.x, this.y - this.height, this.x, this.y);
+            // Enlever la bordure pour les textes et forcer l'arrière-plan
+            if (this.botransparent) drawing.noStroke();
+            else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
+            drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
             //texte x
             drawing.text(this.unitX, this.x + this.width/2, this.y + 25);
             //texte y (Ca serait bien d'orienter le texte)
@@ -133,9 +150,7 @@ class Landmark extends AnimatedObject {
     }
 
     isClicked(x, y) {
-		if((x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height))
-            return true;
-        return false;
+		return (x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height);
     }
     
     toXml() {

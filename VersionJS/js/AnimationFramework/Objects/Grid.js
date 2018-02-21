@@ -56,9 +56,7 @@ class Grid extends AnimatedObject {
     }
 
     isClicked(x, y) {
-        if((x >= this.x) && (x <= this.columns * this.column_width) && (y >= this.y) && (y <= this.lines * this.line_height))
-            return true;
-        return false;        
+        return (x >= this.x) && (x <= this.columns * this.column_width) && (y >= this.y) && (y <= this.lines * this.line_height);
     }
 
     toXml() {

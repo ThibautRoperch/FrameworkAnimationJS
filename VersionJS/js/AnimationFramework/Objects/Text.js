@@ -111,9 +111,7 @@ class Text extends AnimatedObject {
 	}
 	
 	isClicked(x, y) {
-		if((x >= this.x) && (x <= this.x + this.real_width) && (y >= this.y) && (y <= this.y + this.real_height))
-            return true;
-        return false;
+		return (x >= this.x) && (x <= this.x + this.real_width) && (y >= this.y) && (y <= this.y + this.real_height);
 	}
 	
 	toXml() {

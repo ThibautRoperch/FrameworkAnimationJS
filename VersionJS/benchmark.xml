@@ -9,7 +9,7 @@
 	
 	<objects>
 		<object_text text="aziodazod" font="Courier,28,bold" x="0" y="0" visible="true" angle="30">jl</object_text>
-		<object_grid visible="true" botransparent="false" lines="3" columns="8" line_height="100" column_width="40" x="350" y="150">LA GRILLE</object_grid>
+		<object_grid visible="true" bgtransparent="false" bocolor="20,200,50" bgcolor="0,255,0" botransparent="false" lines="3" columns="8" line_height="100" column_width="40" x="350" y="150">LA GRILLE</object_grid>
 
 		<object_landmark 
 			x="100" y="100"
@@ -17,8 +17,23 @@
 			bgtransparent="false"
 			height="500" width="500"
 			scaleX="100" scaleY="100"
-			unitX="patate" unitY="cm"> test
+			unitX="patate" unitY="cm"
+			bocolor="255,0,0"
+			bgcolor="255,255,0"
+			botransparent="false"> test
 		</object_landmark>
+
+		<object_polygon
+			x="200"
+			y="100"
+			coord_x="10,10,0,15,30,20,20,10"
+			coord_y=" 0,10,10,20,10,10,0,0"
+			bocolor="255,0,0"
+			bgcolor="0,128,0"
+			bgtransparent="false"
+			botransparent="false"
+			visible="true"
+		>Polygone</object_polygon>
 
 	</objects>
 

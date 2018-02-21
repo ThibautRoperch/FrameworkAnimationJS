@@ -30,7 +30,7 @@ class Polygon extends AnimatedObject {
         super.draw(drawing);
         drawing.beginShape();
         for (var i = 0; i < this.coord_x.length; ++i) {
-            drawing.vertex(this.coord_x[i], this.coord_y[i]);
+            drawing.vertex(this.x + this.coord_x[i], this.y + this.coord_y[i]);
         }
         drawing.endShape(drawing.CLOSE);
     }
@@ -48,6 +48,8 @@ class Polygon extends AnimatedObject {
             max_y = (this.coord_y[i] > max_y) ? this.coord_y[i] : max_y;
             min_y = (this.coord_y[i] < min_y) ? this.coord_y[i] : min_y;
         }
+
+		return (x >= this.x + min_x) && (x <= this.x + max_x) && (y >= this.y + min_y) && (y <= this.y + max_y);
     }
     
     toXml() {

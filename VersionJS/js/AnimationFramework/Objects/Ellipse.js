@@ -39,7 +39,6 @@ class Ellipse extends AnimatedObject {
     }
 
     toXml() {
-
        var ellipse = document.createElement("object_ellipse");
        ellipse.setAttribute("id", this.id); 
        ellipse.setAttribute("x", this.x);

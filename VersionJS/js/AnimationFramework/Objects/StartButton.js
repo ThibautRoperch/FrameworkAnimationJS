@@ -47,9 +47,7 @@ class StartButton extends AnimatedObject {
     }
 
     isClicked(x, y) {
-		if((x >= this.x - this.width / 2 + 2) && (x <= this.x + this.width / 2 + 2) && (y >= this.y - this.height / 2 + 2) && (y <= this.y + this.height / 2 + 2))
-            return true;
-        return false;
+		return (x >= this.x - this.width / 2 + 2) && (x <= this.x + this.width / 2 + 2) && (y >= this.y - this.height / 2 + 2) && (y <= this.y + this.height / 2 + 2);
     }
     
     toXml() {

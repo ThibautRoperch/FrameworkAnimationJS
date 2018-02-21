@@ -21,7 +21,7 @@ class Animation {
         this.loop_delay = speed("normal"); // delay between two intruction's move
 
         this.start_button = new StartButton(this.width / 2, this.height / 2, "Click me to start", true);
-        new Blink(this.start_button, 6, 60, this.loop_delay).execute();
+        new Blink(this.start_button, 6, 20, this.loop_delay).execute();
 
         // Resize the target node
         this.parent.style.width = this.width + "px";
