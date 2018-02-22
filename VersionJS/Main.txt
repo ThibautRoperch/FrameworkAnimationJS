@@ -1,4 +1,11 @@
 
+TODO
+====
+
+Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilité de bouger à l'infini sur le tracé (revenir au débbut à chaque fois qu'il arrive à la fin)
+Un objet de type tracé, avec des presets, comme une sinusoidale
+trajectoire (type, et en fonction du type : points si c'est une multiligne, width height si c'est une sinusoidale)
+
 Fonctionnalités
 ===============
 
@@ -64,14 +71,12 @@ Précisions
 ==========
 
 Les feuilles de style sont désormais dans le dossier css : <link rel="stylesheet" type="text/css" href="css/css.css" />
-Il faut inclure le script animation_controller.js dans chaque page contenant une animation : <script src="js/animation_controller.js"></script>
-Pour charger une animation (charger un fichier XML, afficher les objets, lancer le programme) : load_animation("animation.xml", "target_node_id", <width>, <height>);
 
 Ajout règles dans le fichier css/css.css.
 
 Le chemin du background donné dans le XML est relatif au fichier XML (ou absolu).
 
-Passage en *instanciation-case* -> il faut dessiner les objets sur un dessin, et non plus directement dans le default canvas.
+p5.js : Passage en *instanciation-case* -> il faut dessiner les objets sur un dessin, et non plus directement dans le default canvas.
 
 Résumé
 ======

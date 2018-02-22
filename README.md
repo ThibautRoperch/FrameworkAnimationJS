@@ -9,7 +9,7 @@ A l'origine codé en Java, ce framework permet une intégration facile d'animati
 Pour plus d'informations, consulter le fichier `VersionJS/index.html`.
 
 
-## Utilisation du framework Java
+## Utilisation du framework Java
 
 L'intégration des applet Java étant dépréciée par les navigateurs internet depuis la [version 9 de Java](https://www.java.com/fr/download/faq/jdk9_plugin.xml), les animations peuvent être visualisées avec les commandes suivantes (une commande correspond à une animation, listées dans le fichier `VersionJava/build.xml`) :
 
@@ -24,7 +24,7 @@ Il faut avoir au préalable compilé le framework avec la commande suivante :
     ant
 
 
-## Utilisation du framework JS
+## Utilisation du framework JS
 
 Le framework est contenu dans le dossier `VersionJS/js/AnimationFramework`. Pour l'utiliser, copier ce dossier dans un projet et inclure le fichier `VersionJS/AnimationFramework/animation_controller.js` dans chaque page HTML contenant une animation.
 

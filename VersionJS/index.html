@@ -64,29 +64,137 @@
 				<li><b>objects</b> : permet de décrire les différents objets de l'animation</li>
 				<li><b>programs</b> : permet de décrire les actions associées aux objets</li>
 			</ul>
-		</article>
-
-		<article>
+			
 			<h3>3.1 Les objets</h3>
 
-			Voir la DTD : <a href="animation.dtd">animation.dtd</a>
+				Le point d'ancrage d'un objet est en haut à gauche de sa boite rectangulaire minimale telle qu'elle contienne tous ses points.<br>
+				L'origine du canevas est en haut à gauche de ce dernier et est positif vers la droite et vers le bas.<br>
+				L'image suivante permet d'illustrer ces deux informations :<br>
 
-			Attributs en commun à tous les objets :
+				<img src="canevas_reperes.svg" width="500px" /><br>
 
+				Les objets suivent la DTD <a href="animation.dtd">animation.dtd</a>.
+
+				Pou résumer, les objets proposés par le framework sont les suivants :
+				<ul>
+					<li>Zone de texte : <tt>object_text</tt></li>
+					<li>Image : <tt>object_image</tt></li>
+					<li>Rectangle : <tt>object_rectangle</tt></li>
+					<li>Polygone : <tt>object_polygon</tt></li>
+					<li>Cercle : <tt>object_circle</tt></li>
+					<li>Ellipse : <tt>object_ellipse</tt></li>
+					<li>Repère (pour graphiques) : <tt>object_landmark</tt></li>
+					<li>Grille (tableau) : <tt>object_grid</tt></li>
+					<li>Copie d'un objet : <tt>object_copy</tt></li>
+				</ul>
+
+				Les attributs communs à tous les objets sont les suivants :
+				<ul>
+					<li><tt>id</tt> : Identifiant de l'objet (ce n'est pas un attribut XML mais la valeur du noeud <tt>object_xxx</tt>)</li>
+					<li><tt>x (0 par défaut)</tt> : Position de l'objet dans le canevas en x</li>
+					<li><tt>y (0 par défaut)</tt> : Position de l'objet dans le canevas en y</li>
+					<li><tt>bgcolor ("0, 0, 0" par défaut)</tt> : Couleur d'arrière-plan de l'objet</li>
+					<li><tt>bgtransparent (true par défaut)</tt> : la bordure est transparente</li>
+					<li><tt>bocolor ("0, 0, 0" par défaut)</tt> : Couleur de bordure de l'objet</li>
+					<li><tt>botransparent (true par défaut)</tt> : L'arrière-plan est transparent</li>
+					<li><tt>layer (0 par défaut)</tt> : Indice du plan de l'objet (les couches supérieures sont d'un indice plus élevé que les autres)</li>
+					<li><tt>visible (false par défaut)</tt> : L'objet est visible</li>
+					<li><tt>opacity (1 par défaut)</tt> : Opacité de l'objet (nombre décimal entre 0 et 1, 1 étant totalement opaque)</li>
+				</ul>
+				
+				Les valeurs par défaut sont respectées par l'assistant - <tt>assistant.html</tt> - lors de la construction des objets.
+
+				<h3>3.2 Les programmes</h3>
+				
+				Les instructions suivent la DTD <a href="animation.dtd">animation.dtd</a>.
 		</article>
 
 		<article>
-			<h3>3.2 Les programmes</h3>
+			<h2>4. Créer ses propres objets</h2>
+
+			<h3>4.1. Classe de l'objet</h3>
+
+			La classe de l'objet, instancée lors de la lecture d'un fichier XML, doit hériter de l'objet <tt>AnimatedObject</tt> et implémenter les méthodes suivantes :
+			<ul>
+				<li>setters et getters classiques</li>
+				<li><tt>draw</tt> : directives de dessin selon la <a href="https://p5js.org/reference/">documentation du framework p5.js</a></li>
+				<li><tt>isClicked</tt> : retourne <tt>true</tt> si les coordonnées du pointeur au moment du clic de la souris - donnés en paramètre - sont situés dans l'objet, <tt>false</tt> sinon</li>
+				<li><tt>toXml</tt> : retourne un objet DOM correspondant à l'objet (pour l'assistant)</li>
+				<li><tt>clone</tt> : retourne une instance du type de la nouvelle classe ayant pour attributs les mêmes que l'instance à cloner</li>
+			</ul>
+			Le fichier implémentant la classe de l'objet doit être avec les autres dans le dossier <a href="js/AnimationFramework/Objects"><tt>js/AnimationFramework/Objects</tt></a>.<br>
+			La classe doit être ajoutée au tableau des objets de dessin afin qu'elle puisse être chargée par la fonction <tt>include_animation_files</tt>. Le tableau en question, <tt>OBJECT_CLASSES</tt>, est au début du fichier <a href="js/AnimationFramework/animation_controller.js"><tt>js/AnimationFramework/animation_controller.js</tt></a>.
+
+			<h3>4.2. Traitement XML du nouvel objet</h3>
+
+			Dans la méthode <tt>readXmlFile</tt> de la classe <a href="js/AnimationFramework/Animation.js"><tt>js/AnimationFramework/Animation.js</tt></a>, les différents noeuds objets sont reconnus par le programme qui instancie l'objet correspondant à chaque noeud lu.<br>
+			Il faut ajouter ici, en suivant le modèle des objets précédents, le traitement du noeud XML associé au nouvel objet, qui consiste à récupérer ses attributs et l'instancier.
+
+			<h3>4.3. Propriétés de l'instruction <tt>set_property</tt></h3>
+
+			La classe <a href="js/AnimationFramework/Instructions/SetProperty.js"><tt>js/AnimationFramework/Instructions/SetProperty.js</tt></a>, relative à l'instruction <tt>set_property</tt> qui est capable de modifier n'importe quel attribut de n'importe quel objet (hormis les propriétés <tt>id</tt> et <tt>state</tt>), doit être revue pour qu'elle prenne en compte les attributs du nouvel objet (pour que <tt>set_property</tt> puisse modifier les attributs du nouvel objet).<br>
+
+			Pour ce faire, ajouter dans le <tt>switch</tt> de la fonction <tt>execute</tt> les cas correspondants aux noms des attributs et appeler le setter associé à chaque cas ajouté.<br>
 			
-			Voir la DTD : <a href="animation.dtd">animation.dtd</a>
+			<br>Exemple : le nouvel objet de dessin possède les propriétés <tt>width</tt>, <tt>height</tt> et <tt>background_image</tt>.<br>
+			Les deux premiers attributs sont déjà connus par le <tt>switch</tt>, ils appellent respectivement les setters <tt>setWidth</tt> et <tt>setHeight</tt> (au passage, la nouvelle classe doit donc implémenter exactement ces deux setters).<br>
+			Le dernier attribut n'étant pas connu, il faut l'ajouter au <tt>switch</tt> en créant un nouveau cas.
+
+			<h3>4.4. Mise à jour de la DTD</h3>
+
+			La DTD doit être modifiée pour tenir compte du nouvel objet.
+
 		</article>
 
 		<article>
-			<h3>4. Créer ses propres objets</h3>
+			<h2>5. Créer ses propres instructions</h2>
 
-			// TODO
+			La procédure de création d'instructions est semblable à celle des objets.
+
+			<h3>5.1. Classe de l'instruction</h3>
+
+			La classe de l'instruction, instancée lors de la lecture d'un fichier XML, doit hériter de l'objet <tt>Instruction</tt> et implémenter la méthode suivante :
+			<ul>
+				<li><tt>execute</tt> : opérations à effectuer lorsque l'instruction est exécutée.</li>
+			</ul>
+			Le fichier implémentant la classe de l'instruction doit être avec les autres dans le dossier <a href="js/AnimationFramework/Instructions"><tt>js/AnimationFramework/Instructions</tt></a>.<br>
+			La classe doit être ajoutée au tableau des instructions afin qu'elle puisse être chargée par la fonction <tt>include_animation_files</tt>. Le tableau en question, <tt>OBJECT_INSTRUCTIONS</tt>, est au début du fichier <a href="js/AnimationFramework/animation_controller.js"><tt>js/AnimationFramework/animation_controller.js</tt></a>.<br>
+
+			<br>Pour information, les états de bas (<tt>normal</tt>, <tt>waiting_click</tt>, <tt>sleeping</tt> et <tt>moving</tt>) sont définis au début du fichier <a href="js/AnimationFramework/Objects/AnimatedObject.js"><tt>js/AnimationFramework/Objects/AnimatedObject.js</tt></a>.
+			
+			<h3>5.2. Traitement XML de la nouvelle instruction</h3>
+
+			Dans la méthode <tt>readXmlFile</tt> de la classe <a href="js/AnimationFramework/Animation.js"><tt>js/AnimationFramework/Animation.js</tt></a>, les différents noeuds instructions sont reconnus par le programme qui instancie l'instruction correspondant à chaque noeud lu.<br>
+			Il faut ajouter ici, en suivant le modèle des instructions précédentes, le traitement du noeud XML associé à la nouvelle instruction, qui consiste à récupérer ses attributs et l'instancier.
+
+			<h3>5.3. Mise à jour de la DTD</h3>
+
+			La DTD doit être modifiée pour tenir compte de la nouvelle instruction.
+
 		</article>
 
+		<article>
+			<h2>5. Assistant graphique</h2>
+			
+			Nous proposons une interface graphique qui permet de simplifier la création d'animations : <a href="assistant.html"><tt>assistant.html</tt></a>.<br>
+
+			L'interface permet de créer les objets en cliquant sur un bouton (un bouton par objet). Les attributs sont modifiables via des champs de texte. Ils respectent la DTD.<br>
+
+			La zone à droite est le canevas dans lequel sont desinés les objets créés. Le dessin s'effectue en temps réel ; ainsi, dès lors que la valeur d'une propriété d'un objet est modifiée, le dessin se met à jour.<br>
+
+			Il est possible d'exporter la liste des objets au format XML.
+		</article>
+
+		<article>
+			<h2>6. Exemples d'animations</h2>
+			
+			<ul>
+				<li><a href="cpu_anim1.html">cpu_anim1.html</a> : Fonctionnement interne du microprocesseur et utilisation de micro instructions</li>
+				<li><a href="cpu_mono_core.html">cpu_mono_core.html</a> : CPU avec 1 Core</li>
+				<li><a href="cpu_dual_core.html">cpu_dual_core.html</a> : CPU avec 2 Core</li>
+				<li><a href="benchmark.html">benchmark.html</a> : Démonstration de quelques réalisations possibles avec le framework</li>
+			</ul>
+		</article>
 	</section>
 
 </body>
