@@ -26,17 +26,17 @@ Il faut avoir au préalable compilé le framework avec la commande suivante :
 
 ## Utilisation du framework JS
 
-Le framework est contenu dans le dossier `VersionJS/js/AnimationFramework`. Pour l'utiliser, copier ce dossier dans un projet et inclure le fichier `VersionJS/AnimationFramework/animation_controller.js` dans chaque page HTML contenant une animation.
+Le framework est contenu dans le dossier `VersionJS/js/AnimationFramework`. Pour l'utiliser, copier ce dossier dans un projet et inclure le fichier `VersionJS/AnimationFramework/animation_controller.js` dans chaque page HTML contenant une animation :
 
     <script src="AnimationFramework/animation_controller.js"</script>
 
-Ensuite, il faut inclure les autres fichiers du framework :
+Ensuite, les autres fichiers du framework doivent être inclus :
 
     <script>
         include_animation_files("AnimationFramework/");
     </script>
     
-Enfin, pour charger une animation contenue dans un fichier XML, il faut spécifier l'emplacement de ce fichier, l'id de la balise servant de canevas, et les dimensions de ce dernier :
+Enfin, pour charger une animation contenue dans un fichier XML, spécifier l'emplacement de ce fichier, l'id de la balise servant de canevas, et les dimensions de ce dernier :
 
     <script>
         load_animation("animation.xml", "anim1", 1600, 900); // fichier, id du canevas, largeur, hauteur
@@ -46,5 +46,7 @@ Enfin, pour charger une animation contenue dans un fichier XML, il faut spécifi
 ## Développeurs
 
 [Dylan BUNEL](https://github.com/DylanBunel/)
+
 [Pierre GRANIER--RICHARD](https://github.com/PierreGranier/)
+
 [Thibaut ROPERCH](https://github.com/ThibautRoperch/)
