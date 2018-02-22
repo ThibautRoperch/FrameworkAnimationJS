@@ -118,12 +118,12 @@ class Animation {
                     var text = read_object.getAttribute("text");
                     var font = read_object.getAttribute("font").split(",");
                     var color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
-                    var border = parseInt(read_object.getAttribute("border")) | 0;
+                    var padding = parseInt(read_object.getAttribute("padding")) | 0;
                     var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                     var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     var halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
 					var valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-                    new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, border, width, height, halignment, valignment);
+                    new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
                 } else if (type == "object_image") {
                     var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                     var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;

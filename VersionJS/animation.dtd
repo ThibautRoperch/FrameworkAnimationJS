@@ -16,7 +16,7 @@
 <!ATTLIST object_text text CDATA #REQUIRED >
 <!ATTLIST object_text font CDATA #REQUIRED >
 <!ATTLIST object_text color CDATA #IMPLIED >
-<!ATTLIST object_text border CDATA #IMPLIED >
+<!ATTLIST object_text padding CDATA #IMPLIED >
 <!ATTLIST object_text width CDATA #IMPLIED >
 <!ATTLIST object_text height CDATA #IMPLIED >
 <!ATTLIST object_text halignment (left|center|right) #IMPLIED >
@@ -146,7 +146,7 @@
 <!ATTLIST object_copy text CDATA #IMPLIED >
 <!ATTLIST object_copy font CDATA #IMPLIED >
 <!ATTLIST object_copy color CDATA #IMPLIED >
-<!ATTLIST object_copy border CDATA #IMPLIED >
+<!ATTLIST object_copy padding CDATA #IMPLIED >
 <!ATTLIST object_copy width CDATA #IMPLIED >
 <!ATTLIST object_copy height CDATA #IMPLIED >
 <!ATTLIST object_copy halignment (left|center|right) #IMPLIED >

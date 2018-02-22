@@ -64,8 +64,8 @@ class SetProperty extends Instruction {
 			case "color":
 				this.target.setColor(parseIntArray(this.value));
 				break;
-			case "border":
-				this.target.setBorder(parseInt(this.value));
+			case "padding":
+				this.target.setPadding(parseInt(this.value));
 				break;
 			case "halignment":
 				this.target.setHalignment(this.value);

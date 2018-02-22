@@ -4,12 +4,12 @@
 
 class Text extends AnimatedObject {
 	
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, text, font, color, border, width, height, halignment, valignment) {
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
 		this.text = text;
 		this.font = font; // FontName, FontSize, FontWeight
 		this.color = color; // r, g, b
-		this.border = border;
+		this.padding = padding;
 		this.width = width;
 		this.height = height;
 		this.halignment = halignment;
@@ -40,8 +40,8 @@ class Text extends AnimatedObject {
 		return this.color;
 	}
 
-	getBorder() {
-		return this.border;
+	getPadding() {
+		return this.padding;
 	}
 
 	getHalignment() {
@@ -65,8 +65,8 @@ class Text extends AnimatedObject {
 		this.color = color;
 	}
 
-	setBorder(border) {
-		this.border = border;
+	setPaddingr(padding) {
+		this.padding = padding;
 	}
 
 	setWidth(width) {
@@ -97,8 +97,7 @@ class Text extends AnimatedObject {
 		// Background
 		drawing.rect(this.x, this.y, this.real_width, this.real_height);
 		// Text's color, font, size and style
-		if (this.border == 0) drawing.noStroke();
-		else drawing.stroke(this.border);
+		drawing.noStroke();
 		drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
 		drawing.textFont(this.font[0]);
 		drawing.textSize(parseInt(this.font[1]));
@@ -131,7 +130,7 @@ class Text extends AnimatedObject {
         text.setAttribute("text", this.text);
 		text.setAttribute("font", this.font); // FontName, FontSize, FontWeight
 		text.setAttribute("color", this.color); // r, g, b
-		text.setAttribute("border", this.border);
+		text.setAttribute("padding", this.padding);
 		text.setAttribute("width", this.width);
 		text.setAttribute("height", this.height);
 		text.setAttribute("halignment",this.halignment); 
@@ -140,7 +139,7 @@ class Text extends AnimatedObject {
     }
 
     clone() {
-		return new Text(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.border, this.width, this.height, this.halignment, this.valignment);
+		return new Text(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.padding, this.width, this.height, this.halignment, this.valignment);
 	}
 	
 }

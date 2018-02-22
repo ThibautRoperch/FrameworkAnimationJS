@@ -256,16 +256,16 @@ function new_object(object_dom) {
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
-			// border
-			var border = 0;
+			// padding
+			var padding = 0;
 			property = document.createElement("property");
-				property.className = "border";
+				property.className = "padding";
 				label = document.createElement("label");
-					label.innerHTML = "border";
+					label.innerHTML = "padding";
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "number";
-					input.placeholder = border;
+					input.placeholder = padding;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
@@ -321,7 +321,7 @@ function new_object(object_dom) {
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
-			object = new Text(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, "", font, color, border, width, height, halignment, valignment);
+			object = new Text(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, "", font, color, padding, width, height, halignment, valignment);
 			break;
 		case "Image":
 			// width

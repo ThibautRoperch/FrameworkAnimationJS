@@ -26,9 +26,10 @@
 		<article>
 			<h2>2. Utilisation</h2>
 
-			<p>Le contenu du dossier <tt>js/AnimationFramework</tt> doit être accessible et son arborescence inchangée.</p>
+			<p>Copier et coller le dossier <tt>js/AnimationFramework</tt> au sein du projet destiné à utiliser le framework. Il doit être accessible par l'ensemble des pages HTML du projet et son arborescence inchangée.</p>
 			<p>Il faut inclure le fichier <a href="js/AnimationFramework/animation_controller.js"><tt>animation_controller.js</tt></a> dans chaque fichier contenant une animation.</p>
-			<p>Le chemin du dossier contenant le framework doit être précisé avant de charger les fichiers les animations.</p>
+			<p>Les fichiers nécessaires au bon fonctionnement du framework doivent être inclus en appellant la fonction `include_animation_files` en donnant le chemin du dossier contenant le framework.</p>
+			<p>Une animation est chargée avec la fonction `load_animation` en précisant le chemin de son fichier XML.</p>
 			<p>Le script suivant permet de charger l'animation contenue dans le fichier <tt>animation.xml</tt> et de l'afficher dans la balise ayant pour <code>id</code> <tt>anim1</tt>  :</p>
 			<pre>
 <code>
@@ -69,6 +70,9 @@
 			<h3>3.1 Les objets</h3>
 
 			Voir la DTD : <a href="animation.dtd">animation.dtd</a>
+
+			Attributs en commun à tous les objets :
+
 		</article>
 
 		<article>
