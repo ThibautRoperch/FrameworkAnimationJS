@@ -88,8 +88,8 @@ class Text extends AnimatedObject {
 	}
 
 	computeRealDimension() {
-		this.real_width = (this.width == undefined) ? this.text.length * (parseInt(this.font[1])/2 + 1) + 2 : this.width;
-		this.real_height = (this.height == undefined) ? parseInt(this.font[1]) + 8 : this.height;
+		this.real_width = (this.width == undefined) ? this.text.length * (parseInt(this.font[1])/2 + 1) + 2 + this.padding * 2 : this.width;
+		this.real_height = (this.height == undefined) ? parseInt(this.font[1]) + 8 + this.padding : this.height;
 	}
 	
 	draw(drawing) {
@@ -106,7 +106,7 @@ class Text extends AnimatedObject {
 		drawing.textAlign(this.halignment == "right" ? drawing.RIGHT : this.halignment == "center" ? drawing.CENTER : drawing.LEFT,
 		this.valignment == "center" ? drawing.CENTER : this.valignment == "bottom" ? drawing.BOTTOM : this.valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
 		// Display
-		drawing.text(this.text.replace("@", "\n"), this.x + 2, this.y + 4);
+		drawing.text(this.text.replace("@", "\n"), this.x + 2 + this.padding, this.y + 4 + this.padding / 2);
 	}
 	
 	isClicked(x, y) {
