@@ -11,8 +11,20 @@ function wait_for_includes() {
 		console.log("Animation files are not included. Include them by this way :\n<script>include_animation_files(\"path/of/AnimationFramework/\");</script>");
 	}
 
+	// Check if object classes are loaded
+	var objects_classes_loaded = true;
+	for (obj_cl of OBJECT_CLASSES) {
+		objects_classes_loaded = objects_classes_loaded & typeof(obj_cl) !== "undefined";
+	}
+	
+	// Check if instruction classes are loaded
+	var instruction_classes_loaded = true;
+	for (instr_cl of INSTRUCTION_CLASSES) {
+		instruction_classes_loaded = instruction_classes_loaded & typeof(instr_cl) !== "undefined";
+	}
+
 	// Loop with delay until main animation classes are not loaded
-	if (typeof(p5) === "undefined" || typeof(Animation) === "undefined") {
+    if (typeof(p5) === "undefined" || typeof(Animation) === "undefined" || !objects_classes_loaded) {
 		setTimeout(function() {
 			wait_for_includes();
 		}, 50);
@@ -30,15 +42,18 @@ function new_object(object_dom) {
 	var header = document.createElement("headerobj");
 		header.onclick = function() { expand(obj_id); };
 		var id = document.createElement("id");
-			id.innerHTML = "Object identifier : " + obj_id;
+			id.innerHTML = "<b>Identifiant :</b> " + obj_id;
 			header.appendChild(id);
 		var type = document.createElement("type");
-			type.innerHTML = "Object type : " + object_dom.innerHTML;
+			type.innerHTML = "<b>Type :</b> " + object_dom.innerHTML;
 			header.appendChild(type);
 		var arrow = document.createElement("arrow");
 			arrow.innerHTML = "&#11167;";
 			header.appendChild(arrow);
-	li.appendChild(header);
+		li.appendChild(header);
+	var test = document.createElement("bite");
+		test.innerHTML = "uidhioazd"
+		li.appendChild(test)
 
 	// init default attributs
 	var x = 0;
@@ -757,9 +772,14 @@ function draw_animation() {
 				objects_array[id].loadImage(draw_ref);
 			}
 
+			// Retrieve all layers in a set
 			for (var object of objects_array) {
 				layers.add(object.getLayer());
 			}
+
+			// Convert and sort the layers set
+			layers = Array.from(layers);
+			layers.sort();
 		}
 
 		draw_ref.setup = function() { // setup function waits until preload one is done

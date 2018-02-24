@@ -102,6 +102,7 @@ class Animation {
                 // Retrieve the AnimatedObjects' attributes
                 var type = read_object.nodeName;
                 var id = read_object.textContent;
+                if (this.objects.has(id)) console.log("[Animation.js] L'identifiant " + id + " a déjà été utilisé par un objet, ce dernier va être écrasé par le nouvel objet");
                 var x = parseInt(read_object.getAttribute("x")) | 0;
                 var y = parseInt(read_object.getAttribute("y")) | 0;
                 var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
@@ -222,7 +223,7 @@ class Animation {
                         var value = parseInt(read_instruction.getAttribute("value"));
                         new_instruction = new Sleep(this.objects.get(object_id), value, this.loop_delay);
                     } else if (type == "state") {
-                        console.log("Attention, instruction state dépréciée");
+                        console.log("[Animation.js] Attention, instruction state dépréciée");
                         var value = read_instruction.getAttribute("value");
                         new_instruction = new State(this.objects.get(object_id), value);
                     } else if (type == "trigger") {
@@ -328,6 +329,10 @@ class Animation {
         for (var object_id of this.objects_image) {
             this.objects.get(object_id).loadImage(drawing);
         }
+
+        // Convert and sort the layers set
+        this.layers = Array.from(this.layers);
+        this.layers.sort();
     }
 
     setup(drawing) {
