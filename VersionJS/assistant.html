@@ -51,13 +51,13 @@
 				<label for="height">Height (px)</label><input onchange="draw_animation()" id="height" type="number" value="200" />
 			</setting>
 			<setting>
-				<label for="start">Start button present</label><select id="start"><option>True</option><option>False</option></select>
+				<label for="start_button">Start button present</label><select id="start_button"><option selected value="true">True</option><option value="false">False</option></select>
 			</setting>
 			<setting>
-				<label for="speed">Speed</label><select id="speed"><option>Very slow</option><option>Slow</option><option selected>Normal</option><option>Fast</option><option>Very fast</option></select>
+				<label for="speed">Speed</label><select id="speed"><option value="very slow">Very slow</option><option value="slow">Slow</option><option selected value="normal">Normal</option><option value="fast">Fast</option><option value="very fast">Very fast</option></select>
 			</setting>
 			<setting>
-				<label for="image">Background image</label><input onchange="draw_animation()" id="image" type="text" placeholder="img/yellow_blue_linear_gradient.png" />
+				<label for="background">Background image</label><input onchange="draw_animation()" id="background" type="text" placeholder="img/yellow_blue_linear_gradient.png" />
 			</setting>
 		</article>
 

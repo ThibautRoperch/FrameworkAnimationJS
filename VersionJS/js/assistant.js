@@ -684,17 +684,27 @@ function reduce(object_id) {
 function to_xml() {
 	console.log("--------------------------------\n");
 
-	var animation_node = document.createElement("objects");
+	var animation_node = document.createElement("animation");
 
+	// init node
 	var init_node = document.createElement("init");
+	var start_button = document.createElement("start_button");
+	start_button.setAttribute("present", document.getElementById("start_button").value);
+	init_node.appendChild(start_button);
 	animation_node.appendChild(init_node);
 
+	// speed node
 	var speed_node = document.createElement("speed");
+	speed_node.innerHTML = document.getElementById("speed").value;
 	animation_node.appendChild(speed_node);
 
-	var background_node = document.createElement("background");
-	animation_node.appendChild(background_node);
+	// background image node
+	if (document.getElementById("background").value != "") {
+		var background_node = document.createElement("background");
+		animation_node.appendChild(background_node);
+	}
 
+	// objects node
 	var objects_node = document.createElement("objects");
 	for (var object of objects_array) {
 		console.log(object.toXml());
@@ -702,6 +712,7 @@ function to_xml() {
 	}
 	animation_node.appendChild(objects_node);
 
+	// programs node
 	var programs_node = document.createElement("programs");
 	animation_node.appendChild(programs_node);
 
@@ -736,7 +747,7 @@ function draw_animation() {
 
 		draw_ref.preload = function() { // preload function runs once
 			// Load the backround image
-			var bg_image = document.getElementById("image").value;
+			var bg_image = document.getElementById("background").value;
 			if (bg_image != "") {
 				BG_IMAGE = draw_ref.loadImage(bg_image);
 			}
