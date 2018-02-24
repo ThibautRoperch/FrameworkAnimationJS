@@ -115,7 +115,7 @@ class Text extends AnimatedObject {
 	
 	toXml() {
         var text = document.createElement("object_text");
-        text.setAttribute("id", this.id); 
+        text.innerHTML = this.id;
         text.setAttribute("x", this.x);
         text.setAttribute("y",this.y);
         text.setAttribute("bgcolor", this.bgcolor); // r, g, b

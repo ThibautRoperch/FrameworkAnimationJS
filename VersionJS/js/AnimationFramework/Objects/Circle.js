@@ -19,7 +19,6 @@ class Circle extends Ellipse {
 
     draw(drawing) {
         super.draw(drawing);
-        drawing.ellipse(this.x, this.y, this.radius, this.radius);
     }
 
     isClicked(x, y) {
@@ -31,7 +30,7 @@ class Circle extends Ellipse {
 
     toXml() {
         var circle = document.createElement("object_circle");
-        circle.setAttribute("id", this.id); 
+        circle.innerHTML = this.id; 
         circle.setAttribute("x", this.x);
         circle.setAttribute("y",this.y);
         circle.setAttribute("bgcolor", this.bgcolor); // r, g, b

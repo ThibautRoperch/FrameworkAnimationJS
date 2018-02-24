@@ -2,6 +2,7 @@ var last_id = -1;
 var objects_list = document.getElementById("objects");
 var objects_array = new Array();
 var instructions_array = new Array();
+var objects_image_id = new Array();
 
 wait_for_includes();
 function wait_for_includes() {
@@ -35,7 +36,7 @@ function new_object(object_dom) {
 			type.innerHTML = "Object type : " + object_dom.innerHTML;
 			header.appendChild(type);
 		var arrow = document.createElement("arrow");
-			arrow.innerHTML = "\\/";
+			arrow.innerHTML = "&#11167;";
 			header.appendChild(arrow);
 	li.appendChild(header);
 
@@ -302,10 +303,21 @@ function new_object(object_dom) {
 				label = document.createElement("label");
 					label.innerHTML = "halignment";
 					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text";
-					input.placeholder = halignment;
+				input = document.createElement("select");
 					input.onchange = function() { change_property(obj_id, this); };
+						option = document.createElement("option");
+							option.value = "left";
+							option.innerHTML = "Left";
+							option.selected = "selected";
+							input.appendChild(option);
+							option = document.createElement("option");
+							option.value = "center";
+							option.innerHTML = "Center";
+							input.appendChild(option);
+							option = document.createElement("option");
+							option.value = "right";
+							option.innerHTML = "Right";
+							input.appendChild(option);
 					property.appendChild(input);
 				article1.appendChild(property);
 			// valignment
@@ -315,16 +327,32 @@ function new_object(object_dom) {
 				label = document.createElement("label");
 					label.innerHTML = "valignment";
 					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text";
-					input.placeholder = valignment;
+				input = document.createElement("select");
 					input.onchange = function() { change_property(obj_id, this); };
+						option = document.createElement("option");
+							option.value = "top";
+							option.innerHTML = "Top";
+							option.selected = "selected";
+							input.appendChild(option);
+							option = document.createElement("option");
+							option.value = "bottom";
+							option.innerHTML = "Bottom";
+							input.appendChild(option);
+							option = document.createElement("option");
+							option.value = "center";
+							option.innerHTML = "Center";
+							input.appendChild(option);
+							option = document.createElement("option");
+							option.value = "baseline";
+							option.innerHTML = "Baseline";
+							input.appendChild(option);
 					property.appendChild(input);
 				article1.appendChild(property);
 			object = new Text(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, "", font, color, padding, width, height, halignment, valignment);
 			break;
-		case "Image":
+		case "ImageFile":
 			// width
+			var width = "50";
 			property = document.createElement("property");
 			property.className = "width";
 			label = document.createElement("label");
@@ -332,10 +360,12 @@ function new_object(object_dom) {
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
+				input.value = width;
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
 			// height
+			var height = "50";
 			property = document.createElement("property");
 			property.className = "height";
 			label = document.createElement("label");
@@ -343,10 +373,12 @@ function new_object(object_dom) {
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
+				input.value = height;
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
 			// image
+			var image = "img/yellow_blue_linear_gradient.png";
 			property.appendChild(input);
 			property = document.createElement("property");
 			property.className = "image";
@@ -354,12 +386,14 @@ function new_object(object_dom) {
 				label.innerHTML = "image";
 				property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "file";
+				input.type = "text";
+				input.value = image;
 				input.required = "required";
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new ImageFile(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, undefined, undefined, image); 
+			object = new ImageFile(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, image);
+			objects_image_id.push(obj_id);
 			break;
 		case "Rectangle":
 			// width
@@ -407,7 +441,7 @@ function new_object(object_dom) {
 			break;
 		case "Polygon":
 			// coord_x
-			var coord_x = [];
+			var coord_x = [50, 100, 100];
 			property = document.createElement("property");
 				property.className = "coord_x";
 				label = document.createElement("label");
@@ -415,13 +449,13 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "text"
-					input.value = "";
+					input.value = coord_x;
 					input.required = "required";
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
 			// coord_y
-			var coord_y = [];
+			var coord_y = [50, 100, 50];
 			property = document.createElement("property");
 				property.className = "coord_y";
 				label = document.createElement("label");
@@ -429,7 +463,7 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "text";
-					input.value = "";
+					input.value = coord_y;
 					input.required = "required";
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
@@ -573,7 +607,7 @@ function new_object(object_dom) {
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
-				input.value = "3";
+				input.value = columns;
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
@@ -586,7 +620,7 @@ function new_object(object_dom) {
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
-				input.value = "4";
+				input.value = lines;
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
@@ -599,7 +633,7 @@ function new_object(object_dom) {
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
-				input.value = "15";
+				input.value = column_width;
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
@@ -612,7 +646,7 @@ function new_object(object_dom) {
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
-				input.value = "10";
+				input.value = line_height;
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
@@ -637,21 +671,47 @@ function expand(object_id) {
 	var object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "displayed";
 	object_dom.getElementsByTagName("headerobj")[0].onclick = function() { reduce(object_id); };
-	object_dom.getElementsByTagName("arrow")[0].innerHTML = "/\\";
+	object_dom.getElementsByTagName("arrow")[0].innerHTML = "&#11165;";
 }
 
 function reduce(object_id) {
 	var object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "hidden";
 	object_dom.getElementsByTagName("headerobj")[0].onclick = function() { expand(object_id); };
-	object_dom.getElementsByTagName("arrow")[0].innerHTML = "\\/";
+	object_dom.getElementsByTagName("arrow")[0].innerHTML = "&#11167;";
 }
 
 function to_xml() {
 	console.log("--------------------------------\n");
+
+	var animation_node = document.createElement("objects");
+
+	var init_node = document.createElement("init");
+	animation_node.appendChild(init_node);
+
+	var speed_node = document.createElement("speed");
+	animation_node.appendChild(speed_node);
+
+	var background_node = document.createElement("background");
+	animation_node.appendChild(background_node);
+
+	var objects_node = document.createElement("objects");
 	for (var object of objects_array) {
 		console.log(object.toXml());
+		objects_node.appendChild(object.toXml());
 	}
+	animation_node.appendChild(objects_node);
+
+	var programs_node = document.createElement("programs");
+	animation_node.appendChild(programs_node);
+
+	// Serialize the animation XML tree
+	var serializer = new XMLSerializer();
+	var animation_string = serializer.serializeToString(animation_node);
+
+	// Display the serialized XML tree in a file
+	document.getElementById("xml_output").innerHTML = animation_string;
+	document.getElementsByTagName("popup")[0].className = "display";
 }
 
 /**********************
@@ -666,22 +726,25 @@ var drawing_dom = document.getElementById("drawing");
 function draw_animation() {
 	var layers = new Set();
 
-	if (drawing_dom.hasChildNodes()) {
+	while (drawing_dom.hasChildNodes()) {
 		drawing_dom.removeChild(drawing_dom.firstChild);
-	};
+	}
 
 	new p5(function(draw_ref) {
 
+		var BG_IMAGE = null;
+
 		draw_ref.preload = function() { // preload function runs once
-			// // Load the backround image
-			// if (this.bg_image != "") {
-			// 	this.bg_image = draw_ref.loadImage(this.bg_image);
-			// }
+			// Load the backround image
+			var bg_image = document.getElementById("image").value;
+			if (bg_image != "") {
+				BG_IMAGE = draw_ref.loadImage(bg_image);
+			}
 			
-			// // Load animation's images
-			// for (var object_id of this.objects_image) {
-			// 	this.objects.get(object_id).loadImage(drawing);
-			// }
+			// Load animation's images
+			for (var id of objects_image_id) {
+				objects_array[id].loadImage(draw_ref);
+			}
 
 			for (var object of objects_array) {
 				layers.add(object.getLayer());
@@ -699,9 +762,9 @@ function draw_animation() {
 			draw_ref.frameRate(60); // 60 fps
 			
 			// Display the background image
-			// if (BG_IMAGE != null) {
-			// 	background(BG_IMAGE);
-			// }
+			if (BG_IMAGE != null) {
+				draw_ref.background(BG_IMAGE);
+			}
 
 			// Display objects of each layer, if they're set as visible
 			for (var layer of layers) {

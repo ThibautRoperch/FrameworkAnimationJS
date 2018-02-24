@@ -55,7 +55,7 @@ class Polygon extends AnimatedObject {
     toXml() {
         
         var polygon = document.createElement("object_polygon");
-        polygon.setAttribute("id", this.id); 
+        polygon.innerHTML = this.id;
         polygon.setAttribute("x", this.x);
         polygon.setAttribute("y",this.y);
         polygon.setAttribute("bgcolor", this.bgcolor);

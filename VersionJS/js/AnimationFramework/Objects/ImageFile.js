@@ -55,7 +55,7 @@ class ImageFile extends AnimatedObject {
     
     toXml() {
         var image = document.createElement("object_image");
-        image.setAttribute("id", this.id); 
+        image.innerHTML = this.id;
         image.setAttribute("x", this.x);
         image.setAttribute("y",this.y);
         image.setAttribute("bgcolor", this.bgcolor); // r, g, b

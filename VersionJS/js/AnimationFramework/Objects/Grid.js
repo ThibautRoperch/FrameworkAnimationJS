@@ -61,7 +61,7 @@ class Grid extends AnimatedObject {
 
     toXml() {
         var grid = document.createElement("object_grid");
-        grid.setAttribute("id", this.id); 
+        grid.innerHTML = this.id;
         grid.setAttribute("x", this.x);
         grid.setAttribute("y",this.y);
         grid.setAttribute("bgcolor", this.bgcolor); // r, g, b

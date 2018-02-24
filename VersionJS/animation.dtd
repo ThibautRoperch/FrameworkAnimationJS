@@ -1,5 +1,5 @@
 
-<!ELEMENT animation (init?,background?,objects,programs) >
+<!ELEMENT animation (init?,speed?,background?,objects,programs) >
 
 <!ELEMENT init (start_button) >
 <!ELEMENT start_button EMPTY >
@@ -7,6 +7,8 @@
 <!ATTLIST start_button x CDATA #IMPLIED >
 <!ATTLIST start_button y CDATA #IMPLIED >
 <!ATTLIST start_button present (true|false) #IMPLIED >
+
+<!ELEMENT speed ("very slow"|"slow"|"normal"|"fast"|"very fast") >
 
 <!ELEMENT background (#PCDATA) >
 
@@ -172,9 +174,6 @@
 <!ATTLIST object_copy visible (true|false) #IMPLIED >
 <!ATTLIST object_copy opacity CDATA #IMPLIED >
 <!ATTLIST object_copy angle CDATA #IMPLIED >
-
-
-<!ELEMENT speed ("very slow"|"slow"|"normal"|"fast"|"very fast") >
 
 <!ELEMENT programs (program+) >
 

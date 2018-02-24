@@ -52,7 +52,7 @@ class StartButton extends AnimatedObject {
     
     toXml() {
         var rectangle = document.createElement("object_rectangle");
-        rectangle.setAttribute("id", this.id); 
+        rectangle.innerHTML = this.id;
         rectangle.setAttribute("x", this.x);
         rectangle.setAttribute("y",this.y);
         rectangle.setAttribute("bgcolor", this.bgcolor); 
