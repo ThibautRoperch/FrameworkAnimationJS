@@ -43,11 +43,10 @@
 	<programs>
 		<program assigned_to="cercle">
       		<click />
-			<setproperty object="cercle" property="x" value="50" />
+			<moveto x="50" y="100" dx="20" dy="20" delay="5" />
 		</program>
 		<program assigned_to="ellipse">
       		<click />
-			<setproperty object="ellipse" property="x" value="50" />
 		</program>
 	</programs>
 

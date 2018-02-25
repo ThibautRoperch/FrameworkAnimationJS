@@ -24,36 +24,76 @@ class MoveTo extends Instruction {
 				instruction.object.setY(instruction.object.getY()-instruction.interval_y);
 				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
 				
-				setTimeout(function() {
-					move(instruction);
-				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+				if ((instruction.object.getY() > instruction.y) || (instruction.object.getX() > instruction.x))
+					setTimeout(function() {
+						move(instruction);
+					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() > instruction.x)) {
 					
 				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
 				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
 		
-				setTimeout(function() {
-					move(instruction);
-				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+				if ((instruction.object.getY() < instruction.y) || (instruction.object.getX() > instruction.x))
+					setTimeout(function() {
+						move(instruction);
+					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+			}
+			else if ((instruction.object.getY() == instruction.y) && (instruction.object.getX() > instruction.x)) {
+					
+				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
+		
+				if (instruction.object.getX() > instruction.x)
+					setTimeout(function() {
+						move(instruction);
+					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() < instruction.x)) {
 					
 				instruction.object.setY(instruction.object.getY()-instruction.interval_y);
 				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
 		
-				setTimeout(function() {
-					move(instruction);
-				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+				if ((instruction.object.getY() > instruction.y) || (instruction.object.getX() < instruction.x))
+					setTimeout(function() {
+						move(instruction);
+					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() < instruction.x)) {
 					
 				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
 				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
 			
-				setTimeout(function() {
-					move(instruction);
-				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+				if ((instruction.object.getY() < instruction.y) || (instruction.object.getX() < instruction.x))
+					setTimeout(function() {
+						move(instruction);
+					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+			}
+			else if ((instruction.object.getY() == instruction.y) && (instruction.object.getX() < instruction.x)) {
+					
+				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
+			
+				if ((instruction.object.getX() < instruction.x))
+					setTimeout(function() {
+						move(instruction);
+					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+			}
+			else if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() == instruction.x)) {
+					
+				instruction.object.setY(instruction.object.getY()-instruction.interval_y);
+			
+				if ((instruction.object.getY() > instruction.y))
+					setTimeout(function() {
+						move(instruction);
+					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
+			}
+			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() == instruction.x)) {
+					
+				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
+			
+				if ((instruction.object.getY() < instruction.y))
+					setTimeout(function() {
+						move(instruction);
+					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 		}
 

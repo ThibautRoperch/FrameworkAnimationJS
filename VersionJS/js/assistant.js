@@ -719,11 +719,11 @@ function customize(object_id) {
 
 		// Set the background object as not transparent
 		object.setBgtransparent(false);
-		document.getElementById(object_id).getElementsByClassName("bgtransparent")[0].getElementsByTagName("option")[0].selected = "selected";
+		document.getElementById(object_id).getElementsByClassName("bgtransparent")[0].getElementsByTagName("option")[1].selected = "selected";
 
 		// Set the border object as not transparent
 		object.setBotransparent(false);
-		document.getElementById(object_id).getElementsByClassName("botransparent")[0].getElementsByTagName("option")[0].selected = "selected";
+		document.getElementById(object_id).getElementsByClassName("botransparent")[0].getElementsByTagName("option")[1].selected = "selected";
 
 		// Give random colors for the background and border object
 		object.setBgcolor(rand_rgb());

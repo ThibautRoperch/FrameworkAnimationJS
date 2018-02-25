@@ -101,7 +101,7 @@ h2 {
     margin-bottom: 20px;
     padding-bottom: 10px;
     font-size: 18px;
-    border-bottom: 2px inset gray;
+    border-bottom: 2px solid silver;
 }
 
 #objects {
