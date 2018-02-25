@@ -38,7 +38,7 @@ function load_animation(source_file, target_id, width, height) {
 		instruction_classes_loaded = instruction_classes_loaded & typeof(instr_cl) !== "undefined";
 	}
 
-	// Loop with delay until main animation classes are not loaded
+	// Loop with delay until animation classes are not loaded
     if (typeof(p5) === "undefined" || typeof(Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
         setTimeout(function() {
             load_animation(source_file, target_id, width, height);

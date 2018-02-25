@@ -23,8 +23,8 @@ function wait_for_includes() {
 		instruction_classes_loaded = instruction_classes_loaded & typeof(instr_cl) !== "undefined";
 	}
 
-	// Loop with delay until main animation classes are not loaded
-    if (typeof(p5) === "undefined" || typeof(Animation) === "undefined" || !objects_classes_loaded) {
+	// Loop with delay until animation classes are not loaded
+    if (typeof(p5) === "undefined" || typeof(Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
 		setTimeout(function() {
 			wait_for_includes();
 		}, 50);
@@ -40,20 +40,29 @@ function new_object(object_dom) {
 	var li = document.createElement("li");
 		li.id = obj_id;
 	var header = document.createElement("headerobj");
-		header.onclick = function() { expand(obj_id); };
-		var id = document.createElement("id");
-			id.innerHTML = "<b>Identifiant :</b> " + obj_id;
-			header.appendChild(id);
-		var type = document.createElement("type");
-			type.innerHTML = "<b>Type :</b> " + object_dom.innerHTML;
-			header.appendChild(type);
-		var arrow = document.createElement("arrow");
-			arrow.innerHTML = "&#11167;";
-			header.appendChild(arrow);
-		li.appendChild(header);
-	var test = document.createElement("bite");
-		test.innerHTML = "uidhioazd"
-		li.appendChild(test)
+		var spoiler = document.createElement("div");
+			spoiler.onclick = function() { expand(obj_id); };
+			var id = document.createElement("id");
+				id.innerHTML = "<b>Identifiant :</b> " + obj_id;
+				spoiler.appendChild(id);
+			var type = document.createElement("type");
+				type.innerHTML = "<b>Type :</b> " + object_dom.innerHTML;
+				spoiler.appendChild(type);
+			var arrow = document.createElement("arrow");
+				arrow.innerHTML = "&#11167;";
+				spoiler.appendChild(arrow);
+		header.appendChild(spoiler);
+		var style = document.createElement("div");
+			style.className = "warning";
+			style.onclick = function() { customize(obj_id); };
+			style.innerHTML = "&#127912;";
+		header.appendChild(style);
+		var trash = document.createElement("div");
+			trash.className = "danger";
+			trash.onclick = function() { remove(obj_id); };
+			trash.innerHTML = "&#10060;";
+		header.appendChild(trash);
+	li.appendChild(header);
 
 	// init default attributs
 	var x = 0;
@@ -456,7 +465,7 @@ function new_object(object_dom) {
 			break;
 		case "Polygon":
 			// coord_x
-			var coord_x = [50, 100, 100];
+			var coord_x = [0, 80, 80, 40];
 			property = document.createElement("property");
 				property.className = "coord_x";
 				label = document.createElement("label");
@@ -470,7 +479,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// coord_y
-			var coord_y = [50, 100, 50];
+			var coord_y = [0, 60, 0, 60];
 			property = document.createElement("property");
 				property.className = "coord_y";
 				label = document.createElement("label");
@@ -487,7 +496,7 @@ function new_object(object_dom) {
 			break;
 		case "Circle":
 			// radius
-			var radius = 10;
+			var radius = 30;
 			property = document.createElement("property");
 			property.className = "radius";
 			label = document.createElement("label");
@@ -504,6 +513,7 @@ function new_object(object_dom) {
 			break;
 		case "Ellipse":
 			// width
+			var width = 60;
 			property = document.createElement("property");
 			property.className = "width";
 			label = document.createElement("label");
@@ -511,12 +521,13 @@ function new_object(object_dom) {
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
-				input.value = "50";
+				input.value = width;
 				input.required = "required";
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
 			// height
+			var height = 40;
 			property = document.createElement("property");
 			property.className = "height";
 			label = document.createElement("label");
@@ -524,7 +535,7 @@ function new_object(object_dom) {
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
-				input.value = "50";
+				input.value = height;
 				input.required = "required";
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
@@ -627,7 +638,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// lines
-			var lines = 4;
+			var lines = 3;
 			property = document.createElement("property");
 			property.className = "line";
 			label = document.createElement("label");
@@ -640,7 +651,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// column_width
-			var column_width = 15;
+			var column_width = 20;
 			property = document.createElement("property");
 			property.className = "column_width";
 			label = document.createElement("label");
@@ -653,7 +664,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// line_height
-			var line_height = 10;
+			var line_height = 20;
 			property = document.createElement("property");
 			property.className = "line_height";
 			label = document.createElement("label");
@@ -679,21 +690,65 @@ function new_instruction(object_id, object_dom) {
 
 function change_property(object_id, property_dom) {
 	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
-	draw_animation();
+	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
 function expand(object_id) {
 	var object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "displayed";
-	object_dom.getElementsByTagName("headerobj")[0].onclick = function() { reduce(object_id); };
+	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].className = "active";
+	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].onclick = function() { reduce(object_id); };
 	object_dom.getElementsByTagName("arrow")[0].innerHTML = "&#11165;";
 }
 
 function reduce(object_id) {
 	var object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "hidden";
-	object_dom.getElementsByTagName("headerobj")[0].onclick = function() { expand(object_id); };
+	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].className = "";
+	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].onclick = function() { expand(object_id); };
 	object_dom.getElementsByTagName("arrow")[0].innerHTML = "&#11167;";
+}
+
+function customize(object_id) {
+	var object = objects_array[object_id];
+
+	if (object !== undefined) { // vérifier ça à cause de la suppression
+		// Set the object as visible
+		object.setVisible(true);
+		document.getElementById(object_id).getElementsByClassName("visible")[0].getElementsByTagName("option")[0].selected = "selected";
+
+		// Set the background object as not transparent
+		object.setBgtransparent(false);
+		document.getElementById(object_id).getElementsByClassName("bgtransparent")[0].getElementsByTagName("option")[0].selected = "selected";
+
+		// Set the border object as not transparent
+		object.setBotransparent(false);
+		document.getElementById(object_id).getElementsByClassName("botransparent")[0].getElementsByTagName("option")[0].selected = "selected";
+
+		// Give random colors for the background and border object
+		object.setBgcolor(rand_rgb());
+		document.getElementById(object_id).getElementsByClassName("bgcolor")[0].getElementsByTagName("input")[0].value = object.getBgcolor();
+		object.setBocolor(rand_rgb());
+		document.getElementById(object_id).getElementsByClassName("bocolor")[0].getElementsByTagName("input")[0].value = object.getBocolor();
+		
+		draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
+	}
+}
+
+function remove(object_id) {
+	// Remove from the objects array (JS)
+	objects_array.splice(objects_array.indexOf(object_id), 1);
+
+	// Remove from the image objects array (js)
+	var pos = objects_image_id.indexOf(object_id);
+	if (pos > -1) {
+		objects_image_id.splice(pos, 1);
+	}
+
+	// Remove from the objects list (HTML)
+	objects_list.removeChild(document.getElementById(object_id));
+
+	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
 function to_xml() {
@@ -769,12 +824,17 @@ function draw_animation() {
 			
 			// Load animation's images
 			for (var id of objects_image_id) {
-				objects_array[id].loadImage(draw_ref);
+				var object = objects_array[id];
+				if (object !== undefined) { // vérifier ça à cause de la suppression
+					object.loadImage(draw_ref);
+				}
 			}
 
 			// Retrieve all layers in a set
 			for (var object of objects_array) {
-				layers.add(object.getLayer());
+				if (object !== undefined) { // vérifier ça à cause de la suppression
+					layers.add(object.getLayer());
+				}
 			}
 
 			// Convert and sort the layers set
@@ -800,7 +860,7 @@ function draw_animation() {
 			// Display objects of each layer, if they're set as visible
 			for (var layer of layers) {
 				for (var object of objects_array) {
-					if (object.getLayer() == layer && object.getVisible()) {
+					if (object !== undefined && object.getLayer() == layer && object.getVisible()) { // vérifier ça à cause de la suppression
 						object.draw(draw_ref);
 					}
 				}
@@ -815,4 +875,10 @@ function draw_animation() {
 		// }
 
 	});
+}
+
+function rand_rgb() {
+	var max = 255;
+	// Math.random : [0, 1[
+	return [Math.floor(Math.random() * (max + 1)), Math.floor(Math.random() * (max + 1)), Math.floor(Math.random() * (max + 1))];
 }

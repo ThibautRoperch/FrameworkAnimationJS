@@ -72,9 +72,14 @@ body aside {
     width: 30%;
 }
 
-body aside article {
+article {
     display: flex;
     flex-direction: column;
+    margin-bottom: 40px;
+}
+
+article:last-child {
+    margin-bottom: 0;
 }
 
 body aside article setting {
@@ -93,19 +98,14 @@ body aside article #drawing {
 }
 
 h2 {
-    margin: 15px 0;
-    padding-bottom: 5px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
     font-size: 18px;
-    border-bottom: 2px solid gray;
-}
-
-h2:first-child {
-    margin-top: 0;
+    border-bottom: 2px inset gray;
 }
 
 #objects {
     display: flex;
-    margin-bottom: 20px;
     flex-direction: column;
     list-style-type : none;
     background: white;
@@ -114,22 +114,36 @@ h2:first-child {
 #objects li {
     display: flex;
     flex-direction: column;
+    margin: 5px 0;
 }
 
 #objects li headerobj {
     display: flex;
-    padding: 10px 3%;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: all 0.13s ease;
+    flex-direction: row;
 }
 
-#objects li headerobj:hover {
-    border-color: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+#objects li headerobj div {
+    display: flex;
+    padding: 10px 15px;
 }
 
-#objects li headerobj > * {
+#objects li headerobj div.warning:hover {
+    background: lightyellow;
+}
+
+#objects li headerobj div.danger:hover {
+    background: tomato;
+}
+
+#objects li headerobj div:first-child {
+    flex: 1;
+}
+
+#objects li headerobj div:hover, #objects li headerobj div.active {
+    background: rgb(217, 239, 255);
+}
+
+#objects li headerobj div > * {
     flex: 1;
 }
 
@@ -158,6 +172,7 @@ h2:first-child {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding: 5px 0;
 }
 
 /* #objects li sectionobj article:first-child {
@@ -217,13 +232,21 @@ objects > *:last-child, instructions > *:last-child {
 button {
     height: 40px;
     color: rgba(0, 0, 0, 0.6);
+}
+
+button, headerobj div {
+    background: white;
+    transition: all .13s ease;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    background: rgba(0, 0, 0, 0.05);
+    box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
-button:hover {
-    background: rgba(0, 0, 0, 0.1);
+button:hover, headerobj div:hover, headerobj div.active {
+    margin-top: 2px;
+    margin-bottom: -2px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
 }
 
 canvas {
