@@ -287,6 +287,7 @@ class Animation {
     execute_instructions(object_id, instruction_number, labels) {
         // Retrieve the program and the current instruction of the program
         var program = this.programs.get(object_id);
+        if (program.length == 0) return; // In case of the program does not contain any instruction, stop its execution right now
         var instruction = program[instruction_number];
 
         var next_instruction = instruction_number; // the next instruction is by default the current one

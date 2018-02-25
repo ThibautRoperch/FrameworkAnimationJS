@@ -5,7 +5,7 @@
 class Circle extends Ellipse {
        
     constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, radius) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, radius, radius);
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, radius * 2, radius * 2);
         this.radius = radius;
     }
 
@@ -22,10 +22,11 @@ class Circle extends Ellipse {
     }
 
     isClicked(x, y) {
-        x = this.x - x;
-        y = this.y - y;
-        distance = Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
-        return distance <= this.width/2;
+        // Compute the distance between the circle center and the mouse position
+        var delta_x = this.x + this.radius - x;
+        var delta_y = this.y + this.radius - y;
+        var distance = Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2));
+        return distance <= this.radius;
     }
 
     toXml() {

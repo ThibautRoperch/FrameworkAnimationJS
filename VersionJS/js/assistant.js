@@ -237,7 +237,7 @@ function new_object(object_dom) {
 						instructions.appendChild(button);
 				}
 				article2.appendChild(instructions);
-			//section.appendChild(article2); // TODO enlever pour mettre les instructions
+			//section.appendChild(article2); // TODO à enlever pour mettre les instructions
 		li.appendChild(section);
 	objects_list.appendChild(li);
 
@@ -676,7 +676,7 @@ function new_object(object_dom) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Grid(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, lines, columns, line_height, column_width); //todo
+			object = new Grid(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, lines, columns, line_height, column_width);
 			break;
 	}
 

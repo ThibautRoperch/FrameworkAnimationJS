@@ -34,7 +34,6 @@ class StartButton extends AnimatedObject {
 		super.draw(drawing);
         // Background
        	drawing.rect(this.x - this.width / 2 + 2, this.y - this.height / 2 + 2, this.width, this.height); 
-		// Remplacer les @ par \n TODO p-ê utiliser textLeading (https://p5js.org/reference/#/p5/textLeading)
         // Text's color, size and style
         drawing.noStroke();
         drawing.fill(0, 0, 255, this.opacity * 255);
@@ -43,7 +42,7 @@ class StartButton extends AnimatedObject {
 		// Text alignment
 		drawing.textAlign(drawing.CENTER, drawing.CENTER);
 		// Display
-		drawing.text(this.text, this.x + 2, this.y + 4);
+		drawing.text(this.text.replace("@", "\n"), this.x + 2, this.y + 4);
     }
 
     isClicked(x, y) {

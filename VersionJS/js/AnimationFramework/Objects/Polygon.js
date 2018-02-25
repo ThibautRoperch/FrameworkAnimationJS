@@ -36,7 +36,6 @@ class Polygon extends AnimatedObject {
     }
     
     isClicked(x, y) {
-        // TODO définir une hitbox rectangulaire si c'est trop relou (trouver le min et le max de x et de y parmi les points)
         var min_x = this.coord_x[0];
         var max_x = this.coord_x[0];
         var min_y = this.coord_y[0];

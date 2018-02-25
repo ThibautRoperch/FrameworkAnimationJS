@@ -31,10 +31,11 @@ class Ellipse extends AnimatedObject {
         drawing.ellipse(this.x + this.width / 2, this.y + this.height / 2, this.width, this.height);
     }
 
-    isClicked(x, y) { //probably false // TODO à vérifier
-        x = this.x - x;
-        y = this.y - y;
-        distance = Math.pow(x/(width/2),2) + Math.pow(y/(height/2),2);
+    isClicked(x, y) {
+        // Compute the distance between the ellipse center and the mouse position
+        var delta_x = this.x + (this.width / 2) - x;
+        var delta_y = this.y + (this.height / 2) - y;
+        var distance = Math.pow(delta_x / (this.width / 2), 2) + Math.pow(delta_y / (this.height / 2), 2);
         return distance <= 1;
     }
 

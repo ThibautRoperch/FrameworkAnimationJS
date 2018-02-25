@@ -2,9 +2,16 @@
 TODO
 ====
 
-Pouvoir faire suivre un tracé à un objet	<follow object="" />	avec possibilité de bouger à l'infini sur le tracé (revenir au débbut à chaque fois qu'il arrive à la fin)
+Pouvoir faire suivre un tracé à un objet avec possibilité de bouger à l'infini sur le tracé (revenir au débbut à chaque fois qu'il arrive à la fin)
 Un objet de type tracé, avec des presets, comme une sinusoidale
 trajectoire (type, et en fonction du type : points si c'est une multiligne, width height si c'est une sinusoidale)
+
+<object_rectangle>rect</object_rectangle>
+<objet_path type=”sine” loop=”true”>tracé</object_path>
+
+<program assigned_to=”rect”>
+	<follow object="tracé” dx=”5” dy=”5” />
+</program>
 
 Fonctionnalités
 ===============
