@@ -89,7 +89,7 @@ class Text extends AnimatedObject {
 
 	computeRealDimension() {
 		this.real_width = (this.width == undefined) ? this.text.length * (parseInt(this.font[1])/2 + 1) + 2 + this.padding * 2 : this.width;
-		this.real_height = (this.height == undefined) ? parseInt(this.font[1]) + 8 + this.padding : this.height;
+		this.real_height = (this.height == undefined) ? (parseInt(this.font[1]) + 8 + this.padding) * ((this.text.match(/@/g) || []).length + 1) : this.height;
 	}
 	
 	draw(drawing) {

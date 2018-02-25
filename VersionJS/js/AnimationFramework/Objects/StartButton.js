@@ -11,7 +11,7 @@ class StartButton extends AnimatedObject {
 
         this.font_size = 12;
         this.width = this.text.length * (parseInt(this.font_size) / 2 + 1) + 2;
-        this.height = this.font_size + 13;
+        this.height = (this.font_size + 13) * ((this.text.match(/@/g) || []).length + 1);
     }
     
     getText() {
