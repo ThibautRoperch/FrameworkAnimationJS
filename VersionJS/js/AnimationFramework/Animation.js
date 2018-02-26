@@ -165,7 +165,7 @@ class Animation {
                     var idcopy = read_object.getAttribute("idcopy");
                     var initial_object = this.objects.get(idcopy);
                     if (initial_object == null) {
-                        console.log("[Animation.js] L'objet " + idcopy + " à copier n'existe pas");
+                        console.log("[Animation.js] L'objet " + idcopy + " à copier n'existe pas (le définir avec l'attribut idcopy)");
                     } else {
                         new_object = initial_object.clone();
                         new_object.setId(id);

@@ -8,7 +8,9 @@
 	</background>
 	
 	<objects>
-		<object_text text="test avec gros padding" font="Arial,18,bold" x="800" y="60" visible="true" padding="50" bgtransparent="false">jl</object_text>
+		<object_text text="test avec gros padding" font="Arial,18,bold" x="800" y="60" visible="true" padding="50" bgtransparent="false">a_copier</object_text>
+		<object_copy idcopy="a_copier" text="copie du texte avec gros padding" y="150">jl_copy</object_copy>
+
 		<object_grid visible="true" layer="4" bgtransparent="false" bocolor="20,200,50" bgcolor="0,255,0" botransparent="false" lines="3" columns="8" line_height="100" column_width="40" x="350" y="150">LA GRILLE</object_grid>
 		<object_grid visible="true" layer="2" bgtransparent="false" bocolor="20,100,50" bgcolor="100,55,20" botransparent="false" lines="3" columns="10" line_height="30" column_width="40" x="420" y="270">test</object_grid>
 		

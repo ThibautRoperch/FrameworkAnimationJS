@@ -139,10 +139,6 @@
 <!ATTLIST object_grid opacity CDATA #IMPLIED >
 <!ATTLIST object_grid angle CDATA #IMPLIED >
 
-<!ELEMENT object_extern (#PCDATA) >
-<!ATTLIST object_extern class CDATA #REQUIRED >
-<!ATTLIST object_extern constructor CDATA #REQUIRED >
-
 <!ELEMENT object_copy (#PCDATA) >
 <!ATTLIST object_copy idcopy CDATA #REQUIRED>
 <!ATTLIST object_copy text CDATA #IMPLIED >
