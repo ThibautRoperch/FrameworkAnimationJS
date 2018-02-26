@@ -224,7 +224,7 @@ function new_object(object_dom) {
 					input.placeholder = angle;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
-				// article1.appendChild(property);
+				article1.appendChild(property);
 			section.appendChild(article1);
 		// Instructions
 		var article2 = document.createElement("article");
@@ -777,8 +777,10 @@ function to_xml() {
 	// objects node
 	var objects_node = document.createElement("objects");
 	for (var object of objects_array) {
-		console.log(object.toXml());
-		objects_node.appendChild(object.toXml());
+		if (object !== undefined) { // vérifier ça à cause de la suppression
+			console.log(object.toXml());
+			objects_node.appendChild(object.toXml());
+		}
 	}
 	animation_node.appendChild(objects_node);
 
