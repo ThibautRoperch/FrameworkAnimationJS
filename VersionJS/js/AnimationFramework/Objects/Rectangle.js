@@ -4,8 +4,8 @@
 
 class Rectangle extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, width, height, round) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, round) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);
         this.width = width;
         this.height = height;
         this.round = round; // tl, tr, bl, br

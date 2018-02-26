@@ -10,7 +10,7 @@ var MOVING_STATE = "moving";
 
 class AnimatedObject {
    
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle) {
+    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -18,6 +18,7 @@ class AnimatedObject {
         this.bgtransparent = bgtransparent;
         this.bocolor = bocolor; // r, g, b
         this.botransparent = botransparent;
+        this.bosize = bosize;
         this.state = state;
         this.layer = layer;
         this.visible = visible;
@@ -51,6 +52,10 @@ class AnimatedObject {
 
     getBotransparent() {
         return this.botransparent;
+    }
+
+    getBosize() {
+        return this.bosize;
     }
 
     getState() {
@@ -101,6 +106,10 @@ class AnimatedObject {
         this.botransparent = botransparent;
     }
 
+    setBosize(bosize) {
+        this.bosize = bosize;
+    }
+
     setState(state) {
         this.state = state;
     }
@@ -128,6 +137,7 @@ class AnimatedObject {
         // Border
         if (this.botransparent) drawing.noStroke();
         else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
+        drawing.strokeWeight(this.bosize);
     }
 
 }

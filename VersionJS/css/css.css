@@ -7,7 +7,8 @@ font-family: Verdana, Tahoma, Arial, sans-serif;
 font-size:12px;
 }
 
-ul { 
+ul {
+margin: 20px 0;
 list-style: square; 
 }
 

@@ -4,8 +4,8 @@
 
 class Landmark extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);
         this.height = height;
         this.width = width;
         this.scaleX = scaleX;

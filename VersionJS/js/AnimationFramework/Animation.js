@@ -109,6 +109,7 @@ class Animation {
                 var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : true;
                 var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
                 var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : true;
+                var bosize = parseInt(read_object.getAttribute("bosize")) | 1;
                 var layer = parseInt(read_object.getAttribute("layer")) | 0;
                 this.layers.add(layer);
                 var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : false;
@@ -124,29 +125,29 @@ class Animation {
                     var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     var halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
 					var valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-                    new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
+                    new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
                 } else if (type == "object_image") {
                     var width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                     var height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     var image = read_object.getAttribute("image");
                     this.objects_image.push(id);
-                    new_object = new ImageFile(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
+                    new_object = new ImageFile(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
                 } else if (type == "object_rectangle") {
                     var width = parseInt(read_object.getAttribute("width"));
                     var height = parseInt(read_object.getAttribute("height"));
                     var round = parseInt(read_object.getAttribute("round")) | 0;
-                    new_object = new Rectangle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
+                    new_object = new Rectangle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
                 } else if (type == "object_polygon") {
                     var coord_x = parseIntArray(read_object.getAttribute("coord_x"));
                     var coord_y = parseIntArray(read_object.getAttribute("coord_y"));
-                    new_object = new Polygon(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
+                    new_object = new Polygon(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
                 } else if (type == "object_circle") {
                     var radius = parseInt(read_object.getAttribute("radius"));
-                    new_object = new Circle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, radius);
+                    new_object = new Circle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, radius);
                 } else if (type == "object_ellipse") {
                     var width = parseInt(read_object.getAttribute("width"));
                     var height = parseInt(read_object.getAttribute("height"));
-                    new_object = new Ellipse(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
+                    new_object = new Ellipse(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
                 } else if (type == "object_landmark") {
                     var width = parseInt(read_object.getAttribute("width"));
                     var height = parseInt(read_object.getAttribute("height"));
@@ -154,13 +155,13 @@ class Animation {
                     var scaleY = parseInt(read_object.getAttribute("scaleY"));
                     var unitX = read_object.getAttribute("unitX");
                     var unitY = read_object.getAttribute("unitY");
-                    new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY);
+                    new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY);
                 } else if (type == "object_grid") {
                     var lines = parseInt(read_object.getAttribute("lines"));
                     var columns = parseInt(read_object.getAttribute("columns"));
                     var line_height = parseInt(read_object.getAttribute("line_height"));
                     var column_width = parseInt(read_object.getAttribute("column_width"));
-                    new_object = new Grid(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, DEFAULT_STATE, layer, visible, opacity, angle, lines, columns, line_height, column_width);
+                    new_object = new Grid(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, lines, columns, line_height, column_width);
                 } else if (type == "object_copy") {
                     var idcopy = read_object.getAttribute("idcopy");
                     var initial_object = this.objects.get(idcopy);

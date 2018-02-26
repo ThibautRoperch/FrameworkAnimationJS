@@ -12,7 +12,7 @@
 
 <!ELEMENT background (#PCDATA) >
 
-<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_extern|object_landmark)+ >
+<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_landmark)+ >
 
 <!ELEMENT object_text (#PCDATA) >
 <!ATTLIST object_text text CDATA #REQUIRED >
@@ -29,6 +29,7 @@
 <!ATTLIST object_text bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_text bocolor CDATA #IMPLIED >
 <!ATTLIST object_text botransparent (true|false) #IMPLIED >
+<!ATTLIST object_text bosize CDATA #IMPLIED >
 <!ATTLIST object_text layer CDATA #IMPLIED >
 <!ATTLIST object_text visible (true|false) #IMPLIED >
 <!ATTLIST object_text opacity CDATA #IMPLIED >
@@ -44,6 +45,7 @@
 <!ATTLIST object_image bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_image bocolor CDATA #IMPLIED >
 <!ATTLIST object_image botransparent (true|false) #IMPLIED >
+<!ATTLIST object_image bosize CDATA #IMPLIED >
 <!ATTLIST object_image layer CDATA #IMPLIED >
 <!ATTLIST object_image visible (true|false) #IMPLIED >
 <!ATTLIST object_image opacity CDATA #IMPLIED >
@@ -59,6 +61,7 @@
 <!ATTLIST object_rectangle bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_rectangle bocolor CDATA #IMPLIED >
 <!ATTLIST object_rectangle botransparent (true|false) #IMPLIED >
+<!ATTLIST object_rectangle bosize CDATA #IMPLIED >
 <!ATTLIST object_rectangle layer CDATA #IMPLIED >
 <!ATTLIST object_rectangle visible (true|false) #IMPLIED >
 <!ATTLIST object_rectangle opacity CDATA #IMPLIED >
@@ -73,6 +76,7 @@
 <!ATTLIST object_polygon bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_polygon bocolor CDATA #IMPLIED >
 <!ATTLIST object_polygon botransparent (true|false) #IMPLIED >
+<!ATTLIST object_polygon bosize CDATA #IMPLIED >
 <!ATTLIST object_polygon layer CDATA #IMPLIED >
 <!ATTLIST object_polygon visible (true|false) #IMPLIED >
 <!ATTLIST object_polygon opacity CDATA #IMPLIED >
@@ -86,6 +90,7 @@
 <!ATTLIST object_circle bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_circle bocolor CDATA #IMPLIED >
 <!ATTLIST object_circle botransparent (true|false) #IMPLIED >
+<!ATTLIST object_circle bosize CDATA #IMPLIED >
 <!ATTLIST object_circle layer CDATA #IMPLIED >
 <!ATTLIST object_circle visible (true|false) #IMPLIED >
 <!ATTLIST object_circle opacity CDATA #IMPLIED >
@@ -100,6 +105,7 @@
 <!ATTLIST object_ellipse bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_ellipse bocolor CDATA #IMPLIED >
 <!ATTLIST object_ellipse botransparent (true|false) #IMPLIED >
+<!ATTLIST object_ellipse bosize CDATA #IMPLIED >
 <!ATTLIST object_ellipse layer CDATA #IMPLIED >
 <!ATTLIST object_ellipse visible (true|false) #IMPLIED >
 <!ATTLIST object_ellipse opacity CDATA #IMPLIED >
@@ -118,6 +124,7 @@
 <!ATTLIST object_landmark bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_landmark bocolor CDATA #IMPLIED >
 <!ATTLIST object_landmark botransparent (true|false) #IMPLIED >
+<!ATTLIST object_landmark bosize CDATA #IMPLIED >
 <!ATTLIST object_landmark layer CDATA #IMPLIED >
 <!ATTLIST object_landmark visible (true|false) #IMPLIED >
 <!ATTLIST object_landmark opacity CDATA #IMPLIED >
@@ -134,6 +141,7 @@
 <!ATTLIST object_grid bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_grid bocolor CDATA #IMPLIED >
 <!ATTLIST object_grid botransparent (true|false) #IMPLIED >
+<!ATTLIST object_grid bosize CDATA #IMPLIED >
 <!ATTLIST object_grid layer CDATA #IMPLIED >
 <!ATTLIST object_grid visible (true|false) #IMPLIED >
 <!ATTLIST object_grid opacity CDATA #IMPLIED >
@@ -166,6 +174,7 @@
 <!ATTLIST object_copy bgtransparent (true|false) #IMPLIED >
 <!ATTLIST object_copy bocolor CDATA #IMPLIED >
 <!ATTLIST object_copy botransparent (true|false) #IMPLIED >
+<!ATTLIST object_copy bosize CDATA #IMPLIED >
 <!ATTLIST object_copy layer CDATA #IMPLIED >
 <!ATTLIST object_copy visible (true|false) #IMPLIED >
 <!ATTLIST object_copy opacity CDATA #IMPLIED >

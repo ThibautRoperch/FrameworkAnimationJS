@@ -33,6 +33,9 @@ class SetProperty extends Instruction {
 			case "botransparent":
 				this.target.setBotransparent(this.value == "true" | false);
 				break;
+			case "bosize":
+				this.target.setBosize(parseInt(this.value));
+				break;
 			case "layer":
 				this.target.setLayer(parseInt(this.value));
 				break;

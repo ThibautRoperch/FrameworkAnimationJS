@@ -11,12 +11,12 @@
 		<object_text text="test avec gros padding" font="Arial,18,bold" x="800" y="60" visible="true" padding="50" bgtransparent="false">a_copier</object_text>
 		<object_copy idcopy="a_copier" text="copie du texte avec gros padding" y="150">jl_copy</object_copy>
 
-		<object_grid visible="true" layer="4" bgtransparent="false" bocolor="20,200,50" bgcolor="0,255,0" botransparent="false" lines="3" columns="8" line_height="100" column_width="40" x="350" y="150">LA GRILLE</object_grid>
-		<object_grid visible="true" layer="2" bgtransparent="false" bocolor="20,100,50" bgcolor="100,55,20" botransparent="false" lines="3" columns="10" line_height="30" column_width="40" x="420" y="270">test</object_grid>
+		<object_grid visible="true" layer="4" bgtransparent="false" bgcolor="0,255,0" botransparent="false" bocolor="20,200,50" bosize="10" lines="3" columns="8" line_height="100" column_width="40" x="350" y="150">LA GRILLE</object_grid>
+		<object_grid visible="true" layer="2" bgtransparent="false" bgcolor="100,55,20" botransparent="false" bocolor="20,100,50" lines="3" columns="10" line_height="30" column_width="40" x="420" y="270">test</object_grid>
 		
 		<object_circle visible="true" bgtransparent="false" bocolor="0,0,5" bgcolor="90,80,100" botransparent="false" radius="70" x="800" y="500">cercle</object_circle>
-		<object_ellipse visible="true" bgtransparent="false" bocolor="50,16,98" bgcolor="151,11,210" botransparent="false" width="150" height="100" x="1000" y="500">ellipse</object_ellipse>
-		<object_text text="cliquer le cercle et l'ellipse@dans le même temps" font="Arial,14" x="800" y="700" visible="true" bgtransparent="false" width="170">tests deplacement et clics</object_text>
+		<object_ellipse visible="true" bgtransparent="false" bocolor="50,16,98" bgcolor="151,11,210" botransparent="false" bosize="3" width="150" height="100" x="1000" y="500">ellipse</object_ellipse>
+		<object_text text="cliquer le cercle et l'ellipse@dans le même temps" bosize="5" botransparent="false" bocolor="255,0,0" font="Arial,14" x="800" y="700" visible="true" bgtransparent="false" width="170">tests deplacement et clics</object_text>
 
 		<object_landmark 
 			x="100" y="100"

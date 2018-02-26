@@ -4,8 +4,8 @@
 
 class Text extends AnimatedObject {
 	
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, state, layer, visible, opacity, angle);
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment) {
+        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);
 		this.text = text;
 		this.font = font; // FontName, FontSize, FontWeight
 		this.color = color; // r, g, b
