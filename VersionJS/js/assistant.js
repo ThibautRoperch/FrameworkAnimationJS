@@ -720,6 +720,7 @@ function change_property(object_id, property_dom) {
 
 function change_id(object_id) {
 	var new_id = document.getElementById("new_id").value;
+	if (new_id === "") return; // stop here if the input is empty (won't change the id and will keep the popup active)
 
 	// Change in the objects array (JS)
 	objects_array[object_id].setId(new_id);
