@@ -52,6 +52,11 @@ function new_object(object_dom) {
 				arrow.innerHTML = "&#11167;";
 				spoiler.appendChild(arrow);
 		header.appendChild(spoiler);
+		var pen = document.createElement("div");
+			pen.className = "warning";
+			pen.onclick = function() { ask_popup("Change object identifier", "New id for the object <b>" + obj_id + "</b> : <input id='new_id' type='text' value='" + objects_array[obj_id].getId() + "' required/>", change_id, obj_id); };
+			pen.innerHTML = "&#128397;";
+		header.appendChild(pen);
 		var style = document.createElement("div");
 			style.className = "warning";
 			style.onclick = function() { customize(obj_id); };
@@ -708,6 +713,18 @@ function change_property(object_id, property_dom) {
 	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
+function change_id(object_id) {
+	var new_id = document.getElementById("new_id").value;
+
+	// Change in the objects array (JS)
+	objects_array[object_id].setId(new_id);
+
+	// Change in the objects list (HTML)
+	objects_list.children[object_id].getElementsByTagName("id")[0].innerHTML = "<b>Identifiant :</b> " + new_id;
+
+	document.getElementById("ask_popup").className = "";
+}
+
 function expand(object_id) {
 	var object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "displayed";
@@ -763,13 +780,13 @@ function remove(object_id) {
 	/*// Remove from the objects array (JS)
 	objects_array.splice(objects_array.indexOf(object_id), 1);
 
-	// Remove from the image objects array (js)
+	// Remove from the image objects array (JS)
 	var pos = objects_image_id.indexOf(object_id);
 	if (pos > -1) {
 		objects_image_id.splice(pos, 1);
 	}*/
 
-	// Set the object as visible
+	// Set the object as not visible from the objects array (JS)
 	objects_array[object_id].setVisible(false);
 
 	// Remove from the objects list (HTML)
@@ -819,7 +836,17 @@ function to_xml() {
 
 	// Display the serialized XML tree in a file
 	document.getElementById("xml_output").innerHTML = animation_string;
-	document.getElementsByTagName("popup")[0].className = "display";
+	document.getElementById("convert_popup").className = "display";
+}
+
+function ask_popup(title, contents, callback, args) {
+	var popup = document.getElementById("ask_popup");
+
+	popup.getElementsByTagName("h2")[0].innerHTML = title;
+	popup.getElementsByTagName("p")[0].innerHTML = contents;
+	popup.getElementsByTagName("button")[1].onclick = function() { callback(args); };
+
+	popup.className = "display";
 }
 
 /**********************
