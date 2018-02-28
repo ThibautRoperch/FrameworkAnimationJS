@@ -695,6 +695,8 @@ function new_object(object_dom) {
 
 	objects_array[obj_id] = object;
 	instructions_array[obj_id] = new Array();
+
+	draw_animation();
 }
 
 function new_instruction(object_id, object_dom) {
@@ -722,41 +724,53 @@ function reduce(object_id) {
 	object_dom.getElementsByTagName("arrow")[0].innerHTML = "&#11167;";
 }
 
+function update_section_size() {
+	var section = document.getElementsByTagName("section")[0];
+	var aside = document.getElementsByTagName("aside")[0];
+
+	// section margin right = aside.(margin left * 2 + margin right + padding left + padding right + width)
+	// aside.offsetWidth = aside.paddings + aside.width
+	var aside_style = aside.currentStyle || window.getComputedStyle(aside);
+	var aside_size = parseInt(aside_style.marginLeft) * 2 + parseInt(aside_style.marginRight) + aside.offsetWidth; 
+	section.style.marginRight = aside_size + "px";
+}
+
 function customize(object_id) {
 	var object = objects_array[object_id];
 
-	if (object !== undefined) { // vérifier ça à cause de la suppression
-		// Set the object as visible
-		object.setVisible(true);
-		document.getElementById(object_id).getElementsByClassName("visible")[0].getElementsByTagName("option")[0].selected = "selected";
+	// Set the object as visible
+	object.setVisible(true);
+	document.getElementById(object_id).getElementsByClassName("visible")[0].getElementsByTagName("option")[0].selected = "selected";
 
-		// Set the background object as not transparent
-		object.setBgtransparent(false);
-		document.getElementById(object_id).getElementsByClassName("bgtransparent")[0].getElementsByTagName("option")[1].selected = "selected";
+	// Set the background object as not transparent
+	object.setBgtransparent(false);
+	document.getElementById(object_id).getElementsByClassName("bgtransparent")[0].getElementsByTagName("option")[1].selected = "selected";
 
-		// Set the border object as not transparent
-		object.setBotransparent(false);
-		document.getElementById(object_id).getElementsByClassName("botransparent")[0].getElementsByTagName("option")[1].selected = "selected";
+	// Set the border object as not transparent
+	object.setBotransparent(false);
+	document.getElementById(object_id).getElementsByClassName("botransparent")[0].getElementsByTagName("option")[1].selected = "selected";
 
-		// Give random colors for the background and border object
-		object.setBgcolor(rand_rgb());
-		document.getElementById(object_id).getElementsByClassName("bgcolor")[0].getElementsByTagName("input")[0].value = object.getBgcolor();
-		object.setBocolor(rand_rgb());
-		document.getElementById(object_id).getElementsByClassName("bocolor")[0].getElementsByTagName("input")[0].value = object.getBocolor();
-		
-		draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
-	}
+	// Give random colors for the background and border object
+	object.setBgcolor(rand_rgb());
+	document.getElementById(object_id).getElementsByClassName("bgcolor")[0].getElementsByTagName("input")[0].value = object.getBgcolor();
+	object.setBocolor(rand_rgb());
+	document.getElementById(object_id).getElementsByClassName("bocolor")[0].getElementsByTagName("input")[0].value = object.getBocolor();
+	
+	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
 function remove(object_id) {
-	// Remove from the objects array (JS)
+	/*// Remove from the objects array (JS)
 	objects_array.splice(objects_array.indexOf(object_id), 1);
 
 	// Remove from the image objects array (js)
 	var pos = objects_image_id.indexOf(object_id);
 	if (pos > -1) {
 		objects_image_id.splice(pos, 1);
-	}
+	}*/
+
+	// Set the object as visible
+	objects_array[object_id].setVisible(false);
 
 	// Remove from the objects list (HTML)
 	objects_list.removeChild(document.getElementById(object_id));
@@ -790,10 +804,8 @@ function to_xml() {
 	// objects node
 	var objects_node = document.createElement("objects");
 	for (var object of objects_array) {
-		if (object !== undefined) { // vérifier ça à cause de la suppression
-			console.log(object.toXml());
-			objects_node.appendChild(object.toXml());
-		}
+		console.log(object.toXml());
+		objects_node.appendChild(object.toXml());
 	}
 	animation_node.appendChild(objects_node);
 
@@ -817,14 +829,8 @@ function to_xml() {
 var canvas;
 var drawing_dom = document.getElementById("drawing");
 
-// re appeller drawanim quand une propertie est changé
-
 function draw_animation() {
 	var layers = new Set();
-
-	while (drawing_dom.hasChildNodes()) {
-		drawing_dom.removeChild(drawing_dom.firstChild);
-	}
 
 	new p5(function(draw_ref) {
 
@@ -840,16 +846,12 @@ function draw_animation() {
 			// Load animation's images
 			for (var id of objects_image_id) {
 				var object = objects_array[id];
-				if (object !== undefined) { // vérifier ça à cause de la suppression
-					object.loadImage(draw_ref);
-				}
+				object.loadImage(draw_ref);
 			}
 
 			// Retrieve all layers in a set
 			for (var object of objects_array) {
-				if (object !== undefined) { // vérifier ça à cause de la suppression
-					layers.add(object.getLayer());
-				}
+				layers.add(object.getLayer());
 			}
 
 			// Convert and sort the layers set
@@ -858,8 +860,14 @@ function draw_animation() {
 		}
 
 		draw_ref.setup = function() { // setup function waits until preload one is done
+			while (drawing_dom.hasChildNodes()) {
+				drawing_dom.removeChild(drawing_dom.firstChild);
+			}
+
 			canvas = draw_ref.createCanvas(parseInt(document.getElementById("width").value), parseInt(document.getElementById("height").value));
 			canvas.parent(drawing_dom);
+
+			update_section_size();
 		}
 		
 		draw_ref.draw = function() {
@@ -875,7 +883,7 @@ function draw_animation() {
 			// Display objects of each layer, if they're set as visible
 			for (var layer of layers) {
 				for (var object of objects_array) {
-					if (object !== undefined && object.getLayer() == layer && object.getVisible()) { // vérifier ça à cause de la suppression
+					if (object.getLayer() == layer && object.getVisible()) {
 						object.draw(draw_ref);
 					}
 				}
@@ -888,8 +896,8 @@ function draw_animation() {
 		// 	// Prevent default
 		// 	return false;
 		// }
-
 	});
+
 }
 
 function rand_rgb() {

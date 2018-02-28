@@ -20,57 +20,59 @@
 		</div>
 	</header>
 
-	<section>
-		<article>
-			<h2>Add a new object</h2>
-		
-			<objects>
-				<button onclick="new_object(this)">Text</button>
-				<button onclick="new_object(this)">ImageFile</button>
-				<button onclick="new_object(this)">Rectangle</button>
-				<button onclick="new_object(this)">Polygon</button>
-				<button onclick="new_object(this)">Circle</button>
-				<button onclick="new_object(this)">Ellipse</button>
-				<button onclick="new_object(this)">Landmark</button>
-				<button onclick="new_object(this)">Grid</button>
-			</objects>
-		</article>
-
-		<article>
-			<h2>Animation objects</h2>
-
-			<ul id="objects">
-			</ul>
-		</article>
-	</section>
-
-	<aside>
-		<article>
-			<h2>Animation properties</h2>
+	<main>
+		<section>
+			<article>
+				<h2>Add a new object</h2>
 			
-			<setting>
-				<label for="width">Width (px)</label><input onchange="draw_animation()" id="width" type="number" value="400" />
-			</setting>
-			<setting>
-				<label for="height">Height (px)</label><input onchange="draw_animation()" id="height" type="number" value="200" />
-			</setting>
-			<setting>
-				<label for="start_button">Start button present</label><select id="start_button"><option selected value="true">True</option><option value="false">False</option></select>
-			</setting>
-			<setting>
-				<label for="speed">Speed</label><select id="speed"><option value="very slow">Very slow</option><option value="slow">Slow</option><option selected value="normal">Normal</option><option value="fast">Fast</option><option value="very fast">Very fast</option></select>
-			</setting>
-			<setting>
-				<label for="background">Background image</label><input onchange="draw_animation()" id="background" type="text" placeholder="img/yellow_blue_linear_gradient.png" />
-			</setting>
-		</article>
+				<objects>
+					<button onclick="new_object(this)">Text</button>
+					<button onclick="new_object(this)">ImageFile</button>
+					<button onclick="new_object(this)">Rectangle</button>
+					<button onclick="new_object(this)">Polygon</button>
+					<button onclick="new_object(this)">Circle</button>
+					<button onclick="new_object(this)">Ellipse</button>
+					<button onclick="new_object(this)">Landmark</button>
+					<button onclick="new_object(this)">Grid</button>
+				</objects>
+			</article>
 
-		<article>
-			<h2>Preview</h2>
+			<article>
+				<h2>Animation objects</h2>
 
-			<div id="drawing"></div>
-		</article>
-	</aside>
+				<ul id="objects">
+				</ul>
+			</article>
+		</section>
+
+		<aside>
+			<article>
+				<h2>Animation properties</h2>
+				
+				<setting>
+					<label for="width">Width (px)</label><input onchange="draw_animation()" id="width" type="number" value="400" />
+				</setting>
+				<setting>
+					<label for="height">Height (px)</label><input onchange="draw_animation()" id="height" type="number" value="200" />
+				</setting>
+				<setting>
+					<label for="start_button">Start button present</label><select id="start_button"><option selected value="true">True</option><option value="false">False</option></select>
+				</setting>
+				<setting>
+					<label for="speed">Speed</label><select id="speed"><option value="very slow">Very slow</option><option value="slow">Slow</option><option selected value="normal">Normal</option><option value="fast">Fast</option><option value="very fast">Very fast</option></select>
+				</setting>
+				<setting>
+					<label for="background">Background image</label><input onchange="draw_animation()" id="background" type="text" placeholder="img/yellow_blue_linear_gradient.png" />
+				</setting>
+			</article>
+
+			<article>
+				<h2>Preview</h2>
+
+				<div id="drawing"></div>
+			</article>
+		</aside>
+	</main>
 
 	<footer>
 		<span>Université d'Angers - Master 2 Informatique - 2017/2018</span><br>

@@ -8,14 +8,21 @@
 body {
     display: flex;
     justify-content: space-around;
-    padding: 100px 50px;
     color: rgba(0, 0, 0, 0.6);
     background: rgba(0, 0, 0, 0.13);
 }
 
-body section, body aside, popup {
+body main {
+    flex: 1;
     display: flex;
-    padding: 20px;    
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 90px 0 90px 0;
+}
+
+body main section, body main aside, body popup {
+    display: flex;
+    padding: 20px;
     flex-direction: column;
     background: white;
     box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.2) inset;
@@ -63,19 +70,23 @@ body header div a svg {
     fill: rgba(255, 255, 255, 0.8);
 }
 
-body section {
-    width: 60%;
+body main section {
+    flex: 1;
+    margin: 0 15px 0 30px;
     z-index: 200;
 }
 
-body aside {
-    width: 30%;
+body main aside {
+    position: fixed;
+    right: 0;
+    margin: 0 30px 0 15px;
+    z-index: 100;
 }
 
 article {
     display: flex;
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 article:last-child {
@@ -209,6 +220,10 @@ objects, instructions {
     flex-direction: row;
 }
 
+objects {
+    flex-wrap: wrap;
+}
+
 instructions {
     padding: 5px;
     margin-top: 5px;
@@ -218,6 +233,9 @@ instructions {
 objects > * {
     flex: 1;
     margin-right: 15px;
+    margin-bottom: 15px;
+    min-width: 80px;
+    max-width: 15%;
 }
 
 instructions > * {
@@ -258,7 +276,7 @@ input, select {
     padding-right: 5px;
 }
 
-popup {
+body popup {
     position: absolute;
     top: -100%;
     height: 80%;
@@ -270,12 +288,12 @@ popup {
     z-index: 400;
 }
 
-popup.display {
+body popup.display {
     top: 50px;
     opacity: 1;
 }
 
-popup textarea {
+body popup textarea {
     resize: none;
     height: 100%;
     margin-bottom: 15px;
@@ -286,7 +304,7 @@ popup textarea {
     background: burlywood;
 }
 
-footer {
+body footer {
     position: fixed;
     bottom: 20px;
     line-height: 23px;
@@ -295,12 +313,12 @@ footer {
     color: rgba(0, 0, 0, 0.3);
 }
 
-footer a {
+body footer a {
     color: rgba(0, 0, 0, 0.3);
     text-decoration: none;
 }
 
-footer a:hover {
+body footer a:hover {
     color: rgba(0, 0, 0, 0.5);
     text-decoration: underline;
 }
