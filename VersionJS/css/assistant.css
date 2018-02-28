@@ -325,6 +325,15 @@ body #ask_popup {
 body #ask_popup p {
     line-height: 120%;
     margin: 10px 0 30px 0;
+    text-align: justify;
+}
+
+body #ask_popup p input {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    padding: 4px;
+    text-align: center;
 }
 
 body #ask_popup buttons {

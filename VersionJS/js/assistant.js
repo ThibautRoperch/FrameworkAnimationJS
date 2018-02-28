@@ -59,7 +59,7 @@ function new_object(object_dom) {
 		header.appendChild(spoiler);
 		var pen = document.createElement("div");
 			pen.className = "warning";
-			pen.onclick = function() { ask_popup("Change object identifier", "New id for the object <b>" + obj_id + "</b> : <input id='new_id' type='text' value='" + objects_array[obj_id].getId() + "' required/>", change_id, obj_id); };
+			pen.onclick = function() { ask_popup("Change object identifier", "Enter below the new id for the object <b>" + obj_id + "</b>.<input id='new_id' type='text' value='" + objects_array[obj_id].getId() + "' required/>", change_id, obj_id); };
 			pen.innerHTML = "&#128397;";
 		header.appendChild(pen);
 		var style = document.createElement("div");
