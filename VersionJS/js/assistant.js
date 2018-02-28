@@ -34,6 +34,10 @@ function wait_for_includes() {
 	}
 }
 
+function import_xml() {
+	new Animation();
+}
+
 function new_object(object_dom) {
 	var obj_id = ++last_id;
 	var object;
@@ -799,7 +803,7 @@ function remove(object_id) {
 	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
-function to_xml() {
+function export_xml() {
 	console.log("--------------------------------\n");
 
 	var animation_node = document.createElement("animation");

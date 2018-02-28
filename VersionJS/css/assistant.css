@@ -38,22 +38,29 @@ body header {
     z-index: 400;
 }
 
-body header div {
+body header > div {
     display: flex;
-    padding: 0 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 40px;
 }
 
-body header div * {
+body header div div {
+    display: flex;
+    flex-direction: row;
+}
+
+body header div div * {
     line-height: 60px;
 }
 
-body header div h1 {
-    margin: 0 20px;
+body header h1 {
+    margin-right: 40px;
     font-size: 16px;
     color: rgba(255, 255, 255, 0.8);
 }
 
-body header div a {
+body header a {
     display: flex;
     padding: 0 20px;
     text-decoration: none;
@@ -61,11 +68,11 @@ body header div a {
     transition: all 0.2s ease;
 }
 
-body header div a:hover {
+body header a:hover {
     background: rgba(255, 255, 255, 0.24);
 }
 
-body header div a svg {
+body header a svg {
     padding-top: 15px;
     fill: rgba(255, 255, 255, 0.8);
 }
