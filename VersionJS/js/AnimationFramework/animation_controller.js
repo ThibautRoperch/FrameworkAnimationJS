@@ -85,7 +85,9 @@ function draw_animation(animation_obj) {
         }
         
         draw_ref.draw = function() {
-            animation_obj.draw(draw_ref);
+			if (!animation_obj.stopAnimation()) {
+				animation_obj.draw(draw_ref);
+			}
         }
 
         draw_ref.mouseClicked = function() {

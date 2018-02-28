@@ -1,5 +1,5 @@
 /**
- * This instruction move the object on a distance by interval at a rate of loop_delay
+ * This instruction moves the object on a distance by interval at a rate of loop_delay
  */
 
 class SimpleMovement extends Instruction {

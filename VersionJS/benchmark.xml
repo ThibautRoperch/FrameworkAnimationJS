@@ -48,10 +48,12 @@
 		<program assigned_to="cercle">
       		<click />
 			<moveto x="50" y="100" dx="20" dy="20" delay="5" />
+			<blink times="5" delay="5" />
 		</program>
 		<program assigned_to="ellipse">
       		<click />
 			<moveto x="100" y="200" dx="4" dy="1" delay="0" />
+			<blink times="5" delay="5" />
 		</program>
 	</programs>
 

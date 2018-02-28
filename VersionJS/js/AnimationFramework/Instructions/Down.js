@@ -1,18 +1,16 @@
 /**
- * This instruction move the object down of y by interval of interval_y at a speed of loop_delay
+ * This instruction moves the object down of y by interval of interval_y at a speed of loop_delay
  */
 
-class Down extends Instruction {
+class Down extends SimpleMovement {
 
 	constructor(object, distance, interval, loop_delay) {
-		super(object);
-		this.distance = distance;
-        this.interval = interval;
-        this.loop_delay = loop_delay;
+		super(object, distance, interval, loop_delay);
 	}
 	
 	execute() {
         this.object.setState(MOVING_STATE);
+		var original_distance = this.distance;
 
         down(this);
         function down(instruction) {
@@ -25,6 +23,7 @@ class Down extends Instruction {
                     down(instruction);
                 }, instruction.loop_delay);
             } else {
+				instruction.distance = original_distance;
                 instruction.object.setState(DEFAULT_STATE);
             }
         }

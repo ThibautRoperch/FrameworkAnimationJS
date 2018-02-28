@@ -1,5 +1,7 @@
 /**
  * Animation class
+ * Parse and read a given XML file andlaunch objects program
+ * Preload, setup and draw according to animation_controller.js
  */
 
 class Animation {
@@ -22,6 +24,8 @@ class Animation {
 
         this.start_button = new StartButton(this.width / 2, this.height / 2, "Click me to start", true);
         new Blink(this.start_button, 6, 20, this.loop_delay).execute();
+
+        this.stop_animation = false;
 
         // Resize the target node
         this.parent.style.width = this.width + "px";
@@ -55,6 +59,10 @@ class Animation {
         loading.style.textAlign = "center";
         loading.style.color = "gray";
         this.parent.appendChild(loading);
+    }
+
+    stopAnimation() {
+        return this.stop_animation;
     }
 
     readXmlFile(contents) {
@@ -288,11 +296,16 @@ class Animation {
     execute_instructions(object_id, instruction_number, labels) {
         // Retrieve the program and the current instruction of the program
         var program = this.programs.get(object_id);
-        if (program.length == 0) return; // In case of the program does not contain any instruction, stop its execution right now
+
+        // In case of the program does not contain any instruction, stop its execution right now
+        if (this.stop_animation || program.length == 0) {
+            return;
+        }
+
         var instruction = program[instruction_number];
 
         var next_instruction = instruction_number; // the next instruction is by default the current one
-        var continue_execution = true; // this programme will by default continue
+        var continue_execution = true; // this program will by default continue
         
         // Execute the instruction if the state of the object is the default one
         if (!this.start_button.getPresent() && this.objects.get(object_id).getState() == DEFAULT_STATE) {
@@ -304,6 +317,7 @@ class Animation {
                 next_instruction = labels.get(instruction.getValue());
             } else if (instruction_type == "Stop") {
                 var continue_execution = false;
+                this.stop_animation = true;
             } else {
                 instruction.execute();
                 next_instruction = instruction_number + 1;

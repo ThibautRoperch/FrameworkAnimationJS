@@ -1,5 +1,5 @@
 /**
- * 
+ * Give a token to the object, setting it in the normal state if the given token is the same as expected
  */
 
 class Trigger extends Instruction {

@@ -1,5 +1,5 @@
 /**
- * This instruction move the object up of y by interval of interval_y at a rate of loop_delay
+ * This instruction moves the object up of y by interval of interval_y at a rate of loop_delay
  */
 
 class Up extends SimpleMovement {
@@ -10,6 +10,7 @@ class Up extends SimpleMovement {
 
 	execute() {
 		this.object.setState(MOVING_STATE);
+		var original_distance = this.distance;
 
 		up(this);
 		function up(instruction) {
@@ -22,6 +23,7 @@ class Up extends SimpleMovement {
 					up(instruction);
 				}, instruction.loop_delay);
 			} else {
+				instruction.distance = original_distance;
 				instruction.object.setState(DEFAULT_STATE);
 			}
 		}

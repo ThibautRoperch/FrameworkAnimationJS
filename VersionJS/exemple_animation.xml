@@ -62,7 +62,7 @@
       <trigger object="Texte" value="ship_displayed" />
       <label value="loop" />
       <moveto x="200" y="200" dx="1" dy="1" delay="2"/>
-      <moveto x="100" y="100" dx="-5" dy="-5" delay="2" />
+      <moveto x="100" y="100" dx="5" dy="5" delay="2" />
       <goto value="loop" />
     </program>
 

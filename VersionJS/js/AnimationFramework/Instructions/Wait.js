@@ -1,5 +1,5 @@
 /**
- * 
+ * Set the object as waiting for a given token, triggerable by the Trigger instruction
  */
 
 class Wait extends Instruction {

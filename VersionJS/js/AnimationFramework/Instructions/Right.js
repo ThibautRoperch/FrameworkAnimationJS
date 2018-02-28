@@ -1,5 +1,5 @@
 /**
- * This instruction move the object right of x by interval of interval_x at a speed of loop_delay
+ * This instruction moves the object right of x by interval of interval_x at a speed of loop_delay
  */
 
 class Right extends SimpleMovement {
@@ -10,6 +10,7 @@ class Right extends SimpleMovement {
 	
 	execute() {
 		this.object.setState(MOVING_STATE);
+		var original_distance = this.distance;
 
 		right(this);
 		function right(instruction) {
@@ -22,9 +23,11 @@ class Right extends SimpleMovement {
 					right(instruction);
 				}, instruction.loop_delay);
 			} else {
+				instruction.distance = original_distance;
 				instruction.object.setState(DEFAULT_STATE);				
 			}
 		}
+
 	}
 
 }

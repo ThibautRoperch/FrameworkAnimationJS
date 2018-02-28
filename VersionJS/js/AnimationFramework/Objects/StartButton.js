@@ -5,7 +5,7 @@
 class StartButton extends AnimatedObject {
     
 	constructor(x, y, text, present) {
-        super(null, x, y, [255, 255, 255], false, [0, 0, 0], false, DEFAULT_STATE, null, true, 1, 0);
+        super(null, x, y, [255, 255, 255], false, [0, 0, 0], false, 1, DEFAULT_STATE, null, true, 1, 0);
         this.text = text;
         this.present = present;
 
