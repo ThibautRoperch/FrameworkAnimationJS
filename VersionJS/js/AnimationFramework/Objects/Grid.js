@@ -68,13 +68,14 @@ class Grid extends AnimatedObject {
         grid.setAttribute("bgtransparent", this.bgtransparent);
         grid.setAttribute("bocolor", this.bocolor); // r, g, b
         grid.setAttribute("botransparent", this.botransparent);
+        grid.setAttribute("bosize", this.bosize);
         grid.setAttribute("state", this.state);
         grid.setAttribute("layer", this.layer);
         grid.setAttribute("visible", this.visible);
         grid.setAttribute("opacity", this.opacity);
         grid.setAttribute("angle", this.angle); // degrees
-        grid.setAttribute("line", this.line);
-        grid.setAttribute("column", this.column);
+        grid.setAttribute("line", this.lines);
+        grid.setAttribute("column", this.columns);
         grid.setAttribute("line_height", this.line_height);
         grid.setAttribute("column_width", this.column_width);
         return grid;

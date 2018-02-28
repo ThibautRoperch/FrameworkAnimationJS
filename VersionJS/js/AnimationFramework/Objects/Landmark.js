@@ -162,6 +162,7 @@ class Landmark extends AnimatedObject {
         landmark.setAttribute("bgtransparent", this.bgtransparent);
         landmark.setAttribute("bocolor", this.bocolor); // r, g, b
         landmark.setAttribute("botransparent", this.botransparent);
+        landmark.setAttribute("bosize", this.bosize);
         landmark.setAttribute("state", this.state);
         landmark.setAttribute("layer", this.layer);
         landmark.setAttribute("visible", this.visible);
@@ -169,10 +170,10 @@ class Landmark extends AnimatedObject {
         landmark.setAttribute("angle", this.angle); // degrees
         landmark.setAttribute("width", this.width);
         landmark.setAttribute("height", this.height);
-        landmark.setAttribute("scalex", this.scaleX);
-        landmark.setAttribute("scaley", this.scaleY);
-        landmark.setAttribute("unitx", this.unitX);
-        landmark.setAttribute("unity", this.unitY);
+        landmark.setAttribute("scaleX", this.scaleX);
+        landmark.setAttribute("scaleY", this.scaleY);
+        landmark.setAttribute("unitX", this.unitX);
+        landmark.setAttribute("unitY", this.unitY);
         return landmark;
     }
 

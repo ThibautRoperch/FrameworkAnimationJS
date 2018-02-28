@@ -122,6 +122,7 @@ class Text extends AnimatedObject {
         text.setAttribute("bgtransparent", this.bgtransparent);
         text.setAttribute("bocolor", this.bocolor); // r, g, b
         text.setAttribute("botransparent", this.botransparent);
+        text.setAttribute("bosize", this.bosize);
         text.setAttribute("state", this.state);
         text.setAttribute("layer", this.layer);
         text.setAttribute("visible", this.visible);
@@ -131,8 +132,8 @@ class Text extends AnimatedObject {
 		text.setAttribute("font", this.font); // FontName, FontSize, FontWeight
 		text.setAttribute("color", this.color); // r, g, b
 		text.setAttribute("padding", this.padding);
-		text.setAttribute("width", this.width);
-		text.setAttribute("height", this.height);
+		if (this.width != undefined) text.setAttribute("width", this.width);
+		if (this.height != undefined) text.setAttribute("height", this.height);
 		text.setAttribute("halignment",this.halignment); 
 		text.setAttribute("valignment", this.valignment);
         return text;

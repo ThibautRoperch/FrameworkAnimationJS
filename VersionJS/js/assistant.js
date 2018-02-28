@@ -3,6 +3,7 @@ var objects_list = document.getElementById("objects");
 var objects_array = new Array();
 var instructions_array = new Array();
 var objects_image_id = new Array();
+var removed_objects_id = new Array();
 
 wait_for_includes();
 function wait_for_includes() {
@@ -43,7 +44,7 @@ function new_object(object_dom) {
 		var spoiler = document.createElement("div");
 			spoiler.onclick = function() { expand(obj_id); };
 			var id = document.createElement("id");
-				id.innerHTML = "<b>Identifiant :</b> " + obj_id;
+				id.innerHTML = "<b>Identifier :</b> " + obj_id;
 				spoiler.appendChild(id);
 			var type = document.createElement("type");
 				type.innerHTML = "<b>Type :</b> " + object_dom.innerHTML;
@@ -720,7 +721,7 @@ function change_id(object_id) {
 	objects_array[object_id].setId(new_id);
 
 	// Change in the objects list (HTML)
-	objects_list.children[object_id].getElementsByTagName("id")[0].innerHTML = "<b>Identifiant :</b> " + new_id;
+	document.getElementById(object_id).getElementsByTagName("id")[0].innerHTML = "<b>Identifier :</b> " + new_id;
 
 	document.getElementById("ask_popup").className = "";
 }
@@ -785,6 +786,9 @@ function remove(object_id) {
 	if (pos > -1) {
 		objects_image_id.splice(pos, 1);
 	}*/
+	
+	// Add the object to the deleted objects array (JS)
+	removed_objects_id.push(object_id);
 
 	// Set the object as not visible from the objects array (JS)
 	objects_array[object_id].setVisible(false);
@@ -821,8 +825,10 @@ function to_xml() {
 	// objects node
 	var objects_node = document.createElement("objects");
 	for (var object of objects_array) {
-		console.log(object.toXml());
-		objects_node.appendChild(object.toXml());
+		if (removed_objects_id.indexOf(object.getId()) == -1) {
+			console.log(object.toXml());
+			objects_node.appendChild(object.toXml());
+		}
 	}
 	animation_node.appendChild(objects_node);
 

@@ -38,6 +38,7 @@ class Circle extends Ellipse {
         circle.setAttribute("bgtransparent", this.bgtransparent);
         circle.setAttribute("bocolor", this.bocolor); // r, g, b
         circle.setAttribute("botransparent", this.botransparent);
+        circle.setAttribute("bosize", this.bosize);
         circle.setAttribute("state", this.state);
         circle.setAttribute("layer", this.layer);
         circle.setAttribute("visible", this.visible);

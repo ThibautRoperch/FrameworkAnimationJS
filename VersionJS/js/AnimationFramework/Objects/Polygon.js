@@ -52,7 +52,6 @@ class Polygon extends AnimatedObject {
     }
     
     toXml() {
-        
         var polygon = document.createElement("object_polygon");
         polygon.innerHTML = this.id;
         polygon.setAttribute("x", this.x);
@@ -61,6 +60,7 @@ class Polygon extends AnimatedObject {
         polygon.setAttribute("bgtransparent", this.bgtransparent);
         polygon.setAttribute("bocolor", this.bocolor);
         polygon.setAttribute("botransparent", this.botransparent);
+        polygon.setAttribute("bosize", this.bosize);
         polygon.setAttribute("state", this.state);
         polygon.setAttribute("layer", this.layer);
         polygon.setAttribute("visible", this.visible);

@@ -48,25 +48,5 @@ class StartButton extends AnimatedObject {
     isClicked(x, y) {
 		return (x >= this.x - this.width / 2 + 2) && (x <= this.x + this.width / 2 + 2) && (y >= this.y - this.height / 2 + 2) && (y <= this.y + this.height / 2 + 2);
     }
-    
-    toXml() {
-        var rectangle = document.createElement("object_rectangle");
-        rectangle.innerHTML = this.id;
-        rectangle.setAttribute("x", this.x);
-        rectangle.setAttribute("y",this.y);
-        rectangle.setAttribute("bgcolor", this.bgcolor); 
-        rectangle.setAttribute("bgtransparent", this.bgtransparent);
-        rectangle.setAttribute("bocolor", this.bocolor); 
-        rectangle.setAttribute("botransparent", this.botransparent);
-        rectangle.setAttribute("state", this.state);
-        rectangle.setAttribute("layer", this.layer);
-        rectangle.setAttribute("visible", this.visible);
-        rectangle.setAttribute("opacity", this.opacity);
-        rectangle.setAttribute("angle", this.angle); 
-        rectangle.setAttribute("width", this.width);
-        rectangle.setAttribute("height", this.height);
-        rectangle.setAttribute("round", this.round);
-        return rectangle;
-    }
 
 }

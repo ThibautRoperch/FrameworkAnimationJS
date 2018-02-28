@@ -163,6 +163,8 @@ function include_animation_files(path) {
  * Parse a a string into an int array, splitting on commas
  */
 function parseIntArray(string) {
+	if (string == "") return [0, 0, 0];
+	
 	var array = string.split(",");
 
 	for (i in array) {

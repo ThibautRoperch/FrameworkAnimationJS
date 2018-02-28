@@ -16,10 +16,10 @@ class SetProperty extends Instruction {
 
 			// all
 			case "x":
-				this.target.setX(parseInt(this.value));
+				this.target.setX(parseInt(this.value) | 0);
 				break;
 			case "y":
-				this.target.setY(parseInt(this.value));
+				this.target.setY(parseInt(this.value) | 0);
 				break;
 			case "bgcolor":
 				this.target.setBgcolor(parseIntArray(this.value));
@@ -34,27 +34,27 @@ class SetProperty extends Instruction {
 				this.target.setBotransparent(this.value == "true" | false);
 				break;
 			case "bosize":
-				this.target.setBosize(parseInt(this.value));
+				this.target.setBosize(parseInt(this.value) | 0);
 				break;
 			case "layer":
-				this.target.setLayer(parseInt(this.value));
+				this.target.setLayer(parseInt(this.value) | 0);
 				break;
 			case "visible":
 				this.target.setVisible(this.value == "true" | false);
 				break;
 			case "opacity":
-				this.target.setOpacity(parseInt(this.value) / 100);
+				this.target.setOpacity((parseInt(this.value) / 100) | 0);
 				break;
 			case "angle":
-				this.target.setAngle(parseInt(this.value));
+				this.target.setAngle(parseInt(this.value) | 0);
 				break;
 
 			// text, image, rectangle, ellipse, landmark
 			case "width":
-				this.target.setWidth(parseInt(this.value));
+				this.target.setWidth(parseInt(this.value) | 0);
 				break;
 			case "height":
-				this.target.setHeight(parseInt(this.value));
+				this.target.setHeight(parseInt(this.value) | 0);
 				break;
 
 			// text
@@ -68,7 +68,7 @@ class SetProperty extends Instruction {
 				this.target.setColor(parseIntArray(this.value));
 				break;
 			case "padding":
-				this.target.setPadding(parseInt(this.value));
+				this.target.setPadding(parseInt(this.value) | 0);
 				break;
 			case "halignment":
 				this.target.setHalignment(this.value);
@@ -97,35 +97,35 @@ class SetProperty extends Instruction {
 
 			// circle
 			case "radius":
-				this.target.setRadius(parseInt(this.value));
+				this.target.setRadius(parseInt(this.value) | 0);
 				break;
 
 			// landmark
 			case "scaleX":
-				this.target.setScaleX(parseInt(this.value));
+				this.target.setScaleX(parseInt(this.value) | 0);
 				break;
 			case "scaleY":
-				this.target.setScaleY(parseInt(this.value));
+				this.target.setScaleY(parseInt(this.value) | 0);
 				break;
 			case "unitX":
-				this.target.setUnitX(parseInt(this.value));
+				this.target.setUnitX(parseInt(this.value) | 0);
 				break;
 			case "unitY":
-				this.target.setUnitY(parseInt(this.value));
+				this.target.setUnitY(parseInt(this.value) | 0);
 				break;
 
 			// grid
 			case "lines":
-				this.target.setLines(parseInt(this.value));
+				this.target.setLines(parseInt(this.value) | 0);
 				break;
 			case "columns":
-				this.target.setColumns(parseInt(this.value));
+				this.target.setColumns(parseInt(this.value) | 0);
 				break;
 			case "line_height":
-				this.target.setLine_height(parseInt(this.value));
+				this.target.setLine_height(parseInt(this.value) | 0);
 				break;
 			case "column_width":
-				this.target.setColumn_width(parseInt(this.value));
+				this.target.setColumn_width(parseInt(this.value) | 0);
 				break;
 
 			default:

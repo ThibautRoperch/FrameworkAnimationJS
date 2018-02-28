@@ -62,6 +62,7 @@ class ImageFile extends AnimatedObject {
         image.setAttribute("bgtransparent", this.bgtransparent);
         image.setAttribute("bocolor", this.bocolor); // r, g, b
         image.setAttribute("botransparent", this.botransparent);
+        image.setAttribute("bosize", this.bosize);
         image.setAttribute("state", this.state);
         image.setAttribute("layer", this.layer);
         image.setAttribute("visible", this.visible);
