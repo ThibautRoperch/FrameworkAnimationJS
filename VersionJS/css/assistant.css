@@ -345,7 +345,7 @@ body #ask_popup buttons {
 
 body #ask_popup buttons button {
     flex: 1;
-    margin-right: 5px;
+    margin-right: 20px;
 }
 
 body #ask_popup buttons button:last-child {

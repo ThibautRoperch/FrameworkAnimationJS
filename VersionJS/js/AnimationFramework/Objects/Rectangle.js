@@ -54,11 +54,10 @@ class Rectangle extends AnimatedObject {
         rectangle.setAttribute("bocolor", this.bocolor); 
         rectangle.setAttribute("botransparent", this.botransparent);
         rectangle.setAttribute("bosize", this.bosize);
-        rectangle.setAttribute("state", this.state);
         rectangle.setAttribute("layer", this.layer);
         rectangle.setAttribute("visible", this.visible);
         rectangle.setAttribute("opacity", this.opacity);
-        rectangle.setAttribute("angle", this.angle); 
+        // rectangle.setAttribute("angle", this.angle); 
         rectangle.setAttribute("width", this.width);
         rectangle.setAttribute("height", this.height);
         rectangle.setAttribute("round", this.round);

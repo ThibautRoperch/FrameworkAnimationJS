@@ -65,7 +65,7 @@ class Text extends AnimatedObject {
 		this.color = color;
 	}
 
-	setPaddingr(padding) {
+	setPadding(padding) {
 		this.padding = padding;
 	}
 
@@ -123,11 +123,10 @@ class Text extends AnimatedObject {
         text.setAttribute("bocolor", this.bocolor); // r, g, b
         text.setAttribute("botransparent", this.botransparent);
         text.setAttribute("bosize", this.bosize);
-        text.setAttribute("state", this.state);
         text.setAttribute("layer", this.layer);
         text.setAttribute("visible", this.visible);
         text.setAttribute("opacity", this.opacity);
-        text.setAttribute("angle", this.angle); // degrees
+        // text.setAttribute("angle", this.angle); // degrees
         text.setAttribute("text", this.text);
 		text.setAttribute("font", this.font); // FontName, FontSize, FontWeight
 		text.setAttribute("color", this.color); // r, g, b

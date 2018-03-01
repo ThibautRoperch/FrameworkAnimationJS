@@ -38,6 +38,10 @@ class Animation {
         }
     }
 
+    getObjects() {
+        return this.objects;
+    }
+
     /**
      * Display an error message because the XML file can't be
      */
@@ -112,7 +116,7 @@ class Animation {
                 // Retrieve the AnimatedObjects' attributes
                 var type = read_object.nodeName;
                 var id = read_object.textContent;
-                if (this.objects.has(id)) console.log("[Animation.js] L'identifiant " + id + " a déjà été utilisé par un objet, ce dernier va être écrasé par le nouvel objet");
+                if (this.objects.has(id)) console.log("[Animation.js] L'identifiant '" + id + "' a déjà été utilisé par un objet, ce dernier va être écrasé par le nouvel objet");
                 var x = parseInt(read_object.getAttribute("x")) | 0;
                 var y = parseInt(read_object.getAttribute("y")) | 0;
                 var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
@@ -161,11 +165,11 @@ class Animation {
                 } else if (type == "object_landmark") {
                     var width = parseInt(read_object.getAttribute("width"));
                     var height = parseInt(read_object.getAttribute("height"));
-                    var scaleX = parseInt(read_object.getAttribute("scaleX"));
-                    var scaleY = parseInt(read_object.getAttribute("scaleY"));
-                    var unitX = read_object.getAttribute("unitX");
-                    var unitY = read_object.getAttribute("unitY");
-                    new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY);
+                    var scale_x = parseInt(read_object.getAttribute("scale_x"));
+                    var scale_y = parseInt(read_object.getAttribute("scale_y"));
+                    var unit_x = read_object.getAttribute("unit_x");
+                    var unit_y = read_object.getAttribute("unit_y");
+                    new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y);
                 } else if (type == "object_grid") {
                     var lines = parseInt(read_object.getAttribute("lines"));
                     var columns = parseInt(read_object.getAttribute("columns"));
@@ -176,7 +180,7 @@ class Animation {
                     var idcopy = read_object.getAttribute("idcopy");
                     var initial_object = this.objects.get(idcopy);
                     if (initial_object == null) {
-                        console.log("[Animation.js] L'objet " + idcopy + " à copier n'existe pas (le définir avec l'attribut idcopy)");
+                        console.log("[Animation.js] L'objet '" + idcopy + "' à copier n'existe pas (le définir avec l'attribut idcopy)");
                     } else {
                         new_object = initial_object.clone();
                         new_object.setId(id);

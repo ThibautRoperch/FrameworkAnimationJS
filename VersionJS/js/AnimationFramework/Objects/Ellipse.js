@@ -49,11 +49,10 @@ class Ellipse extends AnimatedObject {
        ellipse.setAttribute("bocolor", this.bocolor); // r, g, b
        ellipse.setAttribute("botransparent", this.botransparent);
        ellipse.setAttribute("bosize", this.bosize);
-       ellipse.setAttribute("state", this.state);
        ellipse.setAttribute("layer", this.layer);
        ellipse.setAttribute("visible", this.visible);
        ellipse.setAttribute("opacity", this.opacity);
-       ellipse.setAttribute("angle", this.angle); // degrees
+    //    ellipse.setAttribute("angle", this.angle); // degrees
        ellipse.setAttribute("width", this.width);
        ellipse.setAttribute("height", this.height)
        return ellipse;

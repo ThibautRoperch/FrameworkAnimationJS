@@ -114,10 +114,10 @@
 <!ELEMENT object_landmark (#PCDATA) >
 <!ATTLIST object_landmark width CDATA #REQUIRED >
 <!ATTLIST object_landmark height CDATA #REQUIRED >
-<!ATTLIST object_landmark scaleX CDATA #REQUIRED >
-<!ATTLIST object_landmark scaleY CDATA #REQUIRED >
-<!ATTLIST object_landmark unitX CDATA #REQUIRED >
-<!ATTLIST object_landmark unitY CDATA #REQUIRED >
+<!ATTLIST object_landmark scale_x CDATA #REQUIRED >
+<!ATTLIST object_landmark scale_y CDATA #REQUIRED >
+<!ATTLIST object_landmark unit_x CDATA #REQUIRED >
+<!ATTLIST object_landmark unit_y CDATA #REQUIRED >
 <!ATTLIST object_landmark x CDATA #IMPLIED >
 <!ATTLIST object_landmark y CDATA #IMPLIED >
 <!ATTLIST object_landmark bgcolor CDATA #IMPLIED >
@@ -162,12 +162,14 @@
 <!ATTLIST object_copy coord_x CDATA #IMPLIED >
 <!ATTLIST object_copy coord_y CDATA #IMPLIED >
 <!ATTLIST object_copy radius CDATA #IMPLIED >
-<!ATTLIST object_copy scaleX CDATA #IMPLIED >
-<!ATTLIST object_copy scaleY CDATA #IMPLIED >
-<!ATTLIST object_copy unitX CDATA #IMPLIED >
-<!ATTLIST object_copy unitY CDATA #IMPLIED >
-<!ATTLIST object_copy class CDATA #IMPLIED >
-<!ATTLIST object_copy constructor CDATA #IMPLIED >
+<!ATTLIST object_copy scale_x CDATA #IMPLIED >
+<!ATTLIST object_copy scale_y CDATA #IMPLIED >
+<!ATTLIST object_copy unit_x CDATA #IMPLIED >
+<!ATTLIST object_copy unit_y CDATA #IMPLIED >
+<!ATTLIST object_copy lines CDATA #REQUIRED >
+<!ATTLIST object_copy columns CDATA #REQUIRED >
+<!ATTLIST object_copy line_height CDATA #REQUIRED >
+<!ATTLIST object_copy column_width CDATA #REQUIRED >
 <!ATTLIST object_copy x CDATA #IMPLIED >
 <!ATTLIST object_copy y CDATA #IMPLIED >
 <!ATTLIST object_copy bgcolor CDATA #IMPLIED >

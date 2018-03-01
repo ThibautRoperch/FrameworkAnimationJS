@@ -3,7 +3,7 @@ var objects_list = document.getElementById("objects");
 var objects_array = new Array();
 var instructions_array = new Array();
 var objects_image_id = new Array();
-var removed_objects_id = new Array();
+var removed_objects_identifier = new Array();
 
 wait_for_includes();
 function wait_for_includes() {
@@ -45,6 +45,38 @@ function import_xml(input_id) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
 			animation.readXmlFile(xhr.responseText);
+			// Remove all current objects
+			for (var i = 0; i <= last_id; ++i) {
+				remove(i);
+			}
+			// Re-create all read objects
+			for (obj of animation.getObjects().values()) {
+				var fake_button = document.createElement("button"); fake_button.innerHTML = obj.constructor.name;
+				var new_obj_id = new_object(fake_button);
+				document.getElementById(new_obj_id).getElementsByTagName("id")[0].innerHTML = "<b>Identifier :</b> " + obj.getId();
+				for (prop of obj.toXml().attributes) {
+					// Change the value of this property
+					new SetProperty(null, objects_array[new_obj_id], prop.name, prop.value).execute();
+					// Display the value of this property
+					// Try to retrieve the DOM of this property
+					var property_dom = objects_list.lastChild.getElementsByClassName(prop.name)[0];
+					if (property_dom) {
+						// Try to retrieve the input of this property
+						// Otherwise, this is a select option
+						var property_input = property_dom.getElementsByTagName("input")[0];
+						if (property_input) {
+							objects_list.lastChild.getElementsByClassName(prop.name)[0].getElementsByTagName("input")[0].value = prop.value;
+						} else {
+							// console.log(prop.name + " = " + prop.value);
+							// objects_list.lastChild.getElementsByClassName(prop.name)[0].getElementsByTagName("option")[0].selected = "selected";
+							// TODO
+						}
+					} else {
+						console.log("[assistant.js] La propriété '" + prop.name + "' pour l'objet de type " + fake_button.innerHTML + " est inconnue de l'assistant"); // dans ce cas, rajouter l'attribut (fonction new_object, faire un DOM property qui a pour className le nom de l'attribut)
+					}
+				}
+			}
+			draw_animation();
 		}
 	};
 	xhr.open("GET", source_file, true);
@@ -607,12 +639,12 @@ function new_object(object_dom) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			// scaleX
-			var scaleX = 1;
+			// scale_x
+			var scale_x = 1;
 			property = document.createElement("property");
-			property.className = "scaleX";
+			property.className = "scale_x";
 			label = document.createElement("label");
-				label.innerHTML = "scaleX";
+				label.innerHTML = "scale_x";
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
@@ -620,12 +652,12 @@ function new_object(object_dom) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			// scaleY
-			var scaleY = 1;
+			// scale_y
+			var scale_y = 1;
 			property = document.createElement("property");
-			property.className = "scaleY";
+			property.className = "scale_y";
 			label = document.createElement("label");
-				label.innerHTML = "scaleY";
+				label.innerHTML = "scale_y";
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
@@ -633,12 +665,12 @@ function new_object(object_dom) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			// unitX
-			var unitX = "cm";
+			// unit_x
+			var unit_x = "cm";
 			property = document.createElement("property");
-			property.className = "unitX";
+			property.className = "unit_x";
 			label = document.createElement("label");
-				label.innerHTML = "unitX";
+				label.innerHTML = "unit_x";
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "text";
@@ -646,12 +678,12 @@ function new_object(object_dom) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			// unitY
-			var unitY = "cm";
+			// unit_y
+			var unit_y = "cm";
 			property = document.createElement("property");
-			property.className = "unitY";
+			property.className = "unit_y";
 			label = document.createElement("label");
-				label.innerHTML = "unitY";
+				label.innerHTML = "unit_y";
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "text";
@@ -659,28 +691,15 @@ function new_object(object_dom) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Landmark(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, scaleX, scaleY, unitX, unitY); 
+			object = new Landmark(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y); 
 			break;
 		case "Grid":
-			// columns
-			var columns = 3;
-			property = document.createElement("property");
-			property.className = "column";
-			label = document.createElement("label");
-				label.innerHTML = "column";
-				property.appendChild(label);
-			input = document.createElement("input");
-				input.type = "number";
-				input.value = columns;
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
-			article1.appendChild(property);
 			// lines
 			var lines = 3;
 			property = document.createElement("property");
-			property.className = "line";
+			property.className = "lines";
 			label = document.createElement("label");
-				label.innerHTML = "line";
+				label.innerHTML = "lines";
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
@@ -688,16 +707,16 @@ function new_object(object_dom) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			// column_width
-			var column_width = 20;
+			// columns
+			var columns = 3;
 			property = document.createElement("property");
-			property.className = "column_width";
+			property.className = "columns";
 			label = document.createElement("label");
-				label.innerHTML = "column_width";
+				label.innerHTML = "columns";
 				property.appendChild(label);
 			input = document.createElement("input");
 				input.type = "number";
-				input.value = column_width;
+				input.value = columns;
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
@@ -714,6 +733,19 @@ function new_object(object_dom) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
+			// column_width
+			var column_width = 20;
+			property = document.createElement("property");
+			property.className = "column_width";
+			label = document.createElement("label");
+				label.innerHTML = "column_width";
+				property.appendChild(label);
+			input = document.createElement("input");
+				input.type = "number";
+				input.value = column_width;
+				input.onchange = function() { change_property(obj_id, this); };
+				property.appendChild(input);
+			article1.appendChild(property);
 			object = new Grid(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, lines, columns, line_height, column_width);
 			break;
 	}
@@ -722,6 +754,8 @@ function new_object(object_dom) {
 	instructions_array[obj_id] = new Array();
 
 	draw_animation();
+
+	return obj_id;
 }
 
 function new_instruction(object_id, object_dom) {
@@ -811,7 +845,7 @@ function remove(object_id) {
 	}*/
 	
 	// Add the object to the deleted objects array (JS)
-	removed_objects_id.push(object_id);
+	removed_objects_identifier.push(objects_array[object_id].getId()); // l'identifiant réel de l'objet plutot que son indice dans le tableau, car renommage possible de l'id
 
 	// Set the object as not visible from the objects array (JS)
 	objects_array[object_id].setVisible(false);
@@ -848,7 +882,7 @@ function export_xml() {
 	// objects node
 	var objects_node = document.createElement("objects");
 	for (var object of objects_array) {
-		if (removed_objects_id.indexOf(object.getId()) == -1) {
+		if (removed_objects_identifier.indexOf(object.getId()) == -1) {
 			console.log(object.toXml());
 			objects_node.appendChild(object.toXml());
 		}

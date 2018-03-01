@@ -4,14 +4,14 @@
 
 class Landmark extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, height, width, scaleX, scaleY, unitX, unitY) {
+	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);
         this.height = height;
         this.width = width;
-        this.scaleX = scaleX;
-        this.scaleY = scaleY;
-        this.unitX = unitX;
-        this.unitY = unitY;
+        this.scale_x = scale_x;
+        this.scale_y = scale_y;
+        this.unit_x = unit_x;
+        this.unit_y = unit_y;
     }
 
     getWidth() {
@@ -23,19 +23,19 @@ class Landmark extends AnimatedObject {
     }
 
     getScaleX() {
-        return this.scaleX;
+        return this.scale_x;
     }
 
     getScaleY() {
-        return this.scaleY;
+        return this.scale_y;
     }
 
     getUnitX() {
-        return this.unitX;
+        return this.unit_x;
     }
 
     getUnitY() {
-        return this.unitY;
+        return this.unit_y;
     }
 
     setWidth(width) {
@@ -46,20 +46,20 @@ class Landmark extends AnimatedObject {
         this.height = height;
     }
 
-    setScaleX(scaleX) {
-        this.scaleX = scaleX;
+    setScaleX(scale_x) {
+        this.scale_x = scale_x;
     }
 
-    setScaleY(scaleY) {
-        this.scaleY = scaleY;
+    setScaleY(scale_y) {
+        this.scale_y = scale_y;
     }
 
-    setUnitX(unitX) {
-        this.unitX = unitX;
+    setUnitX(unit_x) {
+        this.unit_x = unit_x;
     }
 
-    setUnitY(unitY) {
-        this.unitY = unitY;
+    setUnitY(unit_y) {
+        this.unit_y = unit_y;
     }
 
     draw(drawing) {
@@ -87,13 +87,13 @@ class Landmark extends AnimatedObject {
             else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
             drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
             //texte x
-            drawing.text(this.unitX, this.x + this.width/2, this.y + this.height + 25);
+            drawing.text(this.unit_x, this.x + this.width/2, this.y + this.height + 25);
             //texte y (Ca serait bien d'orienter le texte)
 
             drawing.push();        //sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
                 drawing.translate(this.x - 20, this.y + this.height/2);
                 drawing.rotate(-90);
-                drawing.text(this.unitY,0, 0);
+                drawing.text(this.unit_y,0, 0);
             drawing.pop();
         }
         else if(this.height < 0 && this.width > 0) { 
@@ -104,7 +104,7 @@ class Landmark extends AnimatedObject {
             else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
             drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
             //texte x
-            drawing.text(this.unitX, this.x + this.width/2, this.y + this.width + 25);
+            drawing.text(this.unit_x, this.x + this.width/2, this.y + this.width + 25);
             
             //application de la translation pour fixer le point initial et rotation
             darwing.translate(this.x + this.width + 20, this.y - this.height/2);
@@ -112,7 +112,7 @@ class Landmark extends AnimatedObject {
             //texte y
             if (this.botransparent) drawing.noStroke();
             else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
-            drawing.text(this.unitY, 0, 0);
+            drawing.text(this.unit_y, 0, 0);
         }
         else if(this.height > 0 && this.width < 0) {
             drawing.line(this.x - this.width, this.y + this.height, this.x - this.width, this.y); 
@@ -122,7 +122,7 @@ class Landmark extends AnimatedObject {
             else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
             drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
             //texte x
-            drawing.text(this.unitX, this.x - this.width/2, this.y + this.height + 25);
+            drawing.text(this.unit_x, this.x - this.width/2, this.y + this.height + 25);
             //texte y (Ca serait bien d'orienter le texte)
             axis1 = drawing.createVector(this.x - this.width/2, this.y + this.height + 25);
             //axis2 = drawing.createVector(this.x - this.width/2, this.y + this.height + 40);
@@ -130,7 +130,7 @@ class Landmark extends AnimatedObject {
             //drawing.push();
             drawing.translate(this.x - this.width + 10, this.y + this.height/2 );
             drawing.rotate(-90);
-            drawing.text(this.unitY, 0, 0);
+            drawing.text(this.unit_y, 0, 0);
             //drawing.pop();
         }
         else if(this.height < 0 && this.width < 0) {
@@ -141,11 +141,11 @@ class Landmark extends AnimatedObject {
             else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
             drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
             //texte x
-            drawing.text(this.unitX, this.x + this.width/2, this.y + 25);
+            drawing.text(this.unit_x, this.x + this.width/2, this.y + 25);
             //texte y (Ca serait bien d'orienter le texte)
             axis1 = drawing.createVector(this.x + this.width/2, this.y + 25);
             drawing.rotate(90, axis1);
-            drawing.text(this.unitY, this.x + this.width + 25, this.y + this.height/2 );
+            drawing.text(this.unit_y, this.x + this.width + 25, this.y + this.height/2 );
         }
     }
 
@@ -163,22 +163,21 @@ class Landmark extends AnimatedObject {
         landmark.setAttribute("bocolor", this.bocolor); // r, g, b
         landmark.setAttribute("botransparent", this.botransparent);
         landmark.setAttribute("bosize", this.bosize);
-        landmark.setAttribute("state", this.state);
         landmark.setAttribute("layer", this.layer);
         landmark.setAttribute("visible", this.visible);
         landmark.setAttribute("opacity", this.opacity);
-        landmark.setAttribute("angle", this.angle); // degrees
+        // landmark.setAttribute("angle", this.angle); // degrees
         landmark.setAttribute("width", this.width);
         landmark.setAttribute("height", this.height);
-        landmark.setAttribute("scaleX", this.scaleX);
-        landmark.setAttribute("scaleY", this.scaleY);
-        landmark.setAttribute("unitX", this.unitX);
-        landmark.setAttribute("unitY", this.unitY);
+        landmark.setAttribute("scale_x", this.scale_x);
+        landmark.setAttribute("scale_y", this.scale_y);
+        landmark.setAttribute("unit_x", this.unit_x);
+        landmark.setAttribute("unit_y", this.unit_y);
         return landmark;
     }
 
     clone() {
-        return new Landmark(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.scaleX, this.scaleY, this.unitX, this.unitY);
+        return new Landmark(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.scale_x, this.scale_y, this.unit_x, this.unit_y);
     }
 
 }

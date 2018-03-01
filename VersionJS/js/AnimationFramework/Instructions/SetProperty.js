@@ -101,17 +101,17 @@ class SetProperty extends Instruction {
 				break;
 
 			// landmark
-			case "scaleX":
+			case "scale_x":
 				this.target.setScaleX(parseInt(this.value) | 0);
 				break;
-			case "scaleY":
+			case "scale_y":
 				this.target.setScaleY(parseInt(this.value) | 0);
 				break;
-			case "unitX":
-				this.target.setUnitX(parseInt(this.value) | 0);
+			case "unit_x":
+				this.target.setUnitX(this.value);
 				break;
-			case "unitY":
-				this.target.setUnitY(parseInt(this.value) | 0);
+			case "unit_y":
+				this.target.setUnitY(this.value);
 				break;
 
 			// grid
@@ -129,7 +129,7 @@ class SetProperty extends Instruction {
 				break;
 
 			default:
-				console.log("[SetProperty.js] The attribute '" + this.property + "' of the SetProperty instruction is unknown.");
+				console.log("[SetProperty.js] The attribute '" + this.property + "' of the SetProperty instruction is unknown");
 				break;
 		}
 	}

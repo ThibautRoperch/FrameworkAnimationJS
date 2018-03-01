@@ -61,11 +61,10 @@ class Polygon extends AnimatedObject {
         polygon.setAttribute("bocolor", this.bocolor);
         polygon.setAttribute("botransparent", this.botransparent);
         polygon.setAttribute("bosize", this.bosize);
-        polygon.setAttribute("state", this.state);
         polygon.setAttribute("layer", this.layer);
         polygon.setAttribute("visible", this.visible);
         polygon.setAttribute("opacity", this.opacity);
-        polygon.setAttribute("angle", this.angle); 
+        // polygon.setAttribute("angle", this.angle); 
         polygon.setAttribute("coord_x", this.coord_x);
         polygon.setAttribute("coord_y", this.coord_y);
         return polygon;
