@@ -330,6 +330,7 @@ body #ask_popup p {
 
 body #ask_popup p input {
     display: block;
+    width: 66%;
     margin: auto;
     margin-top: 20px;
     padding: 4px;

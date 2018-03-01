@@ -27,13 +27,15 @@ class Animation {
 
         this.stop_animation = false;
 
-        // Resize the target node
-        this.parent.style.width = this.width + "px";
-        this.parent.style.height = this.height + "px";
-        this.parent.style.display = "flex";
-        this.parent.style.flexDirection = "row";
-        this.parent.style.alignItems = "center";
-        this.parent.style.padding = "0";
+        // Resize the target node if given
+        if (this.parent != null) {
+            this.parent.style.width = this.width + "px";
+            this.parent.style.height = this.height + "px";
+            this.parent.style.display = "flex";
+            this.parent.style.flexDirection = "row";
+            this.parent.style.alignItems = "center";
+            this.parent.style.padding = "0";
+        }
     }
 
     /**

@@ -42,16 +42,17 @@ function load_animation(source_file, target_id, width, height) {
     if (typeof(p5) === "undefined" || typeof(Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
         setTimeout(function() {
             load_animation(source_file, target_id, width, height);
-        }, 50);
+        }, 150);
     }
     // Create the animation object when animation files are included
     else {
-        if (!document.getElementById(target_id)) {
-            console.log("The HTML element with id '" + target_id + "' is missing.");
-            return;
-        }
-
-        var parent = document.getElementById(target_id);
+		var parent = document.getElementById(target_id);
+		
+		// Check if the parent node exists
+		if (parent == undefined) {
+			console.log("[animation_controller.js] Le noeud parent n'existe pas ; vérifier qu'une balise HTML possède l'id donné (" + target_id + ")");
+			return;
+		}
 
         // Create the animation object
         var animation = new Animation(source_file, parent, width, height);

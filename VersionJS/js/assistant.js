@@ -28,14 +28,29 @@ function wait_for_includes() {
     if (typeof(p5) === "undefined" || typeof(Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
 		setTimeout(function() {
 			wait_for_includes();
-		}, 50);
+		}, 150);
 	} else {
 		draw_animation();
 	}
 }
 
-function import_xml() {
-	new Animation();
+function import_xml(input_id) {
+	var source_file = document.getElementById(input_id).value;
+	if (source_file === "") return; // stop here if the input is empty (won't try to read the file and will keep the popup active)
+
+	var animation = new Animation(source_file, null, undefined, undefined);
+
+	// Read the animation's XML file using AJAX
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+			animation.readXmlFile(xhr.responseText);
+		}
+	};
+	xhr.open("GET", source_file, true);
+	xhr.send();
+
+	document.getElementById("ask_popup").className = "";
 }
 
 function new_object(object_dom) {
@@ -59,7 +74,7 @@ function new_object(object_dom) {
 		header.appendChild(spoiler);
 		var pen = document.createElement("div");
 			pen.className = "warning";
-			pen.onclick = function() { ask_popup("Change object identifier", "Enter below the new id for the object <b>" + obj_id + "</b>.<input id='new_id' type='text' value='" + objects_array[obj_id].getId() + "' required/>", change_id, obj_id); };
+			pen.onclick = function() { ask_popup("Change object identifier", "Enter below the new id for the object <b>" + obj_id + "</b>.<input id='new_id' type='text' value='" + objects_array[obj_id].getId() + "' required/>", change_id, [obj_id, "new_id"]); };
 			pen.innerHTML = "&#128397;";
 		header.appendChild(pen);
 		var style = document.createElement("div");
@@ -718,8 +733,11 @@ function change_property(object_id, property_dom) {
 	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
-function change_id(object_id) {
-	var new_id = document.getElementById("new_id").value;
+function change_id(args) {
+	var object_id = args[0];
+	var input_id = args[1];
+	
+	var new_id = document.getElementById(input_id).value;
 	if (new_id === "") return; // stop here if the input is empty (won't change the id and will keep the popup active)
 
 	// Change in the objects array (JS)
