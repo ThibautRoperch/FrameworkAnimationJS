@@ -38,6 +38,10 @@ class Animation {
         }
     }
 
+    getBgImage() {
+        return this.bg_image;
+    }
+    
     getObjects() {
         return this.objects;
     }
@@ -120,13 +124,13 @@ class Animation {
                 var x = parseInt(read_object.getAttribute("x")) | 0;
                 var y = parseInt(read_object.getAttribute("y")) | 0;
                 var bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
-                var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" : true;
+                var bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" || read_object.getAttribute("bgtransparent") == "1" : true;
                 var bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
-                var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" : true;
+                var botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" || read_object.getAttribute("botransparent") == "1" : true;
                 var bosize = parseInt(read_object.getAttribute("bosize")) | 1;
                 var layer = parseInt(read_object.getAttribute("layer")) | 0;
                 this.layers.add(layer);
-                var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" : false;
+                var visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" || read_object.getAttribute("visible") == "1" : false;
                 var opacity = parseFloat(read_object.getAttribute("opacity")) | 1;
                 var angle = parseFloat(read_object.getAttribute("angle")) | 0;
                 // Retrieve the others specific attributes of the object and create the associated animated object

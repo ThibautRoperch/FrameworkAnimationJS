@@ -129,7 +129,7 @@ class SetProperty extends Instruction {
 				break;
 
 			default:
-				console.log("[SetProperty.js] The attribute '" + this.property + "' of the SetProperty instruction is unknown");
+				console.log("[SetProperty.js] La propriété '" + this.property + "' est inconnue de l'instruction SetProperty"); // dans ce cas, rajouter l'attribut (dans le switch case ci-dessus)
 				break;
 		}
 	}

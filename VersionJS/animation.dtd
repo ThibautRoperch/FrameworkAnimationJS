@@ -1,5 +1,7 @@
 
 <!ELEMENT animation (init?,speed?,background?,objects,programs) >
+<!ATTLIST animation width CDATA #IMPLIED >
+<!ATTLIST animation height CDATA #IMPLIED >
 
 <!ELEMENT init (start_button) >
 <!ELEMENT start_button EMPTY >

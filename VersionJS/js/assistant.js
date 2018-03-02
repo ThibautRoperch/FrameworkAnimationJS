@@ -45,6 +45,10 @@ function import_xml(input_id) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
 			animation.readXmlFile(xhr.responseText);
+			// Retrieve background path
+			if (animation.getBgImage() != null) {
+				document.getElementById("background").value = animation.getBgImage();
+			}
 			// Remove all current objects
 			for (var i = 0; i <= last_id; ++i) {
 				remove(i);
@@ -65,11 +69,16 @@ function import_xml(input_id) {
 						// Otherwise, this is a select option
 						var property_input = property_dom.getElementsByTagName("input")[0];
 						if (property_input) {
-							objects_list.lastChild.getElementsByClassName(prop.name)[0].getElementsByTagName("input")[0].value = prop.value;
+							if (property_input.type == "range") property_input.value = parseInt(prop.value) * 100;
+							else property_input.value = prop.value;
 						} else {
-							// console.log(prop.name + " = " + prop.value);
-							// objects_list.lastChild.getElementsByClassName(prop.name)[0].getElementsByTagName("option")[0].selected = "selected";
-							// TODO
+							var i = 0;
+							while (property_dom.getElementsByTagName("option")[i]) {
+								var option = property_dom.getElementsByTagName("option")[i];
+								var selected = (option.value === prop.value) ? "selected" : "";
+								property_dom.getElementsByTagName("option")[i].selected = selected;
+								++i;
+							}
 						}
 					} else {
 						console.log("[assistant.js] La propriété '" + prop.name + "' pour l'objet de type " + fake_button.innerHTML + " est inconnue de l'assistant"); // dans ce cas, rajouter l'attribut (fonction new_object, faire un DOM property qui a pour className le nom de l'attribut)
@@ -876,6 +885,7 @@ function export_xml() {
 	// background image node
 	if (document.getElementById("background").value != "") {
 		var background_node = document.createElement("background");
+		background_node.innerHTML = document.getElementById("background").value;
 		animation_node.appendChild(background_node);
 	}
 
