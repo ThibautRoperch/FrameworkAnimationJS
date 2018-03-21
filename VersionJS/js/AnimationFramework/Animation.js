@@ -77,7 +77,7 @@ class Animation {
 
     readXmlFile(contents) {
         var parser = new DOMParser();
-        var root = parser.parseFromString(contents ,"text/xml");
+        var root = parser.parseFromString(contents, "text/xml");
 
         // Retrieve sped, init, background, objects and programs nodes
         var speed_node = root.getElementsByTagName("speed")[0];

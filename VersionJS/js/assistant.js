@@ -455,7 +455,7 @@ function new_object(object_dom) {
 			break;
 		case "ImageFile":
 			// width
-			var width = "50";
+			var width = 50;
 			property = document.createElement("property");
 			property.className = "width";
 			label = document.createElement("label");
@@ -468,7 +468,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// height
-			var height = "50";
+			var height = 50;
 			property = document.createElement("property");
 			property.className = "height";
 			label = document.createElement("label");
@@ -807,6 +807,8 @@ function reduce(object_id) {
 	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].onclick = function() { expand(object_id); };
 	object_dom.getElementsByTagName("arrow")[0].innerHTML = "&#11167;";
 }
+
+window.onresize = update_section_size;
 
 function update_section_size() {
 	var section = document.getElementsByTagName("section")[0];
