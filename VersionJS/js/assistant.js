@@ -1,4 +1,5 @@
 import { Animation } from './AnimationFramework/Animation.js';
+
 import { Ellipse } from './AnimationFramework/Objects/Ellipse.js';
 import { Circle } from './AnimationFramework/Objects/Circle.js';
 import { Grid } from './AnimationFramework/Objects/Grid.js';
@@ -7,6 +8,8 @@ import { Landmark } from './AnimationFramework/Objects/Landmark.js';
 import { Polygon } from './AnimationFramework/Objects/Polygon.js';
 import { Rectangle } from './AnimationFramework/Objects/Rectangle.js';
 import { Text } from './AnimationFramework/Objects/Text.js';
+
+import { SetProperty } from './AnimationFramework/Instructions/SetProperty.js';
 
 import { ANIMATION_FILES_INCLUDED, OBJECT_CLASSES, INSTRUCTION_CLASSES } from './AnimationFramework/animation_controller.js';
 import { DEFAULT_STATE } from './AnimationFramework/Objects/AnimatedObject.js';
