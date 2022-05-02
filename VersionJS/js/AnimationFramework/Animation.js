@@ -1,6 +1,6 @@
 import { speed_animation, parseIntArray } from './animation_controller.js';
 
-import { DEFAULT_STATE, WAITING_CLICK_STATE, SLEEPING_STATE, MOVING_STATE, AnimatedObject } from './Objects/AnimatedObject.js';
+import { DEFAULT_STATE, WAITING_CLICK_STATE } from './Objects/AnimatedObject.js';
 
 import { Blink } from './Instructions/Blink.js';
 import { Center } from './Instructions/Center.js';

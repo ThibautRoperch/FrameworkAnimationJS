@@ -14,7 +14,7 @@ export let INSTRUCTION_CLASSES = ["Instruction", "SimpleMovement", "Blink", "Cen
  */
 
 export let ANIMATION_FILES_INCLUDED = false;
-export let ANIMATIONS = new Array();
+let ANIMATIONS = new Array();
 export let FRAME_RATE = 60; // frames displayed per second
 export let LOOP_DELAY_MAX = 60; // lowest speed of the animation, one frame's duration (ms)
 export let LOOP_DELAY_MIN = 0; // highest speed of the animation, one frame's duration (ms)

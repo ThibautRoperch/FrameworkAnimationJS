@@ -1,4 +1,4 @@
-import { DEFAULT_STATE, WAITING_CLICK_STATE, SLEEPING_STATE, MOVING_STATE , AnimatedObject } from "./AnimatedObject.js";
+import { DEFAULT_STATE, AnimatedObject } from "./AnimatedObject.js";
 /**
  * 
  */
