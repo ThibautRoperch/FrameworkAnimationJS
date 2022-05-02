@@ -21,7 +21,7 @@ var instructions_array = new Array();
 var objects_image_id = new Array();
 var removed_objects_identifier = new Array();
 
-document.getElementById("openAnimation").addEventListener("click", ask_popup, "Change object identifier", "Choose the XML file containing the animation to open.<input id=\'animation_file\' type=\'text\' placeholder=\'benchmark.xml\' required />', import_xml, 'animation_file')");
+document.getElementById("openAnimation").addEventListener("click", function(){ask_popup('Change object identifier', 'Choose the XML file containing the animation to open.<input id=\'animation_file\' type=\'text\' placeholder=\'benchmark.xml\' required />', import_xml, 'animation_file')});
 document.getElementById("exportAnimation").addEventListener('click', export_xml);
 document.getElementById("addText").addEventListener('click', function(){new_object('Text')});
 document.getElementById("addImage").addEventListener('click', function(){new_object('ImageFile')});
@@ -31,9 +31,9 @@ document.getElementById("addCircle").addEventListener('click', function(){new_ob
 document.getElementById("addEllipse").addEventListener('click', function(){new_object('Ellipse')});
 document.getElementById("addLandmark").addEventListener('click', function(){new_object('Landmark')});
 document.getElementById("addGrid").addEventListener('click', function(){new_object('Grid')});
-document.getElementById("width").onclick = "draw_animation()";
-document.getElementById("height").onclick = "draw_animation()";
-document.getElementById("background").onclick = "draw_animation()";
+document.getElementById("width").addEventListener('click', draw_animation);
+document.getElementById("height").addEventListener('click', draw_animation);
+document.getElementById("background").addEventListener('click', draw_animation);
 
 wait_for_includes();
 function wait_for_includes() {
@@ -85,6 +85,7 @@ function import_xml(input_id) {
 			}
 			// Re-create all read objects
 			for (let obj of animation.getObjects().values()) {
+				console.log(obj);
 				let fake_button = document.createElement("button"); fake_button.innerHTML = obj.constructor.name;
 				let new_obj_id = new_object(fake_button);
 				document.getElementById(new_obj_id).getElementsByTagName("id")[0].innerHTML = "<b>Identifier :</b> " + obj.getId();
@@ -789,7 +790,6 @@ function new_object(object_type) {
 			object = new Grid(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, lines, columns, line_height, column_width);
 			break;
 	}
-
 	objects_array[obj_id] = object;
 	instructions_array[obj_id] = new Array();
 
@@ -981,7 +981,7 @@ function draw_animation() {
 				let object = objects_array[id];
 				object.loadImage(draw_ref);
 			}
-
+			console.log(objects_array);
 			// Retrieve all layers in a set
 			for (let object of objects_array) {
 				layers.add(object.getLayer());
