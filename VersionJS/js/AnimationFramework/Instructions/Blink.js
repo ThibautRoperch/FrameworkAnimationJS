@@ -1,6 +1,6 @@
 import { Instruction } from './Instruction.js';
-import { DEFAULT_STATE, WAITING_CLICK_STATE, SLEEPING_STATE, MOVING_STATE } from '../Objects/AnimatedObject.js';
-import { ANIMATION_FILES_INCLUDED, ANIMATIONS, FRAME_RATE, LOOP_DELAY_MAX, LOOP_DELAY_MIN } from '../animation_controller.js';
+import { DEFAULT_STATE, WAITING_CLICK_STATE } from '../Objects/AnimatedObject.js';
+import { LOOP_DELAY_MAX, LOOP_DELAY_MIN } from '../animation_controller.js';
 /*
  *  This instruction make the object blink at each Delay*frame rate, for Times iteration
  */
@@ -28,7 +28,7 @@ export class Blink extends Instruction {
 			else instruction.object.setOpacity(0);
 
 			if (blinked_times < instruction.times && (instruction.object.getState() == DEFAULT_STATE || instruction.object.getState() == WAITING_CLICK_STATE)) {
-				setTimeout(function() {
+				setTimeout(function () {
 					blink(instruction, ++blinked_times);
 				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			} else {
@@ -36,5 +36,5 @@ export class Blink extends Instruction {
 			}
 		}
 	}
-	
+
 }

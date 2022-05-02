@@ -2,6 +2,8 @@
  * This instruction moves the object atached to it, at a precise position at interval and a delay
  */
 import { Instruction } from "./Instruction.js";
+import { DEFAULT_STATE, MOVING_STATE } from "../Objects/AnimatedObject.js";
+import { LOOP_DELAY_MAX, LOOP_DELAY_MIN } from '../animation_controller.js';
 export class MoveTo extends Instruction {
 
 	constructor(object, x, y, interval_x, interval_y, delay, loop_delay) {
