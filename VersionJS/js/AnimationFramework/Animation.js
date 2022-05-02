@@ -329,7 +329,7 @@ export class Animation {
         }
 
         // Execute programs of the programs array, as max 1 program per object
-        for (object_id of this.objects.keys()) {
+        for (let object_id of this.objects.keys()) {
             if (this.programs.get(object_id)) {
                 this.execute_instructions(object_id, 0, new Map());
             }

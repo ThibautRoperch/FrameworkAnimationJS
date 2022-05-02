@@ -147,13 +147,13 @@ function include_animation_files(path) {
 
 	
 	// Instructions
-	/*for (instr_cl of INSTRUCTION_CLASSES) {
+	/*for (let instr_cl of INSTRUCTION_CLASSES) {
 		//import { instr_cl } from path + "Instructions/" + instr_cl + ".js";
 		//scripts.push(path + "Instructions/" + instr_cl + ".js");
 	}
 
 	// Objects
-	for (obj_cl of OBJECT_CLASSES) {
+	for (let obj_cl of OBJECT_CLASSES) {
 		//scripts.push(path + "Objects/" + obj_cl + ".js");
 	}*/
 	
