@@ -844,7 +844,7 @@ function customize(object_id) {
 	object.setBgcolor(rand_rgb());
 	document.getElementById(object_id).getElementsByClassName("bgcolor")[0].getElementsByTagName("input")[0].value = object.getBgcolor();
 	object.setBorder_color(rand_rgb());
-	document.getElementById(object_id).getElementsByClassName("border_color")[0].getElementsByTagName("input")[0].value = object.getborder_color();
+	document.getElementById(object_id).getElementsByClassName("border_color")[0].getElementsByTagName("input")[0].value = object.getBorder_color();
 	
 	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }

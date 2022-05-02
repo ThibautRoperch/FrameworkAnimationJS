@@ -46,15 +46,15 @@ export class AnimatedObject {
         return this.bgtransparent;
     }
 
-    getborder_color() {
+    getBorder_color() {
         return this.border_color;
     }
 
-    getborder_transparency() {
+    getBorder_transparency() {
         return this.border_transparency;
     }
 
-    getborder_size() {
+    getBorder_size() {
         return this.border_size;
     }
 
