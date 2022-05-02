@@ -5,8 +5,8 @@ import { Animation } from './Animation.js';
 * Classes (to modify)
 */
 
-let OBJECT_CLASSES = ["AnimatedObject", "Ellipse", "Circle", "Grid", "ImageFile", "Landmark", "Polygon", "Rectangle", "StartButton", "Text"];
-let INSTRUCTION_CLASSES = ["Instruction", "SimpleMovement", "Blink", "Center", "CenterX", "CenterY", "Click",
+export let OBJECT_CLASSES = ["AnimatedObject", "Ellipse", "Circle", "Grid", "ImageFile", "Landmark", "Polygon", "Rectangle", "StartButton", "Text"];
+export let INSTRUCTION_CLASSES = ["Instruction", "SimpleMovement", "Blink", "Center", "CenterX", "CenterY", "Click",
  "Down", "GoTo", "Label", "Left", "MoveTo", "Right", "SetProperty", "Sleep", "State", "Stop", "Trigger", "Up", "Wait"];
 
 /**********************

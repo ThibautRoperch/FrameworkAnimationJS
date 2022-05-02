@@ -1,3 +1,7 @@
+import { Animation } from './AnimationFramework/Animation.js';
+
+import { ANIMATION_FILES_INCLUDED, OBJECT_CLASSES, INSTRUCTION_CLASSES } from './AnimationFramework/animation_controller.js';
+
 var last_id = -1;
 var objects_list = document.getElementById("objects");
 var objects_array = new Array();
@@ -13,14 +17,14 @@ function wait_for_includes() {
 	}
 
 	// Check if object classes are loaded
-	var objects_classes_loaded = true;
-	for (obj_cl of OBJECT_CLASSES) {
+	let objects_classes_loaded = true;
+	for (let obj_cl of OBJECT_CLASSES) {
 		objects_classes_loaded = objects_classes_loaded & typeof(obj_cl) !== "undefined";
 	}
 	
 	// Check if instruction classes are loaded
-	var instruction_classes_loaded = true;
-	for (instr_cl of INSTRUCTION_CLASSES) {
+	let instruction_classes_loaded = true;
+	for (let instr_cl of INSTRUCTION_CLASSES) {
 		instruction_classes_loaded = instruction_classes_loaded & typeof(instr_cl) !== "undefined";
 	}
 
@@ -35,13 +39,13 @@ function wait_for_includes() {
 }
 
 function import_xml(input_id) {
-	var source_file = document.getElementById(input_id).value;
+	let source_file = document.getElementById(input_id).value;
 	if (source_file === "") return; // stop here if the input is empty (won't try to read the file and will keep the popup active)
 
-	var animation = new Animation(source_file, null, undefined, undefined);
+	let animation = new Animation(source_file, null, undefined, undefined);
 
 	// Read the animation's XML file using AJAX
-	var xhr = new XMLHttpRequest();
+	let xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
 			animation.readXmlFile(xhr.responseText);
@@ -50,32 +54,32 @@ function import_xml(input_id) {
 				document.getElementById("background").value = animation.getBgImage();
 			}
 			// Remove all current objects
-			for (var i = 0; i <= last_id; ++i) {
+			for (let i = 0; i <= last_id; ++i) {
 				remove(i);
 			}
 			// Re-create all read objects
-			for (obj of animation.getObjects().values()) {
-				var fake_button = document.createElement("button"); fake_button.innerHTML = obj.constructor.name;
-				var new_obj_id = new_object(fake_button);
+			for (let obj of animation.getObjects().values()) {
+				let fake_button = document.createElement("button"); fake_button.innerHTML = obj.constructor.name;
+				let new_obj_id = new_object(fake_button);
 				document.getElementById(new_obj_id).getElementsByTagName("id")[0].innerHTML = "<b>Identifier :</b> " + obj.getId();
-				for (prop of obj.toXml().attributes) {
+				for (let prop of obj.toXml().attributes) {
 					// Change the value of this property
 					new SetProperty(null, objects_array[new_obj_id], prop.name, prop.value).execute();
 					// Display the value of this property
 					// Try to retrieve the DOM of this property
-					var property_dom = objects_list.lastChild.getElementsByClassName(prop.name)[0];
+					let property_dom = objects_list.lastChild.getElementsByClassName(prop.name)[0];
 					if (property_dom) {
 						// Try to retrieve the input of this property
 						// Otherwise, this is a select option
-						var property_input = property_dom.getElementsByTagName("input")[0];
+						let property_input = property_dom.getElementsByTagName("input")[0];
 						if (property_input) {
 							if (property_input.type == "range") property_input.value = parseInt(prop.value) * 100;
 							else property_input.value = prop.value;
 						} else {
-							var i = 0;
+							let i = 0;
 							while (property_dom.getElementsByTagName("option")[i]) {
-								var option = property_dom.getElementsByTagName("option")[i];
-								var selected = (option.value === prop.value) ? "selected" : "";
+								let option = property_dom.getElementsByTagName("option")[i];
+								let selected = (option.value === prop.value) ? "selected" : "";
 								property_dom.getElementsByTagName("option")[i].selected = selected;
 								++i;
 							}
@@ -95,35 +99,35 @@ function import_xml(input_id) {
 }
 
 function new_object(object_dom) {
-	var obj_id = ++last_id;
-	var object;
+	let obj_id = ++last_id;
+	let object;
 
-	var li = document.createElement("li");
+	let li = document.createElement("li");
 		li.id = obj_id;
-	var header = document.createElement("headerobj");
-		var spoiler = document.createElement("div");
+	let header = document.createElement("headerobj");
+		let spoiler = document.createElement("div");
 			spoiler.onclick = function() { expand(obj_id); };
-			var id = document.createElement("id");
+			let id = document.createElement("id");
 				id.innerHTML = "<b>Identifier :</b> " + obj_id;
 				spoiler.appendChild(id);
-			var type = document.createElement("type");
+			let type = document.createElement("type");
 				type.innerHTML = "<b>Type :</b> " + object_dom.innerHTML;
 				spoiler.appendChild(type);
-			var arrow = document.createElement("arrow");
+			let arrow = document.createElement("arrow");
 				arrow.innerHTML = "&#11167;";
 				spoiler.appendChild(arrow);
 		header.appendChild(spoiler);
-		var pen = document.createElement("div");
+		let pen = document.createElement("div");
 			pen.className = "warning";
 			pen.onclick = function() { ask_popup("Change object identifier", "Enter below the new id for the object <b>" + obj_id + "</b>.<input id='new_id' type='text' value='" + objects_array[obj_id].getId() + "' required/>", change_id, [obj_id, "new_id"]); };
 			pen.innerHTML = "&#128397;";
 		header.appendChild(pen);
-		var style = document.createElement("div");
+		let style = document.createElement("div");
 			style.className = "warning";
 			style.onclick = function() { customize(obj_id); };
 			style.innerHTML = "&#127912;";
 		header.appendChild(style);
-		var trash = document.createElement("div");
+		let trash = document.createElement("div");
 			trash.className = "danger";
 			trash.onclick = function() { remove(obj_id); };
 			trash.innerHTML = "&#10060;";
@@ -131,24 +135,24 @@ function new_object(object_dom) {
 	li.appendChild(header);
 
 	// init default attributs
-	var x = 0;
-	var y = 0;
-	var bgcolor = [0,0,0]; // r, g, b
-	var bgtransparent = true;
-	var bocolor = [0,0,0]; // r, g, b
-	var botransparent = true;
-	var bosize = 1;
-	var state = DEFAULT_STATE;
-	var layer = 0;
-	var visible = false;
-	var opacity = 1;
-	var angle = 0;
-	var width = 50;
-	var height = 50;
+	let x = 0;
+	let y = 0;
+	let bgcolor = [0,0,0]; // r, g, b
+	let bgtransparent = true;
+	let bocolor = [0,0,0]; // r, g, b
+	let botransparent = true;
+	let bosize = 1;
+	let state = DEFAULT_STATE;
+	let layer = 0;
+	let visible = false;
+	let opacity = 1;
+	let angle = 0;
+	let width = 50;
+	let height = 50;
 
-	var section = document.createElement("sectionobj");
+	let section = document.createElement("sectionobj");
 		// Properties
-		var article1 = document.createElement("article");
+		let article1 = document.createElement("article");
 			// x
 			property = document.createElement("property");
 				property.className = "x";
@@ -306,9 +310,9 @@ function new_object(object_dom) {
 				// article1.appendChild(property);
 			section.appendChild(article1);
 		// Instructions
-		var article2 = document.createElement("article");
-			var instructions = document.createElement("instructions");
-				var categories = ["Position", "Move", "Interact", "Instruction", "Change property"];
+		let article2 = document.createElement("article");
+			let instructions = document.createElement("instructions");
+				let categories = ["Position", "Move", "Interact", "Instruction", "Change property"];
 				for (cat of categories) {
 					button = document.createElement("button");
 						button.onclick = function() { display_instructions(this); };
@@ -335,7 +339,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// font
-			var font = ["Courier", 14, "normal"];
+			let font = ["Courier", 14, "normal"];
 			property = document.createElement("property");
 				property.className = "font";
 				label = document.createElement("label");
@@ -348,7 +352,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// color
-			var color = [255, 255, 255];
+			let color = [255, 255, 255];
 			property = document.createElement("property");
 				property.className = "color";
 				label = document.createElement("label");
@@ -361,7 +365,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// padding
-			var padding = 0;
+			let padding = 0;
 			property = document.createElement("property");
 				property.className = "padding";
 				label = document.createElement("label");
@@ -374,7 +378,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// width
-			var width = undefined;
+			width = undefined;
 			property = document.createElement("property");
 				property.className = "width";
 				label = document.createElement("label");
@@ -387,7 +391,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// height
-			var height = undefined;
+			height = undefined;
 			property = document.createElement("property");
 				property.className = "height";
 				label = document.createElement("label");
@@ -400,7 +404,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// halignment
-			var halignment = "left";
+			let halignment = "left";
 			property = document.createElement("property");
 				property.className = "halignment";
 				label = document.createElement("label");
@@ -424,7 +428,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// valignment
-			var valignment = "top";
+			let valignment = "top";
 			property = document.createElement("property");
 				property.className = "valignment";
 				label = document.createElement("label");
@@ -455,7 +459,7 @@ function new_object(object_dom) {
 			break;
 		case "ImageFile":
 			// width
-			var width = 50;
+			width = 50;
 			property = document.createElement("property");
 			property.className = "width";
 			label = document.createElement("label");
@@ -468,7 +472,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// height
-			var height = 50;
+			height = 50;
 			property = document.createElement("property");
 			property.className = "height";
 			label = document.createElement("label");
@@ -481,7 +485,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// image
-			var image = "img/yellow_blue_linear_gradient.png";
+			let image = "img/yellow_blue_linear_gradient.png";
 			property.appendChild(input);
 			property = document.createElement("property");
 			property.className = "image";
@@ -500,7 +504,7 @@ function new_object(object_dom) {
 			break;
 		case "Rectangle":
 			// width
-			var width = 33;
+			width = 33;
 			property = document.createElement("property");
 				property.className = "width";
 				label = document.createElement("label");
@@ -514,7 +518,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// height
-			var height = 10;
+			height = 10;
 			property = document.createElement("property");
 				property.className = "height";
 				label = document.createElement("label");
@@ -528,7 +532,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// round
-			var round = [0, 0, 0, 0];
+			let round = [0, 0, 0, 0];
 			property = document.createElement("property");
 				property.className = "round";
 				label = document.createElement("label");
@@ -544,7 +548,7 @@ function new_object(object_dom) {
 			break;
 		case "Polygon":
 			// coord_x
-			var coord_x = [0, 80, 80, 40];
+			let coord_x = [0, 80, 80, 40];
 			property = document.createElement("property");
 				property.className = "coord_x";
 				label = document.createElement("label");
@@ -558,7 +562,7 @@ function new_object(object_dom) {
 					property.appendChild(input);
 				article1.appendChild(property);
 			// coord_y
-			var coord_y = [0, 60, 0, 60];
+			let coord_y = [0, 60, 0, 60];
 			property = document.createElement("property");
 				property.className = "coord_y";
 				label = document.createElement("label");
@@ -575,7 +579,7 @@ function new_object(object_dom) {
 			break;
 		case "Circle":
 			// radius
-			var radius = 30;
+			let radius = 30;
 			property = document.createElement("property");
 			property.className = "radius";
 			label = document.createElement("label");
@@ -592,7 +596,7 @@ function new_object(object_dom) {
 			break;
 		case "Ellipse":
 			// width
-			var width = 60;
+			let width = 60;
 			property = document.createElement("property");
 			property.className = "width";
 			label = document.createElement("label");
@@ -606,7 +610,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// height
-			var height = 40;
+			let height = 40;
 			property = document.createElement("property");
 			property.className = "height";
 			label = document.createElement("label");
@@ -649,7 +653,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// scale_x
-			var scale_x = 1;
+			let scale_x = 1;
 			property = document.createElement("property");
 			property.className = "scale_x";
 			label = document.createElement("label");
@@ -662,7 +666,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// scale_y
-			var scale_y = 1;
+			let scale_y = 1;
 			property = document.createElement("property");
 			property.className = "scale_y";
 			label = document.createElement("label");
@@ -675,7 +679,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// unit_x
-			var unit_x = "cm";
+			let unit_x = "cm";
 			property = document.createElement("property");
 			property.className = "unit_x";
 			label = document.createElement("label");
@@ -688,7 +692,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// unit_y
-			var unit_y = "cm";
+			let unit_y = "cm";
 			property = document.createElement("property");
 			property.className = "unit_y";
 			label = document.createElement("label");
@@ -704,7 +708,7 @@ function new_object(object_dom) {
 			break;
 		case "Grid":
 			// lines
-			var lines = 3;
+			let lines = 3;
 			property = document.createElement("property");
 			property.className = "lines";
 			label = document.createElement("label");
@@ -717,7 +721,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// columns
-			var columns = 3;
+			let columns = 3;
 			property = document.createElement("property");
 			property.className = "columns";
 			label = document.createElement("label");
@@ -730,7 +734,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// line_height
-			var line_height = 20;
+			let line_height = 20;
 			property = document.createElement("property");
 			property.className = "line_height";
 			label = document.createElement("label");
@@ -743,7 +747,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// column_width
-			var column_width = 20;
+			let column_width = 20;
 			property = document.createElement("property");
 			property.className = "column_width";
 			label = document.createElement("label");
@@ -777,10 +781,10 @@ function change_property(object_id, property_dom) {
 }
 
 function change_id(args) {
-	var object_id = args[0];
-	var input_id = args[1];
+	let object_id = args[0];
+	let input_id = args[1];
 	
-	var new_id = document.getElementById(input_id).value;
+	let new_id = document.getElementById(input_id).value;
 	if (new_id === "") return; // stop here if the input is empty (won't change the id and will keep the popup active)
 
 	// Change in the objects array (JS)
@@ -793,7 +797,7 @@ function change_id(args) {
 }
 
 function expand(object_id) {
-	var object_dom = document.getElementById(object_id);
+	let object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "displayed";
 	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].className = "active";
 	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].onclick = function() { reduce(object_id); };
@@ -801,7 +805,7 @@ function expand(object_id) {
 }
 
 function reduce(object_id) {
-	var object_dom = document.getElementById(object_id);
+	let object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "hidden";
 	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].className = "";
 	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].onclick = function() { expand(object_id); };
@@ -811,18 +815,18 @@ function reduce(object_id) {
 window.onresize = update_section_size;
 
 function update_section_size() {
-	var section = document.getElementsByTagName("section")[0];
-	var aside = document.getElementsByTagName("aside")[0];
+	let section = document.getElementsByTagName("section")[0];
+	let aside = document.getElementsByTagName("aside")[0];
 
 	// section margin right = aside.(margin left * 2 + margin right + padding left + padding right + width)
 	// aside.offsetWidth = aside.paddings + aside.width
-	var aside_style = aside.currentStyle || window.getComputedStyle(aside);
-	var aside_size = parseInt(aside_style.marginLeft) * 2 + parseInt(aside_style.marginRight) + aside.offsetWidth; 
+	let aside_style = aside.currentStyle || window.getComputedStyle(aside);
+	let aside_size = parseInt(aside_style.marginLeft) * 2 + parseInt(aside_style.marginRight) + aside.offsetWidth; 
 	section.style.marginRight = aside_size + "px";
 }
 
 function customize(object_id) {
-	var object = objects_array[object_id];
+	let object = objects_array[object_id];
 
 	// Set the object as visible
 	object.setVisible(true);
@@ -850,7 +854,7 @@ function remove(object_id) {
 	objects_array.splice(objects_array.indexOf(object_id), 1);
 
 	// Remove from the image objects array (JS)
-	var pos = objects_image_id.indexOf(object_id);
+	let pos = objects_image_id.indexOf(object_id);
 	if (pos > -1) {
 		objects_image_id.splice(pos, 1);
 	}*/
@@ -870,30 +874,30 @@ function remove(object_id) {
 function export_xml() {
 	console.log("--------------------------------\n");
 
-	var animation_node = document.createElement("animation");
+	let animation_node = document.createElement("animation");
 
 	// init node
-	var init_node = document.createElement("init");
-	var start_button = document.createElement("start_button");
+	let init_node = document.createElement("init");
+	let start_button = document.createElement("start_button");
 	start_button.setAttribute("present", document.getElementById("start_button").value);
 	init_node.appendChild(start_button);
 	animation_node.appendChild(init_node);
 
 	// speed node
-	var speed_node = document.createElement("speed");
+	let speed_node = document.createElement("speed");
 	speed_node.innerHTML = document.getElementById("speed").value;
 	animation_node.appendChild(speed_node);
 
 	// background image node
 	if (document.getElementById("background").value != "") {
-		var background_node = document.createElement("background");
+		let background_node = document.createElement("background");
 		background_node.innerHTML = document.getElementById("background").value;
 		animation_node.appendChild(background_node);
 	}
 
 	// objects node
-	var objects_node = document.createElement("objects");
-	for (var object of objects_array) {
+	let objects_node = document.createElement("objects");
+	for (let object of objects_array) {
 		if (removed_objects_identifier.indexOf(object.getId()) == -1) {
 			console.log(object.toXml());
 			objects_node.appendChild(object.toXml());
@@ -902,12 +906,12 @@ function export_xml() {
 	animation_node.appendChild(objects_node);
 
 	// programs node
-	var programs_node = document.createElement("programs");
+	let programs_node = document.createElement("programs");
 	animation_node.appendChild(programs_node);
 
 	// Serialize the animation XML tree
-	var serializer = new XMLSerializer();
-	var animation_string = serializer.serializeToString(animation_node);
+	let serializer = new XMLSerializer();
+	let animation_string = serializer.serializeToString(animation_node);
 
 	// Display the serialized XML tree in a file
 	document.getElementById("xml_output").innerHTML = animation_string;
@@ -915,7 +919,7 @@ function export_xml() {
 }
 
 function ask_popup(title, contents, callback, args) {
-	var popup = document.getElementById("ask_popup");
+	let popup = document.getElementById("ask_popup");
 
 	popup.getElementsByTagName("h2")[0].innerHTML = title;
 	popup.getElementsByTagName("p")[0].innerHTML = contents;
@@ -928,31 +932,31 @@ function ask_popup(title, contents, callback, args) {
  * P5.js drawing
  */
 
-var canvas;
-var drawing_dom = document.getElementById("drawing");
+let canvas;
+let drawing_dom = document.getElementById("drawing");
 
 function draw_animation() {
-	var layers = new Set();
+	let layers = new Set();
 
 	new p5(function(draw_ref) {
 
-		var BG_IMAGE = null;
+		let BG_IMAGE = null;
 
 		draw_ref.preload = function() { // preload function runs once
 			// Load the backround image
-			var bg_image = document.getElementById("background").value;
+			let bg_image = document.getElementById("background").value;
 			if (bg_image != "") {
 				BG_IMAGE = draw_ref.loadImage(bg_image);
 			}
 			
 			// Load animation's images
-			for (var id of objects_image_id) {
-				var object = objects_array[id];
+			for (let id of objects_image_id) {
+				let object = objects_array[id];
 				object.loadImage(draw_ref);
 			}
 
 			// Retrieve all layers in a set
-			for (var object of objects_array) {
+			for (let object of objects_array) {
 				layers.add(object.getLayer());
 			}
 
@@ -983,8 +987,8 @@ function draw_animation() {
 			}
 
 			// Display objects of each layer, if they're set as visible
-			for (var layer of layers) {
-				for (var object of objects_array) {
+			for (let layer of layers) {
+				for (let object of objects_array) {
 					if (object.getLayer() == layer && object.getVisible()) {
 						object.draw(draw_ref);
 					}
