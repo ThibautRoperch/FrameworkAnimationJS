@@ -1,6 +1,18 @@
 import { Animation } from './AnimationFramework/Animation.js';
 
+import { Ellipse } from './AnimationFramework/Objects/Ellipse.js';
+import { Circle } from './AnimationFramework/Objects/Circle.js';
+import { Grid } from './AnimationFramework/Objects/Grid.js';
+import { ImageFile } from './AnimationFramework/Objects/ImageFile.js';
+import { Landmark } from './AnimationFramework/Objects/Landmark.js';
+import { Polygon } from './AnimationFramework/Objects/Polygon.js';
+import { Rectangle } from './AnimationFramework/Objects/Rectangle.js';
+import { Text } from './AnimationFramework/Objects/Text.js';
+
+import { SetProperty } from './AnimationFramework/Instructions/SetProperty.js';
+
 import { ANIMATION_FILES_INCLUDED, OBJECT_CLASSES, INSTRUCTION_CLASSES } from './AnimationFramework/animation_controller.js';
+import { DEFAULT_STATE } from './AnimationFramework/Objects/AnimatedObject.js';
 
 var last_id = -1;
 var objects_list = document.getElementById("objects");
@@ -8,6 +20,20 @@ var objects_array = new Array();
 var instructions_array = new Array();
 var objects_image_id = new Array();
 var removed_objects_identifier = new Array();
+
+document.getElementById("openAnimation").addEventListener("click", ask_popup, "Change object identifier", "Choose the XML file containing the animation to open.<input id=\'animation_file\' type=\'text\' placeholder=\'benchmark.xml\' required />', import_xml, 'animation_file')");
+document.getElementById("exportAnimation").addEventListener('click', export_xml);
+document.getElementById("addText").addEventListener('click', function(){new_object('Text')});
+document.getElementById("addImage").addEventListener('click', function(){new_object('ImageFile')});
+document.getElementById("addRectangle").addEventListener('click', function(){new_object('Rectangle')});
+document.getElementById("addPolygon").addEventListener('click', function(){new_object('Polygon')});
+document.getElementById("addCircle").addEventListener('click', function(){new_object('Circle')});
+document.getElementById("addEllipse").addEventListener('click', function(){new_object('Ellipse')});
+document.getElementById("addLandmark").addEventListener('click', function(){new_object('Landmark')});
+document.getElementById("addGrid").addEventListener('click', function(){new_object('Grid')});
+document.getElementById("width").onclick = "draw_animation()";
+document.getElementById("height").onclick = "draw_animation()";
+document.getElementById("background").onclick = "draw_animation()";
 
 wait_for_includes();
 function wait_for_includes() {
@@ -98,7 +124,7 @@ function import_xml(input_id) {
 	document.getElementById("ask_popup").className = "";
 }
 
-function new_object(object_dom) {
+function new_object(object_type) {
 	let obj_id = ++last_id;
 	let object;
 
@@ -111,7 +137,7 @@ function new_object(object_dom) {
 				id.innerHTML = "<b>Identifier :</b> " + obj_id;
 				spoiler.appendChild(id);
 			let type = document.createElement("type");
-				type.innerHTML = "<b>Type :</b> " + object_dom.innerHTML;
+				type.innerHTML = "<b>Type :</b> " + object_type;
 				spoiler.appendChild(type);
 			let arrow = document.createElement("arrow");
 				arrow.innerHTML = "&#11167;";
@@ -154,12 +180,12 @@ function new_object(object_dom) {
 		// Properties
 		let article1 = document.createElement("article");
 			// x
-			property = document.createElement("property");
+			let property = document.createElement("property");
 				property.className = "x";
-				label = document.createElement("label");
+				let label = document.createElement("label");
 					label.innerHTML = "x";
 					property.appendChild(label);
-				input = document.createElement("input");
+				let input = document.createElement("input");
 					input.type = "number";
 					input.placeholder = x;
 					input.onchange = function() { change_property(obj_id, this); };
@@ -197,7 +223,7 @@ function new_object(object_dom) {
 					property.appendChild(label);
 				input = document.createElement("select");
 					input.onchange = function() { change_property(obj_id, this); };
-						option = document.createElement("option");
+						let option = document.createElement("option");
 							option.value = "true";
 							option.innerHTML = "True";
 							option.selected = "selected";
@@ -313,8 +339,8 @@ function new_object(object_dom) {
 		let article2 = document.createElement("article");
 			let instructions = document.createElement("instructions");
 				let categories = ["Position", "Move", "Interact", "Instruction", "Change property"];
-				for (cat of categories) {
-					button = document.createElement("button");
+				for (let cat of categories) {
+					let button = document.createElement("button");
 						button.onclick = function() { display_instructions(this); };
 						button.innerHTML = cat;
 						instructions.appendChild(button);
@@ -325,7 +351,8 @@ function new_object(object_dom) {
 	objects_list.appendChild(li);
 
 	// switch case
-	switch (object_dom.innerHTML) {
+	switch (object_type) {
+
 		case "Text":
 			// text
 			property = document.createElement("property");
@@ -596,7 +623,7 @@ function new_object(object_dom) {
 			break;
 		case "Ellipse":
 			// width
-			let width = 60;
+			width = 60;
 			property = document.createElement("property");
 			property.className = "width";
 			label = document.createElement("label");
@@ -610,7 +637,7 @@ function new_object(object_dom) {
 				property.appendChild(input);
 			article1.appendChild(property);
 			// height
-			let height = 40;
+			height = 40;
 			property = document.createElement("property");
 			property.className = "height";
 			label = document.createElement("label");
