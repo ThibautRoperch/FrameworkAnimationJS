@@ -7,7 +7,7 @@ import { Animation } from './Animation.js';
 
 export let OBJECT_CLASSES = ["AnimatedObject", "Ellipse", "Circle", "Grid", "ImageFile", "Landmark", "Polygon", "Rectangle", "StartButton", "Text"];
 export let INSTRUCTION_CLASSES = ["Instruction", "SimpleMovement", "Blink", "Center", "CenterX", "CenterY", "Click",
- "Down", "GoTo", "Label", "Left", "MoveTo", "Right", "SetProperty", "Sleep", "State", "Stop", "Trigger", "Up", "Wait"];
+	"Down", "GoTo", "Label", "Left", "MoveTo", "Right", "SetProperty", "Sleep", "State", "Stop", "Trigger", "Up", "Wait"];
 
 /**********************
  * Global variables
@@ -137,32 +137,9 @@ export function speed_animation(speed) {
 }
 
 function include_animation_files(path) {
-	//path += "/";
-	let scripts = [
-		// p5.js
-		"https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js",
-		// Animation
-		//path + "Animation.js"
-	];
-
-	
-	// Instructions
-	/*for (let instr_cl of INSTRUCTION_CLASSES) {
-		//import { instr_cl } from path + "Instructions/" + instr_cl + ".js";
-		//scripts.push(path + "Instructions/" + instr_cl + ".js");
-	}
-
-	// Objects
-	for (let obj_cl of OBJECT_CLASSES) {
-		//scripts.push(path + "Objects/" + obj_cl + ".js");
-	}*/
-	
-
-	for (let s of scripts) {
-		let script = document.createElement("script");
-		script.src = s;
-		document.lastChild.appendChild(script);
-	}
+	let script = document.createElement("script");
+	script.src = 'https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js';
+	document.lastChild.appendChild(script);
 
 	ANIMATION_FILES_INCLUDED = true;
 }

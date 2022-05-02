@@ -1,6 +1,6 @@
 import { speed_animation, parseIntArray } from './animation_controller.js';
 
-import { DEFAULT_STATE, WAITING_CLICK_STATE, SLEEPING_STATE, MOVING_STATE , AnimatedObject } from './Objects/AnimatedObject.js';
+import { DEFAULT_STATE, WAITING_CLICK_STATE, SLEEPING_STATE, MOVING_STATE, AnimatedObject } from './Objects/AnimatedObject.js';
 
 import { Blink } from './Instructions/Blink.js';
 import { Center } from './Instructions/Center.js';
@@ -41,7 +41,7 @@ export class Animation {
 
     constructor(source_file, parent, width, height) {
         this.source_file = source_file; // path of the XML source file
-        
+
         this.parent = parent; // HTML node containing the canevas
         this.width = width; // width of the canevas, in px
         this.height = height; // height of the canevas, in px
@@ -50,7 +50,7 @@ export class Animation {
         this.programs = new Map() // associative array containing instructions' programs, as object_identifier : array of Instruction elements
         this.layers = new Set(); // set containing the differents objects' layers
         this.objects_image = new Array(); // array containing image objects
-        
+
         this.canvas = null;
         this.bg_image = null; // path of the background image (can be "" if there isn't background image)
         this.loop_delay = speed_animation("normal"); // delay between two intruction's move
@@ -74,7 +74,7 @@ export class Animation {
     getBgImage() {
         return this.bg_image;
     }
-    
+
     getObjects() {
         return this.objects;
     }
@@ -89,7 +89,7 @@ export class Animation {
         error.style.textAlign = "center";
         error.style.color = "gray";
         this.parent.appendChild(error);
-    }       
+    }
 
     /**
      * Display a loading message while the objects are beeing created
@@ -175,7 +175,7 @@ export class Animation {
                     let width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                     let height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     let halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
-					let valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
+                    let valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
                     new_object = new Text(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
                 } else if (type == "object_image") {
                     let width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
@@ -241,86 +241,110 @@ export class Animation {
                     // Retrieve the instruction's type
                     let type = read_instruction.nodeName;
                     // Retrieve the others specific attributes of the instruction and create the associated instruction
-                    if (type == "setx") {
-                        let x = read_instruction.getAttribute("x"); // don't parse to an int, already did in SetProperty.execution()
-                        new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "x", x);
-                    } else if (type == "sety") {
-                        let y = read_instruction.getAttribute("y");
-                        new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "y", y);
-                    } else if (type == "setxy") {
-                        let x = read_instruction.getAttribute("x");
-                        let y = read_instruction.getAttribute("y");
-                        new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "x", x);
-                        program.push(new_instruction);
-                        new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "y", y);
-                    } else if (type == "visible") {
-                        let value = read_instruction.getAttribute("value"); // don't parse to a boolean, already did in SetProperty.execution()
-                        new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "visible", value);
-                    } else if (type == "click") {
-                        new_instruction = new Click(this.objects.get(object_id));
-                    } else if (type == "label") {
-                        let value = read_instruction.getAttribute("value");
-                        new_instruction = new Label(null, value);
-                    } else if (type == "moveto") {
-                        let x = parseInt(read_instruction.getAttribute("x"));
-                        let y = parseInt(read_instruction.getAttribute("y"));
-                        let dx = parseInt(read_instruction.getAttribute("dx"));
-                        let dy = parseInt(read_instruction.getAttribute("dy"));
-                        let delay = parseInt(read_instruction.getAttribute("delay"));
-                        new_instruction = new MoveTo(this.objects.get(object_id), x, y, dx, dy, delay, this.loop_delay);
-                    } else if (type == "wait") {
-                        let value = read_instruction.getAttribute("value");
-                        new_instruction = new Wait(this.objects.get(object_id), value);
-                    } else if (type == "sleep") {
-                        let value = parseInt(read_instruction.getAttribute("value"));
-                        new_instruction = new Sleep(this.objects.get(object_id), value, this.loop_delay);
-                    } else if (type == "state") {
-                        console.log("[Animation.js] Attention, instruction state dépréciée");
-                        let value = read_instruction.getAttribute("value");
-                        new_instruction = new State(this.objects.get(object_id), value);
-                    } else if (type == "trigger") {
-                        let object = read_instruction.getAttribute("object");
-                        let value = read_instruction.getAttribute("value");
-                        new_instruction = new Trigger(this.objects.get(object_id), this.objects.get(object), value);
-                    } else if (type == "goto") {
-                        let value = read_instruction.getAttribute("value");
-                        new_instruction = new GoTo(null, value);
-                    } else if (type == "up") {
-                        let y = parseInt(read_instruction.getAttribute("y"));
-                        let dy = parseInt(read_instruction.getAttribute("dy"));
-                        new_instruction = new Up(this.objects.get(object_id), y, dy, this.loop_delay);
-                    } else if (type == "down") {
-                        let y = parseInt(read_instruction.getAttribute("y"));
-                        let dy = parseInt(read_instruction.getAttribute("dy"));
-                        new_instruction = new Down(this.objects.get(object_id), y, dy, this.loop_delay);
-                    } else if (type == "left") {
-                        let x = parseInt(read_instruction.getAttribute("x"));
-                        let dx = parseInt(read_instruction.getAttribute("dx"));
-                        new_instruction = new Left(this.objects.get(object_id), x, dx, this.loop_delay);
-                    } else if (type == "right") {
-                        let x = parseInt(read_instruction.getAttribute("x"));
-                        let dx = parseInt(read_instruction.getAttribute("dx"));
-                        new_instruction = new Right(this.objects.get(object_id), x, dx, this.loop_delay);
-                    } else if (type == "angle") {
-                        let degrees = parseInt(read_instruction.getAttribute("degrees"));
-                        new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "angle", degrees);
-                    } else if (type == "setproperty") {
-                        let object = read_instruction.getAttribute("object");
-                        let property = read_instruction.getAttribute("property");
-                        let value = read_instruction.getAttribute("value");
-                        new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object), property, value);
-                    } else if (type == "blink") {
-                        let times = parseInt(read_instruction.getAttribute("times"));
-                        let delay = parseInt(read_instruction.getAttribute("delay"));
-                        new_instruction = new Blink(this.objects.get(object_id), times, delay, this.loop_delay);
-                    } else if (type == "stop") {
-                        new_instruction = new Stop(null);
-                    } else if (type == "center") {
-                        new_instruction = new Center(this.objects.get(object_id));
-                    } else if (type == "centerx") {
-                        new_instruction = new CenterX(this.objects.get(object_id));
-                    } else if (type == "centery") {
-                        new_instruction = new CenterY(this.objects.get(object_id));
+                    switch (type) {
+                        case 'setx':
+                            var x = read_instruction.getAttribute("x"); // don't parse to an int, already did in SetProperty.execution()
+                            new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "x", x);
+                            break;
+                        case 'sety':
+                            var y = read_instruction.getAttribute("y");
+                            new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "y", y);
+                            break;
+                        case 'setxy':
+                            var x = read_instruction.getAttribute("x");
+                            var y = read_instruction.getAttribute("y");
+                            new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "x", x);
+                            program.push(new_instruction);
+                            new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "y", y);
+                            break;
+                        case 'visible':
+                            var value = read_instruction.getAttribute("value"); // don't parse to a boolean, already did in SetProperty.execution()
+                            new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "visible", value);
+                            break;
+                        case 'click':
+                            new_instruction = new Click(this.objects.get(object_id));
+                            break;
+                        case 'label':
+                            var value = read_instruction.getAttribute("value");
+                            new_instruction = new Label(null, value);
+                            break;
+                        case 'moveto':
+                            var x = parseInt(read_instruction.getAttribute("x"));
+                            var y = parseInt(read_instruction.getAttribute("y"));
+                            var dx = parseInt(read_instruction.getAttribute("dx"));
+                            var dy = parseInt(read_instruction.getAttribute("dy"));
+                            var delay = parseInt(read_instruction.getAttribute("delay"));
+                            new_instruction = new MoveTo(this.objects.get(object_id), x, y, dx, dy, delay, this.loop_delay);
+                            break;
+                        case 'wait':
+                            var value = read_instruction.getAttribute("value");
+                            new_instruction = new Wait(this.objects.get(object_id), value);
+                            break;
+                        case 'sleep':
+                            var value = parseInt(read_instruction.getAttribute("value"));
+                            new_instruction = new Sleep(this.objects.get(object_id), value, this.loop_delay);
+                            break;
+                        case 'state':
+                            console.log("[Animation.js] Attention, instruction state dépréciée");
+                            var value = read_instruction.getAttribute("value");
+                            new_instruction = new State(this.objects.get(object_id), value);
+                            break;
+                        case 'trigger':
+                            var object = read_instruction.getAttribute("object");
+                            var value = read_instruction.getAttribute("value");
+                            new_instruction = new Trigger(this.objects.get(object_id), this.objects.get(object), value);
+                            break;
+                        case 'goto':
+                            var value = read_instruction.getAttribute("value");
+                            new_instruction = new GoTo(null, value);
+                            break;
+                        case 'up':
+                            var y = parseInt(read_instruction.getAttribute("y"));
+                            var dy = parseInt(read_instruction.getAttribute("dy"));
+                            new_instruction = new Up(this.objects.get(object_id), y, dy, this.loop_delay);
+                            break;
+                        case 'down':
+                            var y = parseInt(read_instruction.getAttribute("y"));
+                            var dy = parseInt(read_instruction.getAttribute("dy"));
+                            new_instruction = new Down(this.objects.get(object_id), y, dy, this.loop_delay);
+                            break;
+                        case 'left':
+                            var x = parseInt(read_instruction.getAttribute("x"));
+                            var dx = parseInt(read_instruction.getAttribute("dx"));
+                            new_instruction = new Left(this.objects.get(object_id), x, dx, this.loop_delay);
+                            break;
+                        case 'right':
+                            var x = parseInt(read_instruction.getAttribute("x"));
+                            var dx = parseInt(read_instruction.getAttribute("dx"));
+                            new_instruction = new Right(this.objects.get(object_id), x, dx, this.loop_delay);
+                            break;
+                        case 'angle':
+                            var degrees = parseInt(read_instruction.getAttribute("degrees"));
+                            new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object_id), "angle", degrees);
+                            break;
+                        case 'setproperty':
+                            var object = read_instruction.getAttribute("object");
+                            var property = read_instruction.getAttribute("property");
+                            var value = read_instruction.getAttribute("value");
+                            new_instruction = new SetProperty(this.objects.get(object_id), this.objects.get(object), property, value);
+                            break;
+                        case 'blink':
+                            var times = parseInt(read_instruction.getAttribute("times"));
+                            var delay = parseInt(read_instruction.getAttribute("delay"));
+                            new_instruction = new Blink(this.objects.get(object_id), times, delay, this.loop_delay);
+                            break;
+                        case 'stop':
+                            new_instruction = new Stop(null);
+                            break;
+                        case 'center':
+                            new_instruction = new Center(this.objects.get(object_id));
+                            break;
+                        case 'centerx':
+                            new_instruction = new CenterX(this.objects.get(object_id));
+                            break;
+                        case 'centery':
+                            new_instruction = new CenterY(this.objects.get(object_id));
+                            break;
                     }
                     program.push(new_instruction);
                 }
@@ -349,7 +373,7 @@ export class Animation {
 
         let next_instruction = instruction_number; // the next instruction is by default the current one
         let continue_execution = true; // this program will by default continue
-        
+
         // Execute the instruction if the state of the object is the default one
         if (!this.start_button.getPresent() && this.objects.get(object_id).getState() == DEFAULT_STATE) {
             let instruction_type = instruction.constructor.name;
@@ -369,12 +393,12 @@ export class Animation {
         }
 
         if (continue_execution) {
-			re_execute(this);
-			function re_execute(animation) {
-				setTimeout(function() {
-					animation.execute_instructions(object_id, next_instruction, labels);
-				}, 1);
-			}
+            re_execute(this);
+            function re_execute(animation) {
+                setTimeout(function () {
+                    animation.execute_instructions(object_id, next_instruction, labels);
+                }, 1);
+            }
         }
     }
 
@@ -383,8 +407,8 @@ export class Animation {
         if (this.bg_image != "") {
             this.bg_image = drawing.loadImage(this.bg_image);
         }
-		
-		// Load animation's images
+
+        // Load animation's images
         for (let object_id of this.objects_image) {
             this.objects.get(object_id).loadImage(drawing);
         }
@@ -403,7 +427,7 @@ export class Animation {
     }
 
     draw(drawing) {
-		// Display the background image
+        // Display the background image
         if (this.bg_image != null) {
             drawing.background(this.bg_image);
         }
@@ -436,6 +460,6 @@ export class Animation {
         if (this.start_button.getPresent() && this.start_button.isClicked(drawing.mouseX, drawing.mouseY)) {
             this.start_button.setPresent(false);
         }
-	}
+    }
 
 }
