@@ -125,7 +125,7 @@ export class Landmark extends AnimatedObject {
             //texte y (Ca serait bien d'orienter le texte)
             axis1 = drawing.createVector(this.x - this.width/2, this.y + this.height + 25);
             //axis2 = drawing.createVector(this.x - this.width/2, this.y + this.height + 40);
-            //for(i = 0; i>-180; --i) {
+            //for(let i = 0; i>-180; --i) {
             //drawing.push();
             drawing.translate(this.x - this.width + 10, this.y + this.height/2 );
             drawing.rotate(-90);
