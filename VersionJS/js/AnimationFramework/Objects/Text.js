@@ -5,8 +5,8 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Text extends AnimatedObject {
 	
-	constructor(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment) {
-        super(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
+	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment) {
+        super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
 		this.text = text;
 		this.font = font; // FontName, FontSize, FontWeight
 		this.color = color; // r, g, b
@@ -119,8 +119,8 @@ export class Text extends AnimatedObject {
         text.innerHTML = this.id;
         text.setAttribute("x", this.x);
         text.setAttribute("y",this.y);
-        text.setAttribute("bgcolor", this.bgcolor); // r, g, b
-        text.setAttribute("bgtransparent", this.bgtransparent);
+        text.setAttribute("background_color", this.background_color); // r, g, b
+        text.setAttribute("background_transparent", this.background_transparent);
         text.setAttribute("border_color", this.border_color); // r, g, b
         text.setAttribute("border_transparency", this.border_transparency);
         text.setAttribute("border_size", this.border_size);
@@ -140,7 +140,7 @@ export class Text extends AnimatedObject {
     }
 
     clone() {
-		return new Text(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.padding, this.width, this.height, this.halignment, this.valignment);
+		return new Text(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.padding, this.width, this.height, this.halignment, this.valignment);
 	}
 	
 }

@@ -22,11 +22,11 @@ export class SetProperty extends Instruction {
 			case "y":
 				this.target.setY(parseInt(this.value) | 0);
 				break;
-			case "bgcolor":
-				this.target.setBgcolor(parseIntArray(this.value));
+			case "background_color":
+				this.target.setBackground_color(parseIntArray(this.value));
 				break;
-			case "bgtransparent":
-				this.target.setBgtransparent(this.value == "true" | false);
+			case "background_transparent":
+				this.target.setBackground_transparent(this.value == "true" | false);
 				break;
 			case "border_color":
 				this.target.setBorder_color(parseIntArray(this.value));

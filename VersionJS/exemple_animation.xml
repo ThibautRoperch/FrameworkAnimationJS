@@ -8,8 +8,8 @@
     <object_text
       text="click this text@to start"
       font="Courier,12,bold"
-      bgtransparent="false"
-      bgcolor="255,255,255"
+      background_transparent="false"
+      background_color="255,255,255"
       color="0,0,0"
       border_color="0,0,128"
       layer="1">Texte</object_text>
@@ -24,8 +24,8 @@
       coord_x="10,10,0,15,30,20,20,10"
       coord_y=" 0,10,10,20,10,10,0,0"
       border_color="255,0,0"
-      bgcolor="0,128,0"
-      bgtransparent="false"
+      background_color="0,128,0"
+      background_transparent="false"
       border_transparency="false"
       visible="false"
     >Polygone</object_polygon>
@@ -43,11 +43,11 @@
         value="Now click on ship@to make it move" />
       <wait value="ship_displayed" />
       <trigger object="Polygone" value="appear" />
-      <setproperty object="Texte" property="bgcolor" value="250,0,0" />
+      <setproperty object="Texte" property="background_color" value="250,0,0" />
       <setproperty object="Texte" property="text"
         value="Now click on arrow@to make it move" />
       <wait value="arrow_displayed" />
-      <setproperty object="Texte" property="bgcolor" value="0,240,0" />
+      <setproperty object="Texte" property="background_color" value="0,240,0" />
       <setproperty object="Texte" property="text"
         value="Now click here@to stop animation" />
       <click />

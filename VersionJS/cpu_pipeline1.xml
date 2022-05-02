@@ -8,215 +8,215 @@
     <object_text 	
       text="Click on i1 to start" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,0,0">message</object_text>
 
     <object_text 	
       text="i1" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="255,255,255"
-      bgcolor="250,245,250">I1</object_text>
+      background_color="250,245,250">I1</object_text>
 
     <object_text 	
       text="F1" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,0,0"
-      bgcolor="250,245,250">P1</object_text>
+      background_color="250,245,250">P1</object_text>
 
     <object_text 	
       text="instruction 1@completed@after 5 ns" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,0,128"
-      bgcolor="250,245,250">message1</object_text>
+      background_color="250,245,250">message1</object_text>
 
     <object_text 	
       text="i2" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="255,255,255"
-      bgcolor="250,245,250">I2</object_text>
+      background_color="250,245,250">I2</object_text>
 
     <object_text 	
       text="F2" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,0,0"
-      bgcolor="250,245,250">P2</object_text>
+      background_color="250,245,250">P2</object_text>
 
     <object_text 	
       text="instruction 2@completed@after 10 ns" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,0,128"
-      bgcolor="250,245,250">message2</object_text>
+      background_color="250,245,250">message2</object_text>
 
     <object_text 	
       text="i3" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="255,255,255"
-      bgcolor="250,245,250">I3</object_text>
+      background_color="250,245,250">I3</object_text>
 
     <object_text 	
       text="F3" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,0,0"
-      bgcolor="250,245,250">P3</object_text>
+      background_color="250,245,250">P3</object_text>
 
     <object_text 	
       text="instruction 3@completed@after 15 ns" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,0,128"
-      bgcolor="250,245,250">message3</object_text>
+      background_color="250,245,250">message3</object_text>
 
 
     <object_text 	
       text="Fetch" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="82,82,246"
-      bgcolor="250,245,250">FETCH</object_text>
+      background_color="250,245,250">FETCH</object_text>
 
     <object_text 	
       text="Decode" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,204,255"
-      bgcolor="250,245,250">DECODE</object_text>
+      background_color="250,245,250">DECODE</object_text>
 
     <object_text 	
       text="Load Op" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="108,234,170"
-      bgcolor="250,245,250">LOAD</object_text>
+      background_color="250,245,250">LOAD</object_text>
 
     <object_text 	
       text="Execute" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,128,0"
-      bgcolor="250,245,250">EXECUTE</object_text>
+      background_color="250,245,250">EXECUTE</object_text>
 
     <object_text 	
       text="Write" 
       font="Courier,12,bold"
-      bgtransparent="true"
+      background_transparent="true"
       color="0,255,0"
-      bgcolor="250,245,250">WRITE</object_text>
+      background_color="250,245,250">WRITE</object_text>
 
     <object_text
       text="F1"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="82,82,246">F1</object_text>
+      background_color="82,82,246">F1</object_text>
 
     <object_text
       text="D1"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="0,204,255">D1</object_text>
+      background_color="0,204,255">D1</object_text>
 
     <object_text
       text="L1"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="108,234,170">L1</object_text>
+      background_color="108,234,170">L1</object_text>
 
     <object_text
       text="E1"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="0,128,0">E1</object_text>
+      background_color="0,128,0">E1</object_text>
 
     <object_text
       text="W1"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="0,255,0">W1</object_text>
+      background_color="0,255,0">W1</object_text>
 
 
     <object_text
       text="F2"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="82,82,246">F2</object_text>
+      background_color="82,82,246">F2</object_text>
 
     <object_text
       text="D2"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="0,204,255">D2</object_text>
+      background_color="0,204,255">D2</object_text>
 
     <object_text
       text="L2"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="108,234,170">L2</object_text>
+      background_color="108,234,170">L2</object_text>
 
     <object_text
       text="E2"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="0,128,0">E2</object_text>
+      background_color="0,128,0">E2</object_text>
 
     <object_text
       text="W2"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="0,255,0">W2</object_text>
+      background_color="0,255,0">W2</object_text>
 
 
 
     <object_text
       text="F3"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="82,82,246">F3</object_text>
+      background_color="82,82,246">F3</object_text>
 
     <object_text
       text="D3"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="0,204,255">D3</object_text>
+      background_color="0,204,255">D3</object_text>
 
     <object_text
       text="L3"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="108,234,170">L3</object_text>
+      background_color="108,234,170">L3</object_text>
 
     <object_text
       text="E3"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="0,128,0">E3</object_text>
+      background_color="0,128,0">E3</object_text>
 
     <object_text
       text="W3"
       font="Courier,12,bold"
-      bgtransparent="false"
+      background_transparent="false"
       color="255,255,255"
-      bgcolor="0,255,0">W3</object_text>
+      background_color="0,255,0">W3</object_text>
 
   </objects>
   

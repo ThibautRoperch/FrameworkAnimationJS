@@ -10,12 +10,12 @@ export let MOVING_STATE = "moving";
 
 export class AnimatedObject {
    
-    constructor(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle) {
+    constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle) {
         this.id = id;
         this.x = x;
         this.y = y;
-        this.bgcolor = bgcolor; // r, g, b
-        this.bgtransparent = bgtransparent;
+        this.background_color = background_color; // r, g, b
+        this.background_transparent = background_transparent;
         this.border_color = border_color; // r, g, b
         this.border_transparency = border_transparency;
         this.border_size = border_size;
@@ -38,12 +38,12 @@ export class AnimatedObject {
         return this.y;
     }
 
-    getBgcolor() {
-        return this.bgcolor;
+    getBackground_color() {
+        return this.background_color;
     }
 
-    getBgtransparent() {
-        return this.bgtransparent;
+    getBackground_transparent() {
+        return this.background_transparent;
     }
 
     getBorder_color() {
@@ -90,12 +90,12 @@ export class AnimatedObject {
         this.y = y;
     }
 
-    setBgcolor(bgcolor) {
-        this.bgcolor = bgcolor;
+    setBackground_color(background_color) {
+        this.background_color = background_color;
     }
     
-    setBgtransparent(bgtransparent) {
-        this.bgtransparent = bgtransparent;
+    setBackground_transparent(background_transparent) {
+        this.background_transparent = background_transparent;
     }
 
     setBorder_color(border_color) {
@@ -132,8 +132,8 @@ export class AnimatedObject {
 
     draw(drawing) {
         // Fill
-        if (this.bgtransparent) drawing.fill(0, 0);
-        else drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255); // fill([r, g, b], opacity) doesn't work :)
+        if (this.background_transparent) drawing.fill(0, 0);
+        else drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255); // fill([r, g, b], opacity) doesn't work :)
         // Border
         if (this.border_transparency) drawing.noStroke();
         else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);

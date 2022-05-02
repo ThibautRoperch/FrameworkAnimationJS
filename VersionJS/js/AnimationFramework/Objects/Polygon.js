@@ -5,8 +5,8 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Polygon extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, coord_x, coord_y) {
-        super(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
+	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, coord_x, coord_y) {
+        super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.coord_x = coord_x; // x coords' list
         this.coord_y = coord_y; // y coords' list
     }
@@ -57,8 +57,8 @@ export class Polygon extends AnimatedObject {
         polygon.innerHTML = this.id;
         polygon.setAttribute("x", this.x);
         polygon.setAttribute("y",this.y);
-        polygon.setAttribute("bgcolor", this.bgcolor);
-        polygon.setAttribute("bgtransparent", this.bgtransparent);
+        polygon.setAttribute("background_color", this.background_color);
+        polygon.setAttribute("background_transparent", this.background_transparent);
         polygon.setAttribute("border_color", this.border_color);
         polygon.setAttribute("border_transparency", this.border_transparency);
         polygon.setAttribute("border_size", this.border_size);
@@ -72,7 +72,7 @@ export class Polygon extends AnimatedObject {
     }
 
     clone() {
-        return new Polygon(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.coord_x, this.coord_y);
+        return new Polygon(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.coord_x, this.coord_y);
     }
 
 }

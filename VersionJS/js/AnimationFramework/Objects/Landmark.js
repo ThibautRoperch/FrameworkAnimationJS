@@ -5,8 +5,8 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Landmark extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y) {
-        super(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
+	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y) {
+        super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.height = height;
         this.width = width;
         this.scale_x = scale_x;
@@ -84,7 +84,7 @@ export class Landmark extends AnimatedObject {
             // Enlever la bordure pour les textes et forcer l'arrière-plan
             if (this.border_transparency) drawing.noStroke();
             else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-            drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
+            drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
             //texte x
             drawing.text(this.unit_x, this.x + this.width/2, this.y + this.height + 25);
             //texte y (Ca serait bien d'orienter le texte)
@@ -101,7 +101,7 @@ export class Landmark extends AnimatedObject {
             // Enlever la bordure pour les textes et forcer l'arrière-plan
             if (this.border_transparency) drawing.noStroke();
             else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-            drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
+            drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
             //texte x
             drawing.text(this.unit_x, this.x + this.width/2, this.y + this.width + 25);
             
@@ -119,7 +119,7 @@ export class Landmark extends AnimatedObject {
             // Enlever la bordure pour les textes et forcer l'arrière-plan
             if (this.border_transparency) drawing.noStroke();
             else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-            drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
+            drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
             //texte x
             drawing.text(this.unit_x, this.x - this.width/2, this.y + this.height + 25);
             //texte y (Ca serait bien d'orienter le texte)
@@ -138,7 +138,7 @@ export class Landmark extends AnimatedObject {
             // Enlever la bordure pour les textes et forcer l'arrière-plan
             if (this.border_transparency) drawing.noStroke();
             else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-            drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255);
+            drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
             //texte x
             drawing.text(this.unit_x, this.x + this.width/2, this.y + 25);
             //texte y (Ca serait bien d'orienter le texte)
@@ -157,8 +157,8 @@ export class Landmark extends AnimatedObject {
         landmark.innerHTML = this.id;
         landmark.setAttribute("x", this.x);
         landmark.setAttribute("y",this.y);
-        landmark.setAttribute("bgcolor", this.bgcolor); // r, g, b
-        landmark.setAttribute("bgtransparent", this.bgtransparent);
+        landmark.setAttribute("background_color", this.background_color); // r, g, b
+        landmark.setAttribute("background_transparent", this.background_transparent);
         landmark.setAttribute("border_color", this.border_color); // r, g, b
         landmark.setAttribute("border_transparency", this.border_transparency);
         landmark.setAttribute("border_size", this.border_size);
@@ -176,7 +176,7 @@ export class Landmark extends AnimatedObject {
     }
 
     clone() {
-        return new Landmark(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.scale_x, this.scale_y, this.unit_x, this.unit_y);
+        return new Landmark(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.scale_x, this.scale_y, this.unit_x, this.unit_y);
     }
 
 }
