@@ -33,14 +33,14 @@ export class Ellipse extends AnimatedObject {
 
     isClicked(x, y) {
         // Compute the distance between the ellipse center and the mouse position
-        var delta_x = this.x + (this.width / 2) - x;
-        var delta_y = this.y + (this.height / 2) - y;
-        var distance = Math.pow(delta_x / (this.width / 2), 2) + Math.pow(delta_y / (this.height / 2), 2);
+        let delta_x = this.x + (this.width / 2) - x;
+        let delta_y = this.y + (this.height / 2) - y;
+        let distance = Math.pow(delta_x / (this.width / 2), 2) + Math.pow(delta_y / (this.height / 2), 2);
         return distance <= 1;
     }
 
     toXml() {
-       var ellipse = document.createElement("object_ellipse");
+       let ellipse = document.createElement("object_ellipse");
        ellipse.innerHTML = this.id;
        ellipse.setAttribute("x", this.x);
        ellipse.setAttribute("y",this.y);

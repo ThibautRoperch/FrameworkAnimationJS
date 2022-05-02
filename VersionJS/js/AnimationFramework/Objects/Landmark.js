@@ -74,9 +74,7 @@ export class Landmark extends AnimatedObject {
         drawing.textStyle(drawing.NORMAL);
         drawing.angleMode(drawing.DEGREES);
 
-        var axis1;       //Vector utilisé pour effectuer la rotation : à placer au milieu du texte
-        var axis2;
-        var i;
+        let axis1;       //Vector utilisé pour effectuer la rotation : à placer au milieu du texte
         if(this.height > 0 && this.width > 0) {
             drawing.line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
             drawing.line(this.x, this.y + this.height, this.x, this.y);
@@ -155,7 +153,7 @@ export class Landmark extends AnimatedObject {
     }
     
     toXml() {
-        var landmark = document.createElement("object_landmark");
+        let landmark = document.createElement("object_landmark");
         landmark.innerHTML = this.id;
         landmark.setAttribute("x", this.x);
         landmark.setAttribute("y",this.y);

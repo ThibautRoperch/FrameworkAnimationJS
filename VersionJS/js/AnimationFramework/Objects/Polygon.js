@@ -30,19 +30,19 @@ export class Polygon extends AnimatedObject {
     draw(drawing) {
         super.draw(drawing);
         drawing.beginShape();
-        for (var i = 0; i < this.coord_x.length; ++i) {
+        for (let i = 0; i < this.coord_x.length; ++i) {
             drawing.vertex(this.x + this.coord_x[i], this.y + this.coord_y[i]);
         }
         drawing.endShape(drawing.CLOSE);
     }
     
     isClicked(x, y) {
-        var min_x = this.coord_x[0];
-        var max_x = this.coord_x[0];
-        var min_y = this.coord_y[0];
-        var max_y = this.coord_y[0];
+        let min_x = this.coord_x[0];
+        let max_x = this.coord_x[0];
+        let min_y = this.coord_y[0];
+        let max_y = this.coord_y[0];
 
-        for (var i = 1; i < this.coord_x.length; ++i) {
+        for (let i = 1; i < this.coord_x.length; ++i) {
             max_x = (this.coord_x[i] > max_x) ? this.coord_x[i] : max_x;
             min_x = (this.coord_x[i] < min_x) ? this.coord_x[i] : min_x;
             max_y = (this.coord_y[i] > max_y) ? this.coord_y[i] : max_y;
@@ -53,7 +53,7 @@ export class Polygon extends AnimatedObject {
     }
     
     toXml() {
-        var polygon = document.createElement("object_polygon");
+        let polygon = document.createElement("object_polygon");
         polygon.innerHTML = this.id;
         polygon.setAttribute("x", this.x);
         polygon.setAttribute("y",this.y);

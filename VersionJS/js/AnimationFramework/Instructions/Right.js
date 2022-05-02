@@ -12,7 +12,7 @@ export class Right extends SimpleMovement {
 	
 	execute() {
 		this.object.setState(MOVING_STATE);
-		var original_distance = this.distance;
+		let original_distance = this.distance;
 
 		right(this);
 		function right(instruction) {

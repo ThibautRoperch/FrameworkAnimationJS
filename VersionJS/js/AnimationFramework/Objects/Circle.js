@@ -23,14 +23,14 @@ export class Circle extends Ellipse {
 
     isClicked(x, y) {
         // Compute the distance between the circle center and the mouse position
-        var delta_x = this.x + this.radius - x;
-        var delta_y = this.y + this.radius - y;
-        var distance = Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2));
+        let delta_x = this.x + this.radius - x;
+        let delta_y = this.y + this.radius - y;
+        let distance = Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2));
         return distance <= this.radius;
     }
 
     toXml() {
-        var circle = document.createElement("object_circle");
+        let circle = document.createElement("object_circle");
         circle.innerHTML = this.id; 
         circle.setAttribute("x", this.x);
         circle.setAttribute("y",this.y);

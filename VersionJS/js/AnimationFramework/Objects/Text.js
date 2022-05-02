@@ -115,7 +115,7 @@ export class Text extends AnimatedObject {
 	}
 	
 	toXml() {
-        var text = document.createElement("object_text");
+        let text = document.createElement("object_text");
         text.innerHTML = this.id;
         text.setAttribute("x", this.x);
         text.setAttribute("y",this.y);
