@@ -52,7 +52,7 @@ export class Animation {
         this.objects_image = new Array(); // array containing image objects
 
         this.canvas = null;
-        this.bg_image = null; // path of the background image (can be "" if there isn't background image)
+        this.background = null; // path of the background image (can be "" if there isn't background image)
         this.loop_delay = speed_animation("normal"); // delay between two intruction's move
 
         this.start_button = new StartButton(this.width / 2, this.height / 2, "Click me to start", true);
@@ -71,8 +71,8 @@ export class Animation {
         }
     }
 
-    getBgImage() {
-        return this.bg_image;
+    getBackground() {
+        return this.background;
     }
 
     getObjects() {
@@ -108,6 +108,26 @@ export class Animation {
         return this.stop_animation;
     }
 
+    isValidColor(strColor) {
+        try {
+            var s = new Option().style;
+            s.color = strColor;
+            // return 'false' if color wasn't assigned
+            return s.color == strColor.toLowerCase();
+        } catch (_) {
+            return false;
+        }
+    }
+
+    isHexColor(strColor) {
+        try {
+            let RegExp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
+            return RegExp.test(strColor);
+        } catch (_) {
+            return false;
+        }
+    }
+
     readXmlFile(contents) {
         let parser = new DOMParser();
         let root = parser.parseFromString(contents, "text/xml");
@@ -137,12 +157,16 @@ export class Animation {
 
         // If the background's node exists
         if (background_node) {
-            this.bg_image = background_node.textContent;
-            // The image path is relative to the source file's one
-            let source_file_path = this.source_file.substr(0, this.source_file.lastIndexOf("/") + 1);
-            this.bg_image = source_file_path + this.bg_image;
+
+            if(!this.isValidColor(this.background) && !this.isHexColor(this.background)) {
+                this.background = background_node.textContent;
+                // The image path is relative to the source file's one
+                let source_file_path = this.source_file.substr(0, this.source_file.lastIndexOf("/") + 1);
+                this.background = source_file_path + this.background;
+                console.log(this.background);
+            }
         } else {
-            this.bg_image = "";
+            this.background = "";
         }
 
         // If the objects' node exists
@@ -404,8 +428,8 @@ export class Animation {
 
     preload(drawing) {
         // Load the backround image
-        if (this.bg_image != "") {
-            this.bg_image = drawing.loadImage(this.bg_image);
+        if (this.background != "" && !this.isValidColor(this.background) && !this.isHexColor(this.background)) {
+            this.background = drawing.loadImage(this.background);
         }
 
         // Load animation's images
@@ -427,9 +451,9 @@ export class Animation {
     }
 
     draw(drawing) {
-        // Display the background image
-        if (this.bg_image != null) {
-            drawing.background(this.bg_image);
+		// Display the background image
+        if (this.background != null) {
+            drawing.background(this.background);
         }
 
         // Display the start button if it has to

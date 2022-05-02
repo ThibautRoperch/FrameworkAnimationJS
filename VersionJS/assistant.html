@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Assistant</title>
 	<link rel="stylesheet" href="css/assistant.css">
-	<script type="module" src="js/assistant.js"></script>
+	<script type="module" src="./js/assistant.js"></script>
 </head>
 
 <body>
@@ -15,10 +15,8 @@
 
 			<div>
 				<h1>Assistant graphique</h1>
-				<a href="#"
-					onclick="ask_popup('Change object identifier', 'Choose the XML file containing the animation to open.<input id=\'animation_file\' type=\'text\' placeholder=\'benchmark.xml\' required />', import_xml, 'animation_file');">Ouvrir
-					une animation</a>
-				<a href="#" onclick="export_xml()">Exporter l'animation</a>
+				<a href="#" id="openAnimation">Ouvrir une animation</a>
+				<a href="#" id="exportAnimation">Exporter l'animation</a>
 			</div>
 
 			<div>
@@ -41,14 +39,14 @@
 				<h2>Add a new object</h2>
 
 				<objects>
-					<button onclick="new_object(this)">Text</button>
-					<button onclick="new_object(this)">ImageFile</button>
-					<button onclick="new_object(this)">Rectangle</button>
-					<button onclick="new_object(this)">Polygon</button>
-					<button onclick="new_object(this)">Circle</button>
-					<button onclick="new_object(this)">Ellipse</button>
-					<button onclick="new_object(this)">Landmark</button>
-					<button onclick="new_object(this)">Grid</button>
+					<button id="addText">Text</button>
+					<button id="addImage">ImageFile</button>
+					<button id="addRectangle">Rectangle</button>
+					<button id="addPolygon">Polygon</button>
+					<button id="addCircle">Circle</button>
+					<button id="addEllipse">Ellipse</button>
+					<button id="addLandmark">Landmark</button>
+					<button id="addGrid">Grid</button>
 				</objects>
 			</article>
 
@@ -65,11 +63,11 @@
 				<h2>Animation properties</h2>
 
 				<setting>
-					<label for="width">Width (px)</label><input onchange="draw_animation()" id="width" type="number"
+					<label for="width">Width (px)</label><input id="width" type="number"
 						value="500" />
 				</setting>
 				<setting>
-					<label for="height">Height (px)</label><input onchange="draw_animation()" id="height" type="number"
+					<label for="height">Height (px)</label><input id="height" type="number"
 						value="250" />
 				</setting>
 				<setting>
@@ -88,7 +86,7 @@
 					</select>
 				</setting>
 				<setting>
-					<label for="background">Background image</label><input onchange="draw_animation()" id="background"
+					<label for="background">Background image</label><input id="background"
 						type="text" placeholder="img/yellow_blue_linear_gradient.png" />
 				</setting>
 			</article>
