@@ -5,30 +5,30 @@
 
   <objects>
 
-    <object_text 
-      text="click this text@to start" 
+    <object_text
+      text="click this text@to start"
       font="Courier,12,bold"
-      bgtransparent="false"
-      bgcolor="255,255,255"
+      background_transparent="false"
+      background_color="255,255,255"
       color="0,0,0"
-      bocolor="0,0,128"
+      border_color="0,0,128"
       layer="1">Texte</object_text>
 
     <object_image
       image="img/spaceship.png"
       width="40"
       height="40"
-      >Image</object_image>
+    >Image</object_image>
 
     <object_polygon
       coord_x="10,10,0,15,30,20,20,10"
       coord_y=" 0,10,10,20,10,10,0,0"
-      bocolor="255,0,0"
-      bgcolor="0,128,0"
-        bgtransparent="false"
-        botransparent="false"
-        visible="false"
-      >Polygone</object_polygon>
+      border_color="255,0,0"
+      background_color="0,128,0"
+      background_transparent="false"
+      border_transparency="false"
+      visible="false"
+    >Polygone</object_polygon>
 
   </objects>
 
@@ -39,17 +39,17 @@
       <visible value="true" />
       <click />
       <trigger object="Image" value="appear" />
-      <setproperty object="Texte" property="text" 
-	value="Now click on ship@to make it move" />
+      <setproperty object="Texte" property="text"
+        value="Now click on ship@to make it move" />
       <wait value="ship_displayed" />
       <trigger object="Polygone" value="appear" />
-      <setproperty object="Texte" property="bgcolor" value="250,0,0" />
-      <setproperty object="Texte" property="text" 
-	value="Now click on arrow@to make it move" />
+      <setproperty object="Texte" property="background_color" value="250,0,0" />
+      <setproperty object="Texte" property="text"
+        value="Now click on arrow@to make it move" />
       <wait value="arrow_displayed" />
-      <setproperty object="Texte" property="bgcolor" value="0,240,0" />
-      <setproperty object="Texte" property="text" 
-	value="Now click here@to stop animation" />
+      <setproperty object="Texte" property="background_color" value="0,240,0" />
+      <setproperty object="Texte" property="text"
+        value="Now click here@to stop animation" />
       <click />
       <stop />
     </program>
@@ -61,7 +61,7 @@
       <click />
       <trigger object="Texte" value="ship_displayed" />
       <label value="loop" />
-      <moveto x="200" y="200" dx="1" dy="1" delay="2"/>
+      <moveto x="200" y="200" dx="1" dy="1" delay="2" />
       <moveto x="100" y="100" dx="5" dy="5" delay="2" />
       <goto value="loop" />
     </program>

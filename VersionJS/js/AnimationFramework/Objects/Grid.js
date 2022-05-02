@@ -5,8 +5,8 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Grid extends AnimatedObject {
     
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, lines, columns, line_height, column_width) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);
+    constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, lines, columns, line_height, column_width) {
+        super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.lines = lines;
         this.columns = columns;
         this.line_height = line_height;
@@ -65,11 +65,11 @@ export class Grid extends AnimatedObject {
         grid.innerHTML = this.id;
         grid.setAttribute("x", this.x);
         grid.setAttribute("y",this.y);
-        grid.setAttribute("bgcolor", this.bgcolor); // r, g, b
-        grid.setAttribute("bgtransparent", this.bgtransparent);
-        grid.setAttribute("bocolor", this.bocolor); // r, g, b
-        grid.setAttribute("botransparent", this.botransparent);
-        grid.setAttribute("bosize", this.bosize);
+        grid.setAttribute("background_color", this.background_color); // r, g, b
+        grid.setAttribute("background_transparent", this.background_transparent);
+        grid.setAttribute("border_color", this.border_color); // r, g, b
+        grid.setAttribute("border_transparency", this.border_transparency);
+        grid.setAttribute("border_size", this.border_size);
         grid.setAttribute("layer", this.layer);
         grid.setAttribute("visible", this.visible);
         grid.setAttribute("opacity", this.opacity);
@@ -82,7 +82,7 @@ export class Grid extends AnimatedObject {
     }
 
     clone() {
-        return new Grid(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.lines, this.columns, this.line_height, this.column_width);
+        return new Grid(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.lines, this.columns, this.line_height, this.column_width);
     }
 
 }

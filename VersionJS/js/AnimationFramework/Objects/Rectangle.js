@@ -5,8 +5,8 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Rectangle extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, round) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);
+	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, round) {
+        super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.width = width;
         this.height = height;
         this.round = round; // tl, tr, bl, br
@@ -50,11 +50,11 @@ export class Rectangle extends AnimatedObject {
         rectangle.innerHTML = this.id;
         rectangle.setAttribute("x", this.x);
         rectangle.setAttribute("y",this.y);
-        rectangle.setAttribute("bgcolor", this.bgcolor); 
-        rectangle.setAttribute("bgtransparent", this.bgtransparent);
-        rectangle.setAttribute("bocolor", this.bocolor); 
-        rectangle.setAttribute("botransparent", this.botransparent);
-        rectangle.setAttribute("bosize", this.bosize);
+        rectangle.setAttribute("background_color", this.background_color); 
+        rectangle.setAttribute("background_transparent", this.background_transparent);
+        rectangle.setAttribute("border_color", this.border_color); 
+        rectangle.setAttribute("border_transparency", this.border_transparency);
+        rectangle.setAttribute("border_size", this.border_size);
         rectangle.setAttribute("layer", this.layer);
         rectangle.setAttribute("visible", this.visible);
         rectangle.setAttribute("opacity", this.opacity);
@@ -66,7 +66,7 @@ export class Rectangle extends AnimatedObject {
     }
     
     clone() {
-        return new Text(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.round);
+        return new Text(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.round);
     }
 
 }

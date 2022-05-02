@@ -2,7 +2,7 @@
  * This instruction set the property of the target at a certain value
  */
 import { Instruction } from "./Instruction.js";
-import { speedAnim, parseIntArray } from '../animation_controller.js';
+import { speed_animation, parseIntArray } from '../animation_controller.js';
 export class SetProperty extends Instruction {
 
 	constructor(object, target, property, value) {
@@ -22,20 +22,20 @@ export class SetProperty extends Instruction {
 			case "y":
 				this.target.setY(parseInt(this.value) | 0);
 				break;
-			case "bgcolor":
-				this.target.setBgcolor(parseIntArray(this.value));
+			case "background_color":
+				this.target.setBackground_color(parseIntArray(this.value));
 				break;
-			case "bgtransparent":
-				this.target.setBgtransparent(this.value == "true" | false);
+			case "background_transparent":
+				this.target.setBackground_transparent(this.value == "true" | false);
 				break;
-			case "bocolor":
-				this.target.setBocolor(parseIntArray(this.value));
+			case "border_color":
+				this.target.setBorder_color(parseIntArray(this.value));
 				break;
-			case "botransparent":
-				this.target.setBotransparent(this.value == "true" | false);
+			case "border_transparency":
+				this.target.setBorder_transparency(this.value == "true" | false);
 				break;
-			case "bosize":
-				this.target.setBosize(parseInt(this.value) | 0);
+			case "border_size":
+				this.target.setBorder_size(parseInt(this.value) | 0);
 				break;
 			case "layer":
 				this.target.setLayer(parseInt(this.value) | 0);

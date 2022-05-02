@@ -160,11 +160,11 @@ function new_object(object_type) {
 	// init default attributs
 	let x = 0;
 	let y = 0;
-	let bgcolor = [0,0,0]; // r, g, b
-	let bgtransparent = true;
-	let bocolor = [0,0,0]; // r, g, b
-	let botransparent = true;
-	let bosize = 1;
+	let background_color = [0,0,0]; // r, g, b
+	let background_transparent = true;
+	let border_color = [0,0,0]; // r, g, b
+	let border_transparency = true;
+	let border_size = 1;
 	let state = DEFAULT_STATE;
 	let layer = 0;
 	let visible = false;
@@ -200,23 +200,23 @@ function new_object(object_type) {
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
-			// bgcolor
+			// background_color
 			property = document.createElement("property");
-				property.className = "bgcolor";
+				property.className = "background_color";
 				label = document.createElement("label");
-					label.innerHTML = "bgcolor";
+					label.innerHTML = "background_color";
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "text";
-					input.placeholder = bgcolor;
+					input.placeholder = background_color;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
-			// bgtransparent
+			// background_transparent
 			property = document.createElement("property");
-				property.className = "bgtransparent";
+				property.className = "background_transparent";
 				label = document.createElement("label");
-					label.innerHTML = "bgtransparent";
+					label.innerHTML = "background_transparent";
 					property.appendChild(label);
 				input = document.createElement("select");
 					input.onchange = function() { change_property(obj_id, this); };
@@ -231,23 +231,23 @@ function new_object(object_type) {
 							input.appendChild(option);
 					property.appendChild(input);
 				article1.appendChild(property);
-			// bocolor
+			// border_color
 			property = document.createElement("property");
-				property.className = "bocolor";
+				property.className = "border_color";
 				label = document.createElement("label");
-					label.innerHTML = "bocolor";
+					label.innerHTML = "border_color";
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "text";
-					input.placeholder = bocolor;
+					input.placeholder = border_color;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
-			// botransparent
+			// border_transparency
 			property = document.createElement("property");
-				property.className = "botransparent";
+				property.className = "border_transparency";
 				label = document.createElement("label");
-					label.innerHTML = "botransparent";
+					label.innerHTML = "border_transparency";
 					property.appendChild(label);
 				input = document.createElement("select");
 					input.onchange = function() { change_property(obj_id, this); };
@@ -262,15 +262,15 @@ function new_object(object_type) {
 							input.appendChild(option);
 					property.appendChild(input);
 				article1.appendChild(property);
-			// bosize
+			// border_size
 			property = document.createElement("property");
-				property.className = "bosize";
+				property.className = "border_size";
 				label = document.createElement("label");
-					label.innerHTML = "bosize";
+					label.innerHTML = "border_size";
 					property.appendChild(label);
 				input = document.createElement("input");
 					input.type = "number";
-					input.placeholder = bosize;
+					input.placeholder = border_size;
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
@@ -479,7 +479,7 @@ function new_object(object_type) {
 							input.appendChild(option);
 					property.appendChild(input);
 				article1.appendChild(property);
-			object = new Text(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, "", font, color, padding, width, height, halignment, valignment);
+			object = new Text(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, "", font, color, padding, width, height, halignment, valignment);
 			break;
 		case "ImageFile":
 			// width
@@ -523,7 +523,7 @@ function new_object(object_type) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new ImageFile(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, image);
+			object = new ImageFile(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, image);
 			objects_image_id.push(obj_id);
 			break;
 		case "Rectangle":
@@ -568,7 +568,7 @@ function new_object(object_type) {
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);
-			object = new Rectangle(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, round);
+			object = new Rectangle(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, round);
 			break;
 		case "Polygon":
 			// coord_x
@@ -599,7 +599,7 @@ function new_object(object_type) {
 					input.onchange = function() { change_property(obj_id, this); };
 					property.appendChild(input);
 				article1.appendChild(property);	
-			object = new Polygon(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, coord_x, coord_y); 
+			object = new Polygon(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, coord_x, coord_y); 
 			break;
 		case "Circle":
 			// radius
@@ -616,7 +616,7 @@ function new_object(object_type) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Circle(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, radius, radius); 
+			object = new Circle(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, radius, radius); 
 			break;
 		case "Ellipse":
 			// width
@@ -647,7 +647,7 @@ function new_object(object_type) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Ellipse(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height); 
+			object = new Ellipse(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height); 
 			break;
 		case "Landmark":			
 			// width
@@ -728,7 +728,7 @@ function new_object(object_type) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Landmark(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y); 
+			object = new Landmark(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y); 
 			break;
 		case "Grid":
 			// lines
@@ -783,7 +783,7 @@ function new_object(object_type) {
 				input.onchange = function() { change_property(obj_id, this); };
 				property.appendChild(input);
 			article1.appendChild(property);
-			object = new Grid(obj_id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, lines, columns, line_height, column_width);
+			object = new Grid(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, lines, columns, line_height, column_width);
 			break;
 	}
 
@@ -857,18 +857,18 @@ function customize(object_id) {
 	document.getElementById(object_id).getElementsByClassName("visible")[0].getElementsByTagName("option")[0].selected = "selected";
 
 	// Set the background object as not transparent
-	object.setBgtransparent(false);
-	document.getElementById(object_id).getElementsByClassName("bgtransparent")[0].getElementsByTagName("option")[1].selected = "selected";
+	object.setBackground_transparent(false);
+	document.getElementById(object_id).getElementsByClassName("background_transparent")[0].getElementsByTagName("option")[1].selected = "selected";
 
 	// Set the border object as not transparent
-	object.setBotransparent(false);
-	document.getElementById(object_id).getElementsByClassName("botransparent")[0].getElementsByTagName("option")[1].selected = "selected";
+	object.setBorder_transparency(false);
+	document.getElementById(object_id).getElementsByClassName("border_transparency")[0].getElementsByTagName("option")[1].selected = "selected";
 
 	// Give random colors for the background and border object
-	object.setBgcolor(rand_rgb());
-	document.getElementById(object_id).getElementsByClassName("bgcolor")[0].getElementsByTagName("input")[0].value = object.getBgcolor();
-	object.setBocolor(rand_rgb());
-	document.getElementById(object_id).getElementsByClassName("bocolor")[0].getElementsByTagName("input")[0].value = object.getBocolor();
+	object.setBackground_color(rand_rgb());
+	document.getElementById(object_id).getElementsByClassName("background_color")[0].getElementsByTagName("input")[0].value = object.getBackground_color();
+	object.setBorder_color(rand_rgb());
+	document.getElementById(object_id).getElementsByClassName("border_color")[0].getElementsByTagName("input")[0].value = object.getBorder_color();
 	
 	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }

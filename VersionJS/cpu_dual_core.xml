@@ -13,135 +13,135 @@
       font="Courier,12,bold"
       color="0,0,0"
       padding="2"
-      bgtransparent="true">Message</object_text>
+      background_transparent="true">Message</object_text>
 
     <object_text
       text="i1"
       font="Courier,12,bold"
-      bgcolor="255,127,0"
+      background_color="255,127,0"
       color="0,0,0"
       padding="2"
-      bgtransparent="false">I1</object_text>
+      background_transparent="false">I1</object_text>
 
     <object_text
       text="i2"
       font="Courier,12,bold"
-      bgcolor="255,127,0"
+      background_color="255,127,0"
       color="0,0,0"
       padding="2"
-      bgtransparent="false">I2</object_text>
+      background_transparent="false">I2</object_text>
 
     <object_text
       text="i3"
       font="Courier,12,bold"
-      bgcolor="255,127,0"
+      background_color="255,127,0"
       color="0,0,0"
       padding="2"
-      bgtransparent="false">I3</object_text>
+      background_transparent="false">I3</object_text>
 
     <object_text
       text="i4"
       font="Courier,12,bold"
-      bgcolor="255,127,0"
+      background_color="255,127,0"
       color="0,0,0"
       padding="2"
-      bgtransparent="false">I4</object_text>
+      background_transparent="false">I4</object_text>
 
     <object_text
       text="j1"
       font="Courier,12,bold"
-      bgcolor="0,102,204"
+      background_color="0,102,204"
       color="255,255,255"
       padding="2"
-      bgtransparent="false">J1</object_text>
+      background_transparent="false">J1</object_text>
 
     <object_text
       text="j2"
       font="Courier,12,bold"
-      bgcolor="0,102,204"
+      background_color="0,102,204"
       color="255,255,255"
       padding="2"
-      bgtransparent="false">J2</object_text>
+      background_transparent="false">J2</object_text>
 
     <object_text
       text="j3"
       font="Courier,12,bold"
-      bgcolor="0,102,204"
+      background_color="0,102,204"
       color="255,255,255"
       padding="2"
-      bgtransparent="false">J3</object_text>
+      background_transparent="false">J3</object_text>
 
     <object_text
       text="j4"
       font="Courier,12,bold"
-      bgcolor="0,102,204"
+      background_color="0,102,204"
       color="255,255,255"
       padding="2"
-      bgtransparent="false">J4</object_text>
+      background_transparent="false">J4</object_text>
 
     <object_text
       text="i1"
       font="Courier,12,bold"
-      bgcolor="255,127,0"
+      background_color="255,127,0"
       color="0,0,0"
       padding="2"
-      bgtransparent="false">I1D</object_text>
+      background_transparent="false">I1D</object_text>
 
     <object_text
       text="i2"
       font="Courier,12,bold"
-      bgcolor="255,127,0"
+      background_color="255,127,0"
       color="0,0,0"
       padding="2"
-      bgtransparent="false">I2D</object_text>
+      background_transparent="false">I2D</object_text>
 
     <object_text
       text="i3"
       font="Courier,12,bold"
-      bgcolor="255,127,0"
+      background_color="255,127,0"
       color="0,0,0"
       padding="2"
-      bgtransparent="false">I3D</object_text>
+      background_transparent="false">I3D</object_text>
 
     <object_text
       text="i4"
       font="Courier,12,bold"
-      bgcolor="255,127,0"
+      background_color="255,127,0"
       color="0,0,0"
       padding="2"
-      bgtransparent="false">I4D</object_text>
+      background_transparent="false">I4D</object_text>
 
     <object_text
       text="j1"
       font="Courier,12,bold"
-      bgcolor="0,102,204"
+      background_color="0,102,204"
       color="255,255,255"
       padding="2"
-      bgtransparent="false">J1D</object_text>
+      background_transparent="false">J1D</object_text>
 
     <object_text
       text="j2"
       font="Courier,12,bold"
-      bgcolor="0,102,204"
+      background_color="0,102,204"
       color="255,255,255"
       padding="2"
-      bgtransparent="false">J2D</object_text>
+      background_transparent="false">J2D</object_text>
 
     <object_text
       text="j3"
       font="Courier,12,bold"
-      bgcolor="0,102,204"
+      background_color="0,102,204"
       color="255,255,255"
       padding="2"
-      bgtransparent="false">J3D</object_text>
+      background_transparent="false">J3D</object_text>
 
     <object_text
       text="j4"
       font="Courier,12,bold"
-      bgcolor="0,102,204"
+      background_color="0,102,204"
       color="255,255,255"
       padding="2"
-      bgtransparent="false">J4D</object_text>
+      background_transparent="false">J4D</object_text>
 
   </objects>
 

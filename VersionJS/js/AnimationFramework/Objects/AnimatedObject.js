@@ -10,15 +10,15 @@ export let MOVING_STATE = "moving";
 
 export class AnimatedObject {
    
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle) {
+    constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle) {
         this.id = id;
         this.x = x;
         this.y = y;
-        this.bgcolor = bgcolor; // r, g, b
-        this.bgtransparent = bgtransparent;
-        this.bocolor = bocolor; // r, g, b
-        this.botransparent = botransparent;
-        this.bosize = bosize;
+        this.background_color = background_color; // r, g, b
+        this.background_transparent = background_transparent;
+        this.border_color = border_color; // r, g, b
+        this.border_transparency = border_transparency;
+        this.border_size = border_size;
         this.state = state;
         this.layer = layer;
         this.visible = visible;
@@ -38,24 +38,24 @@ export class AnimatedObject {
         return this.y;
     }
 
-    getBgcolor() {
-        return this.bgcolor;
+    getBackground_color() {
+        return this.background_color;
     }
 
-    getBgtransparent() {
-        return this.bgtransparent;
+    getBackground_transparent() {
+        return this.background_transparent;
     }
 
-    getBocolor() {
-        return this.bocolor;
+    getBorder_color() {
+        return this.border_color;
     }
 
-    getBotransparent() {
-        return this.botransparent;
+    getBorder_transparency() {
+        return this.border_transparency;
     }
 
-    getBosize() {
-        return this.bosize;
+    getBorder_size() {
+        return this.border_size;
     }
 
     getState() {
@@ -90,24 +90,24 @@ export class AnimatedObject {
         this.y = y;
     }
 
-    setBgcolor(bgcolor) {
-        this.bgcolor = bgcolor;
+    setBackground_color(background_color) {
+        this.background_color = background_color;
     }
     
-    setBgtransparent(bgtransparent) {
-        this.bgtransparent = bgtransparent;
+    setBackground_transparent(background_transparent) {
+        this.background_transparent = background_transparent;
     }
 
-    setBocolor(bocolor) {
-        this.bocolor = bocolor;
+    setBorder_color(border_color) {
+        this.border_color = border_color;
     }
 
-    setBotransparent(botransparent) {
-        this.botransparent = botransparent;
+    setBorder_transparency(border_transparency) {
+        this.border_transparency = border_transparency;
     }
 
-    setBosize(bosize) {
-        this.bosize = bosize;
+    setBorder_size(border_size) {
+        this.border_size = border_size;
     }
 
     setState(state) {
@@ -132,12 +132,12 @@ export class AnimatedObject {
 
     draw(drawing) {
         // Fill
-        if (this.bgtransparent) drawing.fill(0, 0);
-        else drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255); // fill([r, g, b], opacity) doesn't work :)
+        if (this.background_transparent) drawing.fill(0, 0);
+        else drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255); // fill([r, g, b], opacity) doesn't work :)
         // Border
-        if (this.botransparent) drawing.noStroke();
-        else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
-        drawing.strokeWeight(this.bosize);
+        if (this.border_transparency) drawing.noStroke();
+        else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
+        drawing.strokeWeight(this.border_size);
     }
 
 }
