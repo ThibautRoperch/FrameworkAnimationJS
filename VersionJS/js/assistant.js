@@ -76,8 +76,8 @@ function import_xml(input_id) {
 		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
 			animation.readXmlFile(xhr.responseText);
 			// Retrieve background path
-			if (animation.getBgImage() != null) {
-				document.getElementById("background").value = animation.getBgImage();
+			if (animation.getBackground() != null) {
+				document.getElementById("background").value = animation.getBackground();
 			}
 			// Remove all current objects
 			for (let i = 0; i <= last_id; ++i) {

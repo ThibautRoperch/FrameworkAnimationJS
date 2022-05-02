@@ -71,7 +71,7 @@ export class Animation {
         }
     }
 
-    getBgImage() {
+    getBackground() {
         return this.background;
     }
     
