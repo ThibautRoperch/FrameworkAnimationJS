@@ -11,7 +11,7 @@
       bgtransparent="false"
       bgcolor="255,255,255"
       color="0,0,0"
-      bocolor="0,0,128"
+      border_color="0,0,128"
       layer="1">Texte</object_text>
 
     <object_image
@@ -23,10 +23,10 @@
     <object_polygon
       coord_x="10,10,0,15,30,20,20,10"
       coord_y=" 0,10,10,20,10,10,0,0"
-      bocolor="255,0,0"
+      border_color="255,0,0"
       bgcolor="0,128,0"
         bgtransparent="false"
-        botransparent="false"
+        border_transparency="false"
         visible="false"
       >Polygone</object_polygon>
 

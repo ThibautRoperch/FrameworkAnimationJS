@@ -4,8 +4,8 @@
 import { Ellipse } from "./Ellipse.js";
 export class Circle extends Ellipse {
        
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, radius) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, radius * 2, radius * 2);
+    constructor(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, radius) {
+        super(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, radius * 2, radius * 2);
         this.radius = radius;
     }
 
@@ -36,9 +36,9 @@ export class Circle extends Ellipse {
         circle.setAttribute("y",this.y);
         circle.setAttribute("bgcolor", this.bgcolor); // r, g, b
         circle.setAttribute("bgtransparent", this.bgtransparent);
-        circle.setAttribute("bocolor", this.bocolor); // r, g, b
-        circle.setAttribute("botransparent", this.botransparent);
-        circle.setAttribute("bosize", this.bosize);
+        circle.setAttribute("border_color", this.border_color); // r, g, b
+        circle.setAttribute("border_transparency", this.border_transparency);
+        circle.setAttribute("border_size", this.border_size);
         circle.setAttribute("layer", this.layer);
         circle.setAttribute("visible", this.visible);
         circle.setAttribute("opacity", this.opacity);
@@ -48,7 +48,7 @@ export class Circle extends Ellipse {
     }
 
     clone() {
-        return new Circle(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.radius);
+        return new Circle(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.radius);
     }
 
 }

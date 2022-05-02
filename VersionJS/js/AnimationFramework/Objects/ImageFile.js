@@ -5,8 +5,8 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class ImageFile extends AnimatedObject {
     
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, image_path) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);
+    constructor(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, image_path) {
+        super(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.width = width;
         this.height = height;
         this.image_path = image_path;
@@ -61,9 +61,9 @@ export class ImageFile extends AnimatedObject {
         image.setAttribute("y",this.y);
         image.setAttribute("bgcolor", this.bgcolor); // r, g, b
         image.setAttribute("bgtransparent", this.bgtransparent);
-        image.setAttribute("bocolor", this.bocolor); // r, g, b
-        image.setAttribute("botransparent", this.botransparent);
-        image.setAttribute("bosize", this.bosize);
+        image.setAttribute("border_color", this.border_color); // r, g, b
+        image.setAttribute("border_transparency", this.border_transparency);
+        image.setAttribute("border_size", this.border_size);
         image.setAttribute("layer", this.layer);
         image.setAttribute("visible", this.visible);
         image.setAttribute("opacity", this.opacity);
@@ -75,7 +75,7 @@ export class ImageFile extends AnimatedObject {
     }
 
     clone() {
-        return new ImageFile(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.image_path);
+        return new ImageFile(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.image_path);
     }
 
 }

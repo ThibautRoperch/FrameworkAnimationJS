@@ -5,8 +5,8 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Polygon extends AnimatedObject {
     
-	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, coord_x, coord_y) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);
+	constructor(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, coord_x, coord_y) {
+        super(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.coord_x = coord_x; // x coords' list
         this.coord_y = coord_y; // y coords' list
     }
@@ -59,9 +59,9 @@ export class Polygon extends AnimatedObject {
         polygon.setAttribute("y",this.y);
         polygon.setAttribute("bgcolor", this.bgcolor);
         polygon.setAttribute("bgtransparent", this.bgtransparent);
-        polygon.setAttribute("bocolor", this.bocolor);
-        polygon.setAttribute("botransparent", this.botransparent);
-        polygon.setAttribute("bosize", this.bosize);
+        polygon.setAttribute("border_color", this.border_color);
+        polygon.setAttribute("border_transparency", this.border_transparency);
+        polygon.setAttribute("border_size", this.border_size);
         polygon.setAttribute("layer", this.layer);
         polygon.setAttribute("visible", this.visible);
         polygon.setAttribute("opacity", this.opacity);
@@ -72,7 +72,7 @@ export class Polygon extends AnimatedObject {
     }
 
     clone() {
-        return new Polygon(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.coord_x, this.coord_y);
+        return new Polygon(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.coord_x, this.coord_y);
     }
 
 }

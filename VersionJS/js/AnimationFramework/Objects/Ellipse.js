@@ -4,8 +4,8 @@ import { AnimatedObject } from "./AnimatedObject.js";
  */
 export class Ellipse extends AnimatedObject {
     
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height) {
-        super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);
+    constructor(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height) {
+        super(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.width = width;
         this.height = height;
     }
@@ -46,9 +46,9 @@ export class Ellipse extends AnimatedObject {
        ellipse.setAttribute("y",this.y);
        ellipse.setAttribute("bgcolor", this.bgcolor); // r, g, b
        ellipse.setAttribute("bgtransparent", this.bgtransparent);
-       ellipse.setAttribute("bocolor", this.bocolor); // r, g, b
-       ellipse.setAttribute("botransparent", this.botransparent);
-       ellipse.setAttribute("bosize", this.bosize);
+       ellipse.setAttribute("border_color", this.border_color); // r, g, b
+       ellipse.setAttribute("border_transparency", this.border_transparency);
+       ellipse.setAttribute("border_size", this.border_size);
        ellipse.setAttribute("layer", this.layer);
        ellipse.setAttribute("visible", this.visible);
        ellipse.setAttribute("opacity", this.opacity);
@@ -59,7 +59,7 @@ export class Ellipse extends AnimatedObject {
     }
 
     clone() {
-        return new Ellipse(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.bocolor, this.botransparent, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height);
+        return new Ellipse(this.id, this.x, this.y, this.bgcolor, this.bgtransparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height);
     }
 
 }

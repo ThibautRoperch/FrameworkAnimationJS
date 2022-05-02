@@ -10,15 +10,15 @@ export let MOVING_STATE = "moving";
 
 export class AnimatedObject {
    
-    constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle) {
+    constructor(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.bgcolor = bgcolor; // r, g, b
         this.bgtransparent = bgtransparent;
-        this.bocolor = bocolor; // r, g, b
-        this.botransparent = botransparent;
-        this.bosize = bosize;
+        this.border_color = border_color; // r, g, b
+        this.border_transparency = border_transparency;
+        this.border_size = border_size;
         this.state = state;
         this.layer = layer;
         this.visible = visible;
@@ -46,16 +46,16 @@ export class AnimatedObject {
         return this.bgtransparent;
     }
 
-    getBocolor() {
-        return this.bocolor;
+    getborder_color() {
+        return this.border_color;
     }
 
-    getBotransparent() {
-        return this.botransparent;
+    getborder_transparency() {
+        return this.border_transparency;
     }
 
-    getBosize() {
-        return this.bosize;
+    getborder_size() {
+        return this.border_size;
     }
 
     getState() {
@@ -98,16 +98,16 @@ export class AnimatedObject {
         this.bgtransparent = bgtransparent;
     }
 
-    setBocolor(bocolor) {
-        this.bocolor = bocolor;
+    setBorder_color(border_color) {
+        this.border_color = border_color;
     }
 
-    setBotransparent(botransparent) {
-        this.botransparent = botransparent;
+    setBorder_transparency(border_transparency) {
+        this.border_transparency = border_transparency;
     }
 
-    setBosize(bosize) {
-        this.bosize = bosize;
+    setBorder_size(border_size) {
+        this.border_size = border_size;
     }
 
     setState(state) {
@@ -135,9 +135,9 @@ export class AnimatedObject {
         if (this.bgtransparent) drawing.fill(0, 0);
         else drawing.fill(this.bgcolor[0], this.bgcolor[1], this.bgcolor[2], this.opacity * 255); // fill([r, g, b], opacity) doesn't work :)
         // Border
-        if (this.botransparent) drawing.noStroke();
-        else drawing.stroke(this.bocolor[0], this.bocolor[1], this.bocolor[2], this.opacity * 255);
-        drawing.strokeWeight(this.bosize);
+        if (this.border_transparency) drawing.noStroke();
+        else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
+        drawing.strokeWeight(this.border_size);
     }
 
 }

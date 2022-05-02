@@ -28,14 +28,14 @@ export class SetProperty extends Instruction {
 			case "bgtransparent":
 				this.target.setBgtransparent(this.value == "true" | false);
 				break;
-			case "bocolor":
-				this.target.setBocolor(parseIntArray(this.value));
+			case "border_color":
+				this.target.setBorder_color(parseIntArray(this.value));
 				break;
-			case "botransparent":
-				this.target.setBotransparent(this.value == "true" | false);
+			case "border_transparency":
+				this.target.setBorder_transparency(this.value == "true" | false);
 				break;
-			case "bosize":
-				this.target.setBosize(parseInt(this.value) | 0);
+			case "border_size":
+				this.target.setBorder_size(parseInt(this.value) | 0);
 				break;
 			case "layer":
 				this.target.setLayer(parseInt(this.value) | 0);

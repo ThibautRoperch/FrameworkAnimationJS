@@ -158,9 +158,9 @@ export class Animation {
                 let y = parseInt(read_object.getAttribute("y")) | 0;
                 let bgcolor = read_object.hasAttribute("bgcolor") ? parseIntArray(read_object.getAttribute("bgcolor")) : [0, 0, 0];
                 let bgtransparent = read_object.hasAttribute("bgtransparent") ? read_object.getAttribute("bgtransparent") == "true" || read_object.getAttribute("bgtransparent") == "1" : true;
-                let bocolor = read_object.hasAttribute("bocolor") ? parseIntArray(read_object.getAttribute("bocolor")) : [0, 0, 0];
-                let botransparent = read_object.hasAttribute("botransparent") ? read_object.getAttribute("botransparent") == "true" || read_object.getAttribute("botransparent") == "1" : true;
-                let bosize = parseInt(read_object.getAttribute("bosize")) | 1;
+                let border_color = read_object.hasAttribute("border_color") ? parseIntArray(read_object.getAttribute("border_color")) : [0, 0, 0];
+                let border_transparency = read_object.hasAttribute("border_transparency") ? read_object.getAttribute("border_transparency") == "true" || read_object.getAttribute("border_transparency") == "1" : true;
+                let border_size = parseInt(read_object.getAttribute("border_size")) | 1;
                 let layer = parseInt(read_object.getAttribute("layer")) | 0;
                 this.layers.add(layer);
                 let visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" || read_object.getAttribute("visible") == "1" : false;
@@ -176,29 +176,29 @@ export class Animation {
                     let height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     let halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
 					let valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-                    new_object = new Text(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
+                    new_object = new Text(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
                 } else if (type == "object_image") {
                     let width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                     let height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                     let image = read_object.getAttribute("image");
                     this.objects_image.push(id);
-                    new_object = new ImageFile(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
+                    new_object = new ImageFile(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
                 } else if (type == "object_rectangle") {
                     let width = parseInt(read_object.getAttribute("width"));
                     let height = parseInt(read_object.getAttribute("height"));
                     let round = parseInt(read_object.getAttribute("round")) | 0;
-                    new_object = new Rectangle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
+                    new_object = new Rectangle(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
                 } else if (type == "object_polygon") {
                     let coord_x = parseIntArray(read_object.getAttribute("coord_x"));
                     let coord_y = parseIntArray(read_object.getAttribute("coord_y"));
-                    new_object = new Polygon(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
+                    new_object = new Polygon(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
                 } else if (type == "object_circle") {
                     let radius = parseInt(read_object.getAttribute("radius"));
-                    new_object = new Circle(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, radius);
+                    new_object = new Circle(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, radius);
                 } else if (type == "object_ellipse") {
                     let width = parseInt(read_object.getAttribute("width"));
                     let height = parseInt(read_object.getAttribute("height"));
-                    new_object = new Ellipse(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
+                    new_object = new Ellipse(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
                 } else if (type == "object_landmark") {
                     let width = parseInt(read_object.getAttribute("width"));
                     let height = parseInt(read_object.getAttribute("height"));
@@ -206,13 +206,13 @@ export class Animation {
                     let scale_y = parseInt(read_object.getAttribute("scale_y"));
                     let unit_x = read_object.getAttribute("unit_x");
                     let unit_y = read_object.getAttribute("unit_y");
-                    new_object = new Landmark(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y);
+                    new_object = new Landmark(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y);
                 } else if (type == "object_grid") {
                     let lines = parseInt(read_object.getAttribute("lines"));
                     let columns = parseInt(read_object.getAttribute("columns"));
                     let line_height = parseInt(read_object.getAttribute("line_height"));
                     let column_width = parseInt(read_object.getAttribute("column_width"));
-                    new_object = new Grid(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, DEFAULT_STATE, layer, visible, opacity, angle, lines, columns, line_height, column_width);
+                    new_object = new Grid(id, x, y, bgcolor, bgtransparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, lines, columns, line_height, column_width);
                 } else if (type == "object_copy") {
                     let idcopy = read_object.getAttribute("idcopy");
                     let initial_object = this.objects.get(idcopy);
