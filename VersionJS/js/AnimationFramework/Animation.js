@@ -1,4 +1,4 @@
-import { speedAnim, parseIntArray } from './animation_controller.js';
+import { speed_animation, parseIntArray } from './animation_controller.js';
 
 import { DEFAULT_STATE, WAITING_CLICK_STATE, SLEEPING_STATE, MOVING_STATE , AnimatedObject } from './Objects/AnimatedObject.js';
 
@@ -53,7 +53,7 @@ export class Animation {
         
         this.canvas = null;
         this.bg_image = null; // path of the background image (can be "" if there isn't background image)
-        this.loop_delay = speedAnim("normal"); // delay between two intruction's move
+        this.loop_delay = speed_animation("normal"); // delay between two intruction's move
 
         this.start_button = new StartButton(this.width / 2, this.height / 2, "Click me to start", true);
         new Blink(this.start_button, 6, 20, this.loop_delay).execute();
@@ -121,7 +121,7 @@ export class Animation {
 
         // If the speed node node exists
         if (speed_node) {
-            this.loop_delay = speedAnim(speed_node.textContent);
+            this.loop_delay = speed_animation(speed_node.textContent);
         }
 
         // If the init's node exists

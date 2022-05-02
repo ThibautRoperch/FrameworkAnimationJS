@@ -110,7 +110,7 @@ function draw_animation(animation_obj) {
  * Others functions 
  */
 
-export function speedAnim(speed) {
+export function speed_animation(speed) {
 	let loop_delay = 30;
 
 	switch (speed) {
