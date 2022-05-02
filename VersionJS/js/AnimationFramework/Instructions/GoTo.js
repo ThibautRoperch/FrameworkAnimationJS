@@ -1,8 +1,8 @@
 /** 
  * Reach a mark in the program of the object defined by the instruction Label
  */
-
-class GoTo extends Instruction {
+import { Instruction } from "./Instruction.js";
+export class GoTo extends Instruction {
 
 	constructor(object, value) {
 		super(object);

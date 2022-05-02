@@ -1,8 +1,8 @@
 /**
  * This instruction moves the object atached to it, at a precise position at interval and a delay
  */
-
-class MoveTo extends Instruction {
+import { Instruction } from "./Instruction.js";
+export class MoveTo extends Instruction {
 
 	constructor(object, x, y, interval_x, interval_y, delay, loop_delay) {
 		super(object);

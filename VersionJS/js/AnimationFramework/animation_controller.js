@@ -1,104 +1,108 @@
+import { Animation } from './Animation.js';
+
+
 /**********************
 * Classes (to modify)
 */
 
-var OBJECT_CLASSES = ["AnimatedObject", "Ellipse", "Circle", "Grid", "ImageFile", "Landmark", "Polygon", "Rectangle", "StartButton", "Text"];
-var INSTRUCTION_CLASSES = ["Instruction", "SimpleMovement", "Blink", "Center", "CenterX", "CenterY", "Click", "Down", "GoTo", "Label", "Left", "MoveTo", "Right", "SetProperty", "Sleep", "State", "Stop", "Trigger", "Up", "Wait"];
+let OBJECT_CLASSES = ["AnimatedObject", "Ellipse", "Circle", "Grid", "ImageFile", "Landmark", "Polygon", "Rectangle", "StartButton", "Text"];
+let INSTRUCTION_CLASSES = ["Instruction", "SimpleMovement", "Blink", "Center", "CenterX", "CenterY", "Click",
+ "Down", "GoTo", "Label", "Left", "MoveTo", "Right", "SetProperty", "Sleep", "State", "Stop", "Trigger", "Up", "Wait"];
 
 /**********************
  * Global variables
  */
 
-var ANIMATION_FILES_INCLUDED = false;
-var ANIMATIONS = new Array();
-var FRAME_RATE = 60; // frames displayed per second
-var LOOP_DELAY_MAX = 60; // lowest speed of the animation, one frame's duration (ms)
-var LOOP_DELAY_MIN = 0; // highest speed of the animation, one frame's duration (ms)
+export let ANIMATION_FILES_INCLUDED = false;
+export let ANIMATIONS = new Array();
+export let FRAME_RATE = 60; // frames displayed per second
+export let LOOP_DELAY_MAX = 60; // lowest speed of the animation, one frame's duration (ms)
+export let LOOP_DELAY_MIN = 0; // highest speed of the animation, one frame's duration (ms)
 
 
 /**********************
  * Loading and execution functions
  */
 
-function load_animation(source_file, target_id, width, height) {
-    // Check if animation files are included
-    if (!ANIMATION_FILES_INCLUDED) {
-        console.log("Animation files are not included. Include them by this way :\n<script>include_animation_files(\"path/of/AnimationFramework/\");</script>");
+export function load_animation(source_file, target_id, width, height) {
+	// Check if animation files are included
+	if (!ANIMATION_FILES_INCLUDED) {
+		console.log("Animation files are not included. Include them by this way :\n<script>include_animation_files(\"path/of/AnimationFramework/\");</script>");
 	}
-	
+
 	// Check if object classes are loaded
 	var objects_classes_loaded = true;
-	for (obj_cl of OBJECT_CLASSES) {
-		objects_classes_loaded = objects_classes_loaded & typeof(obj_cl) !== "undefined";
+	for (let obj_cl of OBJECT_CLASSES) {
+		objects_classes_loaded = objects_classes_loaded & typeof (obj_cl) !== "undefined";
 	}
-	
+
 	// Check if instruction classes are loaded
 	var instruction_classes_loaded = true;
-	for (instr_cl of INSTRUCTION_CLASSES) {
-		instruction_classes_loaded = instruction_classes_loaded & typeof(instr_cl) !== "undefined";
+	for (let instr_cl of INSTRUCTION_CLASSES) {
+		instruction_classes_loaded = instruction_classes_loaded & typeof (instr_cl) !== "undefined";
 	}
 
 	// Loop with delay until animation classes are not loaded
-    if (typeof(p5) === "undefined" || typeof(Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
-        setTimeout(function() {
-            load_animation(source_file, target_id, width, height);
-        }, 150);
-    }
-    // Create the animation object when animation files are included
-    else {
+	if (typeof (p5) === "undefined" || typeof (Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
+		setTimeout(function () {
+			load_animation(source_file, target_id, width, height);
+		}, 150);
+	}
+	// Create the animation object when animation files are included
+	else {
 		var parent = document.getElementById(target_id);
-		
+
 		// Check if the parent node exists
 		if (parent == undefined) {
 			console.log("[animation_controller.js] Le noeud parent n'existe pas ; vérifier qu'une balise HTML possède l'id donné (" + target_id + ")");
 			return;
 		}
 
-        // Create the animation object
-        var animation = new Animation(source_file, parent, width, height);
-        ANIMATIONS.push(animation);
+		// Create the animation object
+		var animation = new Animation(source_file, parent, width, height);
+		ANIMATIONS.push(animation);
 
-        // Read the animation's XML file using AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-                animation.displayLoadingMessage();
-                animation.readXmlFile(xhr.responseText);
-                draw_animation(animation);
-            } else if (xhr.readyState == 4 && !(xhr.status == 200 || xhr.status == 0)) {
-                animation.displayErrorMessage(source_file, target_id);
-            }
-        };
-        xhr.open("GET", source_file, true);
-        xhr.send();
-    }
+		// Read the animation's XML file using AJAX
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+				animation.displayLoadingMessage();
+				animation.readXmlFile(xhr.responseText);
+				draw_animation(animation);
+			} else if (xhr.readyState == 4 && !(xhr.status == 200 || xhr.status == 0)) {
+				animation.displayErrorMessage(source_file, target_id);
+			}
+		};
+		xhr.open("GET", source_file, true);
+		xhr.send();
+	}
 }
 
 function draw_animation(animation_obj) {
-    new p5(function(draw_ref) {
+	new p5(function (draw_ref) {
 
-        draw_ref.preload = function() { // preload function runs once
-            animation_obj.preload(draw_ref);
-        }
+		draw_ref.preload = function () { // preload function runs once
+			animation_obj.preload(draw_ref);
+		}
 
-        draw_ref.setup = function() { // setup function waits until preload one is done
-            animation_obj.setup(draw_ref);
-        }
-        
-        draw_ref.draw = function() {
+		draw_ref.setup = function () { // setup function waits until preload one is done
+			animation_obj.setup(draw_ref);
+		}
+
+		draw_ref.draw = function () {
 			if (!animation_obj.stopAnimation()) {
 				animation_obj.draw(draw_ref);
 			}
-        }
+		}
 
-        draw_ref.mouseClicked = function() {
-            // Get the visible objects that are under the cursor position
-            animation_obj.canvasClicked(draw_ref);
-            // Prevent default
-            return false;
-        }
+		draw_ref.mouseClicked = function () {
+			// Get the visible objects that are under the cursor position
+			animation_obj.canvasClicked(draw_ref);
+			// Prevent default
+			return false;
+		}
 
-    });
+	});
 }
 
 
@@ -106,7 +110,7 @@ function draw_animation(animation_obj) {
  * Others functions 
  */
 
-function speed(speed) {
+export function speedAnim(speed) {
 	var loop_delay = 30;
 
 	switch (speed) {
@@ -133,44 +137,49 @@ function speed(speed) {
 }
 
 function include_animation_files(path) {
-	path += "/";
-	scripts = [
+	//path += "/";
+	let scripts = [
 		// p5.js
-        "https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js",
-        // Animation
-		path + "Animation.js"
+		"https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js",
+		// Animation
+		//path + "Animation.js"
 	];
+
 	
+	// Instructions
+	/*for (instr_cl of INSTRUCTION_CLASSES) {
+		//import { instr_cl } from path + "Instructions/" + instr_cl + ".js";
+		//scripts.push(path + "Instructions/" + instr_cl + ".js");
+	}
+
 	// Objects
 	for (obj_cl of OBJECT_CLASSES) {
-		scripts.push(path + "Objects/" + obj_cl + ".js");
-	}
+		//scripts.push(path + "Objects/" + obj_cl + ".js");
+	}*/
+	
 
-	// Instructions
-	for (instr_cl of INSTRUCTION_CLASSES) {
-		scripts.push(path + "Instructions/" + instr_cl + ".js");
-	}
-
-	for (s of scripts) {
+	for (let s of scripts) {
 		var script = document.createElement("script");
 		script.src = s;
 		document.lastChild.appendChild(script);
-    }
-    
-    ANIMATION_FILES_INCLUDED = true;
+	}
+
+	ANIMATION_FILES_INCLUDED = true;
 }
 
 /**
  * Parse a a string into an int array, splitting on commas
  */
-function parseIntArray(string) {
+export function parseIntArray(string) {
 	if (string == "") return [0, 0, 0];
-	
-	var array = string.split(",");
 
-	for (i in array) {
+	let array = string.split(",");
+
+	for (let i in array) {
 		array[i] = parseInt(array[i]);
 	}
 
 	return array;
 }
+
+include_animation_files("js/AnimationFramework/");

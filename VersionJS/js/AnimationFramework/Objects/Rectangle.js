@@ -1,8 +1,9 @@
+import { AnimatedObject } from "./AnimatedObject.js";
 /**
  * 
  */
 
-class Rectangle extends AnimatedObject {
+export class Rectangle extends AnimatedObject {
     
 	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, round) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);

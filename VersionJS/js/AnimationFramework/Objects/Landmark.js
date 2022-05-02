@@ -1,8 +1,9 @@
+import { AnimatedObject } from "./AnimatedObject.js";
 /**
  * 
  */
 
-class Landmark extends AnimatedObject {
+export class Landmark extends AnimatedObject {
     
 	constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);

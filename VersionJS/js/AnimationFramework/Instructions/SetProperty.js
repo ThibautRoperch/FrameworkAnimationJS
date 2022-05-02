@@ -1,8 +1,9 @@
 /**
  * This instruction set the property of the target at a certain value
  */
-
-class SetProperty extends Instruction {
+import { Instruction } from "./Instruction.js";
+import { speedAnim, parseIntArray } from '../animation_controller.js';
+export class SetProperty extends Instruction {
 
 	constructor(object, target, property, value) {
 		super(object);

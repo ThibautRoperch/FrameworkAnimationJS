@@ -1,8 +1,8 @@
 /**
  * Set a marker in the program of the object, reachable by the GoTo instruction
  */
-
-class Label extends Instruction {
+import { Instruction } from "./Instruction.js";
+export class Label extends Instruction {
 	
 	constructor(object, value) {
 		super(object);

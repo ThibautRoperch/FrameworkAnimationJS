@@ -3,7 +3,7 @@
 <head>
 <title>Animation CPU</title>
 <link rel="stylesheet" type="text/css" href="css/css.css" />
-<script src="js/AnimationFramework/animation_controller.js"></script>
+<script type ="module" src="cpu_anim1.js"></script>
 </head>
 
 <body>
@@ -85,7 +85,7 @@ mov [108],eax ; mettre le résultat dans c<br />
 
 <p>L'instruction <code>MOV EAX,[100]</code> est traduite en :</p>
 
-<table align="center" width="50%">
+<table style="margin : 0 auto;" width="50%">
 <tr>
   <th>OPER</th>
   <th>VALUE 1</th>
@@ -107,12 +107,8 @@ mov [108],eax ; mettre le résultat dans c<br />
 <p>Voici l'animation correspondant à l'exécution du code (sans pipeline)</p>
 
 
-<applet id="cpu_anim1">
-  <script>
-		include_animation_files("js/AnimationFramework/");
-    load_animation("cpu_anim1.xml", "cpu_anim1", 692, 378);
-  </script>
-</applet>
+<object id="cpu_anim1">
+</object>
 
 
 <br />

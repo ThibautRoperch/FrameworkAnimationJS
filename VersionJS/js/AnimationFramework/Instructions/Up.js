@@ -1,8 +1,9 @@
+import { SimpleMovement } from "./SimpleMovement.js";
+import { DEFAULT_STATE, MOVING_STATE } from "../Objects/AnimatedObject.js";
 /**
  * This instruction moves the object up of y by interval of interval_y at a rate of loop_delay
  */
-
-class Up extends SimpleMovement {
+export class Up extends SimpleMovement {
 
 	constructor(object, distance, interval, loop_delay) {
 		super(object, distance, interval, loop_delay);

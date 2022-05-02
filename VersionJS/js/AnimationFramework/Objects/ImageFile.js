@@ -1,8 +1,9 @@
+import { AnimatedObject } from "./AnimatedObject.js";
 /**
  * 
  */
 
-class ImageFile extends AnimatedObject {
+export class ImageFile extends AnimatedObject {
     
     constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height, image_path) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);

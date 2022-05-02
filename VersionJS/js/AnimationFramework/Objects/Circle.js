@@ -1,8 +1,8 @@
 /**
  * 
  */
-
-class Circle extends Ellipse {
+import { Ellipse } from "./Ellipse.js";
+export class Circle extends Ellipse {
        
     constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, radius) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, radius * 2, radius * 2);

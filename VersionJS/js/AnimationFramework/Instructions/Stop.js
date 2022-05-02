@@ -1,8 +1,8 @@
 /**
  * This instruction stops all the programs
  */
-
-class Stop extends Instruction {
+import { Instruction } from "./Instruction.js";
+export class Stop extends Instruction {
 
 	constructor(object) {
 		super(object);

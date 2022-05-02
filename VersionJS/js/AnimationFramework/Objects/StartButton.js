@@ -1,8 +1,9 @@
+import { DEFAULT_STATE, WAITING_CLICK_STATE, SLEEPING_STATE, MOVING_STATE , AnimatedObject } from "./AnimatedObject.js";
 /**
  * 
  */
 
-class StartButton extends AnimatedObject {
+export class StartButton extends AnimatedObject {
     
 	constructor(x, y, text, present) {
         super(null, x, y, [255, 255, 255], false, [0, 0, 0], false, 1, DEFAULT_STATE, null, true, 1, 0);

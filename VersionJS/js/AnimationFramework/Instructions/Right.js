@@ -1,8 +1,10 @@
+
+import { SimpleMovement } from "./SimpleMovement.js";
+import { DEFAULT_STATE, MOVING_STATE } from "../Objects/AnimatedObject.js";
 /**
  * This instruction moves the object right of x by interval of interval_x at a speed of loop_delay
  */
-
-class Right extends SimpleMovement {
+export class Right extends SimpleMovement {
 
 	constructor(object, distance, interval, loop_delay) {
 		super(object, distance, interval, loop_delay);

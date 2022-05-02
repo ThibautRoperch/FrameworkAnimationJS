@@ -1,8 +1,8 @@
 /**
  * This instruction moves the object on a distance by interval at a rate of loop_delay
  */
-
-class SimpleMovement extends Instruction {
+import { Instruction } from "./Instruction.js";
+export class SimpleMovement extends Instruction {
 
 	constructor(object, distance, interval, loop_delay) {
 		super(object);

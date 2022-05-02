@@ -1,10 +1,43 @@
+import { speedAnim, parseIntArray } from './animation_controller.js';
+
+import { DEFAULT_STATE, WAITING_CLICK_STATE, SLEEPING_STATE, MOVING_STATE , AnimatedObject } from "./Objects/AnimatedObject.js";
+
+import { Blink } from './Instructions/Blink.js';
+import { Center } from './Instructions/Center.js';
+import { CenterX } from './Instructions/CenterX.js';
+import { CenterY } from './Instructions/CenterY.js';
+import { Click } from './Instructions/Click.js';
+import { Down } from './Instructions/Down.js';
+import { GoTo } from './Instructions/GoTo.js';
+import { Label } from './Instructions/Label.js';
+import { Left } from './Instructions/Left.js';
+import { MoveTo } from './Instructions/MoveTo.js';
+import { Right } from './Instructions/Right.js';
+import { SetProperty } from './Instructions/SetProperty.js';
+import { Sleep } from './Instructions/Sleep.js';
+import { State } from './Instructions/State.js';
+import { Stop } from './Instructions/Stop.js';
+import { Trigger } from './Instructions/Trigger.js';
+import { Up } from './Instructions/Up.js';
+import { Wait } from './Instructions/Wait.js';
+
+import { Ellipse } from './Objects/Ellipse.js';
+import { Circle } from './Objects/Circle.js';
+import { Grid } from './Objects/Grid.js';
+import { ImageFile } from './Objects/ImageFile.js';
+import { Landmark } from './Objects/Landmark.js';
+import { Polygon } from './Objects/Polygon.js';
+import { Rectangle } from './Objects/Rectangle.js';
+import { StartButton } from './Objects/StartButton.js';
+import { Text } from './Objects/Text.js';
+
 /**
  * Animation class
  * Parse and read a given XML file andlaunch objects program
  * Preload, setup and draw according to animation_controller.js
  */
 
-class Animation {
+export class Animation {
 
     constructor(source_file, parent, width, height) {
         this.source_file = source_file; // path of the XML source file
@@ -20,7 +53,7 @@ class Animation {
         
         this.canvas = null;
         this.bg_image = null; // path of the background image (can be "" if there isn't background image)
-        this.loop_delay = speed("normal"); // delay between two intruction's move
+        this.loop_delay = speedAnim("normal"); // delay between two intruction's move
 
         this.start_button = new StartButton(this.width / 2, this.height / 2, "Click me to start", true);
         new Blink(this.start_button, 6, 20, this.loop_delay).execute();
@@ -88,7 +121,7 @@ class Animation {
 
         // If the speed node node exists
         if (speed_node) {
-            this.loop_delay = speed(speed_node.textContent);
+            this.loop_delay = speedAnim(speed_node.textContent);
         }
 
         // If the init's node exists
@@ -392,7 +425,7 @@ class Animation {
 
     canvasClicked(drawing) {
         // Get the visible objects that are under the cursor position
-        for (var object of this.objects.values()) {
+        for (let object of this.objects.values()) {
             if (object.getVisible()) {
                 if (object.isClicked(drawing.mouseX, drawing.mouseY)) {
                     new Trigger(null, object, WAITING_CLICK_STATE).execute();

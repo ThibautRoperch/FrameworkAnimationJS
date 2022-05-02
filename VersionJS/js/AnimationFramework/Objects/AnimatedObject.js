@@ -3,12 +3,12 @@
  */
 
 // File-shared object's states
-var DEFAULT_STATE = "normal";
-var WAITING_CLICK_STATE = "waiting_click";
-var SLEEPING_STATE = "sleeping";
-var MOVING_STATE = "moving";
+export let DEFAULT_STATE = "normal";
+export let WAITING_CLICK_STATE = "waiting_click";
+export let SLEEPING_STATE = "sleeping";
+export let MOVING_STATE = "moving";
 
-class AnimatedObject {
+export class AnimatedObject {
    
     constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle) {
         this.id = id;

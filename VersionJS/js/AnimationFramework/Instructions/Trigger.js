@@ -1,8 +1,9 @@
 /**
  * Give a token to the object, setting it in the normal state if the given token is the same as expected
  */
-
-class Trigger extends Instruction {
+import { Instruction } from "./Instruction.js";
+import { DEFAULT_STATE } from "../Objects/AnimatedObject.js";
+export class Trigger extends Instruction {
 	
 	constructor(object, target, value) {
 		super(object);

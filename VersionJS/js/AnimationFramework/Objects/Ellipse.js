@@ -1,8 +1,8 @@
+import { AnimatedObject } from "./AnimatedObject.js";
 /**
  * 
  */
-
-class Ellipse extends AnimatedObject {
+export class Ellipse extends AnimatedObject {
     
     constructor(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle, width, height) {
         super(id, x, y, bgcolor, bgtransparent, bocolor, botransparent, bosize, state, layer, visible, opacity, angle);

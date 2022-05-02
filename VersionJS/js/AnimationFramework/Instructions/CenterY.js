@@ -1,8 +1,8 @@
 /**
  * This instruction center verticaly the object atached to it
  */
-
-class CenterY extends Instruction {
+import { Instruction } from "./Instruction.js";
+export class CenterY extends Instruction {
 
 	constructor(object) {
 		super(object);

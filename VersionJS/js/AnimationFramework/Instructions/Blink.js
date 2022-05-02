@@ -1,8 +1,10 @@
+import { Instruction } from './Instruction.js';
+import { DEFAULT_STATE, WAITING_CLICK_STATE, SLEEPING_STATE, MOVING_STATE } from '../Objects/AnimatedObject.js';
+import { ANIMATION_FILES_INCLUDED, ANIMATIONS, FRAME_RATE, LOOP_DELAY_MAX, LOOP_DELAY_MIN } from '../animation_controller.js';
 /*
  *  This instruction make the object blink at each Delay*frame rate, for Times iteration
  */
-
-class Blink extends Instruction {
+export class Blink extends Instruction {
 
 	constructor(object, times, delay, loop_delay) {
 		super(object);

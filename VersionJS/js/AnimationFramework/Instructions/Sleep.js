@@ -1,8 +1,10 @@
+import { Instruction } from './Instruction.js';
+import { DEFAULT_STATE, SLEEPING_STATE } from '../Objects/AnimatedObject.js';
+import { LOOP_DELAY_MAX ,LOOP_DELAY_MIN } from '../animation_controller.js';
 /**
  * This instruction set the object to a waiting state for a certain number of frame cycle
  */
-
-class Sleep extends Instruction {
+export class Sleep extends Instruction {
 
 	constructor(object, value, loop_delay) {
 		super(object);
