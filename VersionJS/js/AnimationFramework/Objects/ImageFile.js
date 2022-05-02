@@ -55,7 +55,7 @@ export class ImageFile extends AnimatedObject {
     }
     
     toXml() {
-        var image = document.createElement("object_image");
+        let image = document.createElement("object_image");
         image.innerHTML = this.id;
         image.setAttribute("x", this.x);
         image.setAttribute("y",this.y);

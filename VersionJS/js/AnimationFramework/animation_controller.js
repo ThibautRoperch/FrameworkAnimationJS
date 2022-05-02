@@ -31,13 +31,13 @@ export function load_animation(source_file, target_id, width, height) {
 	}
 
 	// Check if object classes are loaded
-	var objects_classes_loaded = true;
+	let objects_classes_loaded = true;
 	for (let obj_cl of OBJECT_CLASSES) {
 		objects_classes_loaded = objects_classes_loaded & typeof (obj_cl) !== "undefined";
 	}
 
 	// Check if instruction classes are loaded
-	var instruction_classes_loaded = true;
+	let instruction_classes_loaded = true;
 	for (let instr_cl of INSTRUCTION_CLASSES) {
 		instruction_classes_loaded = instruction_classes_loaded & typeof (instr_cl) !== "undefined";
 	}
@@ -50,7 +50,7 @@ export function load_animation(source_file, target_id, width, height) {
 	}
 	// Create the animation object when animation files are included
 	else {
-		var parent = document.getElementById(target_id);
+		let parent = document.getElementById(target_id);
 
 		// Check if the parent node exists
 		if (parent == undefined) {
@@ -59,11 +59,11 @@ export function load_animation(source_file, target_id, width, height) {
 		}
 
 		// Create the animation object
-		var animation = new Animation(source_file, parent, width, height);
+		let animation = new Animation(source_file, parent, width, height);
 		ANIMATIONS.push(animation);
 
 		// Read the animation's XML file using AJAX
-		var xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
 				animation.displayLoadingMessage();
@@ -111,7 +111,7 @@ function draw_animation(animation_obj) {
  */
 
 export function speedAnim(speed) {
-	var loop_delay = 30;
+	let loop_delay = 30;
 
 	switch (speed) {
 		case "very slow":
@@ -159,7 +159,7 @@ function include_animation_files(path) {
 	
 
 	for (let s of scripts) {
-		var script = document.createElement("script");
+		let script = document.createElement("script");
 		script.src = s;
 		document.lastChild.appendChild(script);
 	}

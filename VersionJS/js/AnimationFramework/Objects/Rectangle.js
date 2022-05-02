@@ -46,7 +46,7 @@ export class Rectangle extends AnimatedObject {
     }
     
     toXml() {
-        var rectangle = document.createElement("object_rectangle");
+        let rectangle = document.createElement("object_rectangle");
         rectangle.innerHTML = this.id;
         rectangle.setAttribute("x", this.x);
         rectangle.setAttribute("y",this.y);

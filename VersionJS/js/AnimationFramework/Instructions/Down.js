@@ -11,7 +11,7 @@ export class Down extends SimpleMovement {
 	
 	execute() {
         this.object.setState(MOVING_STATE);
-		var original_distance = this.distance;
+		let original_distance = this.distance;
 
         down(this);
         function down(instruction) {
