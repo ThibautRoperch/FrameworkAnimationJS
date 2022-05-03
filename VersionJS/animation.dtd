@@ -1,7 +1,8 @@
 
-<!ELEMENT animation (init?,speed?,background?,objects,programs) >
+<!ELEMENT animation (init?,background?,objects,programs) >
 <!ATTLIST animation width CDATA #IMPLIED >
 <!ATTLIST animation height CDATA #IMPLIED >
+<!ATTLIST animation speed (very_slow|slow|normal|fast|very_fast) "normal" >
 
 <!ELEMENT init (start_button) >
 <!ELEMENT start_button EMPTY >
@@ -9,8 +10,6 @@
 <!ATTLIST start_button x CDATA #IMPLIED >
 <!ATTLIST start_button y CDATA #IMPLIED >
 <!ATTLIST start_button present (true|false) #IMPLIED >
-
-<!ELEMENT speed ("very slow"|"slow"|"normal"|"fast"|"very fast") >
 
 <!ELEMENT background (#PCDATA) >
 
