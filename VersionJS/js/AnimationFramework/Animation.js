@@ -163,7 +163,6 @@ export class Animation {
                 // The image path is relative to the source file's one
                 let source_file_path = this.source_file.substr(0, this.source_file.lastIndexOf("/") + 1);
                 this.background = source_file_path + this.background;
-                console.log(this.background);
             }
         } else {
             this.background = "";
