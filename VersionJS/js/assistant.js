@@ -85,9 +85,9 @@ function import_xml(input_id) {
 			}
 			// Re-create all read objects
 			for (let obj of animation.getObjects().values()) {
-				console.log(obj);
-				let fake_button = document.createElement("button"); fake_button.innerHTML = obj.constructor.name;
-				let new_obj_id = new_object(fake_button);
+				let fake_button = document.createElement("button");
+				fake_button.innerHTML = obj.constructor.name;
+				let new_obj_id = new_object(fake_button.innerHTML);
 				document.getElementById(new_obj_id).getElementsByTagName("id")[0].innerHTML = "<b>Identifier :</b> " + obj.getId();
 				for (let prop of obj.toXml().attributes) {
 					// Change the value of this property
@@ -981,7 +981,6 @@ function draw_animation() {
 				let object = objects_array[id];
 				object.loadImage(draw_ref);
 			}
-			console.log(objects_array);
 			// Retrieve all layers in a set
 			for (let object of objects_array) {
 				layers.add(object.getLayer());
