@@ -44,7 +44,7 @@ export class SetProperty extends Instruction {
 				this.target.setVisible(this.value == "true" | false);
 				break;
 			case "opacity":
-				this.target.setOpacity((parseInt(this.value) | 0) / 100);
+				this.target.setOpacity(parseInt(this.value) | 0);
 				break;
 			case "angle":
 				this.target.setAngle(parseInt(this.value) | 0);
@@ -93,7 +93,7 @@ export class SetProperty extends Instruction {
 				this.target.setCoordx(parseIntArray(this.value));
 				break;
 			case "coord_y":
-				this.target.setCoordx(parseIntArray(this.value));
+				this.target.setCoordy(parseIntArray(this.value));
 				break;
 
 			// circle
