@@ -95,6 +95,7 @@ export class Text extends AnimatedObject {
 	
 	draw(drawing) {
 		super.draw(drawing);
+		drawing.push();
 		// Background
 		drawing.rect(this.x, this.y, this.real_width, this.real_height);
 		// Text's color, font, size and style
@@ -108,6 +109,7 @@ export class Text extends AnimatedObject {
 		this.valignment == "center" ? drawing.CENTER : this.valignment == "bottom" ? drawing.BOTTOM : this.valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
 		// Display
 		drawing.text(this.text.replace("@", "\n"), this.x + 2 + this.padding, this.y + 4 + this.padding / 2);
+		drawing.pop();
 	}
 	
 	isClicked(x, y) {
