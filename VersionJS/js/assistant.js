@@ -798,10 +798,6 @@ function new_object(object_type) {
 	return obj_id;
 }
 
-function new_instruction(object_id, object_dom) {
-	// Crée, pour un id d'objet, les balises constituant une nouvelle instruction
-}
-
 function change_property(object_id, property_dom) {
 	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
 	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
@@ -1030,7 +1026,7 @@ function draw_animation() {
 		draw_ref.draw = function() {
 			draw_ref.clear();
 
-			draw_ref.frameRate(10); // 60 fps
+			draw_ref.frameRate(60); // 60 fps
 
 			// Display the background image
 			if (background != null) {
@@ -1047,12 +1043,6 @@ function draw_animation() {
 			}
 		}
 
-		// draw_ref.mouseClicked = function() {
-		// 	// Get the visible objects that are under the cursor position
-		// 	animation_obj.canvasClicked(draw_ref);
-		// 	// Prevent default
-		// 	return false;
-		// }
 	});
 
 }
