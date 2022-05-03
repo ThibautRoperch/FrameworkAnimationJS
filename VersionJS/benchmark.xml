@@ -4,7 +4,7 @@
 	</init>
 
 	<background>
-		img/yellow_blue_linear_gradient.png
+		#FFB600
 	</background>
 	
 	<objects>

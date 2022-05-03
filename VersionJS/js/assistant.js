@@ -77,7 +77,7 @@ function import_xml(input_id) {
 			animation.readXmlFile(xhr.responseText);
 			// Retrieve background path
 			if (animation.getBackground() != null) {
-				document.getElementById("background").value = animation.getBackground();
+				document.getElementById("background").value = animation.getBackground().trim();
 			}
 			// Remove all current objects
 			for (let i = 0; i <= last_id; ++i) {
@@ -962,18 +962,43 @@ function ask_popup(title, contents, callback, args) {
 let canvas;
 let drawing_dom = document.getElementById("drawing");
 
+function isValidColor(strColor) {
+	try {
+		var s = new Option().style;
+		s.color = strColor;
+		// return 'false' if color wasn't assigned
+		return s.color == strColor.toLowerCase();
+	} catch (_) {
+		return false;
+	}
+}
+
+function isHexColor(strColor) {
+	try {
+		let RegExp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
+		return RegExp.test(strColor);
+	} catch (_) {
+		return false;
+	}
+}
+
+
 function draw_animation() {
 	let layers = new Set();
 
 	new p5(function(draw_ref) {
 
-		let BG_IMAGE = null;
+		let background = null;
 
 		draw_ref.preload = function() { // preload function runs once
-			// Load the backround image
-			let bg_image = document.getElementById("background").value;
-			if (bg_image != "") {
-				BG_IMAGE = draw_ref.loadImage(bg_image);
+			// Load the backround
+			let bg = document.getElementById("background").value.trim();
+			if (bg != "") {
+				if (!isValidColor(bg) && !isHexColor(bg)) {
+					background = draw_ref.loadImage(bg);
+				} else {
+					background = bg;
+				}
 			}
 			
 			// Load animation's images
@@ -1005,11 +1030,11 @@ function draw_animation() {
 		draw_ref.draw = function() {
 			draw_ref.clear();
 
-			draw_ref.frameRate(60); // 60 fps
-			
+			draw_ref.frameRate(10); // 60 fps
+
 			// Display the background image
-			if (BG_IMAGE != null) {
-				draw_ref.background(BG_IMAGE);
+			if (background != null) {
+				draw_ref.background(background);
 			}
 
 			// Display objects of each layer, if they're set as visible
