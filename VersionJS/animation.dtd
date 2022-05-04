@@ -148,6 +148,25 @@
 <!ATTLIST object_grid opacity CDATA #IMPLIED >
 <!ATTLIST object_grid angle CDATA #IMPLIED >
 
+<!ELEMENT object_table (#PCDATA) >
+<!ATTLIST object_table values CDATA #REQUIRED >
+<!ATTLIST object_text font CDATA #REQUIRED >
+<!ATTLIST object_table line_height CDATA #REQUIRED >
+<!ATTLIST object_table column_width CDATA #REQUIRED >
+<!ATTLIST object_text color CDATA #IMPLIED >
+<!ATTLIST object_text padding CDATA #IMPLIED >
+<!ATTLIST object_table x CDATA #IMPLIED >
+<!ATTLIST object_table y CDATA #IMPLIED >
+<!ATTLIST object_table background_color CDATA #IMPLIED >
+<!ATTLIST object_table background_transparent (true|false) #IMPLIED >
+<!ATTLIST object_table border_color CDATA #IMPLIED >
+<!ATTLIST object_table border_transparency (true|false) #IMPLIED >
+<!ATTLIST object_table border_size CDATA #IMPLIED >
+<!ATTLIST object_table layer CDATA #IMPLIED >
+<!ATTLIST object_table visible (true|false) #IMPLIED >
+<!ATTLIST object_table opacity CDATA #IMPLIED >
+<!ATTLIST object_table angle CDATA #IMPLIED >
+
 <!ELEMENT object_copy (#PCDATA) >
 <!ATTLIST object_copy idcopy CDATA #REQUIRED>
 <!ATTLIST object_copy text CDATA #IMPLIED >

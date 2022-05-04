@@ -29,6 +29,7 @@ import { Landmark } from './Objects/Landmark.js';
 import { Polygon } from './Objects/Polygon.js';
 import { Rectangle } from './Objects/Rectangle.js';
 import { StartButton } from './Objects/StartButton.js';
+import { Table } from './Objects/Table.js';
 import { Text } from './Objects/Text.js';
 
 /**
@@ -158,7 +159,7 @@ export class Animation {
         // If the background's node exists
         if (background_node) {
 
-            if (!this.isValidColor(this.background) && !this.isHexColor(this.background)) {
+            if (this.background != null && !this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim())) {
                 this.background = background_node.textContent;
                 // The image path is relative to the source file's one
                 let source_file_path = this.source_file.substr(0, this.source_file.lastIndexOf("/") + 1);
@@ -198,17 +199,25 @@ export class Animation {
 
                 let width;
                 let height;
+                let font;
+                let color;
+                let padding;
+                let halignment;
+                let valignment;
+                let line_height;
+                let column_width;
+
                 // Retrieve the others specific attributes of the object and create the associated animated object
                 switch (type) {
                     case 'object_text':
                         let text = read_object.getAttribute("text");
-                        let font = read_object.getAttribute("font").split(",");
-                        let color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
-                        let padding = parseInt(read_object.getAttribute("padding")) | 0;
+                        font = read_object.getAttribute("font").split(",");
+                        color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
+                        padding = parseInt(read_object.getAttribute("padding")) | 0;
                         width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                         height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
-                        let halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
-                        let valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
+                        halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
+                        valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
                         new_object = new Text(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
                         break;
                     case 'object_image':
@@ -250,9 +259,20 @@ export class Animation {
                     case 'object_grid':
                         let lines = parseInt(read_object.getAttribute("lines"));
                         let columns = parseInt(read_object.getAttribute("columns"));
-                        let line_height = parseInt(read_object.getAttribute("line_height"));
-                        let column_width = parseInt(read_object.getAttribute("column_width"));
+                        line_height = parseInt(read_object.getAttribute("line_height"));
+                        column_width = parseInt(read_object.getAttribute("column_width"));
                         new_object = new Grid(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, lines, columns, line_height, column_width);
+                        break;
+                    case 'object_table':
+                        let values = read_object.getAttribute("values");
+                        font = read_object.getAttribute("font").split(",");
+                        color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
+                        padding = parseInt(read_object.getAttribute("padding")) | 0;
+                        halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
+                        valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
+                        line_height = parseInt(read_object.getAttribute("line_height"));
+                        column_width = parseInt(read_object.getAttribute("column_width"));
+                        new_object = new Table(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment);
                         break;
                     case 'object_copy':
                         let idcopy = read_object.getAttribute("idcopy");
@@ -446,7 +466,7 @@ export class Animation {
 
     preload(drawing) {
         // Load the backround image
-        if (this.background != "" && !this.isValidColor(this.background) && !this.isHexColor(this.background)) {
+        if (this.background != null && this.background != "" && !this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim())) {
             this.background = drawing.loadImage(this.background);
         }
 
@@ -471,7 +491,7 @@ export class Animation {
     draw(drawing) {
         // Display the background image
         if (this.background != null) {
-            drawing.background(this.background);
+            drawing.background(this.background.trim());
         }
 
         // Display the start button if it has to
