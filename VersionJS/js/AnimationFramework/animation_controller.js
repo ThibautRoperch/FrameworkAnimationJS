@@ -136,7 +136,6 @@ export function speed_animation(speed) {
 	// Changer la valeur du select
 	document.getElementById('speed').value = speed;
 
-
 	return loop_delay;
 }
 
