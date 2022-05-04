@@ -158,9 +158,8 @@ export class Animation {
 
         // If the background's node exists
         if (background_node) {
-
-            if (this.background != null && !this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim())) {
-                this.background = background_node.textContent;
+            this.background = background_node.textContent;
+            if(!this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim())) {
                 // The image path is relative to the source file's one
                 let source_file_path = this.source_file.substr(0, this.source_file.lastIndexOf("/") + 1);
                 this.background = source_file_path + this.background;
@@ -465,8 +464,8 @@ export class Animation {
     }
 
     preload(drawing) {
-        // Load the backround image
-        if (this.background != null && this.background != "" && !this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim())) {
+        // Load the backround image 
+        if (this.background != "" && !this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim())) {
             this.background = drawing.loadImage(this.background);
         }
 

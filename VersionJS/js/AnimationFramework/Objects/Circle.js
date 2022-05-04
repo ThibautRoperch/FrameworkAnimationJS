@@ -15,6 +15,8 @@ export class Circle extends Ellipse {
 
     setRadius(radius) {
         this.radius = radius;
+        super.setWidth(radius * 2);
+        super.setHeight(radius * 2);
     }
 
     draw(drawing) {

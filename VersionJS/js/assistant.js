@@ -21,19 +21,22 @@ var instructions_array = new Array();
 var objects_image_id = new Array();
 var removed_objects_identifier = new Array();
 
-document.getElementById("openAnimation").addEventListener("click", function(){ask_popup('Change object identifier', 'Choose the XML file containing the animation to open.<input id=\'animation_file\' type=\'text\' placeholder=\'benchmark.xml\' required />', import_xml, 'animation_file')});
+let sketch;
+
+// Setup des lsteneer sur le click
+document.getElementById("openAnimation").addEventListener("click", function () { ask_popup('Change object identifier', 'Choose the XML file containing the animation to open.<input id=\'animation_file\' type=\'text\' placeholder=\'benchmark.xml\' required />', import_xml, 'animation_file') });
 document.getElementById("exportAnimation").addEventListener('click', export_xml);
-document.getElementById("addText").addEventListener('click', function(){new_object('Text')});
-document.getElementById("addImage").addEventListener('click', function(){new_object('ImageFile')});
-document.getElementById("addRectangle").addEventListener('click', function(){new_object('Rectangle')});
-document.getElementById("addPolygon").addEventListener('click', function(){new_object('Polygon')});
-document.getElementById("addCircle").addEventListener('click', function(){new_object('Circle')});
-document.getElementById("addEllipse").addEventListener('click', function(){new_object('Ellipse')});
-document.getElementById("addLandmark").addEventListener('click', function(){new_object('Landmark')});
-document.getElementById("addGrid").addEventListener('click', function(){new_object('Grid')});
-document.getElementById("width").addEventListener('click', draw_animation);
-document.getElementById("height").addEventListener('click', draw_animation);
-document.getElementById("background").addEventListener('click', draw_animation);
+document.getElementById("addText").addEventListener('click', function () { new_object('Text') });
+document.getElementById("addImage").addEventListener('click', function () { new_object('ImageFile') });
+document.getElementById("addRectangle").addEventListener('click', function () { new_object('Rectangle') });
+document.getElementById("addPolygon").addEventListener('click', function () { new_object('Polygon') });
+document.getElementById("addCircle").addEventListener('click', function () { new_object('Circle') });
+document.getElementById("addEllipse").addEventListener('click', function () { new_object('Ellipse') });
+document.getElementById("addLandmark").addEventListener('click', function () { new_object('Landmark') });
+document.getElementById("addGrid").addEventListener('click', function () { new_object('Grid') });
+document.getElementById("width").addEventListener('change', function () { sketch.resizeCanvas(this.value, document.getElementById("height").value); update_section_size();});
+document.getElementById("height").addEventListener('change', function () { sketch.resizeCanvas(document.getElementById("width").value, this.value); update_section_size(); });
+document.getElementById("background").addEventListener('change', function () { sketch.load_background() });
 
 wait_for_includes();
 function wait_for_includes() {
@@ -42,21 +45,9 @@ function wait_for_includes() {
 		console.log("Animation files are not included. Include them by this way :\n<script>include_animation_files(\"path/of/AnimationFramework/\");</script>");
 	}
 
-	// Check if object classes are loaded
-	let objects_classes_loaded = true;
-	for (let obj_cl of OBJECT_CLASSES) {
-		objects_classes_loaded = objects_classes_loaded & typeof(obj_cl) !== "undefined";
-	}
-	
-	// Check if instruction classes are loaded
-	let instruction_classes_loaded = true;
-	for (let instr_cl of INSTRUCTION_CLASSES) {
-		instruction_classes_loaded = instruction_classes_loaded & typeof(instr_cl) !== "undefined";
-	}
-
 	// Loop with delay until animation classes are not loaded
-    if (typeof(p5) === "undefined" || typeof(Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
-		setTimeout(function() {
+	if (typeof (p5) === "undefined" || typeof (Animation) === "undefined") {
+		setTimeout(function () {
 			wait_for_includes();
 		}, 150);
 	} else {
@@ -72,17 +63,19 @@ function import_xml(input_id) {
 
 	// Read the animation's XML file using AJAX
 	let xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
+	xhr.onreadystatechange = function () {
 		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
 			animation.readXmlFile(xhr.responseText);
 			// Retrieve background path
 			if (animation.getBackground() != null) {
 				document.getElementById("background").value = animation.getBackground().trim();
+				sketch.load_background();
 			}
 			// Remove all current objects
 			for (let i = 0; i <= last_id; ++i) {
 				remove(i);
 			}
+
 			// Re-create all read objects
 			for (let obj of animation.getObjects().values()) {
 				let fake_button = document.createElement("button");
@@ -116,7 +109,7 @@ function import_xml(input_id) {
 					}
 				}
 			}
-			draw_animation();
+			//draw_animation();
 		}
 	};
 	xhr.open("GET", source_file, true);
@@ -130,225 +123,249 @@ function new_object(object_type) {
 	let object;
 
 	let li = document.createElement("li");
-		li.id = obj_id;
+	li.id = obj_id;
 	let header = document.createElement("headerobj");
-		let spoiler = document.createElement("div");
-			spoiler.onclick = function() { expand(obj_id); };
-			let id = document.createElement("id");
-				id.innerHTML = "<b>Identifier :</b> " + obj_id;
-				spoiler.appendChild(id);
-			let type = document.createElement("type");
-				type.innerHTML = "<b>Type :</b> " + object_type;
-				spoiler.appendChild(type);
-			let arrow = document.createElement("arrow");
-				arrow.innerHTML = "&#11167;";
-				spoiler.appendChild(arrow);
-		header.appendChild(spoiler);
-		let pen = document.createElement("div");
-			pen.className = "warning";
-			pen.onclick = function() { ask_popup("Change object identifier", "Enter below the new id for the object <b>" + obj_id + "</b>.<input id='new_id' type='text' value='" + objects_array[obj_id].getId() + "' required/>", change_id, [obj_id, "new_id"]); };
-			pen.innerHTML = "&#128397;";
-		header.appendChild(pen);
-		let style = document.createElement("div");
-			style.className = "warning";
-			style.onclick = function() { customize(obj_id); };
-			style.innerHTML = "&#127912;";
-		header.appendChild(style);
-		let trash = document.createElement("div");
-			trash.className = "danger";
-			trash.onclick = function() { remove(obj_id); };
-			trash.innerHTML = "&#10060;";
-		header.appendChild(trash);
+
+	let spoiler = document.createElement("div");
+	spoiler.onclick = function () { expand(obj_id); };
+
+	let id = document.createElement("id");
+	id.innerHTML = "<b>Identifier :</b> " + obj_id;
+	spoiler.appendChild(id);
+
+	let type = document.createElement("type");
+	type.innerHTML = "<b>Type :</b> " + object_type;
+	spoiler.appendChild(type);
+
+	let arrow = document.createElement("arrow");
+	arrow.innerHTML = "&#11167;";
+	spoiler.appendChild(arrow);
+	header.appendChild(spoiler);
+
+	let pen = document.createElement("div");
+	pen.className = "warning";
+	pen.onclick = function () { ask_popup("Change object identifier", "Enter below the new id for the object <b>" + obj_id + "</b>.<input id='new_id' type='text' value='" + objects_array[obj_id].getId() + "' required/>", change_id, [obj_id, "new_id"]); };
+	pen.innerHTML = "&#128397;";
+	header.appendChild(pen);
+
+	let style = document.createElement("div");
+	style.className = "warning";
+	style.onclick = function () { customize(obj_id); };
+	style.innerHTML = "&#127912;";
+	header.appendChild(style);
+
+	let trash = document.createElement("div");
+	trash.className = "danger";
+	trash.onclick = function () { remove(obj_id); };
+	trash.innerHTML = "&#10060;";
+	header.appendChild(trash);
+
 	li.appendChild(header);
 
 	// init default attributs
 	let x = 0;
 	let y = 0;
-	let background_color = [0,0,0]; // r, g, b
+	let background_color = [0, 0, 0]; // r, g, b
 	let background_transparent = true;
-	let border_color = [0,0,0]; // r, g, b
-	let border_transparency = true;
+	let border_color = [0, 0, 0]; // r, g, b
+	let border_transparency = false;
 	let border_size = 1;
 	let state = DEFAULT_STATE;
 	let layer = 0;
-	let visible = false;
+	let visible = true;
 	let opacity = 1;
 	let angle = 0;
 	let width = 50;
 	let height = 50;
 
 	let section = document.createElement("sectionobj");
-		// Properties
-		let article1 = document.createElement("article");
-			// x
-			let property = document.createElement("property");
-				property.className = "x";
-				let label = document.createElement("label");
-					label.innerHTML = "x";
-					property.appendChild(label);
-				let input = document.createElement("input");
-					input.type = "number";
-					input.placeholder = x;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
-			// y
-			property = document.createElement("property");
-				property.className = "y";
-				label = document.createElement("label");
-					label.innerHTML = "y";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "number";
-					input.placeholder = y;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
-			// background_color
-			property = document.createElement("property");
-				property.className = "background_color";
-				label = document.createElement("label");
-					label.innerHTML = "background_color";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text";
-					input.placeholder = background_color;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
-			// background_transparent
-			property = document.createElement("property");
-				property.className = "background_transparent";
-				label = document.createElement("label");
-					label.innerHTML = "background_transparent";
-					property.appendChild(label);
-				input = document.createElement("select");
-					input.onchange = function() { change_property(obj_id, this); };
-						let option = document.createElement("option");
-							option.value = "true";
-							option.innerHTML = "True";
-							option.selected = "selected";
-							input.appendChild(option);
-						option = document.createElement("option");
-							option.value = "false";
-							option.innerHTML = "False";
-							input.appendChild(option);
-					property.appendChild(input);
-				article1.appendChild(property);
-			// border_color
-			property = document.createElement("property");
-				property.className = "border_color";
-				label = document.createElement("label");
-					label.innerHTML = "border_color";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text";
-					input.placeholder = border_color;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
-			// border_transparency
-			property = document.createElement("property");
-				property.className = "border_transparency";
-				label = document.createElement("label");
-					label.innerHTML = "border_transparency";
-					property.appendChild(label);
-				input = document.createElement("select");
-					input.onchange = function() { change_property(obj_id, this); };
-						option = document.createElement("option");
-							option.value = "true";
-							option.innerHTML = "True";
-							option.selected = "selected";
-							input.appendChild(option);
-						option = document.createElement("option");
-							option.value = "false";
-							option.innerHTML = "False";
-							input.appendChild(option);
-					property.appendChild(input);
-				article1.appendChild(property);
-			// border_size
-			property = document.createElement("property");
-				property.className = "border_size";
-				label = document.createElement("label");
-					label.innerHTML = "border_size";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "number";
-					input.placeholder = border_size;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
-			// layer
-			property = document.createElement("property");
-				property.className = "layer";
-				label = document.createElement("label");
-					label.innerHTML = "layer"
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "number";
-					input.placeholder = layer;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
-			// visible
-			property = document.createElement("property");
-				property.className = "visible";
-				label = document.createElement("label");
-					label.innerHTML = "visible";
-					property.appendChild(label);
-				input = document.createElement("select");
-					input.onchange = function() { change_property(obj_id, this); };
-						option = document.createElement("option");
-							option.value = "true";
-							option.innerHTML = "True";
-							input.appendChild(option);
-							option = document.createElement("option");
-							option.value = "false";
-							option.innerHTML = "False";
-							option.selected = "selected";
-							input.appendChild(option);
-					property.appendChild(input);
-				article1.appendChild(property);
-			// opacity
-			property = document.createElement("property");
-				property.className = "opacity";
-				label = document.createElement("label");
-					label.innerHTML = "opacity";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "range";
-					input.min = "0";
-					input.max = "100";
-					input.value = "100";
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
-			// angle
-			property = document.createElement("property");
-				property.className = "angle";
-				label = document.createElement("label");
-					label.innerHTML = "angle";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "number";
-					input.placeholder = angle;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				// article1.appendChild(property);
-			section.appendChild(article1);
-		// Instructions
-		let article2 = document.createElement("article");
-			let instructions = document.createElement("instructions");
-				let categories = ["Position", "Move", "Interact", "Instruction", "Change property"];
-				for (let cat of categories) {
-					let button = document.createElement("button");
-						button.onclick = function() { display_instructions(this); };
-						button.innerHTML = cat;
-						instructions.appendChild(button);
-				}
-				article2.appendChild(instructions);
-			//section.appendChild(article2); // TODO à enlever pour mettre les instructions
-		li.appendChild(section);
+	// Properties
+	let article1 = document.createElement("article");
+
+	// x
+	let property = document.createElement("property");
+	property.className = "x";
+	let label = document.createElement("label");
+	label.innerHTML = "x";
+	property.appendChild(label);
+	let input = document.createElement("input");
+	input.type = "number";
+	input.placeholder = x;
+	input.onchange = function () { change_property(obj_id, this); };
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// y
+	property = document.createElement("property");
+	property.className = "y";
+	label = document.createElement("label");
+	label.innerHTML = "y";
+	property.appendChild(label);
+	input = document.createElement("input");
+	input.type = "number";
+	input.placeholder = y;
+	input.onchange = function () { change_property(obj_id, this); };
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// background_color
+	property = document.createElement("property");
+	property.className = "background_color";
+	label = document.createElement("label");
+	label.innerHTML = "background_color";
+	property.appendChild(label);
+	input = document.createElement("input");
+	input.type = "text";
+	input.placeholder = background_color;
+	input.onchange = function () { change_property(obj_id, this); };
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// background_transparent
+	property = document.createElement("property");
+	property.className = "background_transparent";
+	label = document.createElement("label");
+	label.innerHTML = "background_transparent";
+	property.appendChild(label);
+	input = document.createElement("select");
+	input.onchange = function () { change_property(obj_id, this); };
+	let option = document.createElement("option");
+	option.value = "true";
+	option.innerHTML = "True";
+	option.selected = "selected";
+	input.appendChild(option);
+	option = document.createElement("option");
+	option.value = "false";
+	option.innerHTML = "False";
+	input.appendChild(option);
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// border_color
+	property = document.createElement("property");
+	property.className = "border_color";
+	label = document.createElement("label");
+	label.innerHTML = "border_color";
+	property.appendChild(label);
+	input = document.createElement("input");
+	input.type = "text";
+	input.placeholder = border_color;
+	input.onchange = function () { change_property(obj_id, this); };
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// border_transparency
+	property = document.createElement("property");
+	property.className = "border_transparency";
+	label = document.createElement("label");
+	label.innerHTML = "border_transparency";
+	property.appendChild(label);
+	input = document.createElement("select");
+	input.onchange = function () { change_property(obj_id, this); };
+	option = document.createElement("option");
+	option.value = "true";
+	option.innerHTML = "True";
+	input.appendChild(option);
+	option = document.createElement("option");
+	option.value = "false";
+	option.innerHTML = "False";
+	option.selected = "selected";
+	input.appendChild(option);
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// border_size
+	property = document.createElement("property");
+	property.className = "border_size";
+	label = document.createElement("label");
+	label.innerHTML = "border_size";
+	property.appendChild(label);
+	input = document.createElement("input");
+	input.type = "number";
+	input.placeholder = border_size;
+	input.onchange = function () { change_property(obj_id, this); };
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// layer
+	property = document.createElement("property");
+	property.className = "layer";
+	label = document.createElement("label");
+	label.innerHTML = "layer"
+	property.appendChild(label);
+	input = document.createElement("input");
+	input.type = "number";
+	input.placeholder = layer;
+	input.onchange = function () { change_property(obj_id, this); };
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// visible
+	property = document.createElement("property");
+	property.className = "visible";
+	label = document.createElement("label");
+	label.innerHTML = "visible";
+	property.appendChild(label);
+
+	input = document.createElement("select");
+	input.onchange = function () { change_property(obj_id, this); };
+	option = document.createElement("option");
+	option.value = "true";
+	option.innerHTML = "True";
+	option.selected = "selected";
+
+	input.appendChild(option);
+	option = document.createElement("option");
+	option.value = "false";
+	option.innerHTML = "False";
+
+
+	input.appendChild(option);
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// opacity
+	property = document.createElement("property");
+	property.className = "opacity";
+	label = document.createElement("label");
+	label.innerHTML = "opacity";
+	property.appendChild(label);
+	input = document.createElement("input");
+	input.type = "range";
+	input.min = "0";
+	input.max = "100";
+	input.value = "100";
+	input.onchange = function () { change_property(obj_id, this); };
+	property.appendChild(input);
+	article1.appendChild(property);
+
+	// angle
+	property = document.createElement("property");
+	property.className = "angle";
+	label = document.createElement("label");
+	label.innerHTML = "angle";
+	property.appendChild(label);
+	input = document.createElement("input");
+	input.type = "number";
+	input.placeholder = angle;
+	input.onchange = function () { change_property(obj_id, this); };
+	property.appendChild(input);
+	// article1.appendChild(property);
+	section.appendChild(article1);
+
+	// Instructions
+	let article2 = document.createElement("article");
+	let instructions = document.createElement("instructions");
+	let categories = ["Position", "Move", "Interact", "Instruction", "Change property"];
+	for (let cat of categories) {
+		let button = document.createElement("button");
+		button.onclick = function () { display_instructions(this); };
+		button.innerHTML = cat;
+		instructions.appendChild(button);
+	}
+	article2.appendChild(instructions);
+	//section.appendChild(article2); // TODO à enlever pour mettre les instructions
+	li.appendChild(section);
 	objects_list.appendChild(li);
 
 	// switch case
@@ -357,132 +374,132 @@ function new_object(object_type) {
 		case "Text":
 			// text
 			property = document.createElement("property");
-				property.className = "text";
-				label = document.createElement("label");
-					label.innerHTML = "text";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text";
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "text";
+			label = document.createElement("label");
+			label.innerHTML = "text";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// font
 			let font = ["Courier", 14, "normal"];
 			property = document.createElement("property");
-				property.className = "font";
-				label = document.createElement("label");
-					label.innerHTML = "font";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text";
-					input.value = font;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "font";
+			label = document.createElement("label");
+			label.innerHTML = "font";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = font;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// color
 			let color = [255, 255, 255];
 			property = document.createElement("property");
-				property.className = "color";
-				label = document.createElement("label");
-					label.innerHTML = "color";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text";
-					input.placeholder = color;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "color";
+			label = document.createElement("label");
+			label.innerHTML = "color";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.placeholder = color;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// padding
 			let padding = 0;
 			property = document.createElement("property");
-				property.className = "padding";
-				label = document.createElement("label");
-					label.innerHTML = "padding";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "number";
-					input.placeholder = padding;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "padding";
+			label = document.createElement("label");
+			label.innerHTML = "padding";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.placeholder = padding;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// width
 			width = undefined;
 			property = document.createElement("property");
-				property.className = "width";
-				label = document.createElement("label");
-					label.innerHTML = "width";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "number";
-					input.placeholder = width;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "width";
+			label = document.createElement("label");
+			label.innerHTML = "width";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.placeholder = width;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// height
 			height = undefined;
 			property = document.createElement("property");
-				property.className = "height";
-				label = document.createElement("label");
-					label.innerHTML = "height";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "number";
-					input.placeholder = height;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "height";
+			label = document.createElement("label");
+			label.innerHTML = "height";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.placeholder = height;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// halignment
 			let halignment = "left";
 			property = document.createElement("property");
-				property.className = "halignment";
-				label = document.createElement("label");
-					label.innerHTML = "halignment";
-					property.appendChild(label);
-				input = document.createElement("select");
-					input.onchange = function() { change_property(obj_id, this); };
-						option = document.createElement("option");
-							option.value = "left";
-							option.innerHTML = "Left";
-							option.selected = "selected";
-							input.appendChild(option);
-							option = document.createElement("option");
-							option.value = "center";
-							option.innerHTML = "Center";
-							input.appendChild(option);
-							option = document.createElement("option");
-							option.value = "right";
-							option.innerHTML = "Right";
-							input.appendChild(option);
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "halignment";
+			label = document.createElement("label");
+			label.innerHTML = "halignment";
+			property.appendChild(label);
+			input = document.createElement("select");
+			input.onchange = function () { change_property(obj_id, this); };
+			option = document.createElement("option");
+			option.value = "left";
+			option.innerHTML = "Left";
+			option.selected = "selected";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "center";
+			option.innerHTML = "Center";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "right";
+			option.innerHTML = "Right";
+			input.appendChild(option);
+			property.appendChild(input);
+			article1.appendChild(property);
 			// valignment
 			let valignment = "top";
 			property = document.createElement("property");
-				property.className = "valignment";
-				label = document.createElement("label");
-					label.innerHTML = "valignment";
-					property.appendChild(label);
-				input = document.createElement("select");
-					input.onchange = function() { change_property(obj_id, this); };
-						option = document.createElement("option");
-							option.value = "top";
-							option.innerHTML = "Top";
-							option.selected = "selected";
-							input.appendChild(option);
-							option = document.createElement("option");
-							option.value = "bottom";
-							option.innerHTML = "Bottom";
-							input.appendChild(option);
-							option = document.createElement("option");
-							option.value = "center";
-							option.innerHTML = "Center";
-							input.appendChild(option);
-							option = document.createElement("option");
-							option.value = "baseline";
-							option.innerHTML = "Baseline";
-							input.appendChild(option);
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "valignment";
+			label = document.createElement("label");
+			label.innerHTML = "valignment";
+			property.appendChild(label);
+			input = document.createElement("select");
+			input.onchange = function () { change_property(obj_id, this); };
+			option = document.createElement("option");
+			option.value = "top";
+			option.innerHTML = "Top";
+			option.selected = "selected";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "bottom";
+			option.innerHTML = "Bottom";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "center";
+			option.innerHTML = "Center";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "baseline";
+			option.innerHTML = "Baseline";
+			input.appendChild(option);
+			property.appendChild(input);
+			article1.appendChild(property);
 			object = new Text(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, "", font, color, padding, width, height, halignment, valignment);
 			break;
 		case "ImageFile":
@@ -491,26 +508,26 @@ function new_object(object_type) {
 			property = document.createElement("property");
 			property.className = "width";
 			label = document.createElement("label");
-				label.innerHTML = "width";
-				property.appendChild(label);
+			label.innerHTML = "width";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = width;
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = width;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// height
 			height = 50;
 			property = document.createElement("property");
 			property.className = "height";
 			label = document.createElement("label");
-				label.innerHTML = "height";
-				property.appendChild(label);
+			label.innerHTML = "height";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = height;
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = height;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// image
 			let image = "img/yellow_blue_linear_gradient.png";
@@ -518,14 +535,14 @@ function new_object(object_type) {
 			property = document.createElement("property");
 			property.className = "image";
 			label = document.createElement("label");
-				label.innerHTML = "image";
-				property.appendChild(label);
+			label.innerHTML = "image";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "text";
-				input.value = image;
-				input.required = "required";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "text";
+			input.value = image;
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			object = new ImageFile(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, image);
 			objects_image_id.push(obj_id);
@@ -534,76 +551,76 @@ function new_object(object_type) {
 			// width
 			width = 33;
 			property = document.createElement("property");
-				property.className = "width";
-				label = document.createElement("label");
-					label.innerHTML = "width";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "number";
-					input.value = width;
-					input.required = "required";
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "width";
+			label = document.createElement("label");
+			label.innerHTML = "width";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = width;
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// height
 			height = 10;
 			property = document.createElement("property");
-				property.className = "height";
-				label = document.createElement("label");
-					label.innerHTML = "height";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "number";
-					input.value = height;
-					input.required = "required";
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "height";
+			label = document.createElement("label");
+			label.innerHTML = "height";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = height;
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// round
 			let round = [0, 0, 0, 0];
 			property = document.createElement("property");
-				property.className = "round";
-				label = document.createElement("label");
-					label.innerHTML = "round";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text";
-					input.placeholder = round;
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "round";
+			label = document.createElement("label");
+			label.innerHTML = "round";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.placeholder = round;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			object = new Rectangle(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, round);
 			break;
 		case "Polygon":
 			// coord_x
 			let coord_x = [0, 80, 80, 40];
 			property = document.createElement("property");
-				property.className = "coord_x";
-				label = document.createElement("label");
-					label.innerHTML = "coord_x";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text"
-					input.value = coord_x;
-					input.required = "required";
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);
+			property.className = "coord_x";
+			label = document.createElement("label");
+			label.innerHTML = "coord_x";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text"
+			input.value = coord_x;
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// coord_y
 			let coord_y = [0, 60, 0, 60];
 			property = document.createElement("property");
-				property.className = "coord_y";
-				label = document.createElement("label");
-					label.innerHTML = "coord_y";
-					property.appendChild(label);
-				input = document.createElement("input");
-					input.type = "text";
-					input.value = coord_y;
-					input.required = "required";
-					input.onchange = function() { change_property(obj_id, this); };
-					property.appendChild(input);
-				article1.appendChild(property);	
-			object = new Polygon(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, coord_x, coord_y); 
+			property.className = "coord_y";
+			label = document.createElement("label");
+			label.innerHTML = "coord_y";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = coord_y;
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			object = new Polygon(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, coord_x, coord_y);
 			break;
 		case "Circle":
 			// radius
@@ -611,16 +628,16 @@ function new_object(object_type) {
 			property = document.createElement("property");
 			property.className = "radius";
 			label = document.createElement("label");
-				label.innerHTML = "radius";
-				property.appendChild(label);
+			label.innerHTML = "radius";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = "10";
-				input.required = "required";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = "10";
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Circle(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, radius, radius); 
+			object = new Circle(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, radius, radius);
 			break;
 		case "Ellipse":
 			// width
@@ -628,111 +645,111 @@ function new_object(object_type) {
 			property = document.createElement("property");
 			property.className = "width";
 			label = document.createElement("label");
-				label.innerHTML = "width";
-				property.appendChild(label);
+			label.innerHTML = "width";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = width;
-				input.required = "required";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = width;
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// height
 			height = 40;
 			property = document.createElement("property");
 			property.className = "height";
 			label = document.createElement("label");
-				label.innerHTML = "height";
-				property.appendChild(label);
+			label.innerHTML = "height";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = height;
-				input.required = "required";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = height;
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Ellipse(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height); 
+			object = new Ellipse(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height);
 			break;
-		case "Landmark":			
+		case "Landmark":
 			// width
 			property = document.createElement("property");
 			property.className = "width";
 			label = document.createElement("label");
-				label.innerHTML = "width";
-				property.appendChild(label);
+			label.innerHTML = "width";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = "50";
-				input.required = "required";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = "50";
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// height
 			property = document.createElement("property");
 			property.className = "height";
 			label = document.createElement("label");
-				label.innerHTML = "height";
-				property.appendChild(label);
+			label.innerHTML = "height";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = "50";
-				input.required = "required";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = "50";
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// scale_x
 			let scale_x = 1;
 			property = document.createElement("property");
 			property.className = "scale_x";
 			label = document.createElement("label");
-				label.innerHTML = "scale_x";
-				property.appendChild(label);
+			label.innerHTML = "scale_x";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = "1";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = "1";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// scale_y
 			let scale_y = 1;
 			property = document.createElement("property");
 			property.className = "scale_y";
 			label = document.createElement("label");
-				label.innerHTML = "scale_y";
-				property.appendChild(label);
+			label.innerHTML = "scale_y";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = "1";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = "1";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// unit_x
 			let unit_x = "cm";
 			property = document.createElement("property");
 			property.className = "unit_x";
 			label = document.createElement("label");
-				label.innerHTML = "unit_x";
-				property.appendChild(label);
+			label.innerHTML = "unit_x";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "text";
-				input.value = "cm";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "text";
+			input.value = "cm";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// unit_y
 			let unit_y = "cm";
 			property = document.createElement("property");
 			property.className = "unit_y";
 			label = document.createElement("label");
-				label.innerHTML = "unit_y";
-				property.appendChild(label);
+			label.innerHTML = "unit_y";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "text";
-				input.value = "cm";
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "text";
+			input.value = "cm";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Landmark(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y); 
+			object = new Landmark(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y);
 			break;
 		case "Grid":
 			// lines
@@ -740,52 +757,52 @@ function new_object(object_type) {
 			property = document.createElement("property");
 			property.className = "lines";
 			label = document.createElement("label");
-				label.innerHTML = "lines";
-				property.appendChild(label);
+			label.innerHTML = "lines";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = lines;
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = lines;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// columns
 			let columns = 3;
 			property = document.createElement("property");
 			property.className = "columns";
 			label = document.createElement("label");
-				label.innerHTML = "columns";
-				property.appendChild(label);
+			label.innerHTML = "columns";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = columns;
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = columns;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// line_height
 			let line_height = 20;
 			property = document.createElement("property");
 			property.className = "line_height";
 			label = document.createElement("label");
-				label.innerHTML = "line_height";
-				property.appendChild(label);
+			label.innerHTML = "line_height";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = line_height;
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = line_height;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			// column_width
 			let column_width = 20;
 			property = document.createElement("property");
 			property.className = "column_width";
 			label = document.createElement("label");
-				label.innerHTML = "column_width";
-				property.appendChild(label);
+			label.innerHTML = "column_width";
+			property.appendChild(label);
 			input = document.createElement("input");
-				input.type = "number";
-				input.value = column_width;
-				input.onchange = function() { change_property(obj_id, this); };
-				property.appendChild(input);
+			input.type = "number";
+			input.value = column_width;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
 			article1.appendChild(property);
 			object = new Grid(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, lines, columns, line_height, column_width);
 			break;
@@ -793,24 +810,20 @@ function new_object(object_type) {
 	objects_array[obj_id] = object;
 	instructions_array[obj_id] = new Array();
 
-	draw_animation();
+	//draw_animation();
 
 	return obj_id;
 }
 
-function new_instruction(object_id, object_dom) {
-	// Crée, pour un id d'objet, les balises constituant une nouvelle instruction
-}
-
 function change_property(object_id, property_dom) {
 	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
-	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
+	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
 function change_id(args) {
 	let object_id = args[0];
 	let input_id = args[1];
-	
+
 	let new_id = document.getElementById(input_id).value;
 	if (new_id === "") return; // stop here if the input is empty (won't change the id and will keep the popup active)
 
@@ -827,7 +840,7 @@ function expand(object_id) {
 	let object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "displayed";
 	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].className = "active";
-	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].onclick = function() { reduce(object_id); };
+	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].onclick = function () { reduce(object_id); };
 	object_dom.getElementsByTagName("arrow")[0].innerHTML = "&#11165;";
 }
 
@@ -835,7 +848,7 @@ function reduce(object_id) {
 	let object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "hidden";
 	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].className = "";
-	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].onclick = function() { expand(object_id); };
+	object_dom.getElementsByTagName("headerobj")[0].getElementsByTagName("div")[0].onclick = function () { expand(object_id); };
 	object_dom.getElementsByTagName("arrow")[0].innerHTML = "&#11167;";
 }
 
@@ -848,7 +861,7 @@ function update_section_size() {
 	// section margin right = aside.(margin left * 2 + margin right + padding left + padding right + width)
 	// aside.offsetWidth = aside.paddings + aside.width
 	let aside_style = aside.currentStyle || window.getComputedStyle(aside);
-	let aside_size = parseInt(aside_style.marginLeft) * 2 + parseInt(aside_style.marginRight) + aside.offsetWidth; 
+	let aside_size = parseInt(aside_style.marginLeft) * 2 + parseInt(aside_style.marginRight) + aside.offsetWidth;
 	section.style.marginRight = aside_size + "px";
 }
 
@@ -872,8 +885,8 @@ function customize(object_id) {
 	document.getElementById(object_id).getElementsByClassName("background_color")[0].getElementsByTagName("input")[0].value = object.getBackground_color();
 	object.setBorder_color(rand_rgb());
 	document.getElementById(object_id).getElementsByClassName("border_color")[0].getElementsByTagName("input")[0].value = object.getBorder_color();
-	
-	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
+
+	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
 function remove(object_id) {
@@ -885,7 +898,7 @@ function remove(object_id) {
 	if (pos > -1) {
 		objects_image_id.splice(pos, 1);
 	}*/
-	
+
 	// Add the object to the deleted objects array (JS)
 	removed_objects_identifier.push(objects_array[object_id].getId()); // l'identifiant réel de l'objet plutot que son indice dans le tableau, car renommage possible de l'id
 
@@ -895,7 +908,7 @@ function remove(object_id) {
 	// Remove from the objects list (HTML)
 	objects_list.removeChild(document.getElementById(object_id));
 
-	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
+	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
 function export_xml() {
@@ -910,10 +923,8 @@ function export_xml() {
 	init_node.appendChild(start_button);
 	animation_node.appendChild(init_node);
 
-	// speed node
-	let speed_node = document.createElement("speed");
-	speed_node.innerHTML = document.getElementById("speed").value;
-	animation_node.appendChild(speed_node);
+	// speed attribute
+	animation_node.setAttribute('speed', document.getElementById("speed").value);
 
 	// background image node
 	if (document.getElementById("background").value != "") {
@@ -950,7 +961,7 @@ function ask_popup(title, contents, callback, args) {
 
 	popup.getElementsByTagName("h2")[0].innerHTML = title;
 	popup.getElementsByTagName("p")[0].innerHTML = contents;
-	popup.getElementsByTagName("button")[1].onclick = function() { callback(args); };
+	popup.getElementsByTagName("button")[1].onclick = function () { callback(args); };
 
 	popup.className = "display";
 }
@@ -984,58 +995,54 @@ function isHexColor(strColor) {
 
 
 function draw_animation() {
-	let layers = new Set();
 
-	new p5(function(draw_ref) {
 
-		let background = null;
+	sketch = new p5(function (draw_ref) {
 
-		draw_ref.preload = function() { // preload function runs once
+		let background_img = null;
+
+		let layers = [];
+
+		/** Preload data */
+		draw_ref.preload = function () { // preload function runs once
+
 			// Load the backround
-			let bg = document.getElementById("background").value.trim();
-			if (bg != "") {
-				if (!isValidColor(bg) && !isHexColor(bg)) {
-					background = draw_ref.loadImage(bg);
-				} else {
-					background = bg;
-				}
-			}
-			
+			draw_ref.load_background();
+
 			// Load animation's images
 			for (let id of objects_image_id) {
 				let object = objects_array[id];
 				object.loadImage(draw_ref);
 			}
-			// Retrieve all layers in a set
-			for (let object of objects_array) {
-				layers.add(object.getLayer());
-			}
-
-			// Convert and sort the layers set
-			layers = Array.from(layers);
-			layers.sort();
 		}
 
-		draw_ref.setup = function() { // setup function waits until preload one is done
+		/** Setup of the canvas */
+		draw_ref.setup = function () { // setup function waits until preload one is done
 			while (drawing_dom.hasChildNodes()) {
 				drawing_dom.removeChild(drawing_dom.firstChild);
 			}
+
+			draw_ref.frameRate(1); // 60 fps
 
 			canvas = draw_ref.createCanvas(parseInt(document.getElementById("width").value), parseInt(document.getElementById("height").value));
 			canvas.parent(drawing_dom);
 
 			update_section_size();
 		}
-		
-		draw_ref.draw = function() {
-			draw_ref.clear();
 
-			draw_ref.frameRate(10); // 60 fps
+		/** Drawing loop */
+		draw_ref.draw = function () {
+			//draw_ref.clear();
 
 			// Display the background image
-			if (background != null) {
-				draw_ref.background(background);
+			if (background_img != null) {
+				draw_ref.background(background_img);
+			} else {
+				draw_ref.background(255);
 			}
+
+			// Update the number of layers
+			draw_ref.update_layers();
 
 			// Display objects of each layer, if they're set as visible
 			for (let layer of layers) {
@@ -1045,6 +1052,32 @@ function draw_animation() {
 					}
 				}
 			}
+		}
+
+		/** Load the background of the canvas */
+		draw_ref.load_background = function () {
+			let bg = document.getElementById("background").value.trim();
+			if (bg != "") {
+				if (!isValidColor(bg) && !isHexColor(bg)) {
+					background_img = draw_ref.loadImage(bg);
+				} else {
+					background_img = bg;
+				}
+			}
+		}
+
+		/** Update the layers of the canvas by iterating on the objects_array */
+		draw_ref.update_layers = function () {
+
+			let new_layers = new Set();
+			// Retrieve all layers in a set
+			for (let object of objects_array) {
+				new_layers.add(object.getLayer());
+			}
+
+			// Convert and sort the layers set
+			layers = Array.from([...new_layers]);
+			layers.sort();
 		}
 
 		// draw_ref.mouseClicked = function() {

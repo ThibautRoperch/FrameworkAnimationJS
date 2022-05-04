@@ -2,7 +2,7 @@
  * This instruction set the property of the target at a certain value
  */
 import { Instruction } from "./Instruction.js";
-import { speed_animation, parseIntArray } from '../animation_controller.js';
+import { parseIntArray } from '../animation_controller.js';
 export class SetProperty extends Instruction {
 
 	constructor(object, target, property, value) {
@@ -41,10 +41,10 @@ export class SetProperty extends Instruction {
 				this.target.setLayer(parseInt(this.value) | 0);
 				break;
 			case "visible":
-				this.target.setVisible(this.value == "true" | false);
+				this.target.setVisible(this.value == "true" ? true : false);
 				break;
 			case "opacity":
-				this.target.setOpacity((parseInt(this.value) | 0) / 100);
+				this.target.setOpacity(parseInt(this.value) | 0);
 				break;
 			case "angle":
 				this.target.setAngle(parseInt(this.value) | 0);
@@ -93,7 +93,7 @@ export class SetProperty extends Instruction {
 				this.target.setCoordx(parseIntArray(this.value));
 				break;
 			case "coord_y":
-				this.target.setCoordx(parseIntArray(this.value));
+				this.target.setCoordy(parseIntArray(this.value));
 				break;
 
 			// circle
