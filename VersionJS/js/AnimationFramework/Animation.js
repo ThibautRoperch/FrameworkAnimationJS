@@ -133,15 +133,15 @@ export class Animation {
         let root = parser.parseFromString(contents, "text/xml");
 
         // Retrieve sped, init, background, objects and programs nodes
-        let speed_node = root.getElementsByTagName("speed")[0];
+        let animation_node = root.getElementsByTagName("animation")[0];
         let init_node = root.getElementsByTagName("init")[0];
         let background_node = root.getElementsByTagName("background")[0];
         let objects_node = root.getElementsByTagName("objects")[0];
         let programs_node = root.getElementsByTagName("programs")[0];
 
         // If the speed node node exists
-        if (speed_node) {
-            this.loop_delay = speed_animation(speed_node.textContent);
+        if (animation_node.hasAttribute("speed")) {
+            this.loop_delay = speed_animation(animation_node.getAttribute("speed"));
         }
 
         // If the init's node exists
@@ -158,7 +158,7 @@ export class Animation {
         // If the background's node exists
         if (background_node) {
 
-            if(!this.isValidColor(this.background) && !this.isHexColor(this.background)) {
+            if (!this.isValidColor(this.background) && !this.isHexColor(this.background)) {
                 this.background = background_node.textContent;
                 // The image path is relative to the source file's one
                 let source_file_path = this.source_file.substr(0, this.source_file.lastIndexOf("/") + 1);
@@ -176,78 +176,97 @@ export class Animation {
                 // Retrieve the AnimatedObjects' attributes
                 let type = read_object.nodeName;
                 let id = read_object.textContent;
-                if (this.objects.has(id)) console.log("[Animation.js] L'identifiant '" + id + "' a déjà été utilisé par un objet, ce dernier va être écrasé par le nouvel objet");
+                if (this.objects.has(id))
+                    console.log("[Animation.js] L'identifiant '" + id + "' a déjà été utilisé par un objet, ce dernier va être écrasé par le nouvel objet");
+
                 let x = parseInt(read_object.getAttribute("x")) | 0;
                 let y = parseInt(read_object.getAttribute("y")) | 0;
+
                 let background_color = read_object.hasAttribute("background_color") ? parseIntArray(read_object.getAttribute("background_color")) : [0, 0, 0];
                 let background_transparent = read_object.hasAttribute("background_transparent") ? read_object.getAttribute("background_transparent") == "true" || read_object.getAttribute("background_transparent") == "1" : true;
+
                 let border_color = read_object.hasAttribute("border_color") ? parseIntArray(read_object.getAttribute("border_color")) : [0, 0, 0];
                 let border_transparency = read_object.hasAttribute("border_transparency") ? read_object.getAttribute("border_transparency") == "true" || read_object.getAttribute("border_transparency") == "1" : true;
                 let border_size = parseInt(read_object.getAttribute("border_size")) | 1;
+
                 let layer = parseInt(read_object.getAttribute("layer")) | 0;
                 this.layers.add(layer);
+
                 let visible = read_object.hasAttribute("visible") ? read_object.getAttribute("visible") == "true" || read_object.getAttribute("visible") == "1" : false;
                 let opacity = parseFloat(read_object.getAttribute("opacity")) | 1;
                 let angle = parseFloat(read_object.getAttribute("angle")) | 0;
+
+                let width;
+                let height;
                 // Retrieve the others specific attributes of the object and create the associated animated object
-                if (type == "object_text") {
-                    let text = read_object.getAttribute("text");
-                    let font = read_object.getAttribute("font").split(",");
-                    let color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
-                    let padding = parseInt(read_object.getAttribute("padding")) | 0;
-                    let width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
-                    let height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
-                    let halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
-                    let valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-                    new_object = new Text(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
-                } else if (type == "object_image") {
-                    let width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
-                    let height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
-                    let image = read_object.getAttribute("image");
-                    this.objects_image.push(id);
-                    new_object = new ImageFile(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
-                } else if (type == "object_rectangle") {
-                    let width = parseInt(read_object.getAttribute("width"));
-                    let height = parseInt(read_object.getAttribute("height"));
-                    let round = parseInt(read_object.getAttribute("round")) | 0;
-                    new_object = new Rectangle(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
-                } else if (type == "object_polygon") {
-                    let coord_x = parseIntArray(read_object.getAttribute("coord_x"));
-                    let coord_y = parseIntArray(read_object.getAttribute("coord_y"));
-                    new_object = new Polygon(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
-                } else if (type == "object_circle") {
-                    let radius = parseInt(read_object.getAttribute("radius"));
-                    new_object = new Circle(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, radius);
-                } else if (type == "object_ellipse") {
-                    let width = parseInt(read_object.getAttribute("width"));
-                    let height = parseInt(read_object.getAttribute("height"));
-                    new_object = new Ellipse(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
-                } else if (type == "object_landmark") {
-                    let width = parseInt(read_object.getAttribute("width"));
-                    let height = parseInt(read_object.getAttribute("height"));
-                    let scale_x = parseInt(read_object.getAttribute("scale_x"));
-                    let scale_y = parseInt(read_object.getAttribute("scale_y"));
-                    let unit_x = read_object.getAttribute("unit_x");
-                    let unit_y = read_object.getAttribute("unit_y");
-                    new_object = new Landmark(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y);
-                } else if (type == "object_grid") {
-                    let lines = parseInt(read_object.getAttribute("lines"));
-                    let columns = parseInt(read_object.getAttribute("columns"));
-                    let line_height = parseInt(read_object.getAttribute("line_height"));
-                    let column_width = parseInt(read_object.getAttribute("column_width"));
-                    new_object = new Grid(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, lines, columns, line_height, column_width);
-                } else if (type == "object_copy") {
-                    let idcopy = read_object.getAttribute("idcopy");
-                    let initial_object = this.objects.get(idcopy);
-                    if (initial_object == null) {
-                        console.log("[Animation.js] L'objet '" + idcopy + "' à copier n'existe pas (le définir avec l'attribut idcopy)");
-                    } else {
-                        new_object = initial_object.clone();
-                        new_object.setId(id);
-                        for (let i = 1; i < read_object.attributes.length; ++i) { // i = 1 in order to avoid the first attribute (which is "object")
-                            new SetProperty(null, new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
+                switch (type) {
+                    case 'object_text':
+                        let text = read_object.getAttribute("text");
+                        let font = read_object.getAttribute("font").split(",");
+                        let color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
+                        let padding = parseInt(read_object.getAttribute("padding")) | 0;
+                        width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
+                        height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
+                        let halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
+                        let valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
+                        new_object = new Text(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
+                        break;
+                    case 'object_image':
+                        width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
+                        height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
+                        let image = read_object.getAttribute("image");
+                        this.objects_image.push(id);
+                        new_object = new ImageFile(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, image);
+                        break;
+                    case 'object_rectangle':
+                        width = parseInt(read_object.getAttribute("width"));
+                        height = parseInt(read_object.getAttribute("height"));
+                        let round = parseInt(read_object.getAttribute("round")) | 0;
+                        new_object = new Rectangle(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
+                        break;
+                    case 'object_polygon':
+                        let coord_x = parseIntArray(read_object.getAttribute("coord_x"));
+                        let coord_y = parseIntArray(read_object.getAttribute("coord_y"));
+                        new_object = new Polygon(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, coord_x, coord_y);
+                        break;
+                    case 'object_circle':
+                        let radius = parseInt(read_object.getAttribute("radius"));
+                        new_object = new Circle(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, radius);
+                        break;
+                    case 'object_ellipse':
+                        width = parseInt(read_object.getAttribute("width"));
+                        height = parseInt(read_object.getAttribute("height"));
+                        new_object = new Ellipse(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height);
+                        break;
+                    case 'object_landmark':
+                        width = parseInt(read_object.getAttribute("width"));
+                        height = parseInt(read_object.getAttribute("height"));
+                        let scale_x = parseInt(read_object.getAttribute("scale_x"));
+                        let scale_y = parseInt(read_object.getAttribute("scale_y"));
+                        let unit_x = read_object.getAttribute("unit_x");
+                        let unit_y = read_object.getAttribute("unit_y");
+                        new_object = new Landmark(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y);
+                        break;
+                    case 'object_grid':
+                        let lines = parseInt(read_object.getAttribute("lines"));
+                        let columns = parseInt(read_object.getAttribute("columns"));
+                        let line_height = parseInt(read_object.getAttribute("line_height"));
+                        let column_width = parseInt(read_object.getAttribute("column_width"));
+                        new_object = new Grid(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, lines, columns, line_height, column_width);
+                        break;
+                    case 'object_copy':
+                        let idcopy = read_object.getAttribute("idcopy");
+                        let initial_object = this.objects.get(idcopy);
+                        if (initial_object == null) {
+                            console.log("[Animation.js] L'objet '" + idcopy + "' à copier n'existe pas (le définir avec l'attribut idcopy)");
+                        } else {
+                            new_object = initial_object.clone();
+                            new_object.setId(id);
+                            for (let i = 1; i < read_object.attributes.length; ++i) { // i = 1 in order to avoid the first attribute (which is "object")
+                                new SetProperty(null, new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
+                            }
                         }
-                    }
+                        break;
                 }
                 this.objects.set(id, new_object);
             }
@@ -450,7 +469,7 @@ export class Animation {
     }
 
     draw(drawing) {
-		// Display the background image
+        // Display the background image
         if (this.background != null) {
             drawing.background(this.background);
         }

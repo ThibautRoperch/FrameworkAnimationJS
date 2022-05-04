@@ -2,7 +2,7 @@
  * This instruction set the property of the target at a certain value
  */
 import { Instruction } from "./Instruction.js";
-import { speed_animation, parseIntArray } from '../animation_controller.js';
+import { parseIntArray } from '../animation_controller.js';
 export class SetProperty extends Instruction {
 
 	constructor(object, target, property, value) {

@@ -114,7 +114,7 @@ export function speed_animation(speed) {
 	let loop_delay = 30;
 
 	switch (speed) {
-		case "very slow":
+		case "very_slow":
 			loop_delay = LOOP_DELAY_MAX;
 			break;
 		case "slow":
@@ -126,12 +126,16 @@ export function speed_animation(speed) {
 		case "fast":
 			loop_delay = LOOP_DELAY_MAX * 0.25 + LOOP_DELAY_MIN * 0.75;
 			break;
-		case "very fast":
+		case "very_fast":
 			loop_delay = LOOP_DELAY_MIN;
 			break;
 		default:
-			console.log("Unrecognized speed, availables values are 'very slow', 'slow', 'normal', 'fast', 'very fast'.");
+			console.log(`Unrecognized speed '${speed}', availables values are 'very_slow', 'slow', 'normal', 'fast', 'very_fast'.`);
 	}
+
+	// Changer la valeur du select
+	if (document.getElementById('speed'))
+		document.getElementById('speed').value = speed;
 
 	return loop_delay;
 }
