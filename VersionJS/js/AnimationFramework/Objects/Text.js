@@ -68,6 +68,7 @@ export class Text extends AnimatedObject {
 
 	setPadding(padding) {
 		this.padding = padding;
+		this.computeRealDimension();
 	}
 
 	setWidth(width) {
@@ -89,8 +90,10 @@ export class Text extends AnimatedObject {
 	}
 
 	computeRealDimension() {
-		this.real_width = (this.width == undefined) ? this.text.length * (parseInt(this.font[1])/2 + 1) + 2 + this.padding * 2 : this.width;
-		this.real_height = (this.height == undefined) ? (parseInt(this.font[1]) + 8 + this.padding) * ((this.text.match(/@/g) || []).length + 1) : this.height;
+		if(this.text != ""){
+			this.real_width = (this.width == undefined) ? this.text.length * (parseInt(this.font[1])/2 + 1) + 2 + this.padding * 2 : this.width;
+			this.real_height = (this.height == undefined) ? (parseInt(this.font[1]) + 8 + this.padding) * ((this.text.match(/@/g) || []).length + 1) : this.height;
+		}
 	}
 	
 	draw(drawing) {
@@ -142,7 +145,7 @@ export class Text extends AnimatedObject {
     }
 
     clone() {
-		return new Text(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.padding, this.width, this.height, this.halignment, this.valignment);
+		return new Text(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency,this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.padding, this.width, this.height, this.halignment, this.valignment);
 	}
 	
 }
