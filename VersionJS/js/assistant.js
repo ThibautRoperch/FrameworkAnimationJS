@@ -34,9 +34,9 @@ document.getElementById("addCircle").addEventListener('click', function () { new
 document.getElementById("addEllipse").addEventListener('click', function () { new_object('Ellipse') });
 document.getElementById("addLandmark").addEventListener('click', function () { new_object('Landmark') });
 document.getElementById("addGrid").addEventListener('click', function () { new_object('Grid') });
-document.getElementById("width").addEventListener('click', function () { sketch.resizeCanvas(this.value, document.getElementById("height").value) });
-document.getElementById("height").addEventListener('click', function () { sketch.resizeCanvas(document.getElementById("height").value, this.value) });
-document.getElementById("background").addEventListener('click', function () { sketch.load_background() });
+document.getElementById("width").addEventListener('change', function () { sketch.resizeCanvas(this.value, document.getElementById("height").value); update_section_size();});
+document.getElementById("height").addEventListener('change', function () { sketch.resizeCanvas(document.getElementById("width").value, this.value); update_section_size(); });
+document.getElementById("background").addEventListener('change', function () { sketch.load_background() });
 
 wait_for_includes();
 function wait_for_includes() {
@@ -69,6 +69,7 @@ function import_xml(input_id) {
 			// Retrieve background path
 			if (animation.getBackground() != null) {
 				document.getElementById("background").value = animation.getBackground().trim();
+				sketch.load_background();
 			}
 			// Remove all current objects
 			for (let i = 0; i <= last_id; ++i) {
