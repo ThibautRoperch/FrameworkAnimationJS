@@ -815,10 +815,6 @@ function new_object(object_type) {
 	return obj_id;
 }
 
-function new_instruction(object_id, object_dom) {
-	// Crée, pour un id d'objet, les balises constituant une nouvelle instruction
-}
-
 function change_property(object_id, property_dom) {
 	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
 	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
