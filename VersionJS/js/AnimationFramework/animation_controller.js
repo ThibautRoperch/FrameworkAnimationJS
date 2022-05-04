@@ -30,20 +30,8 @@ export function load_animation(source_file, target_id, width, height) {
 		console.log("Animation files are not included. Include them by this way :\n<script>include_animation_files(\"path/of/AnimationFramework/\");</script>");
 	}
 
-	// Check if object classes are loaded
-	let objects_classes_loaded = true;
-	for (let obj_cl of OBJECT_CLASSES) {
-		objects_classes_loaded = objects_classes_loaded & typeof (obj_cl) !== "undefined";
-	}
-
-	// Check if instruction classes are loaded
-	let instruction_classes_loaded = true;
-	for (let instr_cl of INSTRUCTION_CLASSES) {
-		instruction_classes_loaded = instruction_classes_loaded & typeof (instr_cl) !== "undefined";
-	}
-
 	// Loop with delay until animation classes are not loaded
-	if (typeof (p5) === "undefined" || typeof (Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
+	if (typeof (p5) === "undefined" || typeof (Animation) === "undefined") {
 		setTimeout(function () {
 			load_animation(source_file, target_id, width, height);
 		}, 150);
@@ -114,7 +102,7 @@ export function speed_animation(speed) {
 	let loop_delay = 30;
 
 	switch (speed) {
-		case "very slow":
+		case "very_slow":
 			loop_delay = LOOP_DELAY_MAX;
 			break;
 		case "slow":
@@ -126,12 +114,16 @@ export function speed_animation(speed) {
 		case "fast":
 			loop_delay = LOOP_DELAY_MAX * 0.25 + LOOP_DELAY_MIN * 0.75;
 			break;
-		case "very fast":
+		case "very_fast":
 			loop_delay = LOOP_DELAY_MIN;
 			break;
 		default:
-			console.log("Unrecognized speed, availables values are 'very slow', 'slow', 'normal', 'fast', 'very fast'.");
+			console.log(`Unrecognized speed '${speed}', availables values are 'very_slow', 'slow', 'normal', 'fast', 'very_fast'.`);
 	}
+
+	// Changer la valeur du select
+	if (document.getElementById('speed'))
+		document.getElementById('speed').value = speed;
 
 	return loop_delay;
 }
