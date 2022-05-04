@@ -1038,13 +1038,13 @@ function draw_animation() {
 		draw_ref.draw = function () {
 			draw_ref.clear();
 
-			draw_ref.frameRate(1); // 60 fps
+			draw_ref.frameRate(60); // 60 fps
 
 			// Display the background image
 			if (background != null) {
 				draw_ref.background(background);
 			}
-
+			// Display objects of each layer, if they're set as visible
 			for (let layer of layers) {
 				for (let object of objects_array) {
 					if (object.getLayer() == layer && object.getVisible()) {
