@@ -21,6 +21,9 @@ var instructions_array = new Array();
 var objects_image_id = new Array();
 var removed_objects_identifier = new Array();
 
+let sketch;
+
+// Setup des lsteneer sur le click
 document.getElementById("openAnimation").addEventListener("click", function () { ask_popup('Change object identifier', 'Choose the XML file containing the animation to open.<input id=\'animation_file\' type=\'text\' placeholder=\'benchmark.xml\' required />', import_xml, 'animation_file') });
 document.getElementById("exportAnimation").addEventListener('click', export_xml);
 document.getElementById("addText").addEventListener('click', function () { new_object('Text') });
@@ -31,9 +34,9 @@ document.getElementById("addCircle").addEventListener('click', function () { new
 document.getElementById("addEllipse").addEventListener('click', function () { new_object('Ellipse') });
 document.getElementById("addLandmark").addEventListener('click', function () { new_object('Landmark') });
 document.getElementById("addGrid").addEventListener('click', function () { new_object('Grid') });
-document.getElementById("width").addEventListener('click', draw_animation);
-document.getElementById("height").addEventListener('click', draw_animation);
-document.getElementById("background").addEventListener('click', draw_animation);
+document.getElementById("width").addEventListener('click', function () { sketch.resizeCanvas(this.value, document.getElementById("height").value) });
+document.getElementById("height").addEventListener('click', function () { sketch.resizeCanvas(document.getElementById("height").value, this.value) });
+document.getElementById("background").addEventListener('click', function () { sketch.load_background() });
 
 wait_for_includes();
 function wait_for_includes() {
@@ -42,20 +45,8 @@ function wait_for_includes() {
 		console.log("Animation files are not included. Include them by this way :\n<script>include_animation_files(\"path/of/AnimationFramework/\");</script>");
 	}
 
-	// Check if object classes are loaded
-	let objects_classes_loaded = true;
-	for (let obj_cl of OBJECT_CLASSES) {
-		objects_classes_loaded = objects_classes_loaded & typeof (obj_cl) !== "undefined";
-	}
-
-	// Check if instruction classes are loaded
-	let instruction_classes_loaded = true;
-	for (let instr_cl of INSTRUCTION_CLASSES) {
-		instruction_classes_loaded = instruction_classes_loaded & typeof (instr_cl) !== "undefined";
-	}
-
 	// Loop with delay until animation classes are not loaded
-	if (typeof (p5) === "undefined" || typeof (Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
+	if (typeof (p5) === "undefined" || typeof (Animation) === "undefined") {
 		setTimeout(function () {
 			wait_for_includes();
 		}, 150);
@@ -117,7 +108,7 @@ function import_xml(input_id) {
 					}
 				}
 			}
-			draw_animation();
+			//draw_animation();
 		}
 	};
 	xhr.open("GET", source_file, true);
@@ -176,11 +167,11 @@ function new_object(object_type) {
 	let background_color = [0, 0, 0]; // r, g, b
 	let background_transparent = true;
 	let border_color = [0, 0, 0]; // r, g, b
-	let border_transparency = true;
+	let border_transparency = false;
 	let border_size = 1;
 	let state = DEFAULT_STATE;
 	let layer = 0;
-	let visible = false;
+	let visible = true;
 	let opacity = 1;
 	let angle = 0;
 	let width = 50;
@@ -189,6 +180,7 @@ function new_object(object_type) {
 	let section = document.createElement("sectionobj");
 	// Properties
 	let article1 = document.createElement("article");
+
 	// x
 	let property = document.createElement("property");
 	property.className = "x";
@@ -201,6 +193,7 @@ function new_object(object_type) {
 	input.onchange = function () { change_property(obj_id, this); };
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// y
 	property = document.createElement("property");
 	property.className = "y";
@@ -213,6 +206,7 @@ function new_object(object_type) {
 	input.onchange = function () { change_property(obj_id, this); };
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// background_color
 	property = document.createElement("property");
 	property.className = "background_color";
@@ -225,6 +219,7 @@ function new_object(object_type) {
 	input.onchange = function () { change_property(obj_id, this); };
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// background_transparent
 	property = document.createElement("property");
 	property.className = "background_transparent";
@@ -244,6 +239,7 @@ function new_object(object_type) {
 	input.appendChild(option);
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// border_color
 	property = document.createElement("property");
 	property.className = "border_color";
@@ -256,6 +252,7 @@ function new_object(object_type) {
 	input.onchange = function () { change_property(obj_id, this); };
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// border_transparency
 	property = document.createElement("property");
 	property.className = "border_transparency";
@@ -267,14 +264,15 @@ function new_object(object_type) {
 	option = document.createElement("option");
 	option.value = "true";
 	option.innerHTML = "True";
-	option.selected = "selected";
 	input.appendChild(option);
 	option = document.createElement("option");
 	option.value = "false";
 	option.innerHTML = "False";
+	option.selected = "selected";
 	input.appendChild(option);
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// border_size
 	property = document.createElement("property");
 	property.className = "border_size";
@@ -287,6 +285,7 @@ function new_object(object_type) {
 	input.onchange = function () { change_property(obj_id, this); };
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// layer
 	property = document.createElement("property");
 	property.className = "layer";
@@ -299,25 +298,31 @@ function new_object(object_type) {
 	input.onchange = function () { change_property(obj_id, this); };
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// visible
 	property = document.createElement("property");
 	property.className = "visible";
 	label = document.createElement("label");
 	label.innerHTML = "visible";
 	property.appendChild(label);
+
 	input = document.createElement("select");
 	input.onchange = function () { change_property(obj_id, this); };
 	option = document.createElement("option");
 	option.value = "true";
 	option.innerHTML = "True";
+	option.selected = "selected";
+
 	input.appendChild(option);
 	option = document.createElement("option");
 	option.value = "false";
 	option.innerHTML = "False";
-	option.selected = "selected";
+
+
 	input.appendChild(option);
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// opacity
 	property = document.createElement("property");
 	property.className = "opacity";
@@ -332,6 +337,7 @@ function new_object(object_type) {
 	input.onchange = function () { change_property(obj_id, this); };
 	property.appendChild(input);
 	article1.appendChild(property);
+
 	// angle
 	property = document.createElement("property");
 	property.className = "angle";
@@ -803,14 +809,14 @@ function new_object(object_type) {
 	objects_array[obj_id] = object;
 	instructions_array[obj_id] = new Array();
 
-	draw_animation();
+	//draw_animation();
 
 	return obj_id;
 }
 
 function change_property(object_id, property_dom) {
 	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
-	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
+	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
 function change_id(args) {
@@ -879,7 +885,7 @@ function customize(object_id) {
 	object.setBorder_color(rand_rgb());
 	document.getElementById(object_id).getElementsByClassName("border_color")[0].getElementsByTagName("input")[0].value = object.getBorder_color();
 
-	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
+	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
 function remove(object_id) {
@@ -901,7 +907,7 @@ function remove(object_id) {
 	// Remove from the objects list (HTML)
 	objects_list.removeChild(document.getElementById(object_id));
 
-	draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
+	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
 function export_xml() {
@@ -988,42 +994,34 @@ function isHexColor(strColor) {
 
 
 function draw_animation() {
-	let layers = new Set();
 
-	new p5(function (draw_ref) {
 
-		let background = null;
+	sketch = new p5(function (draw_ref) {
 
+		let background_img = null;
+
+		let layers = [];
+
+		/** Preload data */
 		draw_ref.preload = function () { // preload function runs once
+
 			// Load the backround
-			let bg = document.getElementById("background").value.trim();
-			if (bg != "") {
-				if (!isValidColor(bg) && !isHexColor(bg)) {
-					background = draw_ref.loadImage(bg);
-				} else {
-					background = bg;
-				}
-			}
+			draw_ref.load_background();
 
 			// Load animation's images
 			for (let id of objects_image_id) {
 				let object = objects_array[id];
 				object.loadImage(draw_ref);
 			}
-			// Retrieve all layers in a set
-			for (let object of objects_array) {
-				layers.add(object.getLayer());
-			}
-
-			// Convert and sort the layers set
-			layers = Array.from(layers);
-			layers.sort();
 		}
 
+		/** Setup of the canvas */
 		draw_ref.setup = function () { // setup function waits until preload one is done
 			while (drawing_dom.hasChildNodes()) {
 				drawing_dom.removeChild(drawing_dom.firstChild);
 			}
+
+			draw_ref.frameRate(1); // 60 fps
 
 			canvas = draw_ref.createCanvas(parseInt(document.getElementById("width").value), parseInt(document.getElementById("height").value));
 			canvas.parent(drawing_dom);
@@ -1031,15 +1029,20 @@ function draw_animation() {
 			update_section_size();
 		}
 
+		/** Drawing loop */
 		draw_ref.draw = function () {
-			draw_ref.clear();
-
-			draw_ref.frameRate(60); // 60 fps
+			//draw_ref.clear();
 
 			// Display the background image
-			if (background != null) {
-				draw_ref.background(background);
+			if (background_img != null) {
+				draw_ref.background(background_img);
+			} else {
+				draw_ref.background(255);
 			}
+
+			// Update the number of layers
+			draw_ref.update_layers();
+
 			// Display objects of each layer, if they're set as visible
 			for (let layer of layers) {
 				for (let object of objects_array) {
@@ -1050,6 +1053,38 @@ function draw_animation() {
 			}
 		}
 
+		/** Load the background of the canvas */
+		draw_ref.load_background = function () {
+			let bg = document.getElementById("background").value.trim();
+			if (bg != "") {
+				if (!isValidColor(bg) && !isHexColor(bg)) {
+					background_img = draw_ref.loadImage(bg);
+				} else {
+					background_img = bg;
+				}
+			}
+		}
+
+		/** Update the layers of the canvas by iterating on the objects_array */
+		draw_ref.update_layers = function () {
+
+			let new_layers = new Set();
+			// Retrieve all layers in a set
+			for (let object of objects_array) {
+				new_layers.add(object.getLayer());
+			}
+
+			// Convert and sort the layers set
+			layers = Array.from([...new_layers]);
+			layers.sort();
+		}
+
+		// draw_ref.mouseClicked = function() {
+		// 	// Get the visible objects that are under the cursor position
+		// 	animation_obj.canvasClicked(draw_ref);
+		// 	// Prevent default
+		// 	return false;
+		// }
 	});
 
 }

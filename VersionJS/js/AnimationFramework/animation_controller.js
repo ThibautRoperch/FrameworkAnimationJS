@@ -30,20 +30,8 @@ export function load_animation(source_file, target_id, width, height) {
 		console.log("Animation files are not included. Include them by this way :\n<script>include_animation_files(\"path/of/AnimationFramework/\");</script>");
 	}
 
-	// Check if object classes are loaded
-	let objects_classes_loaded = true;
-	for (let obj_cl of OBJECT_CLASSES) {
-		objects_classes_loaded = objects_classes_loaded & typeof (obj_cl) !== "undefined";
-	}
-
-	// Check if instruction classes are loaded
-	let instruction_classes_loaded = true;
-	for (let instr_cl of INSTRUCTION_CLASSES) {
-		instruction_classes_loaded = instruction_classes_loaded & typeof (instr_cl) !== "undefined";
-	}
-
 	// Loop with delay until animation classes are not loaded
-	if (typeof (p5) === "undefined" || typeof (Animation) === "undefined" || !objects_classes_loaded || !instruction_classes_loaded) {
+	if (typeof (p5) === "undefined" || typeof (Animation) === "undefined") {
 		setTimeout(function () {
 			load_animation(source_file, target_id, width, height);
 		}, 150);

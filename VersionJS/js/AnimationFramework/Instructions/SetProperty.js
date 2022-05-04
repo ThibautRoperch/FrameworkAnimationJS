@@ -41,7 +41,7 @@ export class SetProperty extends Instruction {
 				this.target.setLayer(parseInt(this.value) | 0);
 				break;
 			case "visible":
-				this.target.setVisible(this.value == "true" | false);
+				this.target.setVisible(this.value == "true" ? true : false);
 				break;
 			case "opacity":
 				this.target.setOpacity(parseInt(this.value) | 0);
