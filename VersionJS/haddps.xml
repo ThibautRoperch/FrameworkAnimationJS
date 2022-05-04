@@ -1,6 +1,6 @@
 <animation
 		xmlns="http://www.w3.org/1999/xhtml"
-		speed="normal">
+		speed="fast">
 	<init>
 		<start_button present="true"></start_button>
 	</init>

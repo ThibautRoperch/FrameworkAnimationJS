@@ -83,6 +83,7 @@ function import_xml(input_id) {
 			for (let i = 0; i <= last_id; ++i) {
 				remove(i);
 			}
+
 			// Re-create all read objects
 			for (let obj of animation.getObjects().values()) {
 				let fake_button = document.createElement("button");

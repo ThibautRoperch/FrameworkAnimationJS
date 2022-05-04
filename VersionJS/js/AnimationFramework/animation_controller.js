@@ -133,6 +133,10 @@ export function speed_animation(speed) {
 			console.log(`Unrecognized speed '${speed}', availables values are 'very_slow', 'slow', 'normal', 'fast', 'very_fast'.`);
 	}
 
+	// Changer la valeur du select
+	document.getElementById('speed').value = speed;
+
+
 	return loop_delay;
 }
 
