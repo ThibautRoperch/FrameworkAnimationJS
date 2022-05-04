@@ -471,7 +471,7 @@ export class Animation {
     draw(drawing) {
         // Display the background image
         if (this.background != null) {
-            drawing.background(this.background.trim());
+            drawing.background(this.background);
         }
 
         // Display the start button if it has to
