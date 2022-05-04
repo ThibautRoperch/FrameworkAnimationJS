@@ -105,11 +105,6 @@ export class Table extends AnimatedObject {
             }
         }
         this.nb_lines = this.value_tab.length;
-        console.log("nb columns = ", this.nb_columns);
-        console.log("column width", this.column_width);
-        console.log("nb lignes = ", this.nb_lines);
-        console.log("line height = ", this.line_height);
-        console.table(this.value_tab);
     }
 
     fillCoordCells() {
