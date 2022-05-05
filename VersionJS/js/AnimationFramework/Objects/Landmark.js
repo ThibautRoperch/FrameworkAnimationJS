@@ -74,8 +74,6 @@ export class Landmark extends AnimatedObject {
 		drawing.textStyle(drawing.NORMAL);
 		drawing.angleMode(drawing.DEGREES);
 
-		console.log(`x ${this.x}, y ${this.y}, width ${this.width}, height ${this.height}`);
-
 		let axis1;       //Vector utilisé pour effectuer la rotation : à placer au milieu du texte
 		if (this.height > 0 && this.width > 0) {
 			drawing.line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
