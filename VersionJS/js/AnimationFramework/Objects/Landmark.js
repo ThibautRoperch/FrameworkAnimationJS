@@ -74,12 +74,10 @@ export class Landmark extends AnimatedObject {
 		drawing.textStyle(drawing.NORMAL);
 		drawing.angleMode(drawing.DEGREES);
 
-		console.log(`x ${this.x}, y ${this.y}, width ${this.width}, height ${this.height}`);
-
 		let axis1;       //Vector utilisé pour effectuer la rotation : à placer au milieu du texte
 		if (this.height > 0 && this.width > 0) {
-			drawing.line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
-			drawing.line(this.x, this.y + this.height, this.x, this.y);
+			drawing.line(this.x, this.y, this.x, this.y + this.height);
+			drawing.line(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
 
 			// Dessin des triangles 
 			drawing.triangle(this.x - this.width * 0.02, this.y, this.x + this.width * 0.02, this.y, this.x, this.y - this.height * 0.04);
