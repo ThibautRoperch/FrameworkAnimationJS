@@ -63,6 +63,7 @@ export class Table extends AnimatedObject {
 
     setColumn_width(column_width) {
         this.column_width = column_width;
+        this.fillCoordCells();
     }
 
     setFont(font) {
@@ -75,6 +76,7 @@ export class Table extends AnimatedObject {
 
     setLine_height(line_height) {
         this.line_height = line_height;
+        this.fillCoordCells();
     }
 
 	setPadding(padding) {
@@ -87,11 +89,14 @@ export class Table extends AnimatedObject {
 
     setValues(values) {
         this.values = values;
+        this.fillValueTab();
+        this.fillCoordCells();
     }
 
     fillValueTab() {
         let rows = this.values.split("$");
         let columns;
+        this.value_tab = [];
         for (let row of rows) {
             columns = row.split("|");
             let rowTab = [];
@@ -108,6 +113,7 @@ export class Table extends AnimatedObject {
     }
 
     fillCoordCells() {
+        this.index_tab = [];
         for (let i = 0; i < this.nb_lines; i++) {
 
             let y_start = this.y + i * this.line_height;

@@ -13,6 +13,7 @@ import { SetProperty } from './AnimationFramework/Instructions/SetProperty.js';
 
 import { ANIMATION_FILES_INCLUDED, OBJECT_CLASSES, INSTRUCTION_CLASSES } from './AnimationFramework/animation_controller.js';
 import { DEFAULT_STATE } from './AnimationFramework/Objects/AnimatedObject.js';
+import { Table } from './AnimationFramework/Objects/Table.js';
 
 var last_id = -1;
 var objects_list = document.getElementById("objects");
@@ -34,6 +35,7 @@ document.getElementById("addCircle").addEventListener('click', function () { new
 document.getElementById("addEllipse").addEventListener('click', function () { new_object('Ellipse') });
 document.getElementById("addLandmark").addEventListener('click', function () { new_object('Landmark') });
 document.getElementById("addGrid").addEventListener('click', function () { new_object('Grid') });
+document.getElementById("addTable").addEventListener('click', function () { new_object('Table') });
 document.getElementById("width").addEventListener('change', function () { sketch.resizeCanvas(this.value, document.getElementById("height").value); update_section_size();});
 document.getElementById("height").addEventListener('change', function () { sketch.resizeCanvas(document.getElementById("width").value, this.value); update_section_size(); });
 document.getElementById("background").addEventListener('change', function () { sketch.load_background() });
@@ -806,6 +808,140 @@ function new_object(object_type) {
 			article1.appendChild(property);
 			object = new Grid(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, lines, columns, line_height, column_width);
 			break;
+		case "Table" :
+			// values
+			let values = "";
+			property = document.createElement("property");
+			property.className = "values";
+			label = document.createElement("label");
+			label.innerHTML = "values";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = values;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// line_height
+			let tab_line_height = "30";
+			property = document.createElement("property");
+			property.className = "line_height";
+			label = document.createElement("label");
+			label.innerHTML = "line_height";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = tab_line_height;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// column_width
+			let tab_column_width = "60";
+			property = document.createElement("property");
+			property.className = "column_width";
+			label = document.createElement("label");
+			label.innerHTML = "column_width";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = tab_column_width;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// font
+			let text_font = ["Courier", 14, "normal"];
+			property = document.createElement("property");
+			property.className = "font";
+			label = document.createElement("label");
+			label.innerHTML = "font";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = text_font;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// color
+			let text_color = [255, 255, 255];
+			property = document.createElement("property");
+			property.className = "color";
+			label = document.createElement("label");
+			label.innerHTML = "color";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.placeholder = text_color;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// padding
+			let tab_padding = 0;
+			property = document.createElement("property");
+			property.className = "padding";
+			label = document.createElement("label");
+			label.innerHTML = "padding";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.placeholder = tab_padding;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// halignment
+			let text_halignment = "left";
+			property = document.createElement("property");
+			property.className = "halignment";
+			label = document.createElement("label");
+			label.innerHTML = "halignment";
+			property.appendChild(label);
+			input = document.createElement("select");
+			input.onchange = function () { change_property(obj_id, this); };
+			option = document.createElement("option");
+			option.value = "left";
+			option.innerHTML = "Left";
+			option.selected = "selected";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "center";
+			option.innerHTML = "Center";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "right";
+			option.innerHTML = "Right";
+			input.appendChild(option);
+			property.appendChild(input);
+			article1.appendChild(property);
+			// valignment
+			let text_valignment = "top";
+			property = document.createElement("property");
+			property.className = "valignment";
+			label = document.createElement("label");
+			label.innerHTML = "valignment";
+			property.appendChild(label);
+			input = document.createElement("select");
+			input.onchange = function () { change_property(obj_id, this); };
+			option = document.createElement("option");
+			option.value = "top";
+			option.innerHTML = "Top";
+			option.selected = "selected";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "bottom";
+			option.innerHTML = "Bottom";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "center";
+			option.innerHTML = "Center";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "baseline";
+			option.innerHTML = "Baseline";
+			input.appendChild(option);
+			property.appendChild(input);
+			article1.appendChild(property);
+			// Create table object
+			object = new Table(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, tab_line_height, tab_column_width, text_font, text_color, tab_padding, text_halignment, text_valignment);
+			break;
 	}
 	objects_array[obj_id] = object;
 	instructions_array[obj_id] = new Array();
@@ -817,6 +953,7 @@ function new_object(object_type) {
 
 function change_property(object_id, property_dom) {
 	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
+	//objects_array[object_id].draw();
 	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 

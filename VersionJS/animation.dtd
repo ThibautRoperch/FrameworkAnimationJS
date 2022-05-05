@@ -13,7 +13,7 @@
 
 <!ELEMENT background (#PCDATA) >
 
-<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_landmark)+ >
+<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_landmark|object_grid|object_table)+ >
 
 <!ELEMENT object_text (#PCDATA) >
 <!ATTLIST object_text text CDATA #REQUIRED >
