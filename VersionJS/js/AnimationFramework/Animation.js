@@ -164,7 +164,7 @@ export class Animation {
                 this.background = source_file_path + this.background;
             }
         } else {
-            this.background = "";
+            this.background = "white";
         }
 
         // If the objects' node exists
