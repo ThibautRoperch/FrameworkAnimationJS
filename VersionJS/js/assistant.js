@@ -1086,7 +1086,9 @@ function remove(object_id) {
 	objects_array[object_id].setVisible(false);
 
 	// Remove from the objects list (HTML)
-	objects_list.removeChild(document.getElementById(object_id));
+	if (document.getElementById(object_id)) {
+		objects_list.removeChild(document.getElementById(object_id));
+	}	
 
 	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
