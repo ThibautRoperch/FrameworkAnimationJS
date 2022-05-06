@@ -1,28 +1,18 @@
 <animation
 		xmlns="http://www.w3.org/1999/xhtml"
-		speed="fast">
+		speed="very_fast">
+	
 	<init>
+
 		<start_button present="true"></start_button>
+
 	</init>
+
 	<objects>
-		<object_grid
-				x="0"
-				y="0"
-				background_color="0,0,0"
-				background_transparent="1"
-				border_color="1"
-				border_transparency="0"
-				border_size="1"
-				layer="0"
-				visible="1"
-				opacity="1"
-				lines="1"
-				columns="4"
-				line_height="20"
-				column_width="80">9</object_grid>
-		<object_grid
-				x="0"
-				y="40"
+
+		<object_table
+				x="50"
+				y="30"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
@@ -31,13 +21,17 @@
 				layer="0"
 				visible="1"
 				opacity="1"
-				lines="1"
-				columns="4"
-				line_height="20"
-				column_width="80">10</object_grid>
-		<object_grid
-				x="0"
-				y="80"
+				font="Courier,14,normal"
+				color="0,0,0"
+				line_height="30"
+				column_width="60"
+				halignment="center"
+				valignment="center"
+				values="src 1 | a3 | a2 | a1 | a0">src1</object_table>
+
+		<object_table
+				x="50"
+				y="70"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
@@ -46,64 +40,101 @@
 				layer="0"
 				visible="1"
 				opacity="1"
-				lines="1"
-				columns="4"
-				line_height="20"
-				column_width="80">11</object_grid>
-		<object_text
-				x="275"
-				y="0"
-				background_color="0,0,0"
-				background_transparent="1"
-				border_color="0,0,0"
-				border_transparency="1"
-				border_size="1"
-				layer="1"
-				visible="1"
-				opacity="1"
-				text="1"
-				font="Courier,14,normal"
+				font="Arial,15"
 				color="0,0,0"
-				padding="0"
-				halignment="left"
-				valignment="top">12</object_text>
-		<object_text
-				x="195"
-				y="0"
+				line_height="30"
+				column_width="60"
+				halignment="center"
+				valignment="center"
+				values="src 2 | b3 | b2 | b1 | b0">src2</object_table>
+
+		<object_table
+				x="50"
+				y="110"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
-				border_transparency="1"
-				border_size="1"
-				layer="1"
-				visible="1"
-				opacity="1"
-				text="2"
-				font="Courier,14,normal"
-				color="0,0,0"
-				padding="0"
-				halignment="left"
-				valignment="top">13</object_text>
-		<object_text
-				x="115"
-				y="0"
-				background_color="0,0,0"
-				background_transparent="1"
-				border_color="0,0,0"
-				border_transparency="1"
+				border_transparency="0"
 				border_size="1"
 				layer="0"
 				visible="1"
 				opacity="1"
-				text="3"
-				font="Courier,14,normal"
+				font="Arial,15"
 				color="0,0,0"
-				padding="0"
-				halignment="left"
-				valignment="top">14</object_text>
+				line_height="30"
+				column_width="60"
+				halignment="center"
+				valignment="center"
+				values="dest | b3 + b2 | b1 + b0 | a3 + a2 | a1 + a0">dest</object_table>
+
 		<object_text
-				x="35"
-				y="0"
+				x="200"
+				y="200"
+				text="Exemple : "
+				font="Arial,18,bold"
+				visible="1"
+				color="0,0,0">exemple</object_text>
+
+		<object_table
+				x="50"
+				y="250"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="0"
+				border_size="1"
+				layer="0"
+				visible="1"
+				opacity="1"
+				font="Courier,15,normal"
+				color="0,0,0"
+				line_height="50"
+				column_width="90"
+				halignment="center"
+				valignment="center"
+				values="src 1 | 4 | 3 | 2 | 1">ex_src1</object_table>
+
+		<object_table
+				x="50"
+				y="350"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="0"
+				border_size="1"
+				layer="0"
+				visible="1"
+				opacity="1"
+				font="Courier,15,normal"
+				color="0,0,0"
+				line_height="50"
+				column_width="90"
+				halignment="center"
+				valignment="center"
+				values="src 2 | 8 | 7 | 6 | 5">ex_src2</object_table>
+
+		<object_table
+				x="50"
+				y="450"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="0"
+				border_size="1"
+				layer="0"
+				visible="1"
+				opacity="1"
+				font="Courier,15,normal"
+				color="0,0,0"
+				line_height="50"
+				column_width="90"
+				halignment="center"
+				valignment="center"
+				values="dest ||||">ex_dest</object_table>
+
+		<object_text
+				x="183"
+				y="270"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
@@ -113,82 +144,15 @@
 				visible="1"
 				opacity="1"
 				text="4"
-				font="Courier,14,normal"
+				font="Courier,15,normal"
 				color="0,0,0"
 				padding="0"
-				halignment="left"
-				valignment="top">15</object_text>
+				halignment="center"
+				valignment="center">ex_src1_value3</object_text>
+
 		<object_text
-				x="275"
-				y="40"
-				background_color="0,0,0"
-				background_transparent="1"
-				border_color="0,0,0"
-				border_transparency="1"
-				border_size="1"
-				layer="0"
-				visible="1"
-				opacity="1"
-				text="5"
-				font="Courier,14,normal"
-				color="0,0,0"
-				padding="0"
-				halignment="left"
-				valignment="top">16</object_text>
-		<object_text
-				x="195"
-				y="40"
-				background_color="0,0,0"
-				background_transparent="1"
-				border_color="0,0,0"
-				border_transparency="1"
-				border_size="1"
-				layer="0"
-				visible="1"
-				opacity="1"
-				text="6"
-				font="Courier,14,normal"
-				color="0,0,0"
-				padding="0"
-				halignment="left"
-				valignment="top">17</object_text>
-		<object_text
-				x="115"
-				y="40"
-				background_color="0,0,0"
-				background_transparent="1"
-				border_color="0,0,0"
-				border_transparency="1"
-				border_size="1"
-				layer="0"
-				visible="1"
-				opacity="1"
-				text="7"
-				font="Courier,14,normal"
-				color="0,0,0"
-				padding="0"
-				halignment="left"
-				valignment="top">18</object_text>
-		<object_text
-				x="35"
-				y="40"
-				background_color="0,0,0"
-				background_transparent="1"
-				border_color="0,0,0"
-				border_transparency="1"
-				border_size="1"
-				layer="0"
-				visible="1"
-				opacity="1"
-				text="8"
-				font="Courier,14,normal"
-				color="0,0,0"
-				padding="0"
-				halignment="left"
-				valignment="top">19</object_text>
-		<object_text
-				x="275"
-				y="80"
+				x="273"
+				y="270"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
@@ -198,14 +162,69 @@
 				visible="1"
 				opacity="1"
 				text="3"
-				font="Courier,14,bold"
-				color="255,0,0"
+				font="Courier,15,normal"
+				color="0,0,0"
 				padding="0"
-				halignment="left"
-				valignment="top">20</object_text>
+				halignment="center"
+				valignment="center">ex_src1_value2</object_text>
+
 		<object_text
-				x="195"
-				y="80"
+				x="363"
+				y="270"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="1"
+				border_size="1"
+				layer="0"
+				visible="1"
+				opacity="1"
+				text="2"
+				font="Courier,15,normal"
+				color="0,0,0"
+				padding="0"
+				halignment="center"
+				valignment="center">ex_src1_value1</object_text>
+
+		<object_text
+				x="453"
+				y="270"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="1"
+				border_size="1"
+				layer="0"
+				visible="1"
+				opacity="1"
+				text="1"
+				font="Courier,15,normal"
+				color="0,0,0"
+				padding="0"
+				halignment="center"
+				valignment="center">ex_src1_value0</object_text>
+
+		<object_text
+				x="183"
+				y="370"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="1"
+				border_size="1"
+				layer="0"
+				visible="1"
+				opacity="1"
+				text="8"
+				font="Courier,15,normal"
+				color="0,0,0"
+				padding="0"
+				halignment="center"
+				valignment="center">ex_src2_value3</object_text>
+
+		<object_text
+				x="273"
+				y="370"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
@@ -215,14 +234,15 @@
 				visible="1"
 				opacity="1"
 				text="7"
-				font="Courier,14,bold"
-				color="255,0,0"
+				font="Courier,15,normal"
+				color="0,0,0"
 				padding="0"
-				halignment="left"
-				valignment="top">21</object_text>
+				halignment="center"
+				valignment="center">ex_src2_value2</object_text>
+
 		<object_text
-				x="110"
-				y="80"
+				x="363"
+				y="370"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
@@ -231,15 +251,16 @@
 				layer="0"
 				visible="1"
 				opacity="1"
-				text="11"
-				font="Courier,14,bold"
-				color="255,0,0"
+				text="6"
+				font="Courier,15,normal"
+				color="0,0,0"
 				padding="0"
-				halignment="left"
-				valignment="top">22</object_text>
+				halignment="center"
+				valignment="center">ex_src2_value1</object_text>
+
 		<object_text
-				x="30"
-				y="80"
+				x="453"
+				y="370"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
@@ -248,13 +269,201 @@
 				layer="0"
 				visible="1"
 				opacity="1"
-				text="15"
-				font="Courier,14,bold"
-				color="255,0,0"
+				text="5"
+				font="Courier,15,normal"
+				color="0,0,0"
 				padding="0"
-				width="0"
-				halignment="left"
-				valignment="top">23</object_text>
+				halignment="center"
+				valignment="center">ex_src2_value0</object_text>
+
+		<object_text
+				x="183"
+				y="471"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="1"
+				border_size="1"
+				layer="0"
+				visible="0"
+				opacity="1"
+				text="+"
+				font="Courier,15,normal"
+				color="0,0,0"
+				padding="0"
+				halignment="center"
+				valignment="center">ex_dest_value3</object_text>
+
+		<object_text
+				x="273"
+				y="471"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="1"
+				border_size="1"
+				layer="0"
+				visible="0"
+				opacity="1"
+				text="+"
+				font="Courier,15,normal"
+				color="0,0,0"
+				padding="0"
+				halignment="center"
+				valignment="center">ex_dest_value2</object_text>
+
+		<object_text
+				x="363"
+				y="471"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="1"
+				border_size="1"
+				layer="0"
+				visible="0"
+				opacity="1"
+				text="+"
+				font="Courier,15,normal"
+				color="0,0,0"
+				padding="0"
+				halignment="center"
+				valignment="center">ex_dest_value1</object_text>
+
+		<object_text
+				x="453"
+				y="471"
+				background_color="0,0,0"
+				background_transparent="1"
+				border_color="0,0,0"
+				border_transparency="1"
+				border_size="1"
+				layer="0"
+				visible="0"
+				opacity="1"
+				text="+"
+				font="Courier,15,normal"
+				color="0,0,0"
+				padding="0"
+				halignment="center"
+				valignment="center">ex_dest_value0</object_text>
+
 	</objects>
-	<programs></programs>
+
+	<programs>
+
+		<program assigned_to="ex_src1_value0">
+			<moveto x="473" y="471" dx="1" dy="1" />
+			<wait value="continue" />
+			<moveto x="453" y="471" dx="1" dy="1" />
+			<visible value="false" />
+		</program>
+		
+		<program assigned_to="ex_src1_value1">
+			<moveto x="433" y="471" dx="1" dy="1" />
+			<trigger object="ex_src1_value2" value="start" />
+			<trigger object="ex_src1_value3" value="start" />
+			<trigger object="ex_dest_value0" value="appear" />
+			<sleep value="1000" />
+			<trigger object="ex_src1_value0" value="continue" />
+			<moveto x="453" y="471" dx="1" dy="1" />
+			<trigger object="ex_dest_value0" value="display_result" />
+			<visible value="false" />
+		</program>
+
+
+		<program assigned_to="ex_src1_value2">
+			<wait value="start" />
+			<moveto x="383" y="471" dx="1" dy="1" />
+			<wait value="continue" />
+			<moveto x="363" y="471" dx="1" dy="1" />
+			<visible value="false" />
+		</program>
+
+		<program assigned_to="ex_src1_value3">
+			<wait value="start" />
+			<moveto x="343" y="471" dx="1" dy="1" />
+			<trigger object="ex_src2_value0" value="start" />
+			<trigger object="ex_src2_value1" value="start" />
+			<trigger object="ex_dest_value1" value="appear" />
+			<sleep value="1000" />
+			<trigger object="ex_src1_value2" value="continue" />
+			<moveto x="363" y="471" dx="1" dy="1" />
+			<trigger object="ex_dest_value1" value="display_result" />
+			<visible value="false" />
+		</program>
+
+
+		<program assigned_to="ex_src2_value0">
+			<wait value="start" />
+			<moveto x="293" y="471" dx="1" dy="1" />
+			<trigger object="ex_src2_value2" value="start" />
+			<trigger object="ex_src2_value3" value="start" />
+			<trigger object="ex_dest_value2" value="appear" />
+			<sleep value="1000" />
+			<trigger object="ex_src2_value1" value="continue" />
+			<moveto x="273" y="471" dx="1" dy="1" />
+			<trigger object="ex_dest_value2" value="display_result" />
+			<visible value="false" />
+		</program>
+
+		<program assigned_to="ex_src2_value1">
+			<wait value="start" />
+			<moveto x="253" y="471" dx="1" dy="1" />
+			<wait value="continue" />
+			<moveto x="273" y="471" dx="1" dy="1" />
+			<visible value="false" />
+		</program>
+
+
+		<program assigned_to="ex_src2_value2">
+			<wait value="start" />
+			<moveto x="203" y="471" dx="1" dy="1" />
+			<wait value="continue" />
+			<moveto x="183" y="471" dx="1" dy="1"  />
+			<visible value="false" />
+		</program>
+
+		<program assigned_to="ex_src2_value3">
+			<wait value="start" />
+			<moveto x="163" y="471" dx="1" dy="1" />
+			<trigger object="ex_dest_value3" value="appear" />
+			<sleep value="1000" />
+			<trigger object="ex_src2_value2" value="continue" />
+			<moveto x="183" y="471" dx="1" dy="1" />
+			<trigger object="ex_dest_value3" value="display_result" />
+			<visible value="false" />
+		</program>
+
+
+		<program assigned_to="ex_dest_value0">
+			<wait value="appear" />
+			<visible value="true" />
+			<wait value="display_result" />
+			<setproperty object="ex_dest_value0" property="text" value="3" />
+		</program>
+
+		<program assigned_to="ex_dest_value1">
+			<wait value="appear" />
+			<visible value="true" />
+			<wait value="display_result" />
+			<setproperty object="ex_dest_value1" property="text" value="7" />
+		</program>
+
+		<program assigned_to="ex_dest_value2">
+			<wait value="appear" />
+			<visible value="true" />
+			<wait value="display_result" />
+			<setproperty object="ex_dest_value2" property="text" value="11" />
+		</program>
+
+		<program assigned_to="ex_dest_value3">
+			<wait value="appear" />
+			<visible value="true" />
+			<wait value="display_result" />
+			<setproperty object="ex_dest_value3" property="text" value="15" />
+		</program>
+
+	</programs>
+
 </animation>
