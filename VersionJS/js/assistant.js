@@ -39,7 +39,7 @@ document.getElementById("addGrid").addEventListener('click', function () { new_o
 document.getElementById("addTable").addEventListener('click', function () { new_object('Table') });
 document.getElementById("width").addEventListener('change', function () { sketch.resizeCanvas(this.value, document.getElementById("height").value); update_section_size();});
 document.getElementById("height").addEventListener('change', function () { sketch.resizeCanvas(document.getElementById("width").value, this.value); update_section_size(); });
-document.getElementById("background").addEventListener('change', function () { sketch.load_background() });
+document.getElementById("myBackground").addEventListener('change', function () { sketch.load_background() });
 
 wait_for_includes();
 /**
@@ -79,7 +79,7 @@ function import_xml(input_id) {
 			animation.readXmlFile(xhr.responseText);
 			// Retrieve background path
 			if (animation.getBackground() != null) {
-				document.getElementById("background").value = animation.getBackground().trim();
+				document.getElementById("myBackground").value = animation.getBackground().trim();
 				sketch.load_background();
 			}
 			// Remove all current objects
@@ -1112,7 +1112,7 @@ function export_xml() {
 	animation_node.appendChild(init_node);
 
 	// speed attribute
-	animation_node.setAttribute('speed', document.getElementById("speed").value);
+	animation_node.setAttribute('speed', document.getElementById("mySpeed").value);
 
 	// background image node
 	if (document.getElementById("background").value != "") {
@@ -1251,7 +1251,7 @@ function draw_animation() {
 
 		/** Load the background of the canvas */
 		draw_ref.load_background = function () {
-			let bg = document.getElementById("background").value.trim();
+			let bg = document.getElementById("myBackground").value.trim();
 			if (bg != "") {
 				if (!isValidColor(bg) && !isHexColor(bg)) {
 					background_img = draw_ref.loadImage(bg);
