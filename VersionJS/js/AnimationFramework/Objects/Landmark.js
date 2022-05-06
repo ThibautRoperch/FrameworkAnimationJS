@@ -66,90 +66,125 @@ export class Landmark extends AnimatedObject {
 	draw(drawing) {
 		super.draw(drawing);
 
-		// Forcer la bordure pour les éléments du repère
-		drawing.stroke(this.border_color, this.opacity * 255);
-
 		drawing.textFont("courrier");
 		drawing.textSize(12);
 		drawing.textStyle(drawing.NORMAL);
 		drawing.angleMode(drawing.DEGREES);
 
-		let axis1;       //Vector utilisé pour effectuer la rotation : à placer au milieu du texte
 		if (this.height > 0 && this.width > 0) {
-			drawing.line(this.x, this.y, this.x, this.y + this.height);
-			drawing.line(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
+			// X axis
+			drawing.line(this.x, this.y, this.x, this.y - this.height);
+			// Y axis
+			drawing.line(this.x, this.y, this.x + this.width, this.y);
 
-			// Dessin des triangles 
-			drawing.triangle(this.x - this.width * 0.02, this.y, this.x + this.width * 0.02, this.y, this.x, this.y - this.height * 0.04);
-			drawing.triangle(this.x + this.width, this.y + this.height + this.height * 0.02, this.x + this.width, this.y + this.height - this.height * 0.02, this.x + this.width + this.width * 0.04, this.y + this.height);
-
-			// Enlever la bordure pour les textes et forcer l'arrière-plan
-			if (this.border_transparency) drawing.noStroke();
-			else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-			drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
+			drawing.push();
+			if (!this.background_transparent)
+				drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
+			else
+				drawing.noFill();
+			// Drawing arrow of end of axes
+			// Y axis
+			drawing.triangle(this.x - 3, this.y - this.height, this.x + 3, this.y - this.height, this.x, this.y - this.height - 3);
+			// X axis
+			drawing.triangle(this.x + this.width, this.y + 3, this.x + this.width, this.y - 3, this.x + this.width + 3, this.y);
+			drawing.pop();
 
 			//texte x
-			drawing.text(this.unit_x, this.x + this.width / 2, this.y + this.height + 25);
-			//texte y (Ca serait bien d'orienter le texte)
+			drawing.text(this.unit_x, this.x + this.width / 2, this.y + 10);
 
-			drawing.push();        //sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
-			drawing.translate(this.x - 20, this.y + this.height / 2);
+			//texte y
+			drawing.push();  // sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
+			drawing.translate(this.x - 10, this.y - this.height / 2);
 			drawing.rotate(-90);
 			drawing.text(this.unit_y, 0, 0);
 			drawing.pop();
 		}
 		else if (this.height < 0 && this.width > 0) {
-			drawing.line(this.x, this.y + this.width, this.x + this.width, this.y + this.width);
-			drawing.line(this.x + this.width, this.y - this.height, this.x + this.width, this.y);
+			// X axis
+			drawing.line(this.x, this.y, this.x, this.y - this.height);
+			// Y axis
+			drawing.line(this.x, this.y, this.x + this.width, this.y);
 
-			// Enlever la bordure pour les textes et forcer l'arrière-plan
-			if (this.border_transparency) drawing.noStroke();
-			else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-			drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
+			drawing.push();
+			if (!this.background_transparent)
+				drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
+			else
+				drawing.noFill();
+			// Drawing arrow of end of axes
+			// Y axis
+			drawing.triangle(this.x - 3, this.y - this.height, this.x + 3, this.y - this.height, this.x, this.y - this.height + 3);
+			// X axis
+			drawing.triangle(this.x + this.width, this.y + 3, this.x + this.width, this.y - 3, this.x + this.width + 3, this.y);
+			drawing.pop();
 
-			//texte x
-			drawing.text(this.unit_x, this.x + this.width / 2, this.y + this.width + 25);
+			// Unit of X axis
+			drawing.text(this.unit_x, this.x + this.width / 2, this.y - 10);
 
-			//application de la translation pour fixer le point initial et rotation
-			darwing.translate(this.x + this.width + 20, this.y - this.height / 2);
-			darwing.rotate(90);
-			//texte y
-			if (this.border_transparency) drawing.noStroke();
-			else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-			drawing.text(this.unit_y, 0, 0);
-		}
-		else if (this.height > 0 && this.width < 0) {
-			drawing.line(this.x - this.width, this.y + this.height, this.x - this.width, this.y);
-			drawing.line(this.x, this.y - this.width, this.x - this.width, this.y - this.width);
-			// Enlever la bordure pour les textes et forcer l'arrière-plan
-			if (this.border_transparency) drawing.noStroke();
-			else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-			drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
-			//texte x
-			drawing.text(this.unit_x, this.x - this.width / 2, this.y + this.height + 25);
-			//texte y (Ca serait bien d'orienter le texte)
-			axis1 = drawing.createVector(this.x - this.width / 2, this.y + this.height + 25);
-			//axis2 = drawing.createVector(this.x - this.width/2, this.y + this.height + 40);
-			//for(let i = 0; i>-180; --i) {
-			//drawing.push();
-			drawing.translate(this.x - this.width + 10, this.y + this.height / 2);
+			// Unit of Y axis
+			drawing.push();  // sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
+			drawing.translate(this.x - 10, this.y - this.height / 2);
 			drawing.rotate(-90);
 			drawing.text(this.unit_y, 0, 0);
-			//drawing.pop();
+			drawing.pop();
+		}
+		else if (this.height > 0 && this.width < 0) {
+			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
+			// Y axis
+			drawing.line(this.x, this.y, this.x, this.y - this.height);
+			// X axis
+			drawing.line(this.x, this.y, this.x + this.width, this.y);
+
+			drawing.push();
+			// Drawing arrow of end of axes
+			if (!this.border_transparency)
+				drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
+			else
+				drawing.noFill();
+			// Drawing arrow of end of axes
+			// Y axis
+			drawing.triangle(this.x - 3, this.y - this.height, this.x + 3, this.y - this.height, this.x, this.y - this.height - 3);
+			// X axis
+			drawing.triangle(this.x + this.width, this.y + 3, this.x + this.width, this.y - 3, this.x + this.width - 3, this.y);
+			drawing.pop();
+
+			// Unit of X axis
+			drawing.text(this.unit_x, this.x + this.width / 2, this.y + 10);
+
+			// Unit of Y axis
+			drawing.push();  // sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
+			drawing.translate(this.x + 10, this.y - this.height / 2);
+			drawing.rotate(90);
+			drawing.text(this.unit_y, 0, 0);
+			drawing.pop();
 		}
 		else if (this.height < 0 && this.width < 0) {
-			drawing.line(this.x, this.y - this.width, this.x - this.width, this.y - this.width);
-			drawing.line(this.x, this.y - this.height, this.x, this.y);
-			// Enlever la bordure pour les textes et forcer l'arrière-plan
-			if (this.border_transparency) drawing.noStroke();
-			else drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-			drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
-			//texte x
-			drawing.text(this.unit_x, this.x + this.width / 2, this.y + 25);
-			//texte y (Ca serait bien d'orienter le texte)
-			axis1 = drawing.createVector(this.x + this.width / 2, this.y + 25);
-			drawing.rotate(90, axis1);
-			drawing.text(this.unit_y, this.x + this.width + 25, this.y + this.height / 2);
+			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
+			// Y axis
+			drawing.line(this.x, this.y, this.x, this.y - this.height);
+			// X axis
+			drawing.line(this.x, this.y, this.x + this.width, this.y);
+
+			drawing.push();
+			if (!this.background_transparent)
+				drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
+			else
+				drawing.noFill();
+			// Drawing arrow of end of axes
+			// Y axis
+			drawing.triangle(this.x - 3, this.y - this.height, this.x + 3, this.y - this.height, this.x, this.y - this.height + 3);
+			// X axis
+			drawing.triangle(this.x + this.width, this.y + 3, this.x + this.width, this.y - 3, this.x + this.width - 3, this.y);
+			drawing.pop();
+
+			// Unit of X axis
+			drawing.text(this.unit_x, this.x + this.width / 2, this.y - 10);
+
+			// Unit of Y axis
+			drawing.push();  // sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
+			drawing.translate(this.x + 10, this.y - this.height / 2);
+			drawing.rotate(90);
+			drawing.text(this.unit_y, 0, 0);
+			drawing.pop();
 		}
 	}
 

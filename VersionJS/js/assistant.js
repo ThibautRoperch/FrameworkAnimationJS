@@ -74,7 +74,8 @@ function import_xml(input_id) {
 				sketch.load_background();
 			}
 			// Remove all current objects
-			for (let i = 0; i <= last_id; ++i) {
+			let number_object = document.getElementById("objects").childElementCount;
+			for (let i = 0; i < number_object; ++i) {
 				remove(i);
 			}
 
@@ -673,6 +674,12 @@ function new_object(object_type) {
 			object = new Ellipse(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height);
 			break;
 		case "Landmark":
+			// We set x-y at 30-60 at default to see it well in preview
+			let number_property = document.getElementsByClassName("x").length - 1
+			let obj = document.getElementsByClassName("x")[number_property].childNodes[1];
+			obj.placeholder = "60";
+			obj = document.getElementsByClassName("y")[number_property].childNodes[1];
+			obj.placeholder = "60";
 			// width
 			property = document.createElement("property");
 			property.className = "width";
@@ -751,7 +758,7 @@ function new_object(object_type) {
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Landmark(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y);
+			object = new Landmark(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y);
 			break;
 		case "Grid":
 			// lines
