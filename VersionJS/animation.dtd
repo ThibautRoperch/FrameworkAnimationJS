@@ -153,8 +153,15 @@
 <!ATTLIST object_text font CDATA #REQUIRED >
 <!ATTLIST object_table line_height CDATA #REQUIRED >
 <!ATTLIST object_table column_width CDATA #REQUIRED >
-<!ATTLIST object_text color CDATA #IMPLIED >
-<!ATTLIST object_text padding CDATA #IMPLIED >
+<!ATTLIST object_table halignment (left|center|right) #IMPLIED >
+<!ATTLIST object_table valignment (top|bottom|center|baseline) #IMPLIED >
+<!ATTLIST object_table color CDATA #IMPLIED >
+<!ATTLIST object_table padding CDATA #IMPLIED >
+<!ATTLIST object_table has_header_columns (true|false) #IMPLIED >
+<!ATTLIST object_table has_header_lines (true|false) #IMPLIED >
+<!ATTLIST object_table header_background_color CDATA #IMPLIED >
+<!ATTLIST object_table header_color CDATA #IMPLIED >
+<!ATTLIST object_table header_font CDATA #IMPLIED >
 <!ATTLIST object_table x CDATA #IMPLIED >
 <!ATTLIST object_table y CDATA #IMPLIED >
 <!ATTLIST object_table background_color CDATA #IMPLIED >
@@ -165,7 +172,6 @@
 <!ATTLIST object_table layer CDATA #IMPLIED >
 <!ATTLIST object_table visible (true|false) #IMPLIED >
 <!ATTLIST object_table opacity CDATA #IMPLIED >
-<!ATTLIST object_table angle CDATA #IMPLIED >
 
 <!ELEMENT object_copy (#PCDATA) >
 <!ATTLIST object_copy idcopy CDATA #REQUIRED>
