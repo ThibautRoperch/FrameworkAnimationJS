@@ -111,7 +111,7 @@ export class Text extends AnimatedObject {
 		drawing.textAlign(this.halignment == "right" ? drawing.RIGHT : this.halignment == "center" ? drawing.CENTER : drawing.LEFT,
 		this.valignment == "center" ? drawing.CENTER : this.valignment == "bottom" ? drawing.BOTTOM : this.valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
 		// Display
-		drawing.text(this.text.replace("@", "\n"), this.x + 2 + this.padding, this.y + 4 + this.padding / 2);
+		drawing.text(this.text.replaceAll("@", "\n"), this.x + 2 + this.padding, this.y + 4 + this.padding / 2);
 		drawing.pop();
 	}
 	
