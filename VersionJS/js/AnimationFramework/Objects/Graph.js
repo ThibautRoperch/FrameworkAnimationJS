@@ -37,7 +37,7 @@ export class Graph extends Landmark {
 
         // Evaluation of function
         while(iteration <= number_iteration) {
-            let y = eval(this.algorithmic_function); // Evaluation of the fonction
+            let y = eval(this.algorithmic_function);
             y_points.push(y);
             x += 1;
             ++iteration;
@@ -52,6 +52,7 @@ export class Graph extends Landmark {
 		drawing.push();
 		// We move at the origin of graph
 		drawing.translate(this.x, this.y);
+		// Start to calculate all points
 		drawing.beginShape();
         for(let i = 0; i <= number_iteration; ++i){
             let px;
@@ -66,7 +67,7 @@ export class Graph extends Landmark {
 				py = y_points[i];
 			
 			drawing.strokeWeight(2);
-			// For the first and last point, we have to declare two point to draw a line
+			// For the first and last point, we have to declare two same point to draw a line
 			if(i == 0 || i == number_iteration)
 				drawing.curveVertex(
 					drawing.map(px, 0, this.max_X, 0, this.width),
@@ -76,6 +77,7 @@ export class Graph extends Landmark {
 				drawing.map(px, 0, this.max_X, 0, this.width),
 				drawing.map(py, 0, this.max_Y, 0, this.height)
 			);
+			// Draw or no the point we calculate
 			if(this.draw_point) {
 				drawing.strokeWeight(4);
 				drawing.point(
