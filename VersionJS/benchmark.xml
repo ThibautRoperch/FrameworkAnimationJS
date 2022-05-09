@@ -59,14 +59,14 @@
 			x="100" y="450"
 			visible="true"
 			background_transparent="false"
-			height="-500" width="500"
+			height="500" width="500"
 			scale_x="5" scale_y="10"
 			max_X ="100" max_Y="100"
 			unit_x="X" unit_y="Y"
 			border_color="255,0,0"
 			background_color="255,255,0"
 			border_transparency="false"
-			function="x"> Fonction x2
+			function="-x"> Fonction x2
 		</object_graph>
 
 		<object_polygon

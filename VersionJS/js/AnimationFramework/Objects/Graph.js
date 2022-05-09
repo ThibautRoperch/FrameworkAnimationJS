@@ -27,34 +27,39 @@ export class Graph extends Landmark {
 
         // Evaluation of function
         while(iteration < number_iteration) {
-            let replace = this.algorithmic_function.replace("x",x);
             let y = eval(this.algorithmic_function);
             y_points.push(y);
             x += this.scale_x;
             ++iteration;
-        }
-
-		drawing.strokeWeight(5);
-		drawing.point(this.x, this.y);
-		drawing.strokeWeight(1);
+		}
 
         // Drawing of function
-        drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-		drawing.noFill();
-        drawing.beginShape();
+		if (!this.border_transparency)
+			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
+		else
+			drawing.noFill();
+
+		drawing.push();
+		drawing.beginShape();
+		drawing.translate(this.x, this.y);
         for(let i = 0; i < number_iteration; ++i){
             let px;
             let py;
-            if(this.height > 0 && this.width > 0){
-                px = this.x + (i * this.scale_x);
-                py = this.y - y_points[i];
-            }
+			if(this.width > 0)
+				px = i * this.scale_x;
+			else
+				px = -(i * this.scale_x);
+            if(this.height > 0)
+                py = -y_points[i];
+			else
+				py = y_points[i];
+			
+			if(i == 0 || i == number_iteration - 1)
+				drawing.curveVertex(px, py);
             drawing.curveVertex(px, py);
-			drawing.strokeWeight(5);
-			drawing.point(px, py);
-			drawing.strokeWeight(1);
         }
-        drawing.endShape();
+		drawing.endShape();
+		drawing.pop();
 	}
 
 	isClicked(x, y) {

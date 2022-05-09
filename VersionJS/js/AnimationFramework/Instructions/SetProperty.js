@@ -114,6 +114,12 @@ export class SetProperty extends Instruction {
 			case "unit_y":
 				this.target.setUnitY(this.value);
 				break;
+			case "max_X":
+				this.target.setMax_X(this.value);
+				break;
+			case "max_Y":
+				this.target.setMax_Y(this.value);
+				break;
 
 			// grid
 			case "lines":
@@ -137,6 +143,7 @@ export class SetProperty extends Instruction {
 			// graph
 			case "function":
 				this.target.setFunction(this.value);
+				break;
 
 			default:
 				console.log("[SetProperty.js] La propriété '" + this.property + "' est inconnue de l'instruction SetProperty"); // dans ce cas, rajouter l'attribut (dans le switch case ci-dessus)
