@@ -101,11 +101,14 @@ export class Landmark extends AnimatedObject {
 			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
 		}
 		
+		drawing.push();
+		drawing.translate(this.x, this.y);
 		// Y axis
-		drawing.line(this.x, this.y, this.x, this.y - this.height);
+		drawing.line(0, 0, 0, -this.height);
 		// X axis
-		drawing.line(this.x, this.y, this.x + this.width, this.y);
+		drawing.line(0, 0, this.width, 0);
 
+		drawing.pop();
 		drawing.noStroke();
 	}
 
@@ -117,43 +120,38 @@ export class Landmark extends AnimatedObject {
 			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
 		}
 
+		drawing.push();
+		// On se déplace à l'origine du graphe
+		drawing.translate(this.x, this.y);
+
+		let px = 0;
+		let py = this.height > 0 ? -5 : 5; // Choose whether the line is drawn in positive or negative Y
+
+		// The map function convert the graph coordinates in pixels
+
 		// Scale of X axis
-		for(let i = 1; i < number_scale_X; ++i){
-			let px;
-			if(this.width > 0){
-				px = this.x + (i * this.scale_x);
-				if(this.height > 0)
-					drawing.line(px, this.y, px, this.y - 5);
-				else
-					drawing.line(px, this.y, px, this.y + 5);
-			}
-			else {
-				px = this.x - (i * this.scale_x);
-				if(this.height > 0)
-					drawing.line(px, this.y, px, this.y - 5);
-				else
-					drawing.line(px, this.y, px, this.y + 5);
-			}
+		while (Math.abs(drawing.map(px, 0, this.max_X, 0, this.width)) < Math.abs(this.width)) {
+			drawing.line(
+				drawing.map(px, 0, this.max_X, 0, this.width),
+				0, 
+				drawing.map(px, 0, this.max_X, 0, this.width), 
+				py);
+			px += this.scale_x;
 		}
 
+		py = 0;
+		px = this.width > 0 ? 5 : -5; // Choose whether the line is drawn in positive or negative X
 		// Scale of Y axis
-		for(let i = 1; i < number_scale_Y; ++i){
-			let py;
-			if(this.height > 0){
-				py = this.y - (i * this.scale_y);
-				if(this.width > 0)
-					drawing.line(this.x, py, this.x + 5, py);
-				else
-					drawing.line(this.x, py, this.x - 5, py);
-			}
-			else {
-				py = this.y + (i * this.scale_y);
-				if(this.width > 0)
-					drawing.line(this.x, py, this.x + 5, py);
-				else
-					drawing.line(this.x, py, this.x - 5, py);
-			}
+		while (Math.abs(drawing.map(py, 0, this.max_Y, 0, this.height)) < Math.abs(this.height)) {
+			drawing.line(
+				0,
+				-drawing.map(py, 0, this.max_Y, 0, this.height), 
+				px, 
+				-drawing.map(py, 0, this.max_Y, 0, this.height));
+			py += this.scale_y;
 		}
+
+		drawing.pop();
 	}
 
 	drawAxisArrow(drawing) {
