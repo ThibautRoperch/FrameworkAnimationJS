@@ -164,7 +164,6 @@
 				text="4"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_src1_value3</object_text>
 
@@ -182,7 +181,6 @@
 				text="3"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_src1_value2</object_text>
 
@@ -200,7 +198,6 @@
 				text="2"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_src1_value1</object_text>
 
@@ -218,7 +215,6 @@
 				text="1"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_src1_value0</object_text>
 
@@ -236,7 +232,6 @@
 				text="8"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_src2_value3</object_text>
 
@@ -254,7 +249,6 @@
 				text="7"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_src2_value2</object_text>
 
@@ -272,7 +266,6 @@
 				text="6"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_src2_value1</object_text>
 
@@ -290,7 +283,6 @@
 				text="5"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_src2_value0</object_text>
 
@@ -308,7 +300,6 @@
 				text="+"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_dest_value3</object_text>
 
@@ -326,7 +317,6 @@
 				text="+"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_dest_value2</object_text>
 
@@ -344,7 +334,6 @@
 				text="+"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_dest_value1</object_text>
 
@@ -362,7 +351,6 @@
 				text="+"
 				font="Courier,15,normal"
 				color="0,0,0"
-				padding="0"
 				halignment="center"
 				valignment="center">ex_dest_value0</object_text>
 

@@ -30,6 +30,16 @@ export class Table extends AnimatedObject {
         this.fillCoordCells();
     }
 
+    setX(x) {
+        super.setX(x);
+        this.fillCoordCells();
+    }
+
+    setY(y) {
+        super.setY(y);
+        this.fillCoordCells();
+    }
+
 	getColor () {
 		return this.color;
 	}
@@ -146,7 +156,7 @@ export class Table extends AnimatedObject {
             columns = row.split("|");
             let rowTab = [];
             for (let column of columns) {
-                rowTab.push(column.trim());
+                rowTab.push(column.trim().replaceAll("@", "\n"));
             }
             this.value_tab.push(rowTab);
 
@@ -227,10 +237,10 @@ export class Table extends AnimatedObject {
                         drawing.textSize(parseInt(this.header_font[1]));
                         drawing.textStyle(this.header_font[2] == "bold" ? drawing.BOLD : this.header_font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
                     }
-                    drawing.text(value, coords[0], coords[1], this.column_width, this.line_height);
+                    drawing.text(value, coords[0] + this.padding, coords[1] + this.padding / 2, this.column_width, this.line_height);
                     drawing.pop();
                 } else {
-                    drawing.text(value, coords[0], coords[1], this.column_width, this.line_height);
+                    drawing.text(value, coords[0] + this.padding, coords[1] + this.padding / 2, this.column_width, this.line_height);
                 }
             }
         }
@@ -271,7 +281,7 @@ export class Table extends AnimatedObject {
     }
 
     clone() {
-        return new Table(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.values, this.line_height, this.column_width, this.font, this.color, this.padding, this.halignment, this.valignment);
+        return new Table(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.values, this.line_height, this.column_width, this.font, this.color, this.padding, this.halignment, this.valignment, this.has_header_columns, this.has_header_lines, this.header_font, this.header_color, this.header_background_color);
     }
 
 }
