@@ -21,7 +21,7 @@ export class Graph extends Landmark {
 	draw(drawing) {
 		super.draw(drawing);
         let y_points = [];
-        let number_iteration = this.width / this.scale_x;
+        let number_iteration = Math.abs(this.width) / this.scale_x;
         let iteration = 0;
         let x = 0;
 
