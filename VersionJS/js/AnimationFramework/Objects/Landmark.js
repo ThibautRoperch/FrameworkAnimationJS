@@ -72,6 +72,7 @@ export class Landmark extends AnimatedObject {
 		drawing.angleMode(drawing.DEGREES);
 
 		this.drawAxis(drawing);
+		this.drawScale(drawing);
 		this.drawAxisArrow(drawing);
 		this.drawXUnit(drawing);
 		this.drawYUnit(drawing);
@@ -88,6 +89,53 @@ export class Landmark extends AnimatedObject {
 		drawing.line(this.x, this.y, this.x + this.width, this.y);
 
 		drawing.noStroke();
+	}
+
+	drawScale(drawing) {
+		let number_scale_X = Math.abs(this.width) / this.scale_x;
+		let number_scale_Y = Math.abs(this.height) / this.scale_y;
+
+		if (!this.border_transparency) {
+			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
+		}
+
+		// Scale of X axis
+		for(let i = 1; i < number_scale_X; ++i){
+			let px;
+			if(this.width > 0){
+				px = this.x + (i * this.scale_x);
+				if(this.height > 0)
+					drawing.line(px, this.y, px, this.y - 5);
+				else
+					drawing.line(px, this.y, px, this.y + 5);
+			}
+			else {
+				px = this.x - (i * this.scale_x);
+				if(this.height > 0)
+					drawing.line(px, this.y, px, this.y - 5);
+				else
+					drawing.line(px, this.y, px, this.y + 5);
+			}
+		}
+
+		// Scale of Y axis
+		for(let i = 1; i < number_scale_Y; ++i){
+			let py;
+			if(this.height > 0){
+				py = this.y - (i * this.scale_y);
+				if(this.width > 0)
+					drawing.line(this.x, py, this.x + 5, py);
+				else
+					drawing.line(this.x, py, this.x - 5, py);
+			}
+			else {
+				py = this.y + (i * this.scale_y);
+				if(this.width > 0)
+					drawing.line(this.x, py, this.x + 5, py);
+				else
+					drawing.line(this.x, py, this.x - 5, py);
+			}
+		}
 	}
 
 	drawAxisArrow(drawing) {
