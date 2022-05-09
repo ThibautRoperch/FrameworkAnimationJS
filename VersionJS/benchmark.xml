@@ -85,13 +85,21 @@
 			background_color="100,250,250"
 			border_transparency="false"
 			border_color="30,30,30"
-			values="10 | 20 | 30 $ 
-					40 | 50 | 60 | 70 $ 
-					80 | 90"
+			values="   | C1 | C2 | C3 | C4 $
+					L1 | 10 | 20 | 30 $ 
+					L2 | 40 | 50 | 60 | 70 $ 
+					L3 | 80 | 90"
 			font="Arial,14"
-			color="20,20,20"
+			color="20,255,20"
 			line_height="30"
-			column_width="60">Table</object_table>
+			column_width="60"
+			has_header_columns="false"
+			has_header_lines="true"
+			header_background_color="255,0,0"
+			header_color="0,0,255"
+			header_font="Courier,24,italic"
+			halignment="center"
+			valignment="center">Table</object_table>
 	</objects>
 
 	<programs>
