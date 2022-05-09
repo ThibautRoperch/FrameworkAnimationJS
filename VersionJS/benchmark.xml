@@ -56,10 +56,10 @@
 			width="170">tests deplacement et clics</object_text>
 
 		<object_graph 
-			x="100" y="450"
+			x="100" y="750"
 			visible="true"
 			background_transparent="false"
-			height="-500" width="500"
+			height="500" width="500"
 			scale_x="5" scale_y="10"
 			max_X ="100" max_Y="100"
 			unit_x="X" unit_y="Y"

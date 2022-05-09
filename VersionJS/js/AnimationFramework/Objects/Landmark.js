@@ -113,9 +113,6 @@ export class Landmark extends AnimatedObject {
 	}
 
 	drawScale(drawing) {
-		let number_scale_X = Math.abs(this.width) / this.scale_x;
-		let number_scale_Y = Math.abs(this.height) / this.scale_y;
-
 		if (!this.border_transparency) {
 			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
 		}
