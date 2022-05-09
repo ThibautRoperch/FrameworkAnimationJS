@@ -36,59 +36,64 @@ export class Graph extends Landmark {
         let x = 0;
 
         // Evaluation of function
-        while(iteration <= number_iteration) {
-            let y = eval(this.algorithmic_function);
-            y_points.push(y);
-            x += 1;
-            ++iteration;
-		}
+		try {
+			while(iteration <= number_iteration) {
+				let y = eval(this.algorithmic_function);
+				y_points.push(y);
+				x += 1;
+				++iteration;
+			}
 
-        // Drawing of function
-		if (!this.border_transparency)
-			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-		else
-			drawing.noStroke();
+			// Drawing of function
+			if (!this.border_transparency)
+				drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
+			else
+				drawing.noStroke();
 
-		drawing.push();
-		// We move at the origin of graph
-		drawing.translate(this.x, this.y);
-		// Start to calculate all points
-		drawing.beginShape();
-        for(let i = 0; i <= number_iteration; ++i){
-            let px;
-            let py;
-			if(this.width > 0)
-				px = i;
-			else
-				px = -i;
-            if(this.height > 0)
-                py = -y_points[i];
-			else
-				py = y_points[i];
-			
-			drawing.strokeWeight(2);
-			// For the first and last point, we have to declare two same point to draw a line
-			if(i == 0 || i == number_iteration)
+			drawing.push();
+			// We move at the origin of graph
+			drawing.translate(this.x, this.y);
+			// Start to calculate all points
+			drawing.beginShape();
+			for(let i = 0; i <= number_iteration; ++i){
+				let px;
+				let py;
+				if(this.width > 0)
+					px = i;
+				else
+					px = -i;
+				if(this.height > 0)
+					py = -y_points[i];
+				else
+					py = y_points[i];
+				
+				drawing.strokeWeight(2);
+				// For the first and last point, we have to declare two same point to draw a line
+				if(i == 0 || i == number_iteration)
+					drawing.curveVertex(
+						drawing.map(px, 0, this.max_X, 0, this.width),
+						drawing.map(py, 0, this.max_Y, 0, this.height)
+					);
 				drawing.curveVertex(
 					drawing.map(px, 0, this.max_X, 0, this.width),
 					drawing.map(py, 0, this.max_Y, 0, this.height)
 				);
-			drawing.curveVertex(
-				drawing.map(px, 0, this.max_X, 0, this.width),
-				drawing.map(py, 0, this.max_Y, 0, this.height)
-			);
-			// Draw or no the point we calculate
-			if(this.draw_point) {
-				drawing.strokeWeight(4);
-				drawing.point(
-					drawing.map(px, 0, this.max_X, 0, this.width),
-					drawing.map(py, 0, this.max_Y, 0, this.height)
-				);
-				drawing.strokeWeight(1);
+				// Draw or no the point we calculate
+				if(this.draw_point) {
+					drawing.strokeWeight(4);
+					drawing.point(
+						drawing.map(px, 0, this.max_X, 0, this.width),
+						drawing.map(py, 0, this.max_Y, 0, this.height)
+					);
+					drawing.strokeWeight(1);
+				}
 			}
-        }
-		drawing.endShape();
-		drawing.pop();
+			drawing.endShape();
+			drawing.pop();
+		} catch(err){
+			alert(err);
+			this.algorithmic_function="";
+		}
 	}
 
 	isClicked(x, y) {
