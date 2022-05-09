@@ -65,6 +65,7 @@ export class Graph extends Landmark {
 			else
 				py = y_points[i];
 			
+			drawing.strokeWeight(2);
 			// For the first and last point, we have to declare two point to draw a line
 			if(i == 0 || i == number_iteration)
 				drawing.curveVertex(
