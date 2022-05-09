@@ -13,8 +13,8 @@
 		<object_table
 				x="50"
 				y="30"
-				background_color="0,0,0"
-				background_transparent="1"
+				background_color="244,208,63"
+				background_transparent="0"
 				border_color="0,0,0"
 				border_transparency="0"
 				border_size="1"
@@ -27,13 +27,16 @@
 				column_width="60"
 				halignment="center"
 				valignment="center"
+				has_header_lines="true"
+				header_background_color="243,156,18"
+				header_color="0,0,0"
 				values="src 1 | a3 | a2 | a1 | a0">src1</object_table>
 
 		<object_table
 				x="50"
 				y="70"
-				background_color="0,0,0"
-				background_transparent="1"
+				background_color="244,208,63"
+				background_transparent="0"
 				border_color="0,0,0"
 				border_transparency="0"
 				border_size="1"
@@ -46,13 +49,16 @@
 				column_width="60"
 				halignment="center"
 				valignment="center"
+				has_header_lines="true"
+				header_background_color="243,156,18"
+				header_color="0,0,0"
 				values="src 2 | b3 | b2 | b1 | b0">src2</object_table>
 
 		<object_table
 				x="50"
 				y="110"
-				background_color="0,0,0"
-				background_transparent="1"
+				background_color="244,208,63"
+				background_transparent="0"
 				border_color="0,0,0"
 				border_transparency="0"
 				border_size="1"
@@ -65,10 +71,13 @@
 				column_width="60"
 				halignment="center"
 				valignment="center"
+				has_header_lines="true"
+				header_background_color="243,156,18"
+				header_color="0,0,0"
 				values="dest | b3 + b2 | b1 + b0 | a3 + a2 | a1 + a0">dest</object_table>
 
 		<object_text
-				x="200"
+				x="230"
 				y="200"
 				text="Exemple : "
 				font="Arial,18,bold"
@@ -78,8 +87,8 @@
 		<object_table
 				x="50"
 				y="250"
-				background_color="0,0,0"
-				background_transparent="1"
+				background_color="115,198,182"
+				background_transparent="0"
 				border_color="0,0,0"
 				border_transparency="0"
 				border_size="1"
@@ -92,13 +101,16 @@
 				column_width="90"
 				halignment="center"
 				valignment="center"
+				has_header_lines="true"
+				header_background_color="19,141,117"
+				header_color="0,0,0"
 				values="src 1 | 4 | 3 | 2 | 1">ex_src1</object_table>
 
 		<object_table
 				x="50"
 				y="350"
-				background_color="0,0,0"
-				background_transparent="1"
+				background_color="115,198,182"
+				background_transparent="0"
 				border_color="0,0,0"
 				border_transparency="0"
 				border_size="1"
@@ -111,13 +123,16 @@
 				column_width="90"
 				halignment="center"
 				valignment="center"
+				has_header_lines="true"
+				header_background_color="19,141,117"
+				header_color="0,0,0"
 				values="src 2 | 8 | 7 | 6 | 5">ex_src2</object_table>
 
 		<object_table
 				x="50"
 				y="450"
-				background_color="0,0,0"
-				background_transparent="1"
+				background_color="115,198,182"
+				background_transparent="0"
 				border_color="0,0,0"
 				border_transparency="0"
 				border_size="1"
@@ -130,6 +145,9 @@
 				column_width="90"
 				halignment="center"
 				valignment="center"
+				has_header_lines="true"
+				header_background_color="19,141,117"
+				header_color="0,0,0"
 				values="dest ||||">ex_dest</object_table>
 
 		<object_text
@@ -353,6 +371,7 @@
 	<programs>
 
 		<program assigned_to="ex_src1_value0">
+			<wait value="start" />
 			<moveto x="473" y="471" dx="1" dy="1" />
 			<wait value="continue" />
 			<moveto x="453" y="471" dx="1" dy="1" />
@@ -360,6 +379,8 @@
 		</program>
 		
 		<program assigned_to="ex_src1_value1">
+			<sleep value="1000" />
+			<trigger object="ex_src1_value0" value="start" />
 			<moveto x="433" y="471" dx="1" dy="1" />
 			<trigger object="ex_src1_value2" value="start" />
 			<trigger object="ex_src1_value3" value="start" />

@@ -266,11 +266,11 @@ export class Animation {
                         let values = read_object.getAttribute("values");
                         let has_header_columns = read_object.getAttribute("has_header_columns") ? read_object.getAttribute("has_header_columns") == "true" || read_object.getAttribute("has_header_columns") == "1" : false;
                         let has_header_lines = read_object.getAttribute("has_header_lines") ? read_object.getAttribute("has_header_lines") == "true" || read_object.getAttribute("has_header_lines") == "1" : false;
-                        let header_font = read_object.getAttribute("header_font").split(",");
-                        let header_color = read_object.getAttribute("header_color") ? parseIntArray(read_object.getAttribute("header_color")) : [0, 0, 0];
-                        let header_background_color = read_object.getAttribute("header_background_color") ? parseIntArray(read_object.getAttribute("header_background_color")) : [0, 0, 0];
+                        let header_background_color = read_object.getAttribute("header_background_color") ? parseIntArray(read_object.getAttribute("header_background_color")) : background_color;
                         font = read_object.getAttribute("font").split(",");
-                        color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
+                        let header_font = read_object.getAttribute("header_font") ? read_object.getAttribute("header_font").split(",") : font;
+                        color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
+                        let header_color = read_object.getAttribute("header_color") ? parseIntArray(read_object.getAttribute("header_color")) : color;
                         padding = parseInt(read_object.getAttribute("padding")) | 0;
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
                         valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
