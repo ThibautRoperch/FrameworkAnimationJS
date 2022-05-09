@@ -1101,7 +1101,27 @@ function new_object(object_type) {
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Graph(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y);
+			property = document.createElement("property");
+			// draw_point
+			property = document.createElement("property");
+			property.className = "draw_point";
+			label = document.createElement("label");
+			label.innerHTML = "draw_point";
+			property.appendChild(label);
+			input = document.createElement("select");
+			input.onchange = function () { change_property(obj_id, this); };
+			option = document.createElement("option");
+			option.value = "true";
+			option.innerHTML = "True";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "false";
+			option.innerHTML = "False";
+			option.selected = "selected";
+			input.appendChild(option);
+			property.appendChild(input);
+			article1.appendChild(property);
+			object = new Graph(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y, false);
 			break;
 	}
 	objects_array[obj_id] = object;

@@ -186,6 +186,7 @@
 <!ATTLIST object_graph border_color CDATA #IMPLIED >
 <!ATTLIST object_graph border_transparency (true|false) #IMPLIED >
 <!ATTLIST object_graph border_size CDATA #IMPLIED >
+<!ATTLIST object_graph draw_point (true|false) #IMPLIED >
 <!ATTLIST object_graph layer CDATA #IMPLIED >
 <!ATTLIST object_graph visible (true|false) #IMPLIED >
 <!ATTLIST object_graph opacity CDATA #IMPLIED >

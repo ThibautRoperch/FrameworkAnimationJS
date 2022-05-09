@@ -5,9 +5,10 @@ import { Landmark } from "./Landmark.js";
 
 export class Graph extends Landmark {
 
-	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, algorithmic_function, max_X, max_Y) {
+	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, algorithmic_function, max_X, max_Y, draw_point) {
 		super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, max_X, max_Y);
         this.algorithmic_function = algorithmic_function;
+		this.draw_point = draw_point;
 	}
 
     getFunction() {
@@ -18,18 +19,27 @@ export class Graph extends Landmark {
         this.algorithmic_function = algorithmic_function;
     }
 
+	getDrawPoint() {
+		return this.draw_point;
+	}
+
+	setDrawPoint(draw_point){
+		this.draw_point = draw_point;
+	}
+
 	draw(drawing) {
 		super.draw(drawing);
         let y_points = [];
-        let number_iteration = Math.abs(this.width) / this.scale_x;
+		// To get number of point to calculate
+        let number_iteration = Math.abs(this.width) / drawing.map(1, 0, this.max_X, 0, this.width);
         let iteration = 0;
         let x = 0;
 
         // Evaluation of function
-        while(iteration < number_iteration) {
-            let y = eval(this.algorithmic_function);
+        while(iteration <= number_iteration) {
+            let y = eval(this.algorithmic_function); // Evaluation of the fonction
             y_points.push(y);
-            x += this.scale_x;
+            x += 1;
             ++iteration;
 		}
 
@@ -37,26 +47,42 @@ export class Graph extends Landmark {
 		if (!this.border_transparency)
 			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
 		else
-			drawing.noFill();
+			drawing.noStroke();
 
 		drawing.push();
-		drawing.beginShape();
+		// We move at the origin of graph
 		drawing.translate(this.x, this.y);
-        for(let i = 0; i < number_iteration; ++i){
+		drawing.beginShape();
+        for(let i = 0; i <= number_iteration; ++i){
             let px;
             let py;
 			if(this.width > 0)
-				px = i * this.scale_x;
+				px = i;
 			else
-				px = -(i * this.scale_x);
+				px = -i;
             if(this.height > 0)
                 py = -y_points[i];
 			else
 				py = y_points[i];
 			
-			if(i == 0 || i == number_iteration - 1)
-				drawing.curveVertex(px, py);
-            drawing.curveVertex(px, py);
+			// For the first and last point, we have to declare two point to draw a line
+			if(i == 0 || i == number_iteration)
+				drawing.curveVertex(
+					drawing.map(px, 0, this.max_X, 0, this.width),
+					drawing.map(py, 0, this.max_Y, 0, this.height)
+				);
+			drawing.curveVertex(
+				drawing.map(px, 0, this.max_X, 0, this.width),
+				drawing.map(py, 0, this.max_Y, 0, this.height)
+			);
+			if(this.draw_point) {
+				drawing.strokeWeight(4);
+				drawing.point(
+					drawing.map(px, 0, this.max_X, 0, this.width),
+					drawing.map(py, 0, this.max_Y, 0, this.height)
+				);
+				drawing.strokeWeight(1);
+			}
         }
 		drawing.endShape();
 		drawing.pop();

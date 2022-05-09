@@ -144,6 +144,9 @@ export class SetProperty extends Instruction {
 			case "function":
 				this.target.setFunction(this.value);
 				break;
+			case "draw_point":
+				this.target.setDrawPoint(this.value == "true" ? true : false);
+				break;
 
 			default:
 				console.log("[SetProperty.js] La propriété '" + this.property + "' est inconnue de l'instruction SetProperty"); // dans ce cas, rajouter l'attribut (dans le switch case ci-dessus)
