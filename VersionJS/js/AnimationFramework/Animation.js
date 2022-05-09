@@ -254,7 +254,9 @@ export class Animation {
                         let scale_y = parseInt(read_object.getAttribute("scale_y"));
                         let unit_x = read_object.getAttribute("unit_x");
                         let unit_y = read_object.getAttribute("unit_y");
-                        new_object = new Landmark(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y);
+                        let max_X = parseInt(read_object.getAttribute("max_X"));
+                        let max_Y = parseInt(read_object.getAttribute("max_Y"));
+                        new_object = new Landmark(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, max_X, max_Y);
                         break;
                     case 'object_grid':
                         let lines = parseInt(read_object.getAttribute("lines"));
@@ -282,7 +284,9 @@ export class Animation {
                         let graph_scale_y = parseInt(read_object.getAttribute("scale_y"));
                         let graph_unit_x = read_object.getAttribute("unit_x");
                         let graph_unit_y = read_object.getAttribute("unit_y");
-                        new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function);
+                        let graph_max_X = parseInt(read_object.getAttribute("max_X"));
+                        let graph_max_Y = parseInt(read_object.getAttribute("max_Y"));
+                        new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y);
                         break;
                     case 'object_copy':
                         let idcopy = read_object.getAttribute("idcopy");
@@ -493,6 +497,8 @@ export class Animation {
     setup(drawing) {
         this.canvas = drawing.createCanvas(this.width, this.height);
         this.canvas.parent(this.parent);
+
+        drawing.frameRate(1);
 
         // Remove the loading message
         this.parent.removeChild(this.parent.getElementsByClassName("loading")[0]);

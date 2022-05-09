@@ -5,7 +5,7 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Landmark extends AnimatedObject {
 
-	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y) {
+	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, max_X, max_Y) {
 		super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
 		this.height = height;
 		this.width = width;
@@ -13,6 +13,8 @@ export class Landmark extends AnimatedObject {
 		this.scale_y = scale_y;
 		this.unit_x = unit_x;
 		this.unit_y = unit_y;
+		this.max_X = max_X;
+		this.max_Y = max_Y;
 	}
 
 	getWidth() {
@@ -39,6 +41,14 @@ export class Landmark extends AnimatedObject {
 		return this.unit_y;
 	}
 
+	getMax_X() {
+		return this.max_X;
+	}
+
+	getMax_Y() {
+		return this.max_Y;
+	}
+
 	setWidth(width) {
 		this.width = width;
 	}
@@ -61,6 +71,14 @@ export class Landmark extends AnimatedObject {
 
 	setUnitY(unit_y) {
 		this.unit_y = unit_y;
+	}
+
+	setMax_X(max_X) {
+		this.max_X = max_X;
+	}
+
+	setMax_Y(max_Y) {
+		this.max_Y = max_Y;
 	}
 
 	draw(drawing) {

@@ -5,8 +5,8 @@ import { Landmark } from "./Landmark.js";
 
 export class Graph extends Landmark {
 
-	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, algorithmic_function) {
-		super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y);
+	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, algorithmic_function, max_X, max_Y) {
+		super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, max_X, max_Y);
         this.algorithmic_function = algorithmic_function;
 	}
 
@@ -28,14 +28,19 @@ export class Graph extends Landmark {
         // Evaluation of function
         while(iteration < number_iteration) {
             let replace = this.algorithmic_function.replace("x",x);
-            let y = eval(replace);
+            let y = eval(this.algorithmic_function);
             y_points.push(y);
             x += this.scale_x;
             ++iteration;
         }
 
+		drawing.strokeWeight(5);
+		drawing.point(this.x, this.y);
+		drawing.strokeWeight(1);
+
         // Drawing of function
         drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
+		drawing.noFill();
         drawing.beginShape();
         for(let i = 0; i < number_iteration; ++i){
             let px;
@@ -45,6 +50,9 @@ export class Graph extends Landmark {
                 py = this.y - y_points[i];
             }
             drawing.curveVertex(px, py);
+			drawing.strokeWeight(5);
+			drawing.point(px, py);
+			drawing.strokeWeight(1);
         }
         drawing.endShape();
 	}
