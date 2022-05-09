@@ -53,20 +53,21 @@
 			background_transparent="false" 
 			width="170">tests deplacement et clics</object_text>
 
-		<object_landmark 
-			x="100" y="100"
+		<object_graph 
+			x="100" y="650"
 			visible="true"
 			background_transparent="false"
 			height="500" width="500"
-			scale_x="100" scale_y="100"
-			unit_x="patate" unit_y="cm"
+			scale_x="10" scale_y="10"
+			unit_x="X" unit_y="Y"
 			border_color="255,0,0"
 			background_color="255,255,0"
-			border_transparency="false"> test
-		</object_landmark>
+			border_transparency="false"
+			function="x*x"> Fonction x2
+		</object_graph>
 
 		<object_polygon
-			x="200"
+			x="400"
 			y="100"
 			coord_x="10,10,0,15,30,20,20,10"
 			coord_y=" 0,10,10,20,10,10,0,0"

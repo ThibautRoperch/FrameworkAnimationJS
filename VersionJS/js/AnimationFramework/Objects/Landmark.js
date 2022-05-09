@@ -71,11 +71,20 @@ export class Landmark extends AnimatedObject {
 		drawing.textStyle(drawing.NORMAL);
 		drawing.angleMode(drawing.DEGREES);
 
+		let number_scale_X = Math.abs(this.width) / this.scale_x;
+		let number_scale_Y = Math.abs(this.height) / this.scale_y;
+
 		if (this.height > 0 && this.width > 0) {
 			// X axis
 			drawing.line(this.x, this.y, this.x, this.y - this.height);
 			// Y axis
 			drawing.line(this.x, this.y, this.x + this.width, this.y);
+
+			// Drawing scale of X axis
+			for(let i = 1; i < number_scale_X; ++i){
+				let px = this.x + (i * this.scale_x);
+				drawing.line(px, this.y, px, this.y - 5);
+			}
 
 			drawing.push();
 			if (!this.background_transparent)

@@ -13,7 +13,7 @@
 
 <!ELEMENT background (#PCDATA) >
 
-<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_landmark|object_grid|object_table)+ >
+<!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_landmark|object_grid|object_table|object_graph)+ >
 
 <!ELEMENT object_text (#PCDATA) >
 <!ATTLIST object_text text CDATA #REQUIRED >
@@ -166,6 +166,26 @@
 <!ATTLIST object_table visible (true|false) #IMPLIED >
 <!ATTLIST object_table opacity CDATA #IMPLIED >
 <!ATTLIST object_table angle CDATA #IMPLIED >
+
+<!ELEMENT object_graph (#PCDATA) >
+<!ATTLIST object_graph function CDATA #REQUIRED >
+<!ATTLIST object_graph width CDATA #REQUIRED >
+<!ATTLIST object_graph height CDATA #REQUIRED >
+<!ATTLIST object_graph scale_x CDATA #REQUIRED >
+<!ATTLIST object_graph scale_y CDATA #REQUIRED >
+<!ATTLIST object_graph unit_x CDATA #REQUIRED >
+<!ATTLIST object_graph unit_y CDATA #REQUIRED >
+<!ATTLIST object_graph x CDATA #IMPLIED >
+<!ATTLIST object_graph y CDATA #IMPLIED >
+<!ATTLIST object_graph background_color CDATA #IMPLIED >
+<!ATTLIST object_graph background_transparent (true|false) #IMPLIED >
+<!ATTLIST object_graph border_color CDATA #IMPLIED >
+<!ATTLIST object_graph border_transparency (true|false) #IMPLIED >
+<!ATTLIST object_graph border_size CDATA #IMPLIED >
+<!ATTLIST object_graph layer CDATA #IMPLIED >
+<!ATTLIST object_graph visible (true|false) #IMPLIED >
+<!ATTLIST object_graph opacity CDATA #IMPLIED >
+<!ATTLIST object_graph angle CDATA #IMPLIED >
 
 <!ELEMENT object_copy (#PCDATA) >
 <!ATTLIST object_copy idcopy CDATA #REQUIRED>

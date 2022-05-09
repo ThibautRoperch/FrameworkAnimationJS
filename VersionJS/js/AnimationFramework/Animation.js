@@ -31,6 +31,7 @@ import { Rectangle } from './Objects/Rectangle.js';
 import { StartButton } from './Objects/StartButton.js';
 import { Table } from './Objects/Table.js';
 import { Text } from './Objects/Text.js';
+import { Graph } from './Objects/Graph.js';
 
 /**
  * Animation class
@@ -273,6 +274,16 @@ export class Animation {
                         column_width = parseInt(read_object.getAttribute("column_width"));
                         new_object = new Table(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment);
                         break;
+                    case 'object_graph':
+                        let algorithmic_function = read_object.getAttribute("function");
+                        let graph_width = parseInt(read_object.getAttribute("width"));
+                        let graph_height = parseInt(read_object.getAttribute("height"));
+                        let graph_scale_x = parseInt(read_object.getAttribute("scale_x"));
+                        let graph_scale_y = parseInt(read_object.getAttribute("scale_y"));
+                        let graph_unit_x = read_object.getAttribute("unit_x");
+                        let graph_unit_y = read_object.getAttribute("unit_y");
+                        new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function);
+                        break;
                     case 'object_copy':
                         let idcopy = read_object.getAttribute("idcopy");
                         let initial_object = this.objects.get(idcopy);
@@ -490,7 +501,7 @@ export class Animation {
     draw(drawing) {
         // Display the background image
         if (this.background != null) {
-            drawing.background(this.background.trim());
+            drawing.background(this.background);
         }
 
         // Display the start button if it has to

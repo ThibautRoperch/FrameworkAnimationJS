@@ -134,6 +134,10 @@ export class SetProperty extends Instruction {
 				this.target.setValues(this.value);
 				break;
 
+			// graph
+			case "function":
+				this.target.setFunction(this.value);
+
 			default:
 				console.log("[SetProperty.js] La propriété '" + this.property + "' est inconnue de l'instruction SetProperty"); // dans ce cas, rajouter l'attribut (dans le switch case ci-dessus)
 				break;
