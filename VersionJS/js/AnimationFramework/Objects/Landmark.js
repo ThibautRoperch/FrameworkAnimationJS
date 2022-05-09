@@ -71,130 +71,69 @@ export class Landmark extends AnimatedObject {
 		drawing.textStyle(drawing.NORMAL);
 		drawing.angleMode(drawing.DEGREES);
 
-		let number_scale_X = Math.abs(this.width) / this.scale_x;
-		let number_scale_Y = Math.abs(this.height) / this.scale_y;
+		this.drawAxis(drawing);
+		this.drawAxisArrow(drawing);
+		this.drawXUnit(drawing);
+		this.drawYUnit(drawing);
+	}
 
-		if (this.height > 0 && this.width > 0) {
-			// X axis
-			drawing.line(this.x, this.y, this.x, this.y - this.height);
-			// Y axis
-			drawing.line(this.x, this.y, this.x + this.width, this.y);
-
-			// Drawing scale of X axis
-			for(let i = 1; i < number_scale_X; ++i){
-				let px = this.x + (i * this.scale_x);
-				drawing.line(px, this.y, px, this.y - 5);
-			}
-
-			drawing.push();
-			if (!this.background_transparent)
-				drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
-			else
-				drawing.noFill();
-			// Drawing arrow of end of axes
-			// Y axis
-			drawing.triangle(this.x - 3, this.y - this.height, this.x + 3, this.y - this.height, this.x, this.y - this.height - 3);
-			// X axis
-			drawing.triangle(this.x + this.width, this.y + 3, this.x + this.width, this.y - 3, this.x + this.width + 3, this.y);
-			drawing.pop();
-
-			//texte x
-			drawing.text(this.unit_x, this.x + this.width / 2, this.y + 10);
-
-			//texte y
-			drawing.push();  // sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
-			drawing.translate(this.x - 10, this.y - this.height / 2);
-			drawing.rotate(-90);
-			drawing.text(this.unit_y, 0, 0);
-			drawing.pop();
-		}
-		else if (this.height < 0 && this.width > 0) {
-			// X axis
-			drawing.line(this.x, this.y, this.x, this.y - this.height);
-			// Y axis
-			drawing.line(this.x, this.y, this.x + this.width, this.y);
-
-			drawing.push();
-			if (!this.background_transparent)
-				drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
-			else
-				drawing.noFill();
-			// Drawing arrow of end of axes
-			// Y axis
-			drawing.triangle(this.x - 3, this.y - this.height, this.x + 3, this.y - this.height, this.x, this.y - this.height + 3);
-			// X axis
-			drawing.triangle(this.x + this.width, this.y + 3, this.x + this.width, this.y - 3, this.x + this.width + 3, this.y);
-			drawing.pop();
-
-			// Unit of X axis
-			drawing.text(this.unit_x, this.x + this.width / 2, this.y - 10);
-
-			// Unit of Y axis
-			drawing.push();  // sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
-			drawing.translate(this.x - 10, this.y - this.height / 2);
-			drawing.rotate(-90);
-			drawing.text(this.unit_y, 0, 0);
-			drawing.pop();
-		}
-		else if (this.height > 0 && this.width < 0) {
+	drawAxis(drawing) {
+		if (!this.border_transparency) {
 			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-			// Y axis
-			drawing.line(this.x, this.y, this.x, this.y - this.height);
-			// X axis
-			drawing.line(this.x, this.y, this.x + this.width, this.y);
+		}
+		
+		// Y axis
+		drawing.line(this.x, this.y, this.x, this.y - this.height);
+		// X axis
+		drawing.line(this.x, this.y, this.x + this.width, this.y);
 
-			drawing.push();
-			// Drawing arrow of end of axes
-			if (!this.border_transparency)
-				drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
-			else
-				drawing.noFill();
-			// Drawing arrow of end of axes
-			// Y axis
+		drawing.noStroke();
+	}
+
+	drawAxisArrow(drawing) {
+		drawing.push();
+		if (!this.background_transparent)
+			drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
+		else
+			drawing.noFill();
+
+		// Y axis
+		if (this.height < 0) {
+			drawing.triangle(this.x - 3, this.y - this.height, this.x + 3, this.y - this.height, this.x, this.y - this.height + 3);
+		} else {
 			drawing.triangle(this.x - 3, this.y - this.height, this.x + 3, this.y - this.height, this.x, this.y - this.height - 3);
-			// X axis
+		}
+
+		// X axis
+		if (this.width < 0) {
 			drawing.triangle(this.x + this.width, this.y + 3, this.x + this.width, this.y - 3, this.x + this.width - 3, this.y);
-			drawing.pop();
+		} else {
+			drawing.triangle(this.x + this.width, this.y + 3, this.x + this.width, this.y - 3, this.x + this.width + 3, this.y);
+		}
+		drawing.pop();
+	}
 
-			// Unit of X axis
+	drawXUnit(drawing) {
+		if (this.height < 0) {
+			drawing.text(this.unit_x, this.x + this.width / 2, this.y - 10);
+		} else {
 			drawing.text(this.unit_x, this.x + this.width / 2, this.y + 10);
+		}
+	}
 
-			// Unit of Y axis
-			drawing.push();  // sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
+	drawYUnit(drawing) {
+
+		drawing.push();  // sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
+		if (this.width < 0) {
 			drawing.translate(this.x + 10, this.y - this.height / 2);
 			drawing.rotate(90);
-			drawing.text(this.unit_y, 0, 0);
-			drawing.pop();
+		} else {
+			drawing.translate(this.x - 10, this.y - this.height / 2);
+			drawing.rotate(-90);
 		}
-		else if (this.height < 0 && this.width < 0) {
-			drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.opacity * 255);
-			// Y axis
-			drawing.line(this.x, this.y, this.x, this.y - this.height);
-			// X axis
-			drawing.line(this.x, this.y, this.x + this.width, this.y);
+		drawing.text(this.unit_y, 0, 0);
+		drawing.pop();
 
-			drawing.push();
-			if (!this.background_transparent)
-				drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
-			else
-				drawing.noFill();
-			// Drawing arrow of end of axes
-			// Y axis
-			drawing.triangle(this.x - 3, this.y - this.height, this.x + 3, this.y - this.height, this.x, this.y - this.height + 3);
-			// X axis
-			drawing.triangle(this.x + this.width, this.y + 3, this.x + this.width, this.y - 3, this.x + this.width - 3, this.y);
-			drawing.pop();
-
-			// Unit of X axis
-			drawing.text(this.unit_x, this.x + this.width / 2, this.y - 10);
-
-			// Unit of Y axis
-			drawing.push();  // sert à pas faire la rotation et la translation sur tous les objets (s'arrête après pop)
-			drawing.translate(this.x + 10, this.y - this.height / 2);
-			drawing.rotate(90);
-			drawing.text(this.unit_y, 0, 0);
-			drawing.pop();
-		}
 	}
 
 	isClicked(x, y) {
