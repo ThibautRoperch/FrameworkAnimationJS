@@ -114,6 +114,12 @@ export class SetProperty extends Instruction {
 			case "unit_y":
 				this.target.setUnitY(this.value);
 				break;
+			case "max_X":
+				this.target.setMax_X(this.value);
+				break;
+			case "max_Y":
+				this.target.setMax_Y(this.value);
+				break;
 
 			// grid
 			case "lines":
@@ -132,6 +138,14 @@ export class SetProperty extends Instruction {
 			// table
 			case "values":
 				this.target.setValues(this.value);
+				break;
+
+			// graph
+			case "function":
+				this.target.setFunction(this.value);
+				break;
+			case "draw_point":
+				this.target.setDrawPoint(this.value == "true" ? true : false);
 				break;
 
 			default:

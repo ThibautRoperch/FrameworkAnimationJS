@@ -8,12 +8,13 @@ import { Landmark } from './AnimationFramework/Objects/Landmark.js';
 import { Polygon } from './AnimationFramework/Objects/Polygon.js';
 import { Rectangle } from './AnimationFramework/Objects/Rectangle.js';
 import { Text } from './AnimationFramework/Objects/Text.js';
+import { Table } from './AnimationFramework/Objects/Table.js';
+import { Graph } from './AnimationFramework/Objects/Graph.js';
 
 import { SetProperty } from './AnimationFramework/Instructions/SetProperty.js';
 
 import { ANIMATION_FILES_INCLUDED } from './AnimationFramework/animation_controller.js';
 import { DEFAULT_STATE } from './AnimationFramework/Objects/AnimatedObject.js';
-import { Table } from './AnimationFramework/Objects/Table.js';
 
 // Global variables
 let last_id = -1;
@@ -37,6 +38,7 @@ document.getElementById("addEllipse").addEventListener('click', function () { ne
 document.getElementById("addLandmark").addEventListener('click', function () { new_object('Landmark') });
 document.getElementById("addGrid").addEventListener('click', function () { new_object('Grid') });
 document.getElementById("addTable").addEventListener('click', function () { new_object('Table') });
+document.getElementById("addGraph").addEventListener('click', function () { new_object('Graph') });
 document.getElementById("width").addEventListener('change', function () { sketch.resizeCanvas(this.value, document.getElementById("height").value); update_section_size();});
 document.getElementById("height").addEventListener('change', function () { sketch.resizeCanvas(document.getElementById("width").value, this.value); update_section_size(); });
 document.getElementById("myBackground").addEventListener('change', function () { sketch.load_background() });
@@ -83,7 +85,8 @@ function import_xml(input_id) {
 				sketch.load_background();
 			}
 			// Remove all current objects
-			for (let i = 0; i <= last_id; ++i) {
+			let number_object = document.getElementById("objects").childElementCount;
+			for (let i = 0; i < number_object; ++i) {
 				remove(i);
 			}
 
@@ -687,6 +690,12 @@ function new_object(object_type) {
 			object = new Ellipse(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height);
 			break;
 		case "Landmark":
+			// We set x-y at 60-60 at default to see it well in preview
+			let number_property = document.getElementsByClassName("x").length - 1
+			let obj = document.getElementsByClassName("x")[number_property].childNodes[1];
+			obj.placeholder = "60";
+			obj = document.getElementsByClassName("y")[number_property].childNodes[1];
+			obj.placeholder = "60";
 			// width
 			property = document.createElement("property");
 			property.className = "width";
@@ -714,7 +723,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// scale_x
-			let scale_x = 1;
+			let scale_x = 10;
 			property = document.createElement("property");
 			property.className = "scale_x";
 			label = document.createElement("label");
@@ -722,12 +731,12 @@ function new_object(object_type) {
 			property.appendChild(label);
 			input = document.createElement("input");
 			input.type = "number";
-			input.value = "1";
+			input.value = scale_x;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
 			// scale_y
-			let scale_y = 1;
+			let scale_y = 10;
 			property = document.createElement("property");
 			property.className = "scale_y";
 			label = document.createElement("label");
@@ -735,12 +744,12 @@ function new_object(object_type) {
 			property.appendChild(label);
 			input = document.createElement("input");
 			input.type = "number";
-			input.value = "1";
+			input.value = scale_y;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
 			// unit_x
-			let unit_x = "cm";
+			let unit_x = "";
 			property = document.createElement("property");
 			property.className = "unit_x";
 			label = document.createElement("label");
@@ -748,12 +757,12 @@ function new_object(object_type) {
 			property.appendChild(label);
 			input = document.createElement("input");
 			input.type = "text";
-			input.value = "cm";
+			input.value = unit_x;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
 			// unit_y
-			let unit_y = "cm";
+			let unit_y = "";
 			property = document.createElement("property");
 			property.className = "unit_y";
 			label = document.createElement("label");
@@ -761,11 +770,37 @@ function new_object(object_type) {
 			property.appendChild(label);
 			input = document.createElement("input");
 			input.type = "text";
-			input.value = "cm";
+			input.value = unit_y;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Landmark(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y);
+			// max_X
+			let max_X = width;
+			property = document.createElement("property");
+			property.className = "max_X";
+			label = document.createElement("label");
+			label.innerHTML = "max_X";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = max_X;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// max_Y
+			let max_Y = height;
+			property = document.createElement("property");
+			property.className = "max_Y";
+			label = document.createElement("label");
+			label.innerHTML = "max_Y";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = max_Y;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			object = new Landmark(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y, max_X, max_Y);
 			break;
 		case "Grid":
 			// lines
@@ -955,6 +990,152 @@ function new_object(object_type) {
 			article1.appendChild(property);
 			// Create table object
 			object = new Table(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, tab_line_height, tab_column_width, text_font, text_color, tab_padding, text_halignment, text_valignment);
+			break;
+		case "Graph":
+			// We set x-y at 60-60 at default to see it well in preview
+			let graph_number_property = document.getElementsByClassName("x").length - 1
+			let graph_obj = document.getElementsByClassName("x")[graph_number_property].childNodes[1];
+			graph_obj.placeholder = "60";
+			graph_obj = document.getElementsByClassName("y")[graph_number_property].childNodes[1];
+			graph_obj.placeholder = "60";
+			// width
+			property = document.createElement("property");
+			property.className = "width";
+			label = document.createElement("label");
+			label.innerHTML = "width";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = "50";
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// height
+			property = document.createElement("property");
+			property.className = "height";
+			label = document.createElement("label");
+			label.innerHTML = "height";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = "50";
+			input.required = "required";
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// scale_x
+			let graph_scale_x = 10;
+			property = document.createElement("property");
+			property.className = "scale_x";
+			label = document.createElement("label");
+			label.innerHTML = "scale_x";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = graph_scale_x;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// scale_y
+			let graph_scale_y = 10;
+			property = document.createElement("property");
+			property.className = "scale_y";
+			label = document.createElement("label");
+			label.innerHTML = "scale_y";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = graph_scale_y;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// unit_x
+			let graph_unit_x = "";
+			property = document.createElement("property");
+			property.className = "unit_x";
+			label = document.createElement("label");
+			label.innerHTML = "unit_x";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = graph_unit_x;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// unit_y
+			let graph_unit_y = "";
+			property = document.createElement("property");
+			property.className = "unit_y";
+			label = document.createElement("label");
+			label.innerHTML = "unit_y";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = graph_unit_y;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// function
+			let algorithmic_function = "";
+			property = document.createElement("property");
+			property.className = "function";
+			label = document.createElement("label");
+			label.innerHTML = "function";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = algorithmic_function;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// max_X
+			let graph_max_X = width;
+			property = document.createElement("property");
+			property.className = "max_X";
+			label = document.createElement("label");
+			label.innerHTML = "max_X";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = graph_max_X;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// max_Y
+			let graph_max_Y = height;
+			property = document.createElement("property");
+			property.className = "max_Y";
+			label = document.createElement("label");
+			label.innerHTML = "max_Y";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = graph_max_Y;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			property = document.createElement("property");
+			// draw_point
+			property = document.createElement("property");
+			property.className = "draw_point";
+			label = document.createElement("label");
+			label.innerHTML = "draw_point";
+			property.appendChild(label);
+			input = document.createElement("select");
+			input.onchange = function () { change_property(obj_id, this); };
+			option = document.createElement("option");
+			option.value = "true";
+			option.innerHTML = "True";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "false";
+			option.innerHTML = "False";
+			option.selected = "selected";
+			input.appendChild(option);
+			property.appendChild(input);
+			article1.appendChild(property);
+			object = new Graph(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y, false);
 			break;
 	}
 	objects_array[obj_id] = object;
