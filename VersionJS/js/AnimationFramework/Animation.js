@@ -503,8 +503,6 @@ export class Animation {
         this.canvas = drawing.createCanvas(this.width, this.height);
         this.canvas.parent(this.parent);
 
-        drawing.frameRate(1);
-
         // Remove the loading message
         this.parent.removeChild(this.parent.getElementsByClassName("loading")[0]);
     }
