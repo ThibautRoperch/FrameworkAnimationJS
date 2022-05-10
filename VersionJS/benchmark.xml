@@ -6,7 +6,7 @@
 	</init>
 
 	<background>
-		#FFB600
+		#00A6D6
 	</background>
 	
 	<objects>
@@ -56,17 +56,67 @@
 			width="170">tests deplacement et clics</object_text>
 
 		<object_graph 
-			x="100" y="550"
+			x="600" y="600"
+			visible="true"
+			background_transparent="false"
+			height="100" width="-500"
+			scale_x="1" scale_y="1"
+			max_X ="10" max_Y="5"
+			min_X ="0" min_Y="0"
+			unit_x="X" unit_y="Y"
+			draw_point="true"
+			border_color="255,0,0"
+			background_color="255,0,0"
+			border_transparency="false"
+			function="Math.sin(x)*2"> width neg height pos
+		</object_graph>
+
+		<object_graph 
+			x="100" y="800"
 			visible="true"
 			background_transparent="false"
 			height="100" width="500"
-			scale_x="5" scale_y="10"
-			max_X ="10" max_Y="1"
+			scale_x="1" scale_y="1"
+			max_X ="15" max_Y="0"
+			min_X ="0" min_Y="-5"
 			unit_x="X" unit_y="Y"
+			draw_point="true"
 			border_color="255,0,0"
-			background_color="255,255,0"
+			background_color="255,0,0"
 			border_transparency="false"
-			function="Math.sin(x)"> Fonction x2
+			function="-x*0.3"> width pos height pos
+		</object_graph>
+
+		<object_graph 
+			x="100" y="850"
+			visible="true"
+			background_transparent="false"
+			height="-100" width="500"
+			scale_x="1" scale_y="1"
+			max_X ="15" max_Y="5"
+			min_X ="-5" min_Y="-1"
+			unit_x="X" unit_y="Y"
+			draw_point="true"
+			border_color="255,0,0"
+			background_color="255,0,0"
+			border_transparency="false"
+			function="Math.sqrt(x)"> width pos height neg
+		</object_graph>
+
+		<object_graph 
+			x="1200" y="850"
+			visible="true"
+			background_transparent="false"
+			height="-100" width="-500"
+			scale_x="1" scale_y="1"
+			max_X ="15" max_Y="2"
+			min_X ="10" min_Y="-5"
+			unit_x="X" unit_y="Y"
+			draw_point="true"
+			border_color="255,0,0"
+			background_color="255,0,0"
+			border_transparency="false"
+			function="-Math.sqrt(x)"> width neg height neg
 		</object_graph>
 
 		<object_polygon
