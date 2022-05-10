@@ -13,20 +13,21 @@ import { Graph } from './AnimationFramework/Objects/Graph.js';
 
 import { SetProperty } from './AnimationFramework/Instructions/SetProperty.js';
 
-import { ANIMATION_FILES_INCLUDED, OBJECT_CLASSES, INSTRUCTION_CLASSES } from './AnimationFramework/animation_controller.js';
+import { ANIMATION_FILES_INCLUDED } from './AnimationFramework/animation_controller.js';
 import { DEFAULT_STATE } from './AnimationFramework/Objects/AnimatedObject.js';
 
-var last_id = -1;
-var objects_list = document.getElementById("objects");
-var objects_array = new Array();
-var instructions_array = new Array();
-var objects_image_id = new Array();
-var removed_objects_identifier = new Array();
+// Global variables
+let last_id = -1;
+let objects_list = document.getElementById("objects");
+let objects_array = new Array();
+let instructions_array = new Array();
+let objects_image_id = new Array();
+let removed_objects_identifier = new Array();
 
 let sketch;
 
-// Setup des lsteneer sur le click
-document.getElementById("openAnimation").addEventListener("click", function () { ask_popup('Change object identifier', 'Choose the XML file containing the animation to open.<input id=\'animation_file\' type=\'text\' placeholder=\'benchmark.xml\' required />', import_xml, 'animation_file') });
+// Setup of the listeners on the different elemnt of the DOM
+document.getElementById("openAnimation").addEventListener("click", function () { ask_popup('Change object identifier', 'Choose the XML file containing the animation to open.<input id=\'animation_file\' type=\'file\' placeholder=\'benchmark.xml\' required />', import_xml, 'animation_file') });
 document.getElementById("exportAnimation").addEventListener('click', export_xml);
 document.getElementById("addText").addEventListener('click', function () { new_object('Text') });
 document.getElementById("addImage").addEventListener('click', function () { new_object('ImageFile') });
@@ -40,9 +41,12 @@ document.getElementById("addTable").addEventListener('click', function () { new_
 document.getElementById("addGraph").addEventListener('click', function () { new_object('Graph') });
 document.getElementById("width").addEventListener('change', function () { sketch.resizeCanvas(this.value, document.getElementById("height").value); update_section_size();});
 document.getElementById("height").addEventListener('change', function () { sketch.resizeCanvas(document.getElementById("width").value, this.value); update_section_size(); });
-document.getElementById("background").addEventListener('change', function () { sketch.load_background() });
+document.getElementById("myBackground").addEventListener('change', function () { sketch.load_background() });
 
 wait_for_includes();
+/**
+ * Function to check if p5 JS is include and if it isn't wait before starting the animation
+ */
 function wait_for_includes() {
 	// Check if animation files are included
 	if (!ANIMATION_FILES_INCLUDED) {
@@ -59,8 +63,13 @@ function wait_for_includes() {
 	}
 }
 
+/**
+ * Import the file inside the specified input
+ * @param {String} input_id 
+ * @returns 
+ */
 function import_xml(input_id) {
-	let source_file = document.getElementById(input_id).value;
+	let source_file = document.getElementById(input_id).files[0].name;
 	if (source_file === "") return; // stop here if the input is empty (won't try to read the file and will keep the popup active)
 
 	let animation = new Animation(source_file, null, undefined, undefined);
@@ -72,7 +81,7 @@ function import_xml(input_id) {
 			animation.readXmlFile(xhr.responseText);
 			// Retrieve background path
 			if (animation.getBackground() != null) {
-				document.getElementById("background").value = animation.getBackground().trim();
+				document.getElementById("myBackground").value = animation.getBackground().trim();
 				sketch.load_background();
 			}
 			// Remove all current objects
@@ -123,6 +132,11 @@ function import_xml(input_id) {
 	document.getElementById("ask_popup").className = "";
 }
 
+/**
+ * Create an object of the specified type
+ * @param {String} object_type 
+ * @returns 
+ */
 function new_object(object_type) {
 	let obj_id = ++last_id;
 	let object;
@@ -1132,12 +1146,22 @@ function new_object(object_type) {
 	return obj_id;
 }
 
+/**
+ * Change the property of the specified object
+ * @param {String} object_id 
+ * @param {Element} property_dom 
+ */
 function change_property(object_id, property_dom) {
 	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
 	//objects_array[object_id].draw();
 	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
+/**
+ * Change the id of a specified object
+ * @param {Array} args , 0: object_id, 1: inpu_id
+ * @returns 
+ */
 function change_id(args) {
 	let object_id = args[0];
 	let input_id = args[1];
@@ -1154,6 +1178,10 @@ function change_id(args) {
 	document.getElementById("ask_popup").className = "";
 }
 
+/**
+ * Expand the characteristic window of the specified object id
+ * @param {String} object_id 
+ */
 function expand(object_id) {
 	let object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "displayed";
@@ -1162,6 +1190,10 @@ function expand(object_id) {
 	object_dom.getElementsByTagName("arrow")[0].innerHTML = "&#11165;";
 }
 
+/**
+ * Reduce the characteristic window of the specified object id
+ * @param {String} object_id 
+ */
 function reduce(object_id) {
 	let object_dom = document.getElementById(object_id);
 	object_dom.getElementsByTagName("sectionobj")[0].className = "hidden";
@@ -1172,6 +1204,9 @@ function reduce(object_id) {
 
 window.onresize = update_section_size;
 
+/**
+ * Update the size of the section and aside element
+ */
 function update_section_size() {
 	let section = document.getElementsByTagName("section")[0];
 	let aside = document.getElementsByTagName("aside")[0];
@@ -1183,6 +1218,10 @@ function update_section_size() {
 	section.style.marginRight = aside_size + "px";
 }
 
+/**
+ * Function to affect random color to the background and borders of the object with specified id
+ * @param {String} object_id 
+ */
 function customize(object_id) {
 	let object = objects_array[object_id];
 
@@ -1207,6 +1246,10 @@ function customize(object_id) {
 	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
+/**
+ * Function to remove the object with the specified id
+ * @param {String} object_id 
+ */
 function remove(object_id) {
 	/*// Remove from the objects array (JS)
 	objects_array.splice(objects_array.indexOf(object_id), 1);
@@ -1224,35 +1267,43 @@ function remove(object_id) {
 	objects_array[object_id].setVisible(false);
 
 	// Remove from the objects list (HTML)
-	objects_list.removeChild(document.getElementById(object_id));
+	if (document.getElementById(object_id)) {
+		objects_list.removeChild(document.getElementById(object_id));
+	}	
 
 	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
 
+/**
+ * Transform the animation into xml
+ * Download the xml file and show the content
+ */
 function export_xml() {
 	console.log("--------------------------------\n");
 
-	let animation_node = document.createElement("animation");
+	let docType = document.implementation.createDocumentType('animation', '', 'animation.dtd');
+	let doc = document.implementation.createDocument("", "", docType);
+	let animation_node = doc.createElement("animation");
 
 	// init node
-	let init_node = document.createElement("init");
-	let start_button = document.createElement("start_button");
+	let init_node = doc.createElement("init");
+	let start_button = doc.createElement("start_button");
 	start_button.setAttribute("present", document.getElementById("start_button").value);
 	init_node.appendChild(start_button);
 	animation_node.appendChild(init_node);
 
 	// speed attribute
-	animation_node.setAttribute('speed', document.getElementById("speed").value);
+	animation_node.setAttribute('speed', document.getElementById("mySpeed").value);
 
 	// background image node
 	if (document.getElementById("background").value != "") {
-		let background_node = document.createElement("background");
+		let background_node = doc.createElement("background");
 		background_node.innerHTML = document.getElementById("background").value;
 		animation_node.appendChild(background_node);
 	}
 
 	// objects node
-	let objects_node = document.createElement("objects");
+	let objects_node = doc.createElement("objects");
 	for (let object of objects_array) {
 		if (removed_objects_identifier.indexOf(object.getId()) == -1) {
 			console.log(object.toXml());
@@ -1262,15 +1313,22 @@ function export_xml() {
 	animation_node.appendChild(objects_node);
 
 	// programs node
-	let programs_node = document.createElement("programs");
+	let programs_node = doc.createElement("programs");
 	animation_node.appendChild(programs_node);
+
+	doc.appendChild(animation_node);
 
 	// Serialize the animation XML tree
 	let serializer = new XMLSerializer();
-	let animation_string = serializer.serializeToString(animation_node);
+	let animation_string = `<?xml version="1.0" encoding="UTF-8"?>` + serializer.serializeToString(doc);
+
+	// Creating file printer
+	const writer = sketch.createWriter('animation.xml', 'xml');
+	writer.print(animation_string);
+	writer.close();
 
 	// Display the serialized XML tree in a file
-	document.getElementById("xml_output").innerHTML = animation_string;
+	document.getElementById("xml_output").value = animation_string;
 	document.getElementById("convert_popup").className = "display";
 }
 
@@ -1293,7 +1351,7 @@ let drawing_dom = document.getElementById("drawing");
 
 function isValidColor(strColor) {
 	try {
-		var s = new Option().style;
+		let s = new Option().style;
 		s.color = strColor;
 		// return 'false' if color wasn't assigned
 		return s.color == strColor.toLowerCase();
@@ -1374,7 +1432,7 @@ function draw_animation() {
 
 		/** Load the background of the canvas */
 		draw_ref.load_background = function () {
-			let bg = document.getElementById("background").value.trim();
+			let bg = document.getElementById("myBackground").value.trim();
 			if (bg != "") {
 				if (!isValidColor(bg) && !isHexColor(bg)) {
 					background_img = draw_ref.loadImage(bg);
@@ -1409,7 +1467,7 @@ function draw_animation() {
 }
 
 function rand_rgb() {
-	var max = 255;
+	let max = 255;
 	// Math.random : [0, 1[
 	return [Math.floor(Math.random() * (max + 1)), Math.floor(Math.random() * (max + 1)), Math.floor(Math.random() * (max + 1))];
 }

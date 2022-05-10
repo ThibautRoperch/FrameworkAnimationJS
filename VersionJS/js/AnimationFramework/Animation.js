@@ -166,7 +166,7 @@ export class Animation {
                 this.background = source_file_path + this.background;
             }
         } else {
-            this.background = "";
+            this.background = "white";
         }
 
         // If the objects' node exists
@@ -267,14 +267,19 @@ export class Animation {
                         break;
                     case 'object_table':
                         let values = read_object.getAttribute("values");
+                        let has_header_columns = read_object.getAttribute("has_header_columns") ? read_object.getAttribute("has_header_columns") == "true" || read_object.getAttribute("has_header_columns") == "1" : false;
+                        let has_header_lines = read_object.getAttribute("has_header_lines") ? read_object.getAttribute("has_header_lines") == "true" || read_object.getAttribute("has_header_lines") == "1" : false;
+                        let header_background_color = read_object.getAttribute("header_background_color") ? parseIntArray(read_object.getAttribute("header_background_color")) : background_color;
                         font = read_object.getAttribute("font").split(",");
-                        color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
+                        let header_font = read_object.getAttribute("header_font") ? read_object.getAttribute("header_font").split(",") : font;
+                        color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
+                        let header_color = read_object.getAttribute("header_color") ? parseIntArray(read_object.getAttribute("header_color")) : color;
                         padding = parseInt(read_object.getAttribute("padding")) | 0;
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
                         valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
                         line_height = parseInt(read_object.getAttribute("line_height"));
                         column_width = parseInt(read_object.getAttribute("column_width"));
-                        new_object = new Table(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment);
+                        new_object = new Table(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_lines, header_font, header_color, header_background_color);
                         break;
                     case 'object_graph':
                         let algorithmic_function = read_object.getAttribute("function");

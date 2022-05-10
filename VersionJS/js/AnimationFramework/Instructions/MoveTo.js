@@ -20,108 +20,35 @@ export class MoveTo extends Instruction {
 		this.object.setState(MOVING_STATE);
 
 		move(this);
-		function move(instruction) {
-			if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() > instruction.x)) {
 
-				instruction.object.setY(instruction.object.getY()-instruction.interval_y);
-				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
-				
-				if ((instruction.object.getY() > instruction.y) || (instruction.object.getX() > instruction.x)) {
-					setTimeout(function() {
-						move(instruction);
-					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
-				} else {
-					instruction.object.setState(DEFAULT_STATE);
-				}
+		function move(instruction) {
+			if ((instruction.object.getY() === instruction.y) && (instruction.object.getX() === instruction.x)) {
+				instruction.object.setState(DEFAULT_STATE);
+				return;
 			}
-			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() > instruction.x)) {
-					
-				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
-				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
-		
-				if ((instruction.object.getY() < instruction.y) || (instruction.object.getX() > instruction.x)) {
-					setTimeout(function() {
-						move(instruction);
-					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
-				} else {
-					instruction.object.setState(DEFAULT_STATE);
-				}
+
+			if (instruction.object.getY() > instruction.y) {
+				instruction.object.setY(instruction.object.getY() - instruction.interval_y);
 			}
-			else if ((instruction.object.getY() == instruction.y) && (instruction.object.getX() > instruction.x)) {
-					
-				instruction.object.setX(instruction.object.getX()-instruction.interval_x);
-		
-				if (instruction.object.getX() > instruction.x) {
-					setTimeout(function() {
-						move(instruction);
-					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
-				} else {
-					instruction.object.setState(DEFAULT_STATE);
-				}
+			else if (instruction.object.getY() < instruction.y) {
+				instruction.object.setY(instruction.object.getY() + instruction.interval_y);
 			}
-			else if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() < instruction.x)) {
-					
-				instruction.object.setY(instruction.object.getY()-instruction.interval_y);
-				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
-		
-				if ((instruction.object.getY() > instruction.y) || (instruction.object.getX() < instruction.x)) {
-					setTimeout(function() {
-						move(instruction);
-					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
-				} else {
-					instruction.object.setState(DEFAULT_STATE);
-				}
+
+			if (instruction.object.getX() > instruction.x) {
+				instruction.object.setX(instruction.object.getX() - instruction.interval_x);
 			}
-			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() < instruction.x)) {
-					
-				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
-				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
-			
-				if ((instruction.object.getY() < instruction.y) || (instruction.object.getX() < instruction.x)) {
-					setTimeout(function() {
-						move(instruction);
-					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
-				} else {
-					instruction.object.setState(DEFAULT_STATE);
-				}
+			else if (instruction.object.getX() < instruction.x) {
+				instruction.object.setX(instruction.object.getX() + instruction.interval_x);
 			}
-			else if ((instruction.object.getY() == instruction.y) && (instruction.object.getX() < instruction.x)) {
-					
-				instruction.object.setX(instruction.object.getX()+instruction.interval_x);
-			
-				if (instruction.object.getX() < instruction.x) {
-					setTimeout(function() {
-						move(instruction);
-					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
-				} else {
-					instruction.object.setState(DEFAULT_STATE);
-				}
+
+			if ((instruction.object.getY() !== instruction.y) || (instruction.object.getX() !== instruction.x)) {
+				setTimeout(function () {
+					move(instruction);
+				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
-			else if ((instruction.object.getY() > instruction.y) && (instruction.object.getX() == instruction.x)) {
-					
-				instruction.object.setY(instruction.object.getY()-instruction.interval_y);
-			
-				if (instruction.object.getY() > instruction.y) {
-					setTimeout(function() {
-						move(instruction);
-					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
-				} else {
-					instruction.object.setState(DEFAULT_STATE);
-				}
-			}
-			else if ((instruction.object.getY() < instruction.y) && (instruction.object.getX() == instruction.x)) {
-					
-				instruction.object.setY(instruction.object.getY()+instruction.interval_y);
-			
-				if (instruction.object.getY() < instruction.y) {
-					setTimeout(function() {
-						move(instruction);
-					}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
-				} else {
-					instruction.object.setState(DEFAULT_STATE);
-				}
+			else {
+				instruction.object.setState(DEFAULT_STATE);
 			}
 		}
 	}
-
 }
