@@ -212,7 +212,7 @@ export class Animation {
                         let text = read_object.getAttribute("text");
                         font = read_object.getAttribute("font").split(",");
                         color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
-                        padding = parseInt(read_object.getAttribute("padding")) | 0;
+                        padding = read_object.getAttribute("padding") ? parseIntArray(read_object.getAttribute("padding")) : [];
                         width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                         height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
@@ -271,7 +271,7 @@ export class Animation {
                         let header_font = read_object.getAttribute("header_font") ? read_object.getAttribute("header_font").split(",") : font;
                         color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
                         let header_color = read_object.getAttribute("header_color") ? parseIntArray(read_object.getAttribute("header_color")) : color;
-                        padding = parseInt(read_object.getAttribute("padding")) | 0;
+                        padding = read_object.getAttribute("padding") ? parseIntArray(read_object.getAttribute("padding")) : [];
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
                         valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
                         line_height = parseInt(read_object.getAttribute("line_height"));
