@@ -54,6 +54,7 @@ export class Graph extends Landmark {
 			// We move at the origin of graph
 			drawing.translate(this.x, this.y);
 			// Start to calculate all points
+			drawing.noFill();
 			drawing.beginShape();
 			for(let i = 0; i <= number_iteration; ++i){
 				let px;
