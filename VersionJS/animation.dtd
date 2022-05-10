@@ -152,7 +152,7 @@
 
 <!ELEMENT object_table (#PCDATA) >
 <!ATTLIST object_table values CDATA #REQUIRED >
-<!ATTLIST object_text font CDATA #REQUIRED >
+<!ATTLIST object_table font CDATA #REQUIRED >
 <!ATTLIST object_table line_height CDATA #REQUIRED >
 <!ATTLIST object_table column_width CDATA #REQUIRED >
 <!ATTLIST object_table halignment (left|center|right) #IMPLIED >
@@ -185,6 +185,8 @@
 <!ATTLIST object_graph unit_y CDATA #REQUIRED >
 <!ATTLIST object_graph max_X CDATA #REQUIRED >
 <!ATTLIST object_graph max_Y CDATA #REQUIRED >
+<!ATTLIST object_graph min_X CDATA #REQUIRED >
+<!ATTLIST object_graph min_Y CDATA #REQUIRED >
 <!ATTLIST object_graph x CDATA #IMPLIED >
 <!ATTLIST object_graph y CDATA #IMPLIED >
 <!ATTLIST object_graph background_color CDATA #IMPLIED >
