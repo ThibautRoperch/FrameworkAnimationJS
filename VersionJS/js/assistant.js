@@ -13,7 +13,7 @@ import { Graph } from './AnimationFramework/Objects/Graph.js';
 
 import { SetProperty } from './AnimationFramework/Instructions/SetProperty.js';
 
-import { ANIMATION_FILES_INCLUDED } from './AnimationFramework/animation_controller.js';
+import { ANIMATION_FILES_INCLUDED, parseIntArray } from './AnimationFramework/animation_controller.js';
 import { DEFAULT_STATE } from './AnimationFramework/Objects/AnimatedObject.js';
 
 // Global variables
@@ -1446,6 +1446,15 @@ function isHexColor(strColor) {
 	}
 }
 
+function isRgbColor(strColor) {
+	try {
+		strColor.includes(",");
+		return true;
+	} catch (_) {
+		return false;
+	}
+}
+
 
 function draw_animation() {
 
@@ -1485,7 +1494,6 @@ function draw_animation() {
 
 		/** Drawing loop */
 		draw_ref.draw = function () {
-			//draw_ref.clear();
 
 			// Display the background image
 			if (background_img != null) {
@@ -1511,10 +1519,13 @@ function draw_animation() {
 		draw_ref.load_background = function () {
 			let bg = document.getElementById("myBackground").value.trim();
 			if (bg != "") {
-				if (!isValidColor(bg) && !isHexColor(bg)) {
+				if (!isValidColor(bg) && !isHexColor(bg) && !isRgbColor(bg)) {
 					background_img = draw_ref.loadImage(bg);
 				} else {
-					background_img = bg;
+					if(isValidColor(bg) || isHexColor(bg))
+						background_img = bg;
+					else
+						background_img = parseIntArray(bg);
 				}
 			}
 		}
@@ -1532,13 +1543,6 @@ function draw_animation() {
 			layers = Array.from([...new_layers]);
 			layers.sort();
 		}
-
-		// draw_ref.mouseClicked = function() {
-		// 	// Get the visible objects that are under the cursor position
-		// 	animation_obj.canvasClicked(draw_ref);
-		// 	// Prevent default
-		// 	return false;
-		// }
 	});
 
 }

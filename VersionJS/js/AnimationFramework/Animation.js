@@ -130,6 +130,15 @@ export class Animation {
         }
     }
 
+    isRgbColor(strColor) {
+        try {
+            strColor.includes(",");
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+
     readXmlFile(contents) {
         let parser = new DOMParser();
         let root = parser.parseFromString(contents, "text/xml");
@@ -160,10 +169,14 @@ export class Animation {
         // If the background's node exists
         if (background_node) {
             this.background = background_node.textContent;
-            if(!this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim())) {
+            if(!this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim()) && !this.isRgbColor(this.background.trim())) {
                 // The image path is relative to the source file's one
                 let source_file_path = this.source_file.substr(0, this.source_file.lastIndexOf("/") + 1);
                 this.background = source_file_path + this.background;
+            }
+            else {
+                if(!this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim()))
+                    this.background = parseIntArray(this.background);
             }
         } else {
             this.background = "white";
@@ -485,7 +498,7 @@ export class Animation {
 
     preload(drawing) {
         // Load the backround image 
-        if (this.background != "" && !this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim())) {
+        if (this.background != "" && !this.isValidColor(this.background) && !this.isHexColor(this.background) && !this.isRgbColor(this.background)) {
             this.background = drawing.loadImage(this.background);
         }
 
