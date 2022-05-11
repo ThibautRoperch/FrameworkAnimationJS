@@ -1,0 +1,397 @@
+<animation xmlns="http://www.w3.org/1999/xhtml" speed="fast">
+	
+	<init>
+
+		<start_button present="true"></start_button>
+
+	</init>
+
+	<objects>
+
+        <object_text
+            x="50"
+            y="0"
+            text="pshufd src1, src2, expression ordre de sélection"
+            font="Arial,18,bold"
+            visible="1"
+            color="0,0,0">pshufd_generique</object_text>
+
+		<object_table
+            x="50"
+            y="60"
+            background_color="244,208,63"
+            background_transparent="0"
+            border_color="0,0,0"
+            border_transparency="0"
+            border_size="1"
+            layer="0"
+            visible="1"
+            opacity="1"
+            font="Courier,14,normal"
+            color="0,0,0"
+            line_height="30"
+            column_width="60"
+            halignment="center"
+            valignment="center"
+            has_header_lines="true"
+            header_background_color="243,156,18"
+            header_color="0,0,0"
+            values="src 1 | a3 | a2 | a1 | a0">src1</object_table>
+
+        <object_text
+            x="125"
+            y="30"
+            text="d[3]"
+            font="Arial,15,normal"
+            visible="1"
+            color="160,160,160">adresse3</object_text>
+
+        <object_text
+            x="185"
+            y="30"
+            text="d[2]"
+            font="Arial,15,normal"
+            visible="1"
+            color="160,160,160">adresse2</object_text>
+
+        <object_text
+            x="245"
+            y="30"
+            text="d[1]"
+            font="Arial,15,normal"
+            visible="1"
+            color="160,160,160">adresse1</object_text>
+
+        <object_text
+            x="305"
+            y="30"
+            text="d[0]"
+            font="Arial,15,normal"
+            visible="1"
+            color="160,160,160">adresse0</object_text>
+
+		<object_table
+            x="50"
+            y="150"
+            background_color="244,208,63"
+            background_transparent="0"
+            border_color="0,0,0"
+            border_transparency="0"
+            border_size="1"
+            layer="0"
+            visible="1"
+            opacity="1"
+            font="Arial,15"
+            color="0,0,0"
+            line_height="50"
+            column_width="140"
+            halignment="center"
+            valignment="center"
+            has_header_lines="true"
+            header_background_color="243,156,18"
+            header_color="0,0,0"
+            values="src 2 | 1ère adresse dans l'expression | 2ème adresse dans l'expression | 3ème adresse dans l'expression | 4ème adresse dans l'expression">src2</object_table>
+
+        <object_text
+            x="50"
+            y="260"
+            text="Exemple : pshufd xmm1, xmm2, 00_01_10_11b"
+            font="Arial,18,normal"
+            visible="1"
+            color="0,0,0">exemple</object_text>
+
+        <object_text
+            x="125"
+            y="285"
+            text="d[3]"
+            font="Arial,15,normal"
+            visible="1"
+            color="160,160,160">adresse_xmm2_3</object_text>
+
+        <object_text
+            x="185"
+            y="285"
+            text="d[2]"
+            font="Arial,15,normal"
+            visible="1"
+            color="160,160,160">adresse_xmm2_2</object_text>
+
+        <object_text
+            x="245"
+            y="285"
+            text="d[1]"
+            font="Arial,15,normal"
+            visible="1"
+            color="160,160,160">adresse_xmm2_1</object_text>
+
+        <object_text
+            x="305"
+            y="285"
+            text="d[0]"
+            font="Arial,15,normal"
+            visible="1"
+            color="160,160,160">adresse_xmm2_0</object_text>
+
+        <object_table
+            x="50"
+            y="310"
+            background_color="9,124,238"
+            background_transparent="0"
+            border_color="0,0,0"
+            border_transparency="0"
+            border_size="1"
+            layer="0"
+            visible="1"
+            opacity="1"
+            font="Arial,15"
+            color="0,0,0"
+            line_height="30"
+            column_width="60"
+            halignment="center"
+            valignment="center"
+            has_header_lines="true"
+            header_background_color="9,238,123"
+            header_color="0,0,0"
+            values="xmm2 | -1 | 3 | 7 | -2">xmm2</object_table>
+
+        <object_table
+            x="50"
+            y="400"
+            background_color="9,124,238"
+            background_transparent="0"
+            border_color="0,0,0"
+            border_transparency="0"
+            border_size="1"
+            layer="0"
+            visible="1"
+            opacity="1"
+            font="Arial,15"
+            color="0,0,0"
+            line_height="30"
+            column_width="60"
+            halignment="center"
+            valignment="center"
+            has_header_lines="true"
+            header_background_color="9,238,123"
+            header_color="0,0,0"
+            values="xmm1 | | | | ">xmm1</object_table>
+
+        <object_text
+            x="450"
+            y="310"
+            text="00_01_10_11b"
+            font="Arial,20,normal"
+            visible="1"
+            color="0,0,0">expression_ordre</object_text>
+
+        <object_rectangle
+            x="450"
+            y="310"
+            border_color="255,0,0"
+            border_transparency="0"
+            border_size="2"
+            layer="0"
+            visible="0"
+            opacity="1"
+            width="25"
+            height="25">00</object_rectangle>
+
+        <object_text
+            x="-400"
+            y="360"
+            text="00b = 0 ---> prendre adresse d[0]"
+            font="Arial,20,normal"
+            visible="0"
+            color="0,0,0">calcul_00</object_text>
+        
+        <object_text
+            x="311"
+            y="313"
+            text="-2"
+            font="Arial,15,normal"
+            visible="0"
+            color="0,0,0">-2</object_text>
+
+        <object_rectangle
+            x="483"
+            y="310"
+            border_color="255,0,0"
+            border_transparency="0"
+            border_size="2"
+            layer="0"
+            visible="0"
+            opacity="1"
+            width="25"
+            height="25">01</object_rectangle>
+
+        <object_text
+            x="-400"
+            y="360"
+            text="01b = 1 ---> prendre adresse d[1]"
+            font="Arial,20,normal"
+            visible="0"
+            color="0,0,0">calcul_01</object_text>
+
+        <object_text
+            x="253"
+            y="313"
+            text="7"
+            font="Arial,15,normal"
+            visible="0"
+            color="0,0,0">7</object_text>
+
+        <object_rectangle
+            x="518"
+            y="310"
+            border_color="255,0,0"
+            border_transparency="0"
+            border_size="2"
+            layer="0"
+            visible="0"
+            opacity="1"
+            width="25"
+            height="25">10</object_rectangle>
+
+        <object_text
+            x="-400"
+            y="360"
+            text="10b = 2 ---> prendre adresse d[2]"
+            font="Arial,20,normal"
+            visible="0"
+            color="0,0,0">calcul_10</object_text>
+
+        <object_text
+            x="193"
+            y="313"
+            text="3"
+            font="Arial,15,normal"
+            visible="0"
+            color="0,0,0">3</object_text>
+
+        <object_rectangle
+            x="551"
+            y="310"
+            border_color="255,0,0"
+            border_transparency="0"
+            border_size="2"
+            layer="0"
+            visible="0"
+            opacity="1"
+            width="25"
+            height="25">11</object_rectangle>
+
+        <object_text
+            x="-400"
+            y="360"
+            text="11b = 3 ---> prendre adresse d[3]"
+            font="Arial,20,normal"
+            visible="0"
+            color="0,0,0">calcul_11</object_text>
+
+        <object_text
+            x="132"
+            y="313"
+            text="-1"
+            font="Arial,15,normal"
+            visible="0"
+            color="0,0,0">-1</object_text>
+    
+    </objects>
+
+    <programs>
+        <program assigned_to="00">
+			<visible value="true" />
+            <trigger object="calcul_00" value="appear" />
+            <sleep value="2000" />
+            <visible value="false" />
+		</program>
+
+        <program assigned_to="calcul_00">
+			<wait value="appear" />
+			<visible value="true" />
+            <moveto x="450" y="360" dx="5" />
+            <sleep value="1000" />
+            <trigger object="-2" value="start" />
+            <visible value="false" />
+		</program>
+
+        <program assigned_to="-2">
+            <wait value="start" />
+            <visible value="true" />
+            <moveto x="132" y="405" dx="1" dy="1" />
+            <trigger object="01" value="appear" />
+        </program>
+
+        <program assigned_to="01">
+            <wait value="appear" />
+			<visible value="true" />
+            <trigger object="calcul_01" value="appear" />
+            <sleep value="2000" />
+            <visible value="false" />
+		</program>
+
+        <program assigned_to="calcul_01">
+			<wait value="appear" />
+			<visible value="true" />
+            <moveto x="450" y="360" dx="5" />
+            <sleep value="1000" />
+            <trigger object="7" value="start" />
+            <visible value="false" />
+		</program>
+
+        <program assigned_to="7">
+            <wait value="start" />
+            <visible value="true" />
+            <moveto x="195" y="405" dx="1" dy="1" />
+            <trigger object="10" value="appear" />
+        </program>
+
+        <program assigned_to="10">
+            <wait value="appear" />
+			<visible value="true" />
+            <trigger object="calcul_10" value="appear" />
+            <sleep value="2000" />
+            <visible value="false" />
+		</program>
+
+        <program assigned_to="calcul_10">
+			<wait value="appear" />
+			<visible value="true" />
+            <moveto x="450" y="360" dx="5" />
+            <sleep value="1000" />
+            <trigger object="3" value="start" />
+            <visible value="false" />
+		</program>
+
+        <program assigned_to="3">
+            <wait value="start" />
+            <visible value="true" />
+            <moveto x="256" y="405" dx="1" dy="1" />
+            <trigger object="11" value="appear" />
+        </program>
+
+        <program assigned_to="11">
+            <wait value="appear" />
+			<visible value="true" />
+            <trigger object="calcul_11" value="appear" />
+            <sleep value="2000" />
+            <visible value="false" />
+		</program>
+
+        <program assigned_to="calcul_11">
+			<wait value="appear" />
+			<visible value="true" />
+            <moveto x="450" y="360" dx="5" />
+            <sleep value="1000" />
+            <trigger object="-1" value="start" />
+            <visible value="false" />
+		</program>
+
+        <program assigned_to="-1">
+            <wait value="start" />
+            <visible value="true" />
+            <moveto x="313" y="405" dx="1" dy="1" />
+        </program>
+    </programs>
+
+</animation>

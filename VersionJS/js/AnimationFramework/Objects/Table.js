@@ -5,7 +5,7 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Table extends AnimatedObject {
     
-    constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_lines, header_font, header_color, header_background_color) {
+    constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_rows, header_font, header_color, header_background_color) {
         super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.values = values; // row1col1 | row1col2 | row1col3 $ row2col1 | row2col1
         this.line_height = line_height;
@@ -16,16 +16,16 @@ export class Table extends AnimatedObject {
 		this.halignment = halignment;
 		this.valignment = valignment;
         this.has_header_columns = has_header_columns;
-        this.has_header_lines = has_header_lines;
-        this.header_font = header_font;
-        this.header_color = header_color;
-        this.header_background_color = header_background_color;
+        this.has_header_rows = has_header_rows;
+        this.header_font = header_font; // r, g, b
+        this.header_color = header_color; // r, g, b
+        this.header_background_color = header_background_color; // r, g, b
 
         this.value_tab = [];
         this.index_tab = [];
         this.coord_cells = new Map();
         this.nb_columns = 0;
-        this.nb_lines = 0;
+        this.nb_row = 0;
         this.padding_top = 0;
         this.padding_right = 0;
         this.padding_bottom = 0;
@@ -65,8 +65,8 @@ export class Table extends AnimatedObject {
         return this.has_header_columns;
     }
 
-    getHasHeaderLines() {
-        return this.has_header_lines;
+    getHasHeaderRows() {
+        return this.has_header_rows;
     }
 
     getHeaderBackgroundColor() {
@@ -118,19 +118,22 @@ export class Table extends AnimatedObject {
         this.has_header_columns = has_header_columns;
     }
 
-    setHasHeaderColumns(has_header_lines) {
-        this.has_header_lines = has_header_lines;
+    setHasHeaderRows(has_header_rows) {
+        this.has_header_rows = has_header_rows;
     }
 
     setHeaderBackgroundColor(header_background_color) {
+        console.log(typeof header_background_color);
         this.header_background_color = header_background_color;
     }
 
     setHeaderColor(header_color) {
+        console.log(typeof header_color);
         this.header_color = header_color;
     }
 
     setHeaderFont(header_font) {
+        console.log(typeof header_font);
         this.header_font = header_font;
     }
 
@@ -169,12 +172,12 @@ export class Table extends AnimatedObject {
                 this.nb_columns = columns.length;
             }
         }
-        this.nb_lines = this.value_tab.length;
+        this.nb_row = this.value_tab.length;
     }
 
     fillCoordCells() {
         this.index_tab = [];
-        for (let i = 0; i < this.nb_lines; i++) {
+        for (let i = 0; i < this.nb_row; i++) {
 
             let y_start = this.y + i * this.line_height;
             let y_end = y_start + this.line_height;
@@ -210,7 +213,7 @@ export class Table extends AnimatedObject {
 
     draw(drawing) {
         super.draw(drawing);
-        drawing.rect(this.x, this.y, this.column_width * this.nb_columns, this.line_height * this.nb_lines);
+        drawing.rect(this.x, this.y, this.column_width * this.nb_columns, this.line_height * this.nb_row);
 
 
         if (this.has_header_columns) {
@@ -220,18 +223,18 @@ export class Table extends AnimatedObject {
             drawing.pop();
         }
 
-        if (this.has_header_lines) {
+        if (this.has_header_rows) {
             drawing.push();
             drawing.fill(this.header_background_color[0], this.header_background_color[1], this.header_background_color[2], this.opacity * 255);
-            drawing.rect(this.x, this.y, this.column_width, this.line_height * this.nb_lines);
+            drawing.rect(this.x, this.y, this.column_width, this.line_height * this.nb_row);
             drawing.pop();
         }
 
-        for (let i = 1; i < this.nb_lines; ++i) {
+        for (let i = 1; i < this.nb_row; ++i) {
             drawing.line(this.x, this.y + i * this.line_height, this.x + this.column_width * this.nb_columns, this.y + i * this.line_height);
         }
         for (let i = 1; i < this.nb_columns; ++i) {
-            drawing.line(this.x + i * this.column_width, this.y, this.x + i * this.column_width, this.y + this.line_height * this.nb_lines);
+            drawing.line(this.x + i * this.column_width, this.y, this.x + i * this.column_width, this.y + this.line_height * this.nb_row);
         }
         
         drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
@@ -249,7 +252,7 @@ export class Table extends AnimatedObject {
             let value = this.value_tab[index_value[0]][index_value[1]]
 
             if (value != null) {
-                if ((this.has_header_columns && index_value[0] == 0) || (this.has_header_lines && index_value[1] == 0)) {
+                if ((this.has_header_columns && index_value[0] == 0) || (this.has_header_rows && index_value[1] == 0)) {
                     drawing.push();
                     if (this.header_color != null) {
                         drawing.fill(this.header_color[0], this.header_color[1], this.header_color[2], this.opacity * 255);
@@ -289,7 +292,7 @@ export class Table extends AnimatedObject {
     } 
 
     isClicked(x, y) {
-        return (x >= this.x) && (x <= this.nb_columns * this.column_width) && (y >= this.y) && (y <= this.nb_lines * this.line_height);
+        return (x >= this.x) && (x <= this.nb_columns * this.column_width) && (y >= this.y) && (y <= this.nb_row * this.line_height);
     }
 
     toXml() {
@@ -315,7 +318,7 @@ export class Table extends AnimatedObject {
         table.setAttribute("line_height", this.line_height);
         table.setAttribute("column_width", this.column_width);
         table.setAttribute("has_header_columns", this.has_header_columns);
-        table.setAttribute("has_header_lines", this.has_header_lines);
+        table.setAttribute("has_header_rows", this.has_header_rows);
         table.setAttribute("header_background_color", this.header_background_color);
         table.setAttribute("header_color", this.header_color);
         table.setAttribute("header_font", this.header_font);
@@ -323,7 +326,7 @@ export class Table extends AnimatedObject {
     }
 
     clone() {
-        return new Table(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.values, this.line_height, this.column_width, this.font, this.color, this.padding, this.halignment, this.valignment, this.has_header_columns, this.has_header_lines, this.header_font, this.header_color, this.header_background_color);
+        return new Table(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.values, this.line_height, this.column_width, this.font, this.color, this.padding, this.halignment, this.valignment, this.has_header_columns, this.has_header_rows, this.header_font, this.header_color, this.header_background_color);
     }
 
 }

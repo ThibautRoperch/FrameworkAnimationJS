@@ -145,6 +145,21 @@ export class SetProperty extends Instruction {
 			case "values":
 				this.target.setValues(this.value);
 				break;
+			case "has_header_columns":
+				this.target.setHasHeaderColumns(this.value == "true" ? true : false);
+				break;
+			case "has_header_rows":
+				this.target.setHasHeaderRows(this.value == "true" ? true : false);
+				break;
+			case "header_font":
+				this.target.setHeaderFont(this.value.split(","));
+				break;
+			case "header_color":
+				this.target.setHeaderColor(parseIntArray(this.value));
+				break;
+			case "header_background_color":
+				this.target.setHeaderBackgroundColor(parseIntArray(this.value));
+				break;
 
 			// graph
 			case "function":

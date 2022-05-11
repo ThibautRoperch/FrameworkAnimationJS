@@ -13,7 +13,7 @@ import { Graph } from './AnimationFramework/Objects/Graph.js';
 
 import { SetProperty } from './AnimationFramework/Instructions/SetProperty.js';
 
-import { ANIMATION_FILES_INCLUDED } from './AnimationFramework/animation_controller.js';
+import { ANIMATION_FILES_INCLUDED, parseIntArray } from './AnimationFramework/animation_controller.js';
 import { DEFAULT_STATE } from './AnimationFramework/Objects/AnimatedObject.js';
 
 // Global variables
@@ -416,7 +416,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// color
-			let color = [255, 255, 255];
+			let color = [0,0,0];
 			property = document.createElement("property");
 			property.className = "color";
 			label = document.createElement("label");
@@ -911,7 +911,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// color
-			let text_color = [255, 255, 255];
+			let text_color = [0,0,0];
 			property = document.createElement("property");
 			property.className = "color";
 			label = document.createElement("label");
@@ -937,7 +937,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// halignment
-			let text_halignment = "left";
+			let text_halignment = "center";
 			property = document.createElement("property");
 			property.className = "halignment";
 			label = document.createElement("label");
@@ -948,11 +948,11 @@ function new_object(object_type) {
 			option = document.createElement("option");
 			option.value = "left";
 			option.innerHTML = "Left";
-			option.selected = "selected";
 			input.appendChild(option);
 			option = document.createElement("option");
 			option.value = "center";
 			option.innerHTML = "Center";
+			option.selected = "selected";
 			input.appendChild(option);
 			option = document.createElement("option");
 			option.value = "right";
@@ -961,7 +961,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// valignment
-			let text_valignment = "top";
+			let text_valignment = "center";
 			property = document.createElement("property");
 			property.className = "valignment";
 			label = document.createElement("label");
@@ -972,7 +972,6 @@ function new_object(object_type) {
 			option = document.createElement("option");
 			option.value = "top";
 			option.innerHTML = "Top";
-			option.selected = "selected";
 			input.appendChild(option);
 			option = document.createElement("option");
 			option.value = "bottom";
@@ -981,6 +980,7 @@ function new_object(object_type) {
 			option = document.createElement("option");
 			option.value = "center";
 			option.innerHTML = "Center";
+			option.selected = "selected";
 			input.appendChild(option);
 			option = document.createElement("option");
 			option.value = "baseline";
@@ -988,8 +988,85 @@ function new_object(object_type) {
 			input.appendChild(option);
 			property.appendChild(input);
 			article1.appendChild(property);
+			// has_header_columns
+			property = document.createElement("property");
+			property.className = "has_header_columns";
+			label = document.createElement("label");
+			label.innerHTML = "has_header_columns";
+			property.appendChild(label);
+			input = document.createElement("select");
+			input.onchange = function () { change_property(obj_id, this); };
+			option = document.createElement("option");
+			option.value = "true";
+			option.innerHTML = "True";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "false";
+			option.innerHTML = "False";
+			option.selected = "selected";
+			input.appendChild(option);
+			property.appendChild(input);
+			article1.appendChild(property);
+			// has_header_rows
+			property = document.createElement("property");
+			property.className = "has_header_rows";
+			label = document.createElement("label");
+			label.innerHTML = "has_header_rows";
+			property.appendChild(label);
+			input = document.createElement("select");
+			input.onchange = function () { change_property(obj_id, this); };
+			option = document.createElement("option");
+			option.value = "true";
+			option.innerHTML = "True";
+			input.appendChild(option);
+			option = document.createElement("option");
+			option.value = "false";
+			option.innerHTML = "False";
+			option.selected = "selected";
+			input.appendChild(option);
+			property.appendChild(input);
+			article1.appendChild(property);
+			// header_font
+			let header_font = ["Courier", 14, "normal"];
+			property = document.createElement("property");
+			property.className = "header_font";
+			label = document.createElement("label");
+			label.innerHTML = "header_font";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = header_font;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// header_color
+			let header_color = [0,0,0];
+			property = document.createElement("property");
+			property.className = "header_color";
+			label = document.createElement("label");
+			label.innerHTML = "header_color";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.placeholder = header_color;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// header_background_color
+			let header_background_color = [150,150,150];
+			property = document.createElement("property");
+			property.className = "header_background_color";
+			label = document.createElement("label");
+			label.innerHTML = "header_background_color";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.placeholder = header_background_color;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// Create table object
-			object = new Table(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, tab_line_height, tab_column_width, text_font, text_color, tab_padding, text_halignment, text_valignment);
+			object = new Table(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, tab_line_height, tab_column_width, text_font, text_color, tab_padding, text_halignment, text_valignment, false, false, header_font, header_color, header_background_color);
 			break;
 		case "Graph":
 			// We set x-y at 60-60 at default to see it well in preview
@@ -1369,6 +1446,15 @@ function isHexColor(strColor) {
 	}
 }
 
+function isRgbColor(strColor) {
+	try {
+		strColor.includes(",");
+		return true;
+	} catch (_) {
+		return false;
+	}
+}
+
 
 function draw_animation() {
 
@@ -1408,7 +1494,6 @@ function draw_animation() {
 
 		/** Drawing loop */
 		draw_ref.draw = function () {
-			//draw_ref.clear();
 
 			// Display the background image
 			if (background_img != null) {
@@ -1434,10 +1519,13 @@ function draw_animation() {
 		draw_ref.load_background = function () {
 			let bg = document.getElementById("myBackground").value.trim();
 			if (bg != "") {
-				if (!isValidColor(bg) && !isHexColor(bg)) {
+				if (!isValidColor(bg) && !isHexColor(bg) && !isRgbColor(bg)) {
 					background_img = draw_ref.loadImage(bg);
 				} else {
-					background_img = bg;
+					if(isValidColor(bg) || isHexColor(bg))
+						background_img = bg;
+					else
+						background_img = parseIntArray(bg);
 				}
 			}
 		}
@@ -1455,13 +1543,6 @@ function draw_animation() {
 			layers = Array.from([...new_layers]);
 			layers.sort();
 		}
-
-		// draw_ref.mouseClicked = function() {
-		// 	// Get the visible objects that are under the cursor position
-		// 	animation_obj.canvasClicked(draw_ref);
-		// 	// Prevent default
-		// 	return false;
-		// }
 	});
 
 }
