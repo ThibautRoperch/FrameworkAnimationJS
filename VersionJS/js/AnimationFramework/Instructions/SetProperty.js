@@ -135,10 +135,10 @@ export class SetProperty extends Instruction {
 				this.target.setColumns(parseInt(this.value) | 0);
 				break;
 			case "line_height":
-				this.target.setLine_height(parseInt(this.value) | 0);
+				this.target.setLineHeight(parseInt(this.value) | 0);
 				break;
 			case "column_width":
-				this.target.setColumn_width(parseInt(this.value) | 0);
+				this.target.setColumnWidth(parseInt(this.value) | 0);
 				break;
 
 			// table

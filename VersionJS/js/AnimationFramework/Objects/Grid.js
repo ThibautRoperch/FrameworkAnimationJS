@@ -17,7 +17,7 @@ export class Grid extends AnimatedObject {
         return this.lines;
     }
 
-    getLine_height() {
+    getLineHeight() {
         return this.line_height;
     }
 
@@ -25,7 +25,7 @@ export class Grid extends AnimatedObject {
         return this.columns;
     }
 
-    getColumn_width() {
+    getColumnWidth() {
         return this.column_width;
     }
 
@@ -33,7 +33,7 @@ export class Grid extends AnimatedObject {
         this.lines = lines;
     }
 
-    setLine_height(line_height) {
+    setLineHeight(line_height) {
         return this.line_height = line_height;
     }
 
@@ -41,7 +41,7 @@ export class Grid extends AnimatedObject {
         this.columns = columns;
     }
 
-    setColumn_width(column_width) {
+    setColumnWidth(column_width) {
         this.column_width = column_width;
     }
 
