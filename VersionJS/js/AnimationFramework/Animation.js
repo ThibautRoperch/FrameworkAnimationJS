@@ -243,7 +243,7 @@ export class Animation {
                     case 'object_rectangle':
                         width = parseInt(read_object.getAttribute("width"));
                         height = parseInt(read_object.getAttribute("height"));
-                        let round = parseInt(read_object.getAttribute("round")) | 0;
+                        let round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0,0,0,0];
                         new_object = new Rectangle(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
                         break;
                     case 'object_polygon':
@@ -515,8 +515,6 @@ export class Animation {
     setup(drawing) {
         this.canvas = drawing.createCanvas(this.width, this.height);
         this.canvas.parent(this.parent);
-
-        drawing.frameRate(1);
 
         // Remove the loading message
         this.parent.removeChild(this.parent.getElementsByClassName("loading")[0]);
