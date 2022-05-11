@@ -1167,7 +1167,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// max_X
-			let graph_max_X = width;
+			let graph_max_X = 10;
 			property = document.createElement("property");
 			property.className = "max_X";
 			label = document.createElement("label");
@@ -1180,7 +1180,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// max_Y
-			let graph_max_Y = height;
+			let graph_max_Y = 10;
 			property = document.createElement("property");
 			property.className = "max_Y";
 			label = document.createElement("label");
@@ -1212,7 +1212,34 @@ function new_object(object_type) {
 			input.appendChild(option);
 			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Graph(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y, false);
+			// min_X
+			let graph_min_X = 0;
+			property = document.createElement("property");
+			property.className = "min_X";
+			label = document.createElement("label");
+			label.innerHTML = "min_X";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = graph_min_X;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// min_Y
+			let graph_min_Y = 0;
+			property = document.createElement("property");
+			property.className = "min_Y";
+			label = document.createElement("label");
+			label.innerHTML = "min_Y";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = graph_min_Y;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			property = document.createElement("property");
+			object = new Graph(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y, false, graph_min_X, graph_min_Y);
 			break;
 	}
 	objects_array[obj_id] = object;

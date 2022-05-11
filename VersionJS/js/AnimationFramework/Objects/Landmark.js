@@ -231,6 +231,10 @@ export class Landmark extends AnimatedObject {
 		landmark.setAttribute("scale_y", this.scale_y);
 		landmark.setAttribute("unit_x", this.unit_x);
 		landmark.setAttribute("unit_y", this.unit_y);
+		landmark.setAttribute("min_X", this.min_X);
+		landmark.setAttribute("min_Y", this.min_Y);
+		landmark.setAttribute("max_X", this.max_X);
+		landmark.setAttribute("max_Y", this.max_Y);
 		return landmark;
 	}
 
