@@ -26,8 +26,13 @@ export class Table extends AnimatedObject {
         this.coord_cells = new Map();
         this.nb_columns = 0;
         this.nb_row = 0;
+        this.padding_top = 0;
+        this.padding_right = 0;
+        this.padding_bottom = 0;
+        this.padding_left = 0;
         this.fillValueTab();
         this.fillCoordCells();
+        this.setPaddingValues();
     }
 
     setX(x) {
@@ -189,6 +194,23 @@ export class Table extends AnimatedObject {
         }
     }
 
+    setPaddingValues() {
+        switch (this.padding.length) {
+            case 1:
+                this.padding_top = this.padding[0];
+                this.padding_right = this.padding[0];
+                this.padding_bottom = this.padding[0];
+                this.padding_left = this.padding[0];
+                break;
+            case 4:
+                this.padding_top = this.padding[0];
+                this.padding_right = this.padding[1];
+                this.padding_bottom = this.padding[2];
+                this.padding_left = this.padding[3];
+                break;
+        }
+    }
+
     draw(drawing) {
         super.draw(drawing);
         drawing.rect(this.x, this.y, this.column_width * this.nb_columns, this.line_height * this.nb_row);
@@ -225,8 +247,8 @@ export class Table extends AnimatedObject {
         drawing.noStroke();
 
         for (let i = 0; i < this.index_tab.length; i++) {
-            let index_value = this.index_tab[i];
-            let coords = this.coord_cells.get(index_value);
+            let index_value = this.index_tab[i]; // index_value[0] -> n° column ; index_value[1] -> n° row
+            let coords = this.coord_cells.get(index_value); // coords[0] -> x ; coords[1] -> y
             let value = this.value_tab[index_value[0]][index_value[1]]
 
             if (value != null) {
@@ -240,14 +262,34 @@ export class Table extends AnimatedObject {
                         drawing.textSize(parseInt(this.header_font[1]));
                         drawing.textStyle(this.header_font[2] == "bold" ? drawing.BOLD : this.header_font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
                     }
-                    drawing.text(value, coords[0] + this.padding, coords[1] + this.padding / 2, this.column_width, this.line_height);
+                    this.drawText(drawing, value, coords[0], coords[1]);
                     drawing.pop();
                 } else {
-                    drawing.text(value, coords[0] + this.padding, coords[1] + this.padding / 2, this.column_width, this.line_height);
+                    this.drawText(drawing, value, coords[0], coords[1]);
                 }
             }
         }
     }
+
+    drawText(drawing, text, x, y) {
+        switch (this.halignment) {
+            case "left":
+                x += this.padding_left;
+                break;
+            case "right":
+                x -= this.padding_right;
+                break;
+        }
+
+        switch (this.valignment) {
+            case "top":
+                y += this.padding_top;
+                break;
+            case "bottom":
+                y -= this.padding_bottom;
+        }
+        drawing.text(text, x, y, this.column_width, this.line_height);
+    } 
 
     isClicked(x, y) {
         return (x >= this.x) && (x <= this.nb_columns * this.column_width) && (y >= this.y) && (y <= this.nb_row * this.line_height);

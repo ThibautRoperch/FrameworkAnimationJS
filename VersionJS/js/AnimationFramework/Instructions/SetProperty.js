@@ -5,15 +5,15 @@ import { Instruction } from "./Instruction.js";
 import { parseIntArray } from '../animation_controller.js';
 export class SetProperty extends Instruction {
 
-	constructor(object, target, property, value) {
+	constructor (object, target, property, value) {
 		super(object);
 		this.target = target;
 		this.property = property;
 		this.value = value;
 	}
 
-	execute() {
-		switch(this.property) {
+	execute () {
+		switch (this.property) {
 
 			// all
 			case "x":
@@ -103,22 +103,28 @@ export class SetProperty extends Instruction {
 
 			// landmark
 			case "scale_x":
-				this.target.setScaleX(parseInt(this.value) | 0);
+				this.target.scale_X = parseInt(this.value) | 0;
 				break;
 			case "scale_y":
-				this.target.setScaleY(parseInt(this.value) | 0);
+				this.target.scale_Y = parseInt(this.value) | 0;
 				break;
 			case "unit_x":
-				this.target.setUnitX(this.value);
+				this.target.unit_X = this.value;
 				break;
 			case "unit_y":
-				this.target.setUnitY(this.value);
+				this.target.unit_Y = this.value;
 				break;
 			case "max_X":
-				this.target.setMax_X(this.value);
+				this.target.max_X = this.value;
 				break;
 			case "max_Y":
-				this.target.setMax_Y(this.value);
+				this.target.max_Y = this.value;
+				break;
+			case "min_X":
+				this.target.min_X = this.value;
+				break;
+			case "min_Y":
+				this.target.min_Y = this.value;
 				break;
 
 			// grid

@@ -6,11 +6,11 @@
 	</init>
 
 	<background>
-		9,238,123
+		#00A6D6
 	</background>
 	
 	<objects>
-		<object_text text="test avec gros padding" font="Arial,18,bold" x="800" y="60" visible="true" padding="50" background_transparent="false">a_copier</object_text>
+		<object_text text="test avec gros padding" font="Arial,18,bold" x="800" y="60" visible="true" padding="30,40,30,50" background_transparent="false">a_copier</object_text>
 		<object_copy idcopy="a_copier" text="copie du texte avec gros padding" y="150">jl_copy</object_copy>
 
 		<object_grid 
@@ -56,17 +56,67 @@
 			width="170">tests deplacement et clics</object_text>
 
 		<object_graph 
-			x="100" y="750"
+			x="600" y="600"
 			visible="true"
 			background_transparent="false"
-			height="500" width="500"
-			scale_x="5" scale_y="10"
-			max_X ="100" max_Y="100"
+			height="100" width="-500"
+			scale_x="1" scale_y="1"
+			max_X ="10" max_Y="5"
+			min_X ="0" min_Y="0"
 			unit_x="X" unit_y="Y"
+			draw_point="true"
 			border_color="255,0,0"
-			background_color="255,255,0"
+			background_color="255,0,0"
 			border_transparency="false"
-			function="-x"> Fonction x2
+			function="Math.sin(x)*2"> width neg height pos
+		</object_graph>
+
+		<object_graph 
+			x="100" y="800"
+			visible="true"
+			background_transparent="false"
+			height="100" width="500"
+			scale_x="1" scale_y="1"
+			max_X ="15" max_Y="0"
+			min_X ="0" min_Y="-5"
+			unit_x="X" unit_y="Y"
+			draw_point="true"
+			border_color="255,0,0"
+			background_color="255,0,0"
+			border_transparency="false"
+			function="-x*0.3"> width pos height pos
+		</object_graph>
+
+		<object_graph 
+			x="100" y="850"
+			visible="true"
+			background_transparent="false"
+			height="-100" width="500"
+			scale_x="1" scale_y="1"
+			max_X ="15" max_Y="5"
+			min_X ="-5" min_Y="-1"
+			unit_x="X" unit_y="Y"
+			draw_point="true"
+			border_color="255,0,0"
+			background_color="255,0,0"
+			border_transparency="false"
+			function="Math.sqrt(x)"> width pos height neg
+		</object_graph>
+
+		<object_graph 
+			x="1200" y="850"
+			visible="true"
+			background_transparent="false"
+			height="-100" width="-500"
+			scale_x="1" scale_y="1"
+			max_X ="15" max_Y="2"
+			min_X ="10" min_Y="-5"
+			unit_x="X" unit_y="Y"
+			draw_point="true"
+			border_color="255,0,0"
+			background_color="255,0,0"
+			border_transparency="false"
+			function="-Math.sqrt(x)"> width neg height neg
 		</object_graph>
 
 		<object_polygon
@@ -78,8 +128,7 @@
 			background_color="0,128,0"
 			background_transparent="false"
 			border_transparency="false"
-			visible="true"
-		>Polygone</object_polygon>
+			visible="true">Polygone</object_polygon>
 
 		<object_table 
 			x="20" 

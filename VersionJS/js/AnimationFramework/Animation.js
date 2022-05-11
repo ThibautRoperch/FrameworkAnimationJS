@@ -41,7 +41,7 @@ import { Graph } from './Objects/Graph.js';
 
 export class Animation {
 
-    constructor(source_file, parent, width, height) {
+    constructor (source_file, parent, width, height) {
         this.source_file = source_file; // path of the XML source file
 
         this.parent = parent; // HTML node containing the canevas
@@ -49,7 +49,7 @@ export class Animation {
         this.height = height; // height of the canevas, in px
 
         this.objects = new Map(); // associative array containing drawing's objects, as object_identifier : Object
-        this.programs = new Map() // associative array containing instructions' programs, as object_identifier : array of Instruction elements
+        this.programs = new Map(); // associative array containing instructions' programs, as object_identifier : array of Instruction elements
         this.layers = new Set(); // set containing the differents objects' layers
         this.objects_image = new Array(); // array containing image objects
 
@@ -73,18 +73,18 @@ export class Animation {
         }
     }
 
-    getBackground() {
+    getBackground () {
         return this.background;
     }
 
-    getObjects() {
+    getObjects () {
         return this.objects;
     }
 
     /**
      * Display an error message because the XML file can't be
      */
-    displayErrorMessage(source_file, target_id) {
+    displayErrorMessage (source_file, target_id) {
         let error = document.createElement("div");
         error.innerHTML = "The XML file " + source_file + " of the animation " + target_id + " can't be read";
         error.style.flex = "1";
@@ -96,7 +96,7 @@ export class Animation {
     /**
      * Display a loading message while the objects are beeing created
      */
-    displayLoadingMessage() {
+    displayLoadingMessage () {
         let loading = document.createElement("div");
         loading.className = "loading";
         loading.innerHTML = "loading...";
@@ -106,11 +106,11 @@ export class Animation {
         this.parent.appendChild(loading);
     }
 
-    stopAnimation() {
+    stopAnimation () {
         return this.stop_animation;
     }
 
-    isValidColor(strColor) {
+    isValidColor (strColor) {
         try {
             var s = new Option().style;
             s.color = strColor;
@@ -121,7 +121,7 @@ export class Animation {
         }
     }
 
-    isHexColor(strColor) {
+    isHexColor (strColor) {
         try {
             let RegExp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
             return RegExp.test(strColor);
@@ -175,7 +175,7 @@ export class Animation {
                 this.background = source_file_path + this.background;
             }
             else {
-                if(!this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim()))
+                if(this.isRgbColor(this.background.trim()))
                     this.background = parseIntArray(this.background);
             }
         } else {
@@ -226,7 +226,7 @@ export class Animation {
                         let text = read_object.getAttribute("text");
                         font = read_object.getAttribute("font").split(",");
                         color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
-                        padding = parseInt(read_object.getAttribute("padding")) | 0;
+                        padding = read_object.getAttribute("padding") ? parseIntArray(read_object.getAttribute("padding")) : [];
                         width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                         height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
@@ -287,7 +287,7 @@ export class Animation {
                         let header_font = read_object.getAttribute("header_font") ? read_object.getAttribute("header_font").split(",") : font;
                         color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [0, 0, 0];
                         let header_color = read_object.getAttribute("header_color") ? parseIntArray(read_object.getAttribute("header_color")) : color;
-                        padding = parseInt(read_object.getAttribute("padding")) | 0;
+                        padding = read_object.getAttribute("padding") ? parseIntArray(read_object.getAttribute("padding")) : [];
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
                         valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
                         line_height = parseInt(read_object.getAttribute("line_height"));
@@ -304,7 +304,10 @@ export class Animation {
                         let graph_unit_y = read_object.getAttribute("unit_y");
                         let graph_max_X = parseInt(read_object.getAttribute("max_X"));
                         let graph_max_Y = parseInt(read_object.getAttribute("max_Y"));
-                        new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y);
+                        let graph_min_X = parseInt(read_object.getAttribute("min_X"));
+                        let graph_min_Y = parseInt(read_object.getAttribute("min_Y"));
+                        let draw_point = read_object.hasAttribute("draw_point") ? (read_object.getAttribute("draw_point") === "true" ? true : false) : false;
+                        new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y, draw_point, graph_min_X, graph_min_Y);
                         break;
                     case 'object_copy':
                         let idcopy = read_object.getAttribute("idcopy");
@@ -454,7 +457,7 @@ export class Animation {
         }
     }
 
-    execute_instructions(object_id, instruction_number, labels) {
+    execute_instructions (object_id, instruction_number, labels) {
         // Retrieve the program and the current instruction of the program
         let program = this.programs.get(object_id);
 
@@ -488,7 +491,7 @@ export class Animation {
 
         if (continue_execution) {
             re_execute(this);
-            function re_execute(animation) {
+            function re_execute (animation) {
                 setTimeout(function () {
                     animation.execute_instructions(object_id, next_instruction, labels);
                 }, 1);
@@ -496,7 +499,7 @@ export class Animation {
         }
     }
 
-    preload(drawing) {
+    preload (drawing) {
         // Load the backround image 
         if (this.background != "" && !this.isValidColor(this.background) && !this.isHexColor(this.background) && !this.isRgbColor(this.background)) {
             this.background = drawing.loadImage(this.background);
@@ -512,7 +515,7 @@ export class Animation {
         this.layers.sort();
     }
 
-    setup(drawing) {
+    setup (drawing) {
         this.canvas = drawing.createCanvas(this.width, this.height);
         this.canvas.parent(this.parent);
 
@@ -520,7 +523,7 @@ export class Animation {
         this.parent.removeChild(this.parent.getElementsByClassName("loading")[0]);
     }
 
-    draw(drawing) {
+    draw (drawing) {
         // Display the background image
         if (this.background != null) {
             drawing.background(this.background);
@@ -541,7 +544,7 @@ export class Animation {
         }
     }
 
-    canvasClicked(drawing) {
+    canvasClicked (drawing) {
         // Get the visible objects that are under the cursor position
         for (let object of this.objects.values()) {
             if (object.getVisible()) {

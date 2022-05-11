@@ -1,2 +1,2 @@
 import { load_animation } from './AnimationFramework/animation_controller.js';
-load_animation("benchmark.xml", "animation", 1400, 1000);
+load_animation("addps.xml", "addps", 800, 800);
