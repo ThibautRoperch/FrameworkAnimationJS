@@ -1511,8 +1511,6 @@ function draw_animation() {
 				drawing_dom.removeChild(drawing_dom.firstChild);
 			}
 
-			draw_ref.frameRate(1); // 60 fps
-
 			canvas = draw_ref.createCanvas(parseInt(document.getElementById("width").value), parseInt(document.getElementById("height").value));
 			canvas.parent(drawing_dom);
 
