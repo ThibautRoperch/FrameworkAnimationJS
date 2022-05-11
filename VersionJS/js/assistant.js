@@ -1220,7 +1220,7 @@ function new_object(object_type) {
 			label.innerHTML = "min_X";
 			property.appendChild(label);
 			input = document.createElement("input");
-			input.type = "number";
+			input.type = "text";
 			input.value = graph_min_X;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
@@ -1233,7 +1233,7 @@ function new_object(object_type) {
 			label.innerHTML = "min_Y";
 			property.appendChild(label);
 			input = document.createElement("input");
-			input.type = "number";
+			input.type = "text";
 			input.value = graph_min_Y;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
@@ -1530,7 +1530,7 @@ function draw_animation() {
 			// Display objects of each layer, if they're set as visible
 			for (let layer of layers) {
 				for (let object of objects_array) {
-					if (object.getLayer() == layer && object.getVisible()) {
+					if (object.layer == layer && object.visible) {
 						object.draw(draw_ref);
 					}
 				}
@@ -1558,7 +1558,7 @@ function draw_animation() {
 			let new_layers = new Set();
 			// Retrieve all layers in a set
 			for (let object of objects_array) {
-				new_layers.add(object.getLayer());
+				new_layers.add(object.layer);
 			}
 
 			// Convert and sort the layers set

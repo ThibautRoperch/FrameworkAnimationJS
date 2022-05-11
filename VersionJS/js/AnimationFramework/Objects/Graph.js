@@ -5,6 +5,18 @@ import { Landmark } from "./Landmark.js";
 
 export class Graph extends Landmark {
 
+	/**
+	 * The function to be draw by the graph. Js Math function can be use
+	 * @type string
+	 */
+	algorithmic_function;
+
+	/**
+	 * Boolean to choose to draw or not the points at the scale of the axis
+	 * @type bool
+	 */
+	draw_point;
+
 	constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer,
 		visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, algorithmic_function, max_X, max_Y, draw_point, min_X, min_Y) {
 
@@ -12,22 +24,6 @@ export class Graph extends Landmark {
 			visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, max_X, max_Y, min_X, min_Y);
 
 		this.algorithmic_function = algorithmic_function;
-		this.draw_point = draw_point;
-	}
-
-	getFunction () {
-		return this.algorithmic_function;
-	}
-
-	setFunction (algorithmic_function) {
-		this.algorithmic_function = algorithmic_function;
-	}
-
-	getDrawPoint () {
-		return this.draw_point;
-	}
-
-	setDrawPoint (draw_point) {
 		this.draw_point = draw_point;
 	}
 
@@ -73,7 +69,7 @@ export class Graph extends Landmark {
 				x += 0.5;
 			} while (x <= this.max_X);
 
-		} catch (err){
+		} catch (err) {
 			alert(err);
 			this.algorithmic_function = "";
 		}
@@ -118,7 +114,23 @@ export class Graph extends Landmark {
 	}
 
 	clone () {
-		return new Graph(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.scale_x, this.scale_y, this.unit_x, this.unit_y, this.algorithmic_function);
+		return new Graph(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency,
+			this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.scale_x, this.scale_y, this.unit_x, this.unit_y,
+			this.algorithmic_function, this.max_X, this.max_Y, this.draw_point, this.min_X, this.min_Y);
+	}
+
+	get algorithmic_function () {
+		return this.algorithmic_function;
+	}
+	set algorithmic_function (value) {
+		this.algorithmic_function = value;
+	}
+
+	get draw_point () {
+		return this.draw_point;
+	}
+	set draw_point (value) {
+		this.draw_point = value;
 	}
 
 }

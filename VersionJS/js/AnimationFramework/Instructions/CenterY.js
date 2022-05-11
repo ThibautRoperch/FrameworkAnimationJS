@@ -9,7 +9,7 @@ export class CenterY extends Instruction {
 	}
 
 	execute() {
-		this.object.setY(HEIGHT-this.object.getHeight());
+		this.object.y = (HEIGHT-this.object.getHeight());
 	}
 
 }

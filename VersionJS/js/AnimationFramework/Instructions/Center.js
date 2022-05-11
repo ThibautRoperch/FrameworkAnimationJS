@@ -9,8 +9,8 @@ export class Center extends Instruction {
 	}
 	
 	execute() {
-		this.object.setX((WIDTH-this.object.getWidth())/2);
-		this.object.setY((HEIGHT-this.object.getHeight())/2);  
+		this.object.x = ((WIDTH-this.object.getWidth())/2);
+		this.object.y = ((HEIGHT-this.object.getHeight())/2);  
 	}
 	
 }

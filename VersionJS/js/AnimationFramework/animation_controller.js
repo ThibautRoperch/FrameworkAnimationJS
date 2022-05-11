@@ -130,7 +130,7 @@ export function speed_animation(speed) {
 
 function include_animation_files(path) {
 	let script = document.createElement("script");
-	script.src = './js/AnimationFramework/p5.min.js';
+	script.src = path + 'p5.min.js';
 	document.lastChild.appendChild(script);
 
 	ANIMATION_FILES_INCLUDED = true;

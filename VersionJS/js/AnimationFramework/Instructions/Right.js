@@ -11,14 +11,14 @@ export class Right extends SimpleMovement {
 	}
 	
 	execute() {
-		this.object.setState(MOVING_STATE);
+		this.object.state = (MOVING_STATE);
 		let original_distance = this.distance;
 
 		right(this);
 		function right(instruction) {
 			if (instruction.distance > 0) {
 
-				instruction.object.setX(instruction.object.getX() + instruction.interval);
+				instruction.object.x = (instruction.object.x + instruction.interval);
                 instruction.distance -= instruction.interval;
 				
 				setTimeout(function() {
@@ -26,7 +26,7 @@ export class Right extends SimpleMovement {
 				}, instruction.loop_delay);
 			} else {
 				instruction.distance = original_distance;
-				instruction.object.setState(DEFAULT_STATE);				
+				instruction.object.state = (DEFAULT_STATE);				
 			}
 		}
 

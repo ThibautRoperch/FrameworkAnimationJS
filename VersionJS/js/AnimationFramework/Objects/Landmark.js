@@ -111,7 +111,7 @@ export class Landmark extends AnimatedObject {
 				-py + 5);
 
 			// Draw scale text
-			drawing.text(px, this.getXMapping(px, drawing), -py + 15);
+			drawing.text(px, this.getXMapping(px, drawing), -py + 20);
 			px += this.scale_x;
 		}
 
@@ -130,7 +130,7 @@ export class Landmark extends AnimatedObject {
 				-this.getYMapping(py, drawing));
 
 			// Draw scale text
-			drawing.text(py, px - 15, -this.getYMapping(py, drawing));
+			drawing.text(py, px - 20, -this.getYMapping(py, drawing));
 			py += this.scale_y;
 		}
 

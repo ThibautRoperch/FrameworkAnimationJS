@@ -9,7 +9,7 @@ export class CenterX extends Instruction {
 	}
 
 	execute() {
-		this.object.setX((WIDTH-this.object.getWidth())/2);
+		this.object.x = ((WIDTH-this.object.getWidth())/2);
 	}
 	
 }

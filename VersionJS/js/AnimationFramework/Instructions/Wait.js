@@ -16,7 +16,7 @@ export class Wait extends Instruction {
 		} else {
 			this.object.setState(this.expected_state);
 		}*/
-		this.object.setState(this.expected_state);
+		this.object.state = (this.expected_state);
 	}
 	
 }

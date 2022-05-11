@@ -17,88 +17,88 @@ export class SetProperty extends Instruction {
 
 			// all
 			case "x":
-				this.target.setX(parseInt(this.value) | 0);
+				this.target.x = parseInt(this.value) | 0;
 				break;
 			case "y":
-				this.target.setY(parseInt(this.value) | 0);
+				this.target.y = (parseInt(this.value) | 0);
 				break;
 			case "background_color":
-				this.target.setBackground_color(parseIntArray(this.value));
+				this.target.background_color = parseIntArray(this.value);
 				break;
 			case "background_transparent":
-				this.target.setBackground_transparent(this.value == "true" | false);
+				this.target.background_transparent = this.value == "true" | false;
 				break;
 			case "border_color":
-				this.target.setBorder_color(parseIntArray(this.value));
+				this.target.border_color = parseIntArray(this.value);
 				break;
 			case "border_transparency":
-				this.target.setBorder_transparency(this.value == "true" | false);
+				this.target.border_transparency = this.value == "true" | false;
 				break;
 			case "border_size":
-				this.target.setBorder_size(parseInt(this.value) | 0);
+				this.target.border_size = parseInt(this.value) | 0;
 				break;
 			case "layer":
-				this.target.setLayer(parseInt(this.value) | 0);
+				this.target.layer = parseInt(this.value) | 0;
 				break;
 			case "visible":
-				this.target.setVisible(this.value == "true" ? true : false);
+				this.target.visible = this.value == "true" ? true : false;
 				break;
 			case "opacity":
-				this.target.setOpacity(parseInt(this.value) | 0);
+				this.target.opacity = parseInt(this.value) | 0;
 				break;
 			case "angle":
-				this.target.setAngle(parseInt(this.value) | 0);
+				this.target.angle = parseInt(this.value) | 0;
 				break;
 
 			// text, image, rectangle, ellipse, landmark
 			case "width":
-				this.target.setWidth(parseInt(this.value) | 0);
+				this.target.width = parseInt(this.value) | 0;
 				break;
 			case "height":
-				this.target.setHeight(parseInt(this.value) | 0);
+				this.target.height = parseInt(this.value) | 0;
 				break;
 
 			// text
 			case "text":
-				this.target.setText(this.value);
+				this.target.text = this.value;
 				break;
 			case "font":
-				this.target.setFont(this.value.split(","));
+				this.target.font = this.value.split(",");
 				break;
 			case "color":
-				this.target.setColor(parseIntArray(this.value));
+				this.target.color = parseIntArray(this.value);
 				break;
 			case "padding":
-				this.target.setPadding(parseIntArray(this.value));
+				this.target.padding = parseIntArray(this.value);
 				break;
 			case "halignment":
-				this.target.setHalignment(this.value);
+				this.target.halignment = this.value;
 				break;
 			case "valignment":
-				this.target.setValignment(this.value);
+				this.target.valignment = this.value;
 				break;
 
 			// image
 			case "image":
-				this.target.setImage(this.value);
+				this.target.image = this.value;
 				break;
 
 			// rectangle
 			case "round":
-				this.target.setRound(parseIntArray(this.value));
+				this.target.round = parseIntArray(this.value);
 				break;
 
 			// polygon
 			case "coord_x":
-				this.target.setCoordx(parseIntArray(this.value));
+				this.target.coord_x = parseIntArray(this.value);
 				break;
 			case "coord_y":
-				this.target.setCoordy(parseIntArray(this.value));
+				this.target.coord_y = parseIntArray(this.value);
 				break;
 
 			// circle
 			case "radius":
-				this.target.setRadius(parseInt(this.value) | 0);
+				this.target.radius = parseInt(this.value) | 0;
 				break;
 
 			// landmark
@@ -115,58 +115,58 @@ export class SetProperty extends Instruction {
 				this.target.unit_Y = this.value;
 				break;
 			case "max_X":
-				this.target.max_X = this.value;
+				this.target.max_X = parseInt(this.value);
 				break;
 			case "max_Y":
-				this.target.max_Y = this.value;
+				this.target.max_Y = parseInt(this.value);
 				break;
 			case "min_X":
-				this.target.min_X = this.value;
+				this.target.min_X = parseInt(this.value);
 				break;
 			case "min_Y":
-				this.target.min_Y = this.value;
+				this.target.min_Y = parseInt(this.value);
 				break;
 
 			// grid
 			case "lines":
-				this.target.setLines(parseInt(this.value) | 0);
+				this.target.lines = (parseInt(this.value) | 0);
 				break;
 			case "columns":
-				this.target.setColumns(parseInt(this.value) | 0);
+				this.target.columns = (parseInt(this.value) | 0);
 				break;
 			case "line_height":
-				this.target.setLine_height(parseInt(this.value) | 0);
+				this.target.line_height = (parseInt(this.value) | 0);
 				break;
 			case "column_width":
-				this.target.setColumn_width(parseInt(this.value) | 0);
+				this.target.column_width = (parseInt(this.value) | 0);
 				break;
 
 			// table
 			case "values":
-				this.target.setValues(this.value);
+				this.target.values = (this.value);
 				break;
 			case "has_header_columns":
-				this.target.setHasHeaderColumns(this.value == "true" ? true : false);
+				this.target.has_header_columns = (this.value == "true" ? true : false);
 				break;
 			case "has_header_rows":
-				this.target.setHasHeaderRows(this.value == "true" ? true : false);
+				this.target.has_header_rows = (this.value == "true" ? true : false);
 				break;
 			case "header_font":
-				this.target.setHeaderFont(this.value.split(","));
+				this.target.header_font = (this.value.split(","));
 				break;
 			case "header_color":
-				this.target.setHeaderColor(parseIntArray(this.value));
+				this.target.header_color = (parseIntArray(this.value));
 				break;
 			case "header_background_color":
-				this.target.setHeaderBackgroundColor(parseIntArray(this.value));
+				this.target.header_background_color = (parseIntArray(this.value));
 				break;
 
 			// graph
 			case "function":
-				this.target.setFunction(this.value);
+				this.target.algorithmic_function = (this.value);
 				break;
 			case "draw_point":
-				this.target.setDrawPoint(this.value == "true" ? true : false);
+				this.target.draw_point = (this.value == "true" ? true : false);
 				break;
 
 			default:

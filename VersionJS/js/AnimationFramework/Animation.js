@@ -156,7 +156,7 @@ export class Animation {
         if (init_node) {
             let start_node = init_node.getElementsByTagName("start_button")[0];
             if (start_node) {
-                if (start_node.hasAttribute("text")) this.start_button.setText(start_node.hasAttribute("text"));
+                if (start_node.hasAttribute("text")) this.start_button.setText(start_node.getAttribute("text"));
                 if (start_node.hasAttribute("x")) this.start_button.setX(start_node.getAttribute("x"));
                 if (start_node.hasAttribute("y")) this.start_button.setY(start_node.getAttribute("y"));
                 if (start_node.hasAttribute("present") && start_node.getAttribute("present") == "false") this.start_button.setPresent(false);
@@ -469,7 +469,7 @@ export class Animation {
         let continue_execution = true; // this program will by default continue
 
         // Execute the instruction if the state of the object is the default one
-        if (!this.start_button.getPresent() && this.objects.get(object_id).getState() == DEFAULT_STATE) {
+        if (!this.start_button.present && this.objects.get(object_id).state == DEFAULT_STATE) {
             let instruction_type = instruction.constructor.name;
             if (instruction_type == "Label") {
                 labels.set(instruction.getValue(), instruction_number + 1);
@@ -527,13 +527,13 @@ export class Animation {
         }
 
         // Display the start button if it has to
-        if (this.start_button.getPresent()) {
+        if (this.start_button.present) {
             this.start_button.draw(drawing);
         } else {
             // Display objects of each layer, if they're set as visible
             for (let layer of this.layers) {
                 for (let object of this.objects.values()) {
-                    if (object.getLayer() == layer && object.getVisible()) {
+                    if (object.layer == layer && object.visible) {
                         object.draw(drawing);
                     }
                 }
@@ -544,15 +544,15 @@ export class Animation {
     canvasClicked (drawing) {
         // Get the visible objects that are under the cursor position
         for (let object of this.objects.values()) {
-            if (object.getVisible()) {
+            if (object.visible) {
                 if (object.isClicked(drawing.mouseX, drawing.mouseY)) {
                     new Trigger(null, object, WAITING_CLICK_STATE).execute();
                 }
             }
         }
 
-        if (this.start_button.getPresent() && this.start_button.isClicked(drawing.mouseX, drawing.mouseY)) {
-            this.start_button.setPresent(false);
+        if (this.start_button.present && this.start_button.isClicked(drawing.mouseX, drawing.mouseY)) {
+            this.start_button.present = (false);
         }
     }
 
