@@ -109,6 +109,11 @@ export class Graph extends Landmark {
 		graph.setAttribute("unit_x", this.unit_x);
 		graph.setAttribute("unit_y", this.unit_y);
 		graph.setAttribute("function", this.algorithmic_function);
+		graph.setAttribute("min_X", this.min_X);
+		graph.setAttribute("min_Y", this.min_Y);
+		graph.setAttribute("max_X", this.max_X);
+		graph.setAttribute("max_Y", this.max_Y);
+		graph.setAttribute("draw_point", this.draw_point);
 		return graph;
 	}
 
