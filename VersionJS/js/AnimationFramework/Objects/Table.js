@@ -144,6 +144,7 @@ export class Table extends AnimatedObject {
 
 	setPadding(padding) {
 		this.padding = padding;
+        this.setPaddingValues();
 	}
 
 	setValignment(valignment) {

@@ -69,7 +69,7 @@ export class SetProperty extends Instruction {
 				this.target.setColor(parseIntArray(this.value));
 				break;
 			case "padding":
-				this.target.setPadding(parseInt(this.value) | 0);
+				this.target.setPadding(parseIntArray(this.value));
 				break;
 			case "halignment":
 				this.target.setHalignment(this.value);

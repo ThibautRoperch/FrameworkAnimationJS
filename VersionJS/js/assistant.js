@@ -436,7 +436,7 @@ function new_object(object_type) {
 			label.innerHTML = "padding";
 			property.appendChild(label);
 			input = document.createElement("input");
-			input.type = "number";
+			input.type = "text";
 			input.placeholder = padding;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
@@ -931,7 +931,7 @@ function new_object(object_type) {
 			label.innerHTML = "padding";
 			property.appendChild(label);
 			input = document.createElement("input");
-			input.type = "number";
+			input.type = "text";
 			input.placeholder = tab_padding;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
@@ -1373,7 +1373,7 @@ function export_xml() {
 	animation_node.setAttribute('speed', document.getElementById("mySpeed").value);
 
 	// background image node
-	if (document.getElementById("background").value != "") {
+	if (document.getElementById("myBackground").value != "") {
 		let background_node = doc.createElement("background");
 		background_node.innerHTML = document.getElementById("background").value;
 		animation_node.appendChild(background_node);
