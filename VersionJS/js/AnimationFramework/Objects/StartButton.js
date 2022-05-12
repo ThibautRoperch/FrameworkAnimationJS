@@ -46,7 +46,7 @@ export class StartButton extends AnimatedObject {
 		drawing.text(this.text.replace("@", "\n"), this.x + 2, this.y + 4);
     }
 
-    isClicked(x, y) {
+    isClicked(x, y, drawing) {
 		return (x >= this.x - this.width / 2 + 2) && (x <= this.x + this.width / 2 + 2) && (y >= this.y - this.height / 2 + 2) && (y <= this.y + this.height / 2 + 2);
     }
 

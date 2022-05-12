@@ -56,7 +56,7 @@ export class Grid extends AnimatedObject {
         }
     }
 
-    isClicked(x, y) {
+    isClicked(x, y, drawing) {
         return (x >= this.x) && (x <= this.columns * this.column_width) && (y >= this.y) && (y <= this.lines * this.line_height);
     }
 

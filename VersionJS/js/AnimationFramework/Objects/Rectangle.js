@@ -41,7 +41,7 @@ export class Rectangle extends AnimatedObject {
         drawing.rect(this.x, this.y, this.width, this.height, this.round[0], this.round[1], this.round[2], this.round[3]);
     }
     
-    isClicked(x, y) {
+    isClicked(x, y, drawing) {
 		return (x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height);
     }
     

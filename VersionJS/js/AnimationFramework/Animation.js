@@ -554,13 +554,13 @@ export class Animation {
         // Get the visible objects that are under the cursor position
         for (let object of this.objects.values()) {
             if (object.getVisible()) {
-                if (object.isClicked(drawing.mouseX, drawing.mouseY)) {
+                if (object.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
                     new Trigger(null, object, WAITING_CLICK_STATE).execute();
                 }
             }
         }
 
-        if (this.start_button.getPresent() && this.start_button.isClicked(drawing.mouseX, drawing.mouseY)) {
+        if (this.start_button.getPresent() && this.start_button.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
             this.start_button.setPresent(false);
         }
     }

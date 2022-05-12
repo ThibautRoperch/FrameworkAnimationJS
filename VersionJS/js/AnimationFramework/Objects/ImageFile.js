@@ -50,7 +50,7 @@ export class ImageFile extends AnimatedObject {
         }
     }
 
-    isClicked(x, y) {
+    isClicked(x, y, drawing) {
 		return (x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height);
     }
     

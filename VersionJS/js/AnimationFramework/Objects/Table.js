@@ -292,7 +292,7 @@ export class Table extends AnimatedObject {
         drawing.text(text, x, y, this.column_width, this.line_height);
     } 
 
-    isClicked(x, y) {
+    isClicked(x, y, drawing) {
         return (x >= this.x) && (x <= this.nb_columns * this.column_width) && (y >= this.y) && (y <= this.nb_row * this.line_height);
     }
 

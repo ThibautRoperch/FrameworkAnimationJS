@@ -66,8 +66,17 @@ export class Arrow extends AnimatedObject {
         drawing.pop();
     }
     
-    isClicked(x, y) {
-		return (x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height);
+    isClicked(x, y, drawing) {
+        drawing.push();
+        drawing.rotate(this.rotation);
+        console.log(x + " " + this.x + " " + this.width_line + " " + this.width_triangle + " " + y + " " + this.y + " " + this.height_line + " " + this.height_triangle);
+        // Clic in rectangle's zone
+        let inRectangleZone = (x >= this.x) && (x <= this.x + this.width_line) && (y >= this.y) && (y <= this.y + this.height_line)
+        // Clic in triangle's zone
+        let inTriangleZone =  (x <= this.x + this.width_line + this.width_triangle && x >= this.x + this.width_line && y >= (this.y - this.height_triangle / 4) && y <= (this.y + this.height_line + this.height_triangle/4));
+        drawing.pop();
+        console.log(inRectangleZone + " " + inTriangleZone);
+		return inRectangleZone || inTriangleZone;
     }
     
     toXml() {

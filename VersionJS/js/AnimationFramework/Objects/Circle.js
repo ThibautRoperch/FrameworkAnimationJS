@@ -23,7 +23,7 @@ export class Circle extends Ellipse {
         super.draw(drawing);
     }
 
-    isClicked(x, y) {
+    isClicked(x, y, drawing) {
         // Compute the distance between the circle center and the mouse position
         let delta_x = this.x + this.radius - x;
         let delta_y = this.y + this.radius - y;

@@ -31,7 +31,7 @@ export class Ellipse extends AnimatedObject {
         drawing.ellipse(this.x + this.width / 2, this.y + this.height / 2, this.width, this.height);
     }
 
-    isClicked(x, y) {
+    isClicked(x, y, drawing) {
         // Compute the distance between the ellipse center and the mouse position
         let delta_x = this.x + (this.width / 2) - x;
         let delta_y = this.y + (this.height / 2) - y;
