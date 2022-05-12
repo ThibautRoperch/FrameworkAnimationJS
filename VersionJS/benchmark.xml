@@ -168,10 +168,10 @@
 			background_color="210,180,222"
 			border_transparency="false"
 			border_color="255,0,0"
-			width_line="100"
-			height_line="30"
-			width_triangle="50"
-			height_triangle="50"
+			width_line="50"
+			height_line="5"
+			width_triangle="15"
+			height_triangle="15"
 			rotation="0">Arrow</object_arrow>
 
 	</objects>

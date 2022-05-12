@@ -169,6 +169,23 @@ export class SetProperty extends Instruction {
 				this.target.draw_point = (this.value == "true" ? true : false);
 				break;
 
+			// arrow
+			case "width_line":
+				this.target.width_line = (this.value);
+				break;
+			case "height_line":
+				this.target.height_line = (this.value);
+				break;
+			case "width_triangle":
+				this.target.width_triangle = (this.value);
+				break;
+			case "height_triangle":
+				this.target.triangle = (this.value);
+				break;
+			case "rotation":
+				this.target.rotation = (this.value);
+				break;
+
 			default:
 				console.log("[SetProperty.js] La propriété '" + this.property + "' est inconnue de l'instruction SetProperty"); // dans ce cas, rajouter l'attribut (dans le switch case ci-dessus)
 				break;
