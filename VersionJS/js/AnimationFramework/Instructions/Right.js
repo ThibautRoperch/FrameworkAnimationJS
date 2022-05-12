@@ -1,4 +1,3 @@
-
 import { SimpleMovement } from "./SimpleMovement.js";
 import { DEFAULT_STATE, MOVING_STATE } from "../Objects/AnimatedObject.js";
 /**
@@ -18,7 +17,7 @@ export class Right extends SimpleMovement {
 		function right(instruction) {
 			if (instruction.distance > 0) {
 
-				instruction.object.x = (instruction.object.x + instruction.interval);
+				instruction.object.x += instruction.interval;
                 instruction.distance -= instruction.interval;
 				
 				setTimeout(function() {

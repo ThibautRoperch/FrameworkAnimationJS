@@ -17,7 +17,7 @@ export class Left extends SimpleMovement {
 		function left(instruction) {
 			if (instruction.distance > 0) {
 				
-				instruction.object.y = (instruction.object.x - instruction.interval);
+				instruction.object.x -= instruction.interval;
 				instruction.distance -= instruction.interval;
 
 				setTimeout(function() {
