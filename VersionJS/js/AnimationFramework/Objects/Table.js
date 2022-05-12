@@ -197,15 +197,12 @@ export class Table extends AnimatedObject {
     fillCoordCells() {
         this.index_tab = [];
         for (let i = 0; i < this.nb_rows; i++) {
-
             let y_start = (this.has_header_columns && i == 0) ? this.y : this.y + this.header_line_height + (i - 1) * this.line_height;
             let y_end = (this.has_header_columns && i == 0) ? y_start + this.header_line_height : y_start + this.line_height;
 
             for (let j = 0; j < this.nb_columns; j++) {
-
                 let x_start = (this.has_header_rows && j == 0) ? this.x : this.x + this.header_column_width + (j - 1) * this.column_width;
                 let x_end = (this.has_header_rows && j == 0) ? x_start + this.header_column_width : x_start + this.column_width;
-
 
                 let index_value = [i, j];
                 let cell = [x_start, y_start, x_end, y_end];
@@ -233,8 +230,8 @@ export class Table extends AnimatedObject {
     }
 
     draw(drawing) {
-        super.draw(drawing);
         drawing.push();
+        super.draw(drawing);
         drawing.rect(this.x, this.y, this.header_column_width + this.column_width * (this.nb_columns - 1), this.header_line_height + this.line_height * (this.nb_rows - 1));
 
         if (this.has_header_columns) {
@@ -291,17 +288,17 @@ export class Table extends AnimatedObject {
                         drawing.textSize(parseInt(this.header_font[1]));
                         drawing.textStyle(this.header_font[2] == "bold" ? drawing.BOLD : this.header_font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
                     }
-                    this.drawText(drawing, value, coords[0], coords[1]);
+                    this.drawText(drawing, value, coords[0], coords[1], coords[2]- coords[0], coords[3] - coords[1]);
                     drawing.pop();
                 } else {
-                    this.drawText(drawing, value, coords[0], coords[1]);
+                    this.drawText(drawing, value, coords[0], coords[1], coords[2]- coords[0], coords[3] - coords[1]);
                 }
             }
         }
         drawing.pop();
     }
 
-    drawText(drawing, text, x, y) {
+    drawText(drawing, text, x, y, width, height) {
         switch (this.halignment) {
             case "left":
                 x += this.padding_left;
@@ -318,7 +315,7 @@ export class Table extends AnimatedObject {
             case "bottom":
                 y -= this.padding_bottom;
         }
-        drawing.text(text, x, y, this.column_width, this.line_height);
+        drawing.text(text, x, y, width, height);
     } 
 
     isClicked(x, y) {

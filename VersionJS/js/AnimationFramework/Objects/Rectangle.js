@@ -37,8 +37,10 @@ export class Rectangle extends AnimatedObject {
     }
 
     draw(drawing) {
+        drawing.push();
         super.draw(drawing);
         drawing.rect(this.x, this.y, this.width, this.height, this.round[0], this.round[1], this.round[2], this.round[3]);
+        drawing.pop();
     }
     
     isClicked(x, y) {

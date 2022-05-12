@@ -42,12 +42,14 @@ export class ImageFile extends AnimatedObject {
     }
 
     draw(drawing) {
+        drawing.push();
         super.draw(drawing);
         if (this.width == undefined || this.height == undefined) {
             drawing.image(this.loaded_image, this.x, this.y);
         } else {
             drawing.image(this.loaded_image, this.x, this.y, this.width, this.height);
         }
+        drawing.pop();
     }
 
     isClicked(x, y) {

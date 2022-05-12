@@ -46,6 +46,7 @@ export class Grid extends AnimatedObject {
     }
 
     draw(drawing) {
+        drawing.push();
         super.draw(drawing);
         drawing.rect(this.x, this.y, this.column_width * this.columns, this.line_height * this.lines);
         for (let i = 1; i < this.lines; ++i) {
@@ -54,6 +55,7 @@ export class Grid extends AnimatedObject {
         for (let i = 1; i < this.columns; ++i) {
             drawing.line(this.x + i * this.column_width, this.y, this.x + i * this.column_width, this.y + this.line_height * this.lines);
         }
+        drawing.pop();
     }
 
     isClicked(x, y) {

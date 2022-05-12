@@ -51,6 +51,7 @@ export class Landmark extends AnimatedObject {
 	}
 
 	draw (drawing) {
+		drawing.push();
 		super.draw(drawing);
 
 		drawing.textFont("courrier");
@@ -63,6 +64,7 @@ export class Landmark extends AnimatedObject {
 		this.drawAxisArrow(drawing);
 		this.drawXUnit(drawing);
 		this.drawYUnit(drawing);
+		drawing.pop();
 	}
 
 	drawAxis (drawing) {

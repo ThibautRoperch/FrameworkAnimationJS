@@ -133,8 +133,9 @@ export class Text extends AnimatedObject {
     }
 	
 	draw(drawing) {
-		super.draw(drawing);
 		drawing.push();
+		super.draw(drawing);
+		
 		// Background
 		drawing.rect(this.x, this.y, this.real_width, this.real_height);
 		// Text's color, font, size and style
