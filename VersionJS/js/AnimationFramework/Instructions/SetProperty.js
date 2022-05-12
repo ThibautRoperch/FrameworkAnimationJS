@@ -103,28 +103,28 @@ export class SetProperty extends Instruction {
 
 			// landmark
 			case "scale_x":
-				this.target.scale_X = parseInt(this.value) | 0;
+				this.target.scale_x = parseInt(this.value) | 0;
 				break;
 			case "scale_y":
-				this.target.scale_Y = parseInt(this.value) | 0;
+				this.target.scale_y = parseInt(this.value) | 0;
 				break;
 			case "unit_x":
-				this.target.unit_X = this.value;
+				this.target.unit_x = this.value;
 				break;
 			case "unit_y":
-				this.target.unit_Y = this.value;
+				this.target.unit_y = this.value;
 				break;
-			case "max_X":
-				this.target.max_X = parseInt(this.value);
+			case "max_x":
+				this.target.max_x = parseInt(this.value);
 				break;
-			case "max_Y":
-				this.target.max_Y = parseInt(this.value);
+			case "max_y":
+				this.target.max_y = parseInt(this.value);
 				break;
-			case "min_X":
-				this.target.min_X = parseInt(this.value);
+			case "min_x":
+				this.target.min_x = parseInt(this.value);
 				break;
-			case "min_Y":
-				this.target.min_Y = parseInt(this.value);
+			case "min_y":
+				this.target.min_y = parseInt(this.value);
 				break;
 
 			// grid
@@ -143,7 +143,7 @@ export class SetProperty extends Instruction {
 
 			// table
 			case "values":
-				this.target.values = (this.value);
+				this.target.values = this.value;
 				break;
 			case "has_header_columns":
 				this.target.has_header_columns = (this.value == "true" ? true : false);

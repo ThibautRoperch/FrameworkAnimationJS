@@ -119,8 +119,8 @@
 <!ATTLIST object_landmark scale_y CDATA #REQUIRED >
 <!ATTLIST object_landmark unit_x CDATA #REQUIRED >
 <!ATTLIST object_landmark unit_y CDATA #REQUIRED >
-<!ATTLIST object_landmark max_X CDATA #REQUIRED >
-<!ATTLIST object_landmark max_Y CDATA #REQUIRED >
+<!ATTLIST object_landmark max_x CDATA #REQUIRED >
+<!ATTLIST object_landmark max_y CDATA #REQUIRED >
 <!ATTLIST object_landmark x CDATA #IMPLIED >
 <!ATTLIST object_landmark y CDATA #IMPLIED >
 <!ATTLIST object_landmark background_color CDATA #IMPLIED >
@@ -183,10 +183,10 @@
 <!ATTLIST object_graph scale_y CDATA #REQUIRED >
 <!ATTLIST object_graph unit_x CDATA #REQUIRED >
 <!ATTLIST object_graph unit_y CDATA #REQUIRED >
-<!ATTLIST object_graph max_X CDATA #REQUIRED >
-<!ATTLIST object_graph max_Y CDATA #REQUIRED >
-<!ATTLIST object_graph min_X CDATA #REQUIRED >
-<!ATTLIST object_graph min_Y CDATA #REQUIRED >
+<!ATTLIST object_graph max_x CDATA #REQUIRED >
+<!ATTLIST object_graph max_y CDATA #REQUIRED >
+<!ATTLIST object_graph min_x CDATA #REQUIRED >
+<!ATTLIST object_graph min_y CDATA #REQUIRED >
 <!ATTLIST object_graph x CDATA #IMPLIED >
 <!ATTLIST object_graph y CDATA #IMPLIED >
 <!ATTLIST object_graph background_color CDATA #IMPLIED >

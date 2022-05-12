@@ -10,97 +10,97 @@ export class Table extends AnimatedObject {
      * row1col1 | row1col2 | row1col3 $ row2col1 | row2col1
      * @type string
      */
-    values;
+    _values;
 
     /**
      * The line's height
      * @type number
      */
-    line_height;
+    _line_height;
 
     /**
      * The column's width
      * @type number
      */
-    column_width;
+    _column_width;
 
     /**
      * The font caracteristic
      * FontName, FontSize, FontWeight
      * @type string
      */
-    font;
+    _font;
 
     /**
      * The normal text color
      * r, g, b
      * @type string
      */
-    color;
+    _color;
 
     /**
      * The padding in the xml
      * top, right, bottom, left or 1 value for all
      * @type string
      */
-    padding;
+    _padding;
 
     /**
      * The text horizontal alignement
      * @type string
      */
-    halignment;
+    _halignment;
 
     /**
      * The text vertical alignement
      * @type string
      */
-    valignment;
+    _valignment;
 
     /**
      * Presence of header on the column
      * @type bool
      */
-    has_header_columns;
+    _has_header_columns;
 
     /**
      * Presence of header on the rows
      * @type bool
      */
-    has_header_rows;
+    _has_header_rows;
 
     /**
      * The font caracteristic of the text in header
      * FontName, FontSize, FontWeight
      * @type string
      */
-    header_font;
+    _header_font;
 
     /**
      * The color of the text in header
      * r, g, b
      * @type string
      */
-    header_color;
+    _header_color;
 
     /**
      * The background color of the text in header
      * r, g, b
      * @type string
      */
-    header_background_color;
+    _header_background_color;
 
     /**
      * 2D array of the cells value
      * @type [[number]]
      */
-    value_tab;
+    _value_tab;
 
     /**
      * Array of the cells index in value_tab
      * @type [[number, number]]
      */
-    index_tab;
+    _index_tab;
 
     /**
      * Coordinate of each cells
@@ -113,63 +113,63 @@ export class Table extends AnimatedObject {
      * Number of columns
      * @type number
      */
-    nb_columns;
+    _nb_columns;
 
     /**
      * Number of rows
      * @type number
      */
-    nb_row;
+    _nb_row;
 
     /**
      * padding_top
      * @type number
      */
-    padding_top;
+    _padding_top;
 
     /**
      * padding_right
      * @type number
      */
-    padding_right;
+    _padding_right;
 
     /**
      * padding_bottom
      * @type number
      */
-    padding_bottom;
+    _padding_bottom;
 
     /**
      * padding_left
      * @type number
      */
-    padding_left;
+    _padding_left;
 
     constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_rows, header_font, header_color, header_background_color) {
         super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
-        this.values = values; // row1col1 | row1col2 | row1col3 $ row2col1 | row2col1
-        this.line_height = line_height;
-        this.column_width = column_width;
-        this.font = font; // FontName, FontSize, FontWeight
-        this.color = color; // r, g, b
-        this.padding = padding;
-        this.halignment = halignment;
-        this.valignment = valignment;
-        this.has_header_columns = has_header_columns;
-        this.has_header_rows = has_header_rows;
-        this.header_font = header_font; // FontName, FontSize, FontWeight
-        this.header_color = header_color; // r, g, b
-        this.header_background_color = header_background_color; // r, g, b
+        this._values = values; // row1col1 | row1col2 | row1col3 $ row2col1 | row2col1
+        this._line_height = line_height;
+        this._column_width = column_width;
+        this._font = font; // FontName, FontSize, FontWeight
+        this._color = color; // r, g, b
+        this._padding = padding;
+        this._halignment = halignment;
+        this._valignment = valignment;
+        this._has_header_columns = has_header_columns;
+        this._has_header_rows = has_header_rows;
+        this._header_font = header_font; // FontName, FontSize, FontWeight
+        this._header_color = header_color; // r, g, b
+        this._header_background_color = header_background_color; // r, g, b
 
-        this.value_tab = [];
-        this.index_tab = [];
-        this.coord_cells = new Map();
-        this.nb_columns = 0;
-        this.nb_row = 0;
-        this.padding_top = 0;
-        this.padding_right = 0;
-        this.padding_bottom = 0;
-        this.padding_left = 0;
+        this._value_tab = [];
+        this._index_tab = [];
+        this._coord_cells = new Map();
+        this._nb_columns = 0;
+        this._nb_row = 0;
+        this._padding_top = 0;
+        this._padding_right = 0;
+        this._padding_bottom = 0;
+        this._padding_left = 0;
         this.fillValueTab();
         this.fillCoordCells();
         this.setPaddingValues();
@@ -177,54 +177,53 @@ export class Table extends AnimatedObject {
 
     draw (drawing) {
         super.draw(drawing);
-        drawing.rect(this.x, this.y, this.column_width * this.nb_columns, this.line_height * this.nb_row);
+        drawing.rect(this._x, this._y, this._column_width * this._nb_columns, this._line_height * this._nb_row);
 
-
-        if (this.has_header_columns) {
+        if (this._has_header_columns) {
             drawing.push();
-            drawing.fill(this.header_background_color[0], this.header_background_color[1], this.header_background_color[2], this.opacity * 255);
-            drawing.rect(this.x, this.y, this.column_width * this.nb_columns, this.line_height);
+            drawing.fill(this._header_background_color[0], this._header_background_color[1], this._header_background_color[2], this._opacity * 255);
+            drawing.rect(this._x, this._y, this._column_width * this._nb_columns, this._line_height);
             drawing.pop();
         }
 
-        if (this.has_header_rows) {
+        if (this._has_header_rows) {
             drawing.push();
-            drawing.fill(this.header_background_color[0], this.header_background_color[1], this.header_background_color[2], this.opacity * 255);
-            drawing.rect(this.x, this.y, this.column_width, this.line_height * this.nb_row);
+            drawing.fill(this._header_background_color[0], this._header_background_color[1], this._header_background_color[2], this._opacity * 255);
+            drawing.rect(this._x, this._y, this._column_width, this._line_height * this._nb_row);
             drawing.pop();
         }
 
-        for (let i = 1; i < this.nb_row; ++i) {
-            drawing.line(this.x, this.y + i * this.line_height, this.x + this.column_width * this.nb_columns, this.y + i * this.line_height);
+        for (let i = 1; i < this._nb_row; ++i) {
+            drawing.line(this._x, this._y + i * this._line_height, this._x + this._column_width * this._nb_columns, this._y + i * this._line_height);
         }
-        for (let i = 1; i < this.nb_columns; ++i) {
-            drawing.line(this.x + i * this.column_width, this.y, this.x + i * this.column_width, this.y + this.line_height * this.nb_row);
+        for (let i = 1; i < this._nb_columns; ++i) {
+            drawing.line(this._x + i * this._column_width, this._y, this._x + i * this._column_width, this._y + this._line_height * this._nb_row);
         }
 
-        drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
-        drawing.textFont(this.font[0]);
-        drawing.textSize(parseInt(this.font[1]));
-        drawing.textStyle(this.font[2] == "bold" ? drawing.BOLD : this.font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
+        drawing.fill(this._color[0], this._color[1], this._color[2], this._opacity * 255);
+        drawing.textFont(this._font[0]);
+        drawing.textSize(parseInt(this._font[1]));
+        drawing.textStyle(this._font[2] == "bold" ? drawing.BOLD : this._font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
         // Text alignment
-        drawing.textAlign(this.halignment == "right" ? drawing.RIGHT : this.halignment == "center" ? drawing.CENTER : drawing.LEFT,
-            this.valignment == "center" ? drawing.CENTER : this.valignment == "bottom" ? drawing.BOTTOM : this.valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
+        drawing.textAlign(this._halignment == "right" ? drawing.RIGHT : this._halignment == "center" ? drawing.CENTER : drawing.LEFT,
+            this._valignment == "center" ? drawing.CENTER : this._valignment == "bottom" ? drawing.BOTTOM : this._valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
         drawing.noStroke();
 
-        for (let i = 0; i < this.index_tab.length; i++) {
-            let index_value = this.index_tab[i]; // index_value[0] -> n° column ; index_value[1] -> n° row
-            let coords = this.coord_cells.get(index_value); // coords[0] -> x ; coords[1] -> y
-            let value = this.value_tab[index_value[0]][index_value[1]];
+        for (let i = 0; i < this._index_tab.length; i++) {
+            let index_value = this._index_tab[i]; // index_value[0] -> n° column ; index_value[1] -> n° row
+            let coords = this._coord_cells.get(index_value); // coords[0] -> x ; coords[1] -> y
+            let value = this._value_tab[index_value[0]][index_value[1]];
 
             if (value != null) {
-                if ((this.has_header_columns && index_value[0] == 0) || (this.has_header_rows && index_value[1] == 0)) {
+                if ((this._has_header_columns && index_value[0] == 0) || (this._has_header_rows && index_value[1] == 0)) {
                     drawing.push();
-                    if (this.header_color != null) {
-                        drawing.fill(this.header_color[0], this.header_color[1], this.header_color[2], this.opacity * 255);
+                    if (this._header_color != null) {
+                        drawing.fill(this._header_color[0], this._header_color[1], this._header_color[2], this._opacity * 255);
                     }
-                    if (this.header_font != null) {
-                        drawing.textFont(this.header_font[0]);
-                        drawing.textSize(parseInt(this.header_font[1]));
-                        drawing.textStyle(this.header_font[2] == "bold" ? drawing.BOLD : this.header_font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
+                    if (this._header_font != null) {
+                        drawing.textFont(this._header_font[0]);
+                        drawing.textSize(parseInt(this._header_font[1]));
+                        drawing.textStyle(this._header_font[2] == "bold" ? drawing.BOLD : this._header_font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
                     }
                     this.drawText(drawing, value, coords[0], coords[1]);
                     drawing.pop();
@@ -236,27 +235,27 @@ export class Table extends AnimatedObject {
     }
 
     drawText (drawing, text, x, y) {
-        switch (this.halignment) {
+        switch (this._halignment) {
             case "left":
-                x += this.padding_left;
+                x += this._padding_left;
                 break;
             case "right":
-                x -= this.padding_right;
+                x -= this._padding_right;
                 break;
         }
 
-        switch (this.valignment) {
+        switch (this._valignment) {
             case "top":
-                y += this.padding_top;
+                y += this._padding_top;
                 break;
             case "bottom":
-                y -= this.padding_bottom;
+                y -= this._padding_bottom;
         }
-        drawing.text(text, x, y, this.column_width, this.line_height);
+        drawing.text(text, x, y, this._column_width, this._line_height);
     }
 
     isClicked (x, y) {
-        return (x >= this.x) && (x <= this.nb_columns * this.column_width) && (y >= this.y) && (y <= this.nb_row * this.line_height);
+        return (x >= this._x) && (x <= this._nb_columns * this._column_width) && (y >= this._y) && (y <= this._nb_row * this._line_height);
     }
 
     toXml () {
@@ -290,187 +289,186 @@ export class Table extends AnimatedObject {
     }
 
     clone () {
-        return new Table(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.values, this.line_height, this.column_width, this.font, this.color, this.padding, this.halignment, this.valignment, this.has_header_columns, this.has_header_rows, this.header_font, this.header_color, this.header_background_color);
+        return new Table(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, this._border_size, this._state, this._layer, this._visible, this._opacity, this._angle, this._values, this._line_height, this._column_width, this._font, this._color, this._padding, this._halignment, this._valignment, this._has_header_columns, this._has_header_rows, this._header_font, this._header_color, this._header_background_color);
     }
 
     fillValueTab () {
-        let rows = this.values.split("$");
+        let rows = this._values.split("$");
         let columns;
-        this.value_tab = [];
+        this._value_tab = [];
         for (let row of rows) {
             columns = row.split("|");
             let rowTab = [];
             for (let column of columns) {
                 rowTab.push(column.trim().replaceAll("@", "\n"));
             }
-            this.value_tab.push(rowTab);
+            this._value_tab.push(rowTab);
 
-            if (columns.length > this.nb_columns) {
-                this.nb_columns = columns.length;
+            if (columns.length > this._nb_columns) {
+                this._nb_columns = columns.length;
             }
         }
-        this.nb_row = this.value_tab.length;
+        this._nb_row = this._value_tab.length;
     }
 
     fillCoordCells () {
-        this.index_tab = [];
-        for (let i = 0; i < this.nb_row; i++) {
+        this._index_tab = [];
+        for (let i = 0; i < this._nb_row; i++) {
 
-            let y_start = this.y + i * this.line_height;
-            let y_end = y_start + this.line_height;
+            let y_start = this._y + i * this._line_height;
+            let y_end = y_start + this._line_height;
 
-            for (let j = 0; j < this.nb_columns; j++) {
+            for (let j = 0; j < this._nb_columns; j++) {
 
-                let x_start = this.x + j * this.column_width;
-                let x_end = x_start + this.column_width;
+                let x_start = this._x + j * this._column_width;
+                let x_end = x_start + this._column_width;
                 let index_value = [i, j];
                 let cell = [x_start, y_start, x_end, y_end];
-                this.coord_cells.set(index_value, cell);
-                this.index_tab.push(index_value);
+                this._coord_cells.set(index_value, cell);
+                this._index_tab.push(index_value);
             }
         }
     }
 
     setPaddingValues () {
-        switch (this.padding.length) {
+        switch (this._padding.length) {
             case 1:
-                this.padding_top = this.padding[0];
-                this.padding_right = this.padding[0];
-                this.padding_bottom = this.padding[0];
-                this.padding_left = this.padding[0];
+                this._padding_top = this._padding[0];
+                this._padding_right = this._padding[0];
+                this._padding_bottom = this._padding[0];
+                this._padding_left = this._padding[0];
                 break;
             case 4:
-                this.padding_top = this.padding[0];
-                this.padding_right = this.padding[1];
-                this.padding_bottom = this.padding[2];
-                this.padding_left = this.padding[3];
+                this._padding_top = this._padding[0];
+                this._padding_right = this._padding[1];
+                this._padding_bottom = this._padding[2];
+                this._padding_left = this._padding[3];
                 break;
         }
     }
 
     set x (value) {
-        this.x = value;
+        this._x = value;
         this.fillCoordCells();
     }
 
     set y (value) {
-        this.y = y;
+        this._y = value;
         this.fillCoordCells();
     }
 
     get values () {
-        return this.values;
+        return this._values;
     }
-
     set values (value) {
-        this.values = value;
         this.fillValueTab();
         this.fillCoordCells();
+        this._values = value;
     }
 
     get color () {
-        return this.color;
+        return this._color;
     }
 
     set color (value) {
-        this.color = value;
+        this._color = value;
     }
 
     get line_height () {
-        return this.line_height;
+        return this._line_height;
     }
 
     set line_height (value) {
-        this.line_height = value;
+        this._line_height = value;
         this.fillCoordCells();
     }
 
     get column_width () {
-        return this.column_width;
+        return this._column_width;
     }
 
     set column_width (value) {
-        this.column_width = value;
+        this._column_width = value;
         this.fillCoordCells();
     }
 
     get font () {
-        return this.font;
+        return this._font;
     }
 
     set font (value) {
-        this.font = value;
+        this._font = value;
     }
 
     get padding () {
-        return this.padding;
+        return this._padding;
     }
 
     set padding (value) {
-        this.padding = value;
+        this._padding = value;
         this.setPaddingValues();
     }
 
     get halignment () {
-        return this.halignment;
+        return this._halignment;
     }
 
     set halignment (value) {
-        this.halignment = value;
+        this._halignment = value;
     }
 
     get valignment () {
-        return this.valignment;
+        return this._valignment;
     }
 
     set valignment (value) {
-        this.valignment = value;
+        this._valignment = value;
     }
 
     get valignment () {
-        return this.valignment;
+        return this._valignment;
     }
 
     set valignment (value) {
-        this.valignment = value;
+        this._valignment = value;
     }
 
     get has_header_columns () {
-        return this.has_header_columns;
+        return this._has_header_columns;
     }
 
     set has_header_columns (value) {
-        this.has_header_columns = value;
+        this._has_header_columns = value;
     }
 
     get has_header_rows () {
-        return this.has_header_rows;
+        return this._has_header_rows;
     }
 
     set has_header_rows (value) {
-        this.has_header_rows = value;
+        this._has_header_rows = value;
     }
 
     get header_background_color () {
-        return this.header_background_color;
+        return this._header_background_color;
     }
 
     set header_background_color (value) {
-        this.header_background_color = value;
+        this._header_background_color = value;
     }
 
     get header_color () {
-        return this.header_color;
+        return this._header_color;
     }
 
     set header_color (value) {
-        this.header_color = value;
+        this._header_color = value;
     }
 
     get header_font () {
-        return this.header_font;
+        return this._header_font;
     }
     set header_font (value) {
-        this.header_font = value;
+        this._header_font = value;
     }
 }

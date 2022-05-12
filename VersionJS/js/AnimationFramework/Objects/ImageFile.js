@@ -9,93 +9,96 @@ export class ImageFile extends AnimatedObject {
      * The image's width
      * @type number
      */
-    width;
+    _width;
+    get width () {
+        return this._width;
+    }
+    set width (value) {
+        this._width = value;
+    }
 
     /**
      * The images's height
      * @type number
      */
-    height;
+    _height;
+    get height () {
+        return this._height;
+    }
+    set height (value) {
+        this._height = value;
+    }
 
     /**
      * The image's path
      * @type string
      */
-    image_path;
+    _image_path;
+    get image_path () {
+        return this._image_path;
+    }
+    set image_path (value) {
+        this._image_path = value;
+    }
 
     /**
      * The image loaded by p5
      * @type P5.Image
      */
-    loaded_image;
+    _loaded_image;
+    get loaded_image () {
+        return this._loaded_image;
+    }
+    set loaded_image (value) {
+        this._loaded_image = value;
+    }
 
     constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, image_path) {
         super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
-        this.width = width;
-        this.height = height;
-        this.image_path = image_path;
-        this.loaded_image;
+        this._width = width;
+        this._height = height;
+        this._image_path = image_path;
+        this._loaded_image;
     }
 
     loadImage (drawing) {
-        this.loaded_image = drawing.loadImage(this.image_path);
+        this._loaded_image = drawing.loadImage(this._image_path);
     }
 
     draw (drawing) {
         super.draw(drawing);
-        if (this.width == undefined || this.height == undefined) {
-            drawing.image(this.loaded_image, this.x, this.y);
+        if (this._width == undefined || this._height == undefined) {
+            drawing.image(this._loaded_image, this.x, this.y);
         } else {
-            drawing.image(this.loaded_image, this.x, this.y, this.width, this.height);
+            drawing.image(this._loaded_image, this.x, this.y, this._width, this._height);
         }
     }
 
     isClicked (x, y) {
-        return (x >= this.x) && (x <= this.x + this.width) && (y >= this.y) && (y <= this.y + this.height);
+        return (x >= this.x) && (x <= this.x + this._width) && (y >= this.y) && (y <= this.y + this._height);
     }
 
     toXml () {
         let image = document.createElement("object_image");
-        image.innerHTML = this.id;
-        image.setAttribute("x", this.x);
-        image.setAttribute("y", this.y);
-        image.setAttribute("background_color", this.background_color); // r, g, b
-        image.setAttribute("background_transparent", this.background_transparent);
-        image.setAttribute("border_color", this.border_color); // r, g, b
-        image.setAttribute("border_transparency", this.border_transparency);
-        image.setAttribute("border_size", this.border_size);
-        image.setAttribute("layer", this.layer);
-        image.setAttribute("visible", this.visible);
-        image.setAttribute("opacity", this.opacity);
+        image.innerHTML = this._id;
+        image.setAttribute("x", this._x);
+        image.setAttribute("y", this._y);
+        image.setAttribute("background_color", this._background_color); // r, g, b
+        image.setAttribute("background_transparent", this._background_transparent);
+        image.setAttribute("border_color", this._border_color); // r, g, b
+        image.setAttribute("border_transparency", this._border_transparency);
+        image.setAttribute("border_size", this._border_size);
+        image.setAttribute("layer", this._layer);
+        image.setAttribute("visible", this._visible);
+        image.setAttribute("opacity", this._opacity);
         // image.setAttribute("angle", this.angle); // degrees
-        image.setAttribute("width", this.width);
-        image.setAttribute("height", this.height);
-        image.setAttribute("image", this.image_path);
+        image.setAttribute("width", this._width);
+        image.setAttribute("height", this._height);
+        image.setAttribute("image", this._image_path);
         return image;
     }
 
     clone () {
-        return new ImageFile(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.image_path);
-    }
-
-    get width () {
-        return this.width;
-    }
-    set width (value) {
-        this.width = value;
-    }
-
-    get height () {
-        return this.height;
-    }
-    set height (value) {
-        this.height = value;
-    }
-
-    get image_path () {
-        return this.image_path;
-    }
-    set image_path (value) {
-        this.image_path = value;
+        return new ImageFile(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, this._state, this._layer, this._visible, this._opacity, this._angle, this._width, this._height, this._image_path);
     }
 }

@@ -264,9 +264,9 @@ export class Animation {
                         let scale_y = parseInt(read_object.getAttribute("scale_y"));
                         let unit_x = read_object.getAttribute("unit_x");
                         let unit_y = read_object.getAttribute("unit_y");
-                        let max_X = parseInt(read_object.getAttribute("max_X"));
-                        let max_Y = parseInt(read_object.getAttribute("max_Y"));
-                        new_object = new Landmark(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, max_X, max_Y);
+                        let max_x = parseInt(read_object.getAttribute("max_x"));
+                        let max_y = parseInt(read_object.getAttribute("max_y"));
+                        new_object = new Landmark(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, max_x, max_y);
                         break;
                     case 'object_grid':
                         let lines = parseInt(read_object.getAttribute("lines"));
@@ -299,12 +299,12 @@ export class Animation {
                         let graph_scale_y = parseInt(read_object.getAttribute("scale_y"));
                         let graph_unit_x = read_object.getAttribute("unit_x");
                         let graph_unit_y = read_object.getAttribute("unit_y");
-                        let graph_max_X = parseInt(read_object.getAttribute("max_X"));
-                        let graph_max_Y = parseInt(read_object.getAttribute("max_Y"));
-                        let graph_min_X = parseInt(read_object.getAttribute("min_X"));
-                        let graph_min_Y = parseInt(read_object.getAttribute("min_Y"));
+                        let graph_max_x = parseInt(read_object.getAttribute("max_x"));
+                        let graph_max_y = parseInt(read_object.getAttribute("max_y"));
+                        let graph_min_x = parseInt(read_object.getAttribute("min_x"));
+                        let graph_min_y = parseInt(read_object.getAttribute("min_y"));
                         let draw_point = read_object.hasAttribute("draw_point") ? (read_object.getAttribute("draw_point") === "true" ? true : false) : false;
-                        new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y, draw_point, graph_min_X, graph_min_Y);
+                        new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_x, graph_max_y, draw_point, graph_min_x, graph_min_y);
                         break;
                     case 'object_copy':
                         let idcopy = read_object.getAttribute("idcopy");

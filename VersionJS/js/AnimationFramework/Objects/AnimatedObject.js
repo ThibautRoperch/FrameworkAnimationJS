@@ -12,76 +12,149 @@ export class AnimatedObject {
 
     /** Id of the object in the xml  
      * @type string */
-    id;
+    _id;
+    get id () {
+        return this._id;
+    }
+    set id (value) {
+        this._id = value;
+    }
 
     /** X coordinate 
      * @type number */
-    x;
+    _x;
+    get x () {
+        return this._x;
+    }
+    set x (value) {
+        this._x = value;
+    }
 
     /** Y coordinate
      * @type number */
-    y;
+    _y;
+    get y () {
+        return this._y;
+    }
+    set y (value) {
+        this._y = value;
+    }
 
     /** background_color
      * @type string*/
-    background_color;
+    _background_color;
+    get background_color () {
+        return this._background_color;
+    }
+    set background_color (value) {
+        this._background_color = value;
+    }
 
     /** background_transparent
      * @type bool */
-    background_transparent;
+    _background_transparent;
+    get background_transparent () {
+        return this._background_transparent;
+    }
+    set background_transparent (value) {
+        this._background_transparent = value;
+    }
 
     /** border_color
      * @type string */
-    border_color;
+    _border_color;
+    get border_color () {
+        return this._border_color;
+    }
+    set border_color (value) {
+        this._border_color = value;
+    }
 
     /** border_transparency
      * @type bool */
-    border_transparency;
+    _border_transparency;
+    get border_transparency () {
+        return this._border_transparency;
+    }
+    set border_transparency (value) {
+        this._border_transparency = value;
+    }
 
     /** border_size
      * @type number */
-    border_size;
+    _border_size;
+    get border_size () {
+        return this._border_size;
+    }
+    set border_size (value) {
+        this._border_size = value;
+    }
 
     /** state
      * @type string */
-    state;
+    _state;
+    get state () {
+        return this._state;
+    }
+    set state (value) {
+        this._state = value;
+    }
 
     /** layer which will be draw
      * @type number
      */
-    layer;
+    _layer;
+    get layer () {
+        return this._layer;
+    }
+    set layer (value) {
+        this._layer = value;
+    }
 
     /** Is it visible or not
      * @type bool
      */
-    visible;
+    _visible;
+    get visible () {
+        return this._visible;
+    }
+    set visible (value) {
+        this._visible = value;
+    }
 
     /**
      * opacity
      * @type number
      */
-    opacity;
+    _opacity;
+    get opacity () {
+        return this._opacity;
+    }
+    set opacity (value) {
+        this._opacity = value;
+    }
 
     /**
      * angle
      * @type [number]
      */
-    angle;
+    _angle;
+
 
     constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.background_color = background_color; // r, g, b
-        this.background_transparent = background_transparent;
-        this.border_color = border_color; // r, g, b
-        this.border_transparency = border_transparency;
-        this.border_size = border_size;
-        this.state = state;
-        this.layer = layer;
-        this.visible = visible;
-        this.opacity = opacity;
-        this.angle = angle; // degrees
+        this._id = id;
+        this._x = x;
+        this._y = y;
+        this._background_color = background_color; // r, g, b
+        this._background_transparent = background_transparent;
+        this._border_color = border_color; // r, g, b
+        this._border_transparency = border_transparency;
+        this._border_size = border_size;
+        this._state = state;
+        this._layer = layer;
+        this._visible = visible;
+        this._opacity = opacity;
+        this._angle = angle; // degrees
     }
 
     draw (drawing) {
@@ -94,107 +167,10 @@ export class AnimatedObject {
         drawing.strokeWeight(this.border_size);
     }
 
-    get id () {
-        return this.id;
-    }
-
-    set id (value) {
-        this.id = value;
-    }
-
-    get x () {
-        return this.x;
-    }
-
-    set x (value) {
-        this.x = value;
-    }
-
-    get y () {
-        return this.y;
-    }
-
-    set y (value) {
-        this.y = value;
-    }
-
-    get background_color () {
-        return this.background_color;
-    }
-
-    set background_color (value) {
-        this.background_color = value;
-    }
-
-    get background_transparent () {
-        return this.background_transparent;
-    }
-
-    set background_transparent (value) {
-        this.background_transparent = value;
-    }
-
-    get border_color () {
-        return this.border_color;
-    }
-
-    set border_color (value) {
-        this.border_color = value;
-    }
-
-    get border_transparency () {
-        return this.border_transparency;
-    }
-
-    set border_transparency (value) {
-        this.border_transparency = value;
-    }
-
-    get border_size () {
-        return this.border_size;
-    }
-
-    set border_size (value) {
-        this.border_size = value;
-    }
-
-    get state () {
-        return this.state;
-    }
-
-    set state (value) {
-        this.state = value;
-    }
-
-    get layer () {
-        return this.layer;
-    }
-
-    set layer (value) {
-        this.layer = value;
-    }
-
-    get visible () {
-        return this.visible;
-    }
-
-    set visible (value) {
-        this.visible = value;
-    }
-
-    get opacity () {
-        return this.opacity;
-    }
-
-    set opacity (value) {
-        this.opacity = value;
-    }
-
     get angle () {
-        return this.angle;
+        return this._angle;
     }
-
     set angle (value) {
-        this.angle = value;
+        this._angle = value;
     }
 }

@@ -8,105 +8,189 @@ export class Text extends AnimatedObject {
 	 * The text that will be show
 	 * @type string
 	 */
-	text;
+	_text;
+	get text () {
+		return this._text;
+	}
+	set text (value) {
+		this._text = value;
+	}
 
 	/**
 	 * The font caracteristic
 	 * [FontName, FontSize, FontWeight]
 	 * @type [string]
 	 */
-	font;
+	_font;
+	get font () {
+		return this._font;
+	}
+	set font (value) {
+		this._font = value;
+	}
 
 	/**
 	 * The text color
 	 * r, g, b
 	 * @type string
 	 */
-	color;
+	_color;
+	get color () {
+		return this._color;
+	}
+	set color (value) {
+		this._color = value;
+	}
 
 	/**
 	 * The padding in the xml
 	 * top, right, bottom, left or 1 value for all
 	 * @type string
 	 */
-	padding;
+	_padding;
+	get padding () {
+		return this._padding;
+	}
+	set padding (value) {
+		this._padding = value;
+	}
 
 	/**
 	 * Bounding rectangle's width
 	 * @type number
 	 */
-	width;
+	_width;
+	get width () {
+		return this._width;
+	}
+	set width (value) {
+		this._width = value;
+	}
 
 	/**
 	 * Bounding rectangle's height
 	 * @type number
 	 */
-	height;
+	_height;
+	get height () {
+		return this._height;
+	}
+	set height (value) {
+		this._height = value;
+	}
 
 	/**
 	 * The text horizontal alignement
 	 * @type string
 	 */
-	halignment;
+	_halignment;
+	get halignment () {
+		return this._halignment;
+	}
+	set halignment (value) {
+		this._halignment = value;
+	}
 
 	/**
 	 * The text vertical alignement
 	 * @type string
 	 */
-	valignment;
+	_valignment;
+	get valignment () {
+		return this._valignment;
+	}
+	set valignment (value) {
+		this._valignment = value;
+	}
 
 	/**
 	 * The text width + padding + Bounding rectangle width
 	 * @type number
 	 */
-	real_width;
+	_real_width;
+	get real_width () {
+		return this._real_width;
+	}
+	set real_width (value) {
+		this._real_width = value;
+	}
 
 	/**
 	 * The text height + padding + Bounding rectangle height
 	 * @type number
 	 */
-	real_height;
+	_real_height;
+	get real_height () {
+		return this._real_height;
+	}
+	set real_height (value) {
+		this._real_height = value;
+	}
 
 	/**
 	 * padding_top
 	 *	@type number
 	 */
-	padding_top;
+	_padding_top;
+	get padding_top () {
+		return this._padding_top;
+	}
+	set padding_top (value) {
+		this._padding_top = value;
+	}
 
 	/**
 	 * padding_right
 	 * @type number
 	 */
-	padding_right;
+	_padding_right;
+	get padding_right () {
+		return this._padding_right;
+	}
+	set padding_right (value) {
+		this._padding_right = value;
+	}
 
 	/**
 	 * padding_bottom
 	 * @type number
 	 */
-	padding_bottom;
+	_padding_bottom;
+	get padding_bottom () {
+		return this._padding_bottom;
+	}
+	set padding_bottom (value) {
+		this._padding_bottom = value;
+	}
 
 	/**
 	 * padding_left
 	 * @type number
 	 */
-	padding_left;
+	_padding_left;
+	get padding_left () {
+		return this._padding_left;
+	}
+	set padding_left (value) {
+		this._padding_left = value;
+	}
 
 	constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment) {
 		super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
-		this.text = text;
-		this.font = font; // FontName, FontSize, FontWeight
-		this.color = color; // r, g, b
-		this.padding = padding;
-		this.width = width;
-		this.height = height;
-		this.halignment = halignment;
-		this.valignment = valignment;
-		this.real_width;
-		this.real_height;
-		this.padding_top = 0;
-		this.padding_right = 0;
-		this.padding_bottom = 0;
-		this.padding_left = 0;
+		this._text = text;
+		this._font = font; // FontName, FontSize, FontWeight
+		this._color = color; // r, g, b
+		this._padding = padding;
+		this._width = width;
+		this._height = height;
+		this._halignment = halignment;
+		this._valignment = valignment;
+		this._real_width;
+		this._real_height;
+		this._padding_top = 0;
+		this._padding_right = 0;
+		this._padding_bottom = 0;
+		this._padding_left = 0;
 		this.setPaddingValues();
 	}
 
@@ -123,203 +207,123 @@ export class Text extends AnimatedObject {
 
 		drawing.push();
 
-		drawing.textFont(this.font[0]);
-		drawing.textSize(parseInt(this.font[1]));
-		drawing.textStyle(this.font[2] == "bold" ? drawing.BOLD : this.font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
+		drawing.textFont(this._font[0]);
+		drawing.textSize(parseInt(this._font[1]));
+		drawing.textStyle(this._font[2] == "bold" ? drawing.BOLD : this._font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
 		// Text alignment
 		drawing.textAlign(
-			this.halignment == "right" ? drawing.RIGHT :
-				this.halignment == "center" ? drawing.CENTER : drawing.LEFT,
-			this.valignment == "center" ? drawing.CENTER :
-				this.valignment == "bottom" ? drawing.BOTTOM : this.valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
+			this._halignment == "right" ? drawing.RIGHT :
+				this._halignment == "center" ? drawing.CENTER : drawing.LEFT,
+			this._valignment == "center" ? drawing.CENTER :
+				this._valignment == "bottom" ? drawing.BOTTOM : this._valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
 
 		// Compute real_width and real_height
 		this.computeRealDimension(drawing);
 
 
 		// Background
-		drawing.rect(this.x, this.y, this.real_width, this.real_height);
+		drawing.rect(this._x, this._y, this._real_width, this._real_height);
 
 		// Padding
-		let x = this.x;
-		let y = this.y;
-		switch (this.halignment) {
+		let x = this._x;
+		let y = this._y;
+		switch (this._halignment) {
 			case "left":
-				x += this.padding_left;
+				x += this._padding_left;
 				break;
 			case "right":
-				x -= this.padding_right;
+				x -= this._padding_right;
 				break;
 		}
-		switch (this.valignment) {
+		switch (this._valignment) {
 			case "top":
-				y += this.padding_top;
+				y += this._padding_top;
 				break;
 			case "bottom":
-				y -= this.padding_bottom;
+				y -= this._padding_bottom;
 		}
 
 		// Text's color, font, size and style
 		drawing.noStroke();
-		drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
+		drawing.fill(this._color[0], this._color[1], this._color[2], this._opacity * 255);
 
 		// Display
-		drawing.text(this.text.replaceAll('@', '\n'), x, y, this.real_width, this.real_height);
+		drawing.text(this._text.replaceAll('@', '\n'), x, y, this._real_width, this._real_height);
 		drawing.pop();
 	}
 
 	isClicked (x, y) {
-		return (x >= this.x) && (x <= this.x + this.real_width) && (y >= this.y) && (y <= this.y + this.real_height);
+		return (x >= this._x) && (x <= this._x + this._real_width) && (y >= this._y) && (y <= this._y + this._real_height);
 	}
 
 	toXml () {
 		let text = document.createElement("object_text");
-		text.innerHTML = this.id;
-		text.setAttribute("x", this.x);
-		text.setAttribute("y", this.y);
-		text.setAttribute("background_color", this.background_color); // r, g, b
-		text.setAttribute("background_transparent", this.background_transparent);
-		text.setAttribute("border_color", this.border_color); // r, g, b
-		text.setAttribute("border_transparency", this.border_transparency);
-		text.setAttribute("border_size", this.border_size);
-		text.setAttribute("layer", this.layer);
-		text.setAttribute("visible", this.visible);
-		text.setAttribute("opacity", this.opacity);
-		// text.setAttribute("angle", this.angle); // degrees
-		text.setAttribute("text", this.text);
-		text.setAttribute("font", this.font); // FontName, FontSize, FontWeight
-		text.setAttribute("color", this.color); // r, g, b
-		text.setAttribute("padding", this.padding);
-		if (this.width != undefined) text.setAttribute("width", this.width);
-		if (this.height != undefined) text.setAttribute("height", this.height);
-		text.setAttribute("halignment", this.halignment);
-		text.setAttribute("valignment", this.valignment);
+		text.innerHTML = this._id;
+		text.setAttribute("x", this._x);
+		text.setAttribute("y", this._y);
+		text.setAttribute("background_color", this._background_color); // r, g, b
+		text.setAttribute("background_transparent", this._background_transparent);
+		text.setAttribute("border_color", this._border_color); // r, g, b
+		text.setAttribute("border_transparency", this._border_transparency);
+		text.setAttribute("border_size", this._border_size);
+		text.setAttribute("layer", this._layer);
+		text.setAttribute("visible", this._visible);
+		text.setAttribute("opacity", this._opacity);
+		// text.setAttribute("angle", this._angle); // degrees
+		text.setAttribute("text", this._text);
+		text.setAttribute("font", this._font); // FontName, FontSize, FontWeight
+		text.setAttribute("color", this._color); // r, g, b
+		text.setAttribute("padding", this._padding);
+		if (this._width != undefined) text.setAttribute("width", this._width);
+		if (this._height != undefined) text.setAttribute("height", this._height);
+		text.setAttribute("halignment", this._halignment);
+		text.setAttribute("valignment", this._valignment);
 		return text;
 	}
 
 	clone () {
-		return new Text(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.padding, this.width, this.height, this.halignment, this.valignment);
+		return new Text(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, this._border_size, this._state, this._layer, this._visible, this._opacity, this._angle, this._text, this._font, this._color, this._padding, this._width, this._height, this._halignment, this._valignment);
 	}
 
 	computeRealDimension (drawing) {
-		if (this.text != "") {
-			switch (this.padding.length) {
+		if (this._text != "") {
+			switch (this._padding.length) {
 				// Same padding for all side
 				case 1:
-					this.real_width = (this.width == undefined) ? drawing.textWidth(this.text) + this.padding[0] * 2 : this.width;
-					this.real_height = (this.height == undefined) ? (parseInt(this.font[1]) + this.padding[0]) * ((this.text.match(/@/g) || []).length + 1) : this.height;
+					this._real_width = (this._width == undefined) ? drawing.textWidth(this._text) + this._padding[0] * 2 : this._width;
+					this._real_height = (this._height == undefined) ? (parseInt(this._font[1]) + this._padding[0]) * ((this._text.match(/@/g) || []).length + 1) : this._height;
 					break;
 				// Padding different for each side
 				case 4:
-					this.real_width = (this.width == undefined) ? drawing.textWidth(this.text) + this.padding[1] + this.padding[3] : this.width;
-					this.real_height = (this.height == undefined) ? (parseInt(this.font[1]) + this.padding[0] + this.padding[2]) * ((this.text.match(/@/g) || []).length + 1) : this.height;
+					this._real_width = (this._width == undefined) ? drawing.textWidth(this._text) + this._padding[1] + this._padding[3] : this._width;
+					this._real_height = (this._height == undefined) ? (parseInt(this._font[1]) + this._padding[0] + this._padding[2]) * ((this._text.match(/@/g) || []).length + 1) : this._height;
 					break;
 				// No padding
 				default:
-					this.real_width = (this.width == undefined) ? drawing.textWidth(this.text) + 5 : this.width;
-					this.real_height = (this.height == undefined) ? parseInt(this.font[1]) * ((this.text.match(/@/g) || []).length + 1) + 5 : this.height;
+					this._real_width = (this._width == undefined) ? drawing.textWidth(this._text) + 5 : this._width;
+					this._real_height = (this._height == undefined) ? parseInt(this._font[1]) * ((this._text.match(/@/g) || []).length + 1) + 5 : this._height;
 					break;
 			}
 		} else {
-			this.real_width = this.width;
-			this.real_height = this.height;
+			this._real_width = this._width;
+			this._real_height = this._height;
 		}
 	}
 
 	setPaddingValues () {
-		switch (this.padding.length) {
+		switch (this._padding.length) {
 			case 1:
-				this.padding_top = this.padding[0];
-				this.padding_right = this.padding[0];
-				this.padding_bottom = this.padding[0];
-				this.padding_left = this.padding[0];
+				this._padding_top = this._padding[0];
+				this._padding_right = this._padding[0];
+				this._padding_bottom = this._padding[0];
+				this._padding_left = this._padding[0];
 				break;
 			case 4:
-				this.padding_top = this.padding[0];
-				this.padding_right = this.padding[1];
-				this.padding_bottom = this.padding[2];
-				this.padding_left = this.padding[3];
+				this._padding_top = this._padding[0];
+				this._padding_right = this._padding[1];
+				this._padding_bottom = this._padding[2];
+				this._padding_left = this._padding[3];
 				break;
 		}
-	}
-
-	get color () {
-		return this.color;
-	}
-
-	set color (value) {
-		this.color = value;
-	}
-
-	get halignment () {
-		return this.halignment;
-	}
-
-	set halignment (value) {
-		this.halignment = value;
-	}
-
-	get valignment () {
-		return this.valignment;
-	}
-
-	set valignment (value) {
-		this.valignment = value;
-	}
-
-	get padding () {
-		return this.padding;
-	}
-
-	set padding (value) {
-		this.padding = value;
-	}
-
-	get font () {
-		return this.font;
-	}
-
-	set font (value) {
-		this.font = value;
-	}
-
-	get real_height () {
-		return this.real_height;
-	}
-
-	set real_height (value) {
-		this.real_height = value;
-	}
-
-	get real_width () {
-		return this.real_width;
-	}
-
-	set real_width (value) {
-		this.real_width = value;
-	}
-
-	get height () {
-		return this.height;
-	}
-
-	set height (value) {
-		this.height = value;
-	}
-
-	get width () {
-		return this.width;
-	}
-
-	set width (value) {
-		this.width = value;
-	}
-
-	get text () {
-		return this.text;
-	}
-
-	set text (value) {
-		this.text = value;
 	}
 }
