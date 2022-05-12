@@ -1411,7 +1411,6 @@ function export_xml() {
 	let objects_node = doc.createElement("objects");
 	for (let object of objects_array) {
 		if (removed_objects_identifier.indexOf(object.id) == -1) {
-			console.log(object.toXml());
 			objects_node.appendChild(object.toXml());
 		}
 	}
