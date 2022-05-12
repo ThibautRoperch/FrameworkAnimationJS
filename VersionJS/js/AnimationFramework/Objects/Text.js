@@ -179,7 +179,7 @@ export class Text extends AnimatedObject {
 		drawing.pop();
 	}
 	
-	isClicked(x, y) {
+	isClicked(x, y, drawing) {
 		return (x >= this.x) && (x <= this.x + this.real_width) && (y >= this.y) && (y <= this.y + this.real_height);
 	}
 	

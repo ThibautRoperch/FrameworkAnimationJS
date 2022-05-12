@@ -159,6 +159,21 @@
 			header_line_height="50"
 			halignment="center"
 			valignment="center">Table</object_table>
+
+		<object_arrow
+			x="100"
+			y="300"
+			visible="true"
+			background_transparent="false" 
+			background_color="210,180,222"
+			border_transparency="false"
+			border_color="255,0,0"
+			width_line="100"
+			height_line="30"
+			width_triangle="50"
+			height_triangle="50"
+			rotation="0">Arrow</object_arrow>
+
 	</objects>
 
 	<programs>

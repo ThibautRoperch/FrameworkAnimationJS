@@ -48,7 +48,7 @@ export class StartButton extends AnimatedObject {
         drawing.pop();
     }
 
-    isClicked(x, y) {
+    isClicked(x, y, drawing) {
 		return (x >= this.x - this.width / 2 + 2) && (x <= this.x + this.width / 2 + 2) && (y >= this.y - this.height / 2 + 2) && (y <= this.y + this.height / 2 + 2);
     }
 

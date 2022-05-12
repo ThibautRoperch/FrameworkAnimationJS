@@ -38,7 +38,7 @@ export class Polygon extends AnimatedObject {
         drawing.pop();
     }
     
-    isClicked(x, y) {
+    isClicked(x, y, drawing) {
         let min_x = this.coord_x[0];
         let max_x = this.coord_x[0];
         let min_y = this.coord_y[0];
