@@ -297,9 +297,9 @@ export class Table extends AnimatedObject {
     }
 
     clone () {
-        return new Table(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, 
-            this._border_size, this._state, this._layer, this._visible, this._opacity, this._angle, this._values, this._line_height, this._column_width, 
-            this._font, this._color, this._padding, this._halignment, this._valignment, this._has_header_columns, this._has_header_rows, this._header_font, 
+        return new Table(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency,
+            this._border_size, this._state, this._layer, this._visible, this._opacity, this._angle, this._values, this._line_height, this._column_width,
+            this._font, this._color, this._padding, this._halignment, this._valignment, this._has_header_columns, this._has_header_rows, this._header_font,
             this._header_color, this._header_background_color, this._header_column_width, this._header_line_height);
     }
 
