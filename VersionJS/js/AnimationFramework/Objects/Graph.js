@@ -110,7 +110,6 @@ export class Graph extends Landmark {
 		graph.setAttribute("max_x", this._max_x);
 		graph.setAttribute("max_y", this._max_y);
 		graph.setAttribute("draw_point", this._draw_point);
-		console.log(graph);
 		return graph;
 	}
 
