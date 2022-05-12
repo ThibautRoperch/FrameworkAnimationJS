@@ -15,11 +15,13 @@ export class Circle extends Ellipse {
         this._radius = radius;
     }
 
-    draw (drawing) {
+    draw(drawing) {
+        drawing.push();
         super.draw(drawing);
+        drawing.pop();
     }
-
-    isClicked (x, y) {
+  
+    isClicked(x, y, drawing) {
         // Compute the distance between the circle center and the mouse position
         let delta_x = this._x + this._radius - x;
         let delta_y = this._y + this._radius - y;

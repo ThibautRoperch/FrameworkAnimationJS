@@ -32,6 +32,7 @@ import { StartButton } from './Objects/StartButton.js';
 import { Table } from './Objects/Table.js';
 import { Text } from './Objects/Text.js';
 import { Graph } from './Objects/Graph.js';
+import { Arrow } from './Objects/Arrow.js';
 
 /**
  * Animation class
@@ -216,6 +217,7 @@ export class Animation {
                 let valignment;
                 let line_height;
                 let column_width;
+                let round;
 
                 // Retrieve the others specific attributes of the object and create the associated animated object
                 switch (type) {
@@ -228,7 +230,8 @@ export class Animation {
                         height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
                         valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-                        new_object = new Text(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
+                        round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0,0,0,0];
+                        new_object = new Text(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment, round);
                         break;
                     case 'object_image':
                         width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
@@ -240,7 +243,7 @@ export class Animation {
                     case 'object_rectangle':
                         width = parseInt(read_object.getAttribute("width"));
                         height = parseInt(read_object.getAttribute("height"));
-                        let round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0,0,0,0];
+                        round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0,0,0,0];
                         new_object = new Rectangle(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
                         break;
                     case 'object_polygon':
@@ -289,7 +292,9 @@ export class Animation {
                         valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
                         line_height = parseInt(read_object.getAttribute("line_height"));
                         column_width = parseInt(read_object.getAttribute("column_width"));
-                        new_object = new Table(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_lines, header_font, header_color, header_background_color);
+                        let header_line_height = read_object.getAttribute("header_line_height") ? parseInt(read_object.getAttribute("header_line_height")) : line_height;
+                        let header_column_width = read_object.getAttribute("header_column_width") ? parseInt(read_object.getAttribute("header_column_width")) : column_width;
+                        new_object = new Table(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_lines, header_font, header_color, header_background_color, header_column_width, header_line_height);
                         break;
                     case 'object_graph':
                         let algorithmic_function = read_object.getAttribute("function");
@@ -305,6 +310,14 @@ export class Animation {
                         let graph_min_y = parseInt(read_object.getAttribute("min_y"));
                         let draw_point = read_object.hasAttribute("draw_point") ? (read_object.getAttribute("draw_point") === "true" ? true : false) : false;
                         new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_x, graph_max_y, draw_point, graph_min_x, graph_min_y);
+                        break;
+                    case 'object_arrow':
+                        let width_line = parseInt(read_object.getAttribute("width_line"));
+                        let hegiht_line = parseInt(read_object.getAttribute("height_line"));
+                        let width_triangle = parseInt(read_object.getAttribute("width_triangle"));
+                        let height_triangle = parseInt(read_object.getAttribute("height_triangle"));
+                        let rotation = read_object.hasAttribute("rotation") ? parseInt(read_object.getAttribute("rotation")) : 0;
+                        new_object = new Arrow(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width_line, hegiht_line, width_triangle, height_triangle, rotation);
                         break;
                     case 'object_copy':
                         let idcopy = read_object.getAttribute("idcopy");
@@ -547,13 +560,13 @@ export class Animation {
         // Get the visible objects that are under the cursor position
         for (let object of this.objects.values()) {
             if (object.visible) {
-                if (object.isClicked(drawing.mouseX, drawing.mouseY)) {
+                if (object.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
                     new Trigger(null, object, WAITING_CLICK_STATE).execute();
                 }
             }
         }
 
-        if (this.start_button.present && this.start_button.isClicked(drawing.mouseX, drawing.mouseY)) {
+        if (this.start_button.present && this.start_button.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
             this.start_button.present = (false);
         }
     }

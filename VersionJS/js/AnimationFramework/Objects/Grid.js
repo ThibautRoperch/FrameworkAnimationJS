@@ -13,6 +13,7 @@ export class Grid extends AnimatedObject {
     get lines () {
         return this._lines;
     }
+  
     set lines (value) {
         this._lines = value;
     }
@@ -37,6 +38,7 @@ export class Grid extends AnimatedObject {
     get line_height () {
         return this._line_height;
     }
+  
     set line_height (value) {
         this._line_height = value;
     }
@@ -62,6 +64,7 @@ export class Grid extends AnimatedObject {
     }
 
     draw (drawing) {
+      drawing.push();
         super.draw(drawing);
         drawing.rect(this._x, this._y, this._column_width * this._columns, this._line_height * this._lines);
         for (let i = 1; i < this._lines; ++i) {
@@ -70,15 +73,16 @@ export class Grid extends AnimatedObject {
         for (let i = 1; i < this._columns; ++i) {
             drawing.line(this._x + i * this._column_width, this._y, this._x + i * this._column_width, this._y + this._line_height * this._lines);
         }
+        drawing.pop();
     }
 
-    isClicked (x, y) {
+    isClicked (x, y, drawing) {
         return (x >= this._x) && (x <= this._columns * this._column_width) && (y >= this._y) && (y <= this._lines * this._line_height);
     }
 
     toXml () {
         let grid = document.createElement("object_grid");
-        grid.innerHTML = this.id;
+        grid.innerHTML = this._id;
         grid.setAttribute("x", this._x);
         grid.setAttribute("y", this._y);
         grid.setAttribute("background_color", this._background_color); // r, g, b
@@ -98,6 +102,6 @@ export class Grid extends AnimatedObject {
     }
 
     clone () {
-        return new Grid(this.id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, this._state, this._layer, this._visible, this._opacity, this._angle, this._lines, this._columns, this._line_height, this._column_width);
+        return new Grid(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, this._state, this._layer, this._visible, this._opacity, this._angle, this._lines, this._columns, this._line_height, this._column_width);
     }
 }

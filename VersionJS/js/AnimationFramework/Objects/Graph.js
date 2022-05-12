@@ -28,9 +28,9 @@ export class Graph extends Landmark {
 	}
 
 	draw (drawing) {
+		drawing.push();
 		super.draw(drawing);
 
-		drawing.push();
 		// We move at the origin of graph
 		drawing.translate(this._x, this._y);
 
@@ -80,7 +80,7 @@ export class Graph extends Landmark {
 		drawing.pop();
 	}
 
-	isClicked (x, y) {
+	isClicked (x, y, drawing) {
 		return (x >= this._x) && (x <= this._x + this._width) && (y >= this._y) && (y <= this._y + this._height);
 	}
 

@@ -36,15 +36,17 @@ export class Polygon extends AnimatedObject {
     }
 
     draw (drawing) {
+      drawing.push();
         super.draw(drawing);
         drawing.beginShape();
         for (let i = 0; i < this._coord_x.length; ++i) {
             drawing.vertex(this._x + this._coord_x[i], this._y + this._coord_y[i]);
         }
         drawing.endShape(drawing.CLOSE);
+        drawing.pop();
     }
 
-    isClicked (x, y) {
+    isClicked (x, y, drawing) {
         let min_x = this._coord_x[0];
         let max_x = this._coord_x[0];
         let min_y = this._coord_y[0];

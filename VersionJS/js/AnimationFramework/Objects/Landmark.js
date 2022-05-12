@@ -111,6 +111,7 @@ export class Landmark extends AnimatedObject {
 	}
 
 	draw (drawing) {
+		drawing.push();
 		super.draw(drawing);
 
 		drawing.textFont("courrier");
@@ -123,6 +124,7 @@ export class Landmark extends AnimatedObject {
 		this.drawAxisArrow(drawing);
 		this.drawXUnit(drawing);
 		this.drawYUnit(drawing);
+		drawing.pop();
 	}
 
 	drawAxis (drawing) {
@@ -268,7 +270,7 @@ export class Landmark extends AnimatedObject {
 		drawing.pop();
 	}
 
-	isClicked (x, y) {
+	isClicked (x, y, drawing) {
 		return (x >= this._x) && (x <= this._x + this._width) && (y >= this._y) && (y <= this._y + this._height);
 	}
 

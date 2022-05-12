@@ -144,8 +144,12 @@ export class Table extends AnimatedObject {
      * @type number
      */
     _padding_left;
+  
+  _header_column_width;
+  
+  _header_line_height;
 
-    constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_rows, header_font, header_color, header_background_color) {
+    constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_rows, header_font, header_color, header_background_color, header_column_width, header_line_height) {
         super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this._values = values; // row1col1 | row1col2 | row1col3 $ row2col1 | row2col1
         this._line_height = line_height;
@@ -160,6 +164,8 @@ export class Table extends AnimatedObject {
         this._header_font = header_font; // FontName, FontSize, FontWeight
         this._header_color = header_color; // r, g, b
         this._header_background_color = header_background_color; // r, g, b
+        this._header_column_width = header_column_width;
+        this._header_line_height = header_line_height;
 
         this._value_tab = [];
         this._index_tab = [];

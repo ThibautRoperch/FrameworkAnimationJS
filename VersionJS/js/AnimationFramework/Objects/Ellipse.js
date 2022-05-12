@@ -58,14 +58,30 @@ export class Ellipse extends AnimatedObject {
         return new Ellipse(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, this._state, this._layer, this._visible, this._opacity, this._angle, this._width, this._height);
     }
 
+
+    draw(drawing) {
+        drawing.push();
+        super.draw(drawing);
+        drawing.ellipse(this._x + this._width / 2, this._y + this._height / 2, this._width, this._height);
+        drawing.pop();
+    }
+
+    isClicked(x, y, drawing) {
+        // Compute the distance between the ellipse center and the mouse position
+        let delta_x = this._x + (this._width / 2) - x;
+        let delta_y = this._y + (this._height / 2) - y;
+        let distance = Math.pow(delta_x / (this._width / 2), 2) + Math.pow(delta_y / (this._height / 2), 2);
+        return distance <= 1;
+    }
+
     get width () {
         return this._width;
     }
 
     set width (value) {
         this._width = value;
-    }
-
+    } 
+      
     get height () {
         return this._height;
     }

@@ -76,6 +76,7 @@ export class StartButton extends AnimatedObject {
     }
 
     draw (drawing) {
+      drawing.push();
         super.draw(drawing);
         // Background
         drawing.rect(this._x - this._width / 2 + 2, this._y - this._height / 2 + 2, this._width, this._height);
@@ -90,7 +91,7 @@ export class StartButton extends AnimatedObject {
         drawing.text(this._text.replaceAll("@", "\n"), this._x + 2, this._y + 4);
     }
 
-    isClicked (x, y) {
+    isClicked (x, y,drawing) {
         return (x >= this._x - this._width / 2 + 2) && (x <= this._x + this._width / 2 + 2) && (y >= this._y - this._height / 2 + 2) && (y <= this._y + this._height / 2 + 2);
     }
 }

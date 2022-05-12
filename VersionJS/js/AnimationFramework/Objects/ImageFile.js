@@ -66,16 +66,18 @@ export class ImageFile extends AnimatedObject {
     }
 
     draw (drawing) {
+      drawing.push();
         super.draw(drawing);
         if (this._width == undefined || this._height == undefined) {
-            drawing.image(this._loaded_image, this.x, this.y);
+            drawing.image(this._loaded_image, this._x, this._y);
         } else {
-            drawing.image(this._loaded_image, this.x, this.y, this._width, this._height);
+            drawing.image(this._loaded_image, this._x, this._y, this._width, this._height);
         }
+        drawing.pop();
     }
 
-    isClicked (x, y) {
-        return (x >= this.x) && (x <= this.x + this._width) && (y >= this.y) && (y <= this.y + this._height);
+    isClicked (x, y, drawing) {
+        return (x >= this._x) && (x <= this._x + this._width) && (y >= this._y) && (y <= this._y + this._height);
     }
 
     toXml () {

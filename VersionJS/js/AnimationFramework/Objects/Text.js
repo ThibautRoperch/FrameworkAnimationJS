@@ -174,8 +174,10 @@ export class Text extends AnimatedObject {
 	set padding_left (value) {
 		this._padding_left = value;
 	}
+    
+   _round;
 
-	constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment) {
+	constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment, round) {
 		super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
 		this._text = text;
 		this._font = font; // FontName, FontSize, FontWeight
@@ -183,6 +185,7 @@ export class Text extends AnimatedObject {
 		this._padding = padding;
 		this._width = width;
 		this._height = height;
+    this._round = round.lenght == 4 ? round : [round[0], round[0], round[0], round[0]]; // tl, tr, bl, br
 		this._halignment = halignment;
 		this._valignment = valignment;
 		this._real_width;
@@ -282,7 +285,7 @@ export class Text extends AnimatedObject {
 	}
 
 	clone () {
-		return new Text(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, this._border_size, this._state, this._layer, this._visible, this._opacity, this._angle, this._text, this._font, this._color, this._padding, this._width, this._height, this._halignment, this._valignment);
+		return new Text(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, this._border_size, this._state, this._layer, this._visible, this._opacity, this._angle, this._text, this._font, this._color, this._padding, this._width, this._height, this._halignment, this._valignment, this._round);
 	}
 
 	computeRealDimension (drawing) {
