@@ -171,7 +171,7 @@ export class Table extends AnimatedObject {
         this._index_tab = [];
         this._coord_cells = new Map();
         this._nb_columns = 0;
-        this._nb_row = 0;
+        this._nb_rows = 0;
         this._padding_top = 0;
         this._padding_right = 0;
         this._padding_bottom = 0;
@@ -183,27 +183,35 @@ export class Table extends AnimatedObject {
 
     draw (drawing) {
         super.draw(drawing);
-        drawing.rect(this._x, this._y, this._column_width * this._nb_columns, this._line_height * this._nb_row);
+        drawing.rect(this._x, this._y, this._header_column_width + this._column_width * (this._nb_columns - 1), this._header_line_height + this._line_height * (this._nb_rowss - 1));
 
         if (this._has_header_columns) {
             drawing.push();
             drawing.fill(this._header_background_color[0], this._header_background_color[1], this._header_background_color[2], this._opacity * 255);
-            drawing.rect(this._x, this._y, this._column_width * this._nb_columns, this._line_height);
+            drawing.rect(this._x, this._y, this._header_column_width + this._column_width * (this._nb_columns-1), this._header_line_height);
             drawing.pop();
         }
 
         if (this._has_header_rows) {
             drawing.push();
             drawing.fill(this._header_background_color[0], this._header_background_color[1], this._header_background_color[2], this._opacity * 255);
-            drawing.rect(this._x, this._y, this._column_width, this._line_height * this._nb_row);
+            drawing.rect(this._x, this._y, this._header_column_width, this._header_line_height + this._line_height * (this._nb_rows - 1));
             drawing.pop();
         }
 
-        for (let i = 1; i < this._nb_row; ++i) {
-            drawing.line(this._x, this._y + i * this._line_height, this._x + this._column_width * this._nb_columns, this._y + i * this._line_height);
+        for (let i = 1; i < this._nb_rows; ++i) {
+            if (this.has_header_rows && i == 1) {
+                drawing.line(this._x, this._y + this._header_line_height, this._x + this._header_column_width + this._column_width * (this._nb_columns-1), this._y + this._header_line_height);
+            } else {
+                drawing.line(this._x, this._y + this._header_line_height + (i - 1) * this._line_height, this._x + this._header_column_width + this._column_width * (this._nb_columns-1), this._y + this._header_line_height + (i - 1) * this._line_height);
+            }
         }
         for (let i = 1; i < this._nb_columns; ++i) {
-            drawing.line(this._x + i * this._column_width, this._y, this._x + i * this._column_width, this._y + this._line_height * this._nb_row);
+            if (this.has_header_columns && i == 1) {
+                drawing.line(this._x + i * this._header_column_width, this._y, this._x + i * this._header_column_width, this._y + this._header_line_height + this._line_height * (this._nb_rows-1));
+            } else {
+                drawing.line(this._x + this._header_column_width + (i - 1) * this._column_width, this._y, this._x + this._header_column_width + (i - 1) * this._column_width, this._y + this._header_line_height + this._line_height * (this._nb_rows - 1));
+            }
         }
 
         drawing.fill(this._color[0], this._color[1], this._color[2], this._opacity * 255);
@@ -231,16 +239,16 @@ export class Table extends AnimatedObject {
                         drawing.textSize(parseInt(this._header_font[1]));
                         drawing.textStyle(this._header_font[2] == "bold" ? drawing.BOLD : this._header_font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
                     }
-                    this.drawText(drawing, value, coords[0], coords[1]);
+                    this.drawText(drawing, value, coords[0], coords[1], coords[2]- coords[0], coords[3] - coords[1]);
                     drawing.pop();
                 } else {
-                    this.drawText(drawing, value, coords[0], coords[1]);
+                    this.drawText(drawing, value, coords[0], coords[1], coords[2]- coords[0], coords[3] - coords[1]);
                 }
             }
         }
     }
 
-    drawText (drawing, text, x, y) {
+    drawText (drawing, text, x, y, width, height) {
         switch (this._halignment) {
             case "left":
                 x += this._padding_left;
@@ -257,11 +265,11 @@ export class Table extends AnimatedObject {
             case "bottom":
                 y -= this._padding_bottom;
         }
-        drawing.text(text, x, y, this._column_width, this._line_height);
+        drawing.text(text, x, y, width, height);
     }
 
     isClicked (x, y) {
-        return (x >= this._x) && (x <= this._nb_columns * this._column_width) && (y >= this._y) && (y <= this._nb_row * this._line_height);
+        return (x >= this._x) && (x <= this._nb_columns * this._column_width) && (y >= this._y) && (y <= this._nb_rows * this._line_height);
     }
 
     toXml () {
@@ -319,20 +327,20 @@ export class Table extends AnimatedObject {
                 this._nb_columns = columns.length;
             }
         }
-        this._nb_row = this._value_tab.length;
+        this._nb_rows = this._value_tab.length;
     }
 
     fillCoordCells () {
         this._index_tab = [];
-        for (let i = 0; i < this._nb_row; i++) {
+        for (let i = 0; i < this._nb_rows; i++) {
 
-            let y_start = this._y + i * this._line_height;
-            let y_end = y_start + this._line_height;
+            let y_start = (this._has_header_columns && i == 0) ? this._y : this._y + this._header_line_height + (i - 1) * this._line_height;
+            let y_end = (this._has_header_columns && i == 0) ? y_start + this._header_line_height : y_start + this._line_height;
 
             for (let j = 0; j < this._nb_columns; j++) {
 
-                let x_start = this._x + j * this._column_width;
-                let x_end = x_start + this._column_width;
+                let x_start = (this._has_header_rows && j == 0) ? this._x : this._x + this._header_column_width + (j - 1) * this._column_width;
+                let x_end = (this._has_header_rows && j == 0) ? x_start + this._header_column_width : x_start + this._column_width;
                 let index_value = [i, j];
                 let cell = [x_start, y_start, x_end, y_end];
                 this._coord_cells.set(index_value, cell);
