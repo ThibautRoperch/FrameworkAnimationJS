@@ -13,12 +13,12 @@ export class Sleep extends Instruction {
 	}
 
 	execute() {
-		this.object.setState(SLEEPING_STATE);
+		this.object.state = (SLEEPING_STATE);
 		
 		sleep(this);
 		function sleep(instruction) {
 			setTimeout(function() {
-				instruction.object.setState(DEFAULT_STATE);
+				instruction.object.state = (DEFAULT_STATE);
 			}, instruction.value /** 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5))*/);
 		}
 	}

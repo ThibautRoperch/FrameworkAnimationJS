@@ -19,8 +19,8 @@ export class Trigger extends Instruction {
 		} else if (this.target.getState() == DEFAULT_STATE) {
 			this.target.setState(this.value);
 		}*/
-		if (this.target.getState() == this.value) {
-			this.target.setState(DEFAULT_STATE);
+		if (this.target.state == this.value) {
+			this.target.state = (DEFAULT_STATE);
 		}
 	}
 	

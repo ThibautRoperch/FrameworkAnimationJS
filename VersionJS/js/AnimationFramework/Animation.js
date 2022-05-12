@@ -157,10 +157,10 @@ export class Animation {
         if (init_node) {
             let start_node = init_node.getElementsByTagName("start_button")[0];
             if (start_node) {
-                if (start_node.hasAttribute("text")) this.start_button.setText(start_node.hasAttribute("text"));
-                if (start_node.hasAttribute("x")) this.start_button.setX(start_node.getAttribute("x"));
-                if (start_node.hasAttribute("y")) this.start_button.setY(start_node.getAttribute("y"));
-                if (start_node.hasAttribute("present") && start_node.getAttribute("present") == "false") this.start_button.setPresent(false);
+                if (start_node.hasAttribute("text")) this.start_button.text = start_node.getAttribute("text");
+                if (start_node.hasAttribute("x")) this.start_button.x = start_node.getAttribute("x");
+                if (start_node.hasAttribute("y")) this.start_button.y = start_node.getAttribute("y");
+                if (start_node.hasAttribute("present") && start_node.getAttribute("present") == "false") this.start_button.present = false;
             }
         }
 
@@ -225,7 +225,7 @@ export class Animation {
                         let text = read_object.getAttribute("text");
                         font = read_object.getAttribute("font").split(",");
                         color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
-                        padding = read_object.getAttribute("padding") ? parseIntArray(read_object.getAttribute("padding")) : [];
+                        padding = read_object.hasAttribute("padding") ? parseIntArray(read_object.getAttribute("padding")) : [];
                         width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                         height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
@@ -267,9 +267,9 @@ export class Animation {
                         let scale_y = parseInt(read_object.getAttribute("scale_y"));
                         let unit_x = read_object.getAttribute("unit_x");
                         let unit_y = read_object.getAttribute("unit_y");
-                        let max_X = parseInt(read_object.getAttribute("max_X"));
-                        let max_Y = parseInt(read_object.getAttribute("max_Y"));
-                        new_object = new Landmark(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, max_X, max_Y);
+                        let max_x = parseInt(read_object.getAttribute("max_x"));
+                        let max_y = parseInt(read_object.getAttribute("max_y"));
+                        new_object = new Landmark(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, height, width, scale_x, scale_y, unit_x, unit_y, max_x, max_y);
                         break;
                     case 'object_grid':
                         let lines = parseInt(read_object.getAttribute("lines"));
@@ -304,12 +304,12 @@ export class Animation {
                         let graph_scale_y = parseInt(read_object.getAttribute("scale_y"));
                         let graph_unit_x = read_object.getAttribute("unit_x");
                         let graph_unit_y = read_object.getAttribute("unit_y");
-                        let graph_max_X = parseInt(read_object.getAttribute("max_X"));
-                        let graph_max_Y = parseInt(read_object.getAttribute("max_Y"));
-                        let graph_min_X = parseInt(read_object.getAttribute("min_X"));
-                        let graph_min_Y = parseInt(read_object.getAttribute("min_Y"));
+                        let graph_max_x = parseInt(read_object.getAttribute("max_x"));
+                        let graph_max_y = parseInt(read_object.getAttribute("max_y"));
+                        let graph_min_x = parseInt(read_object.getAttribute("min_x"));
+                        let graph_min_y = parseInt(read_object.getAttribute("min_y"));
                         let draw_point = read_object.hasAttribute("draw_point") ? (read_object.getAttribute("draw_point") === "true" ? true : false) : false;
-                        new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y, draw_point, graph_min_X, graph_min_Y);
+                        new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_x, graph_max_y, draw_point, graph_min_x, graph_min_y);
                         break;
                     case 'object_arrow':
                         let width_line = parseInt(read_object.getAttribute("width_line"));
@@ -326,7 +326,7 @@ export class Animation {
                             console.log("[Animation.js] L'objet '" + idcopy + "' à copier n'existe pas (le définir avec l'attribut idcopy)");
                         } else {
                             new_object = initial_object.clone();
-                            new_object.setId(id);
+                            new_object.id = id;
                             for (let i = 1; i < read_object.attributes.length; ++i) { // i = 1 in order to avoid the first attribute (which is "object")
                                 new SetProperty(null, new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
                             }
@@ -482,7 +482,7 @@ export class Animation {
         let continue_execution = true; // this program will by default continue
 
         // Execute the instruction if the state of the object is the default one
-        if (!this.start_button.getPresent() && this.objects.get(object_id).getState() == DEFAULT_STATE) {
+        if (!this.start_button.present && this.objects.get(object_id).state == DEFAULT_STATE) {
             let instruction_type = instruction.constructor.name;
             if (instruction_type == "Label") {
                 labels.set(instruction.getValue(), instruction_number + 1);
@@ -529,6 +529,8 @@ export class Animation {
         this.canvas = drawing.createCanvas(this.width, this.height);
         this.canvas.parent(this.parent);
 
+        //drawing.frameRate(1);
+
         // Remove the loading message
         this.parent.removeChild(this.parent.getElementsByClassName("loading")[0]);
     }
@@ -540,13 +542,13 @@ export class Animation {
         }
 
         // Display the start button if it has to
-        if (this.start_button.getPresent()) {
+        if (this.start_button.present) {
             this.start_button.draw(drawing);
         } else {
             // Display objects of each layer, if they're set as visible
             for (let layer of this.layers) {
                 for (let object of this.objects.values()) {
-                    if (object.getLayer() == layer && object.getVisible()) {
+                    if (object.layer == layer && object.visible) {
                         object.draw(drawing);
                     }
                 }
@@ -557,15 +559,15 @@ export class Animation {
     canvasClicked (drawing) {
         // Get the visible objects that are under the cursor position
         for (let object of this.objects.values()) {
-            if (object.getVisible()) {
+            if (object.visible) {
                 if (object.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
                     new Trigger(null, object, WAITING_CLICK_STATE).execute();
                 }
             }
         }
 
-        if (this.start_button.getPresent() && this.start_button.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
-            this.start_button.setPresent(false);
+        if (this.start_button.present && this.start_button.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
+            this.start_button.present = (false);
         }
     }
 

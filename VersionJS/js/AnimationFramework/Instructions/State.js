@@ -10,7 +10,7 @@ export class State extends Instruction {
 	}
 	
 	execute() {
-		this.object.setState(this.value);
+		this.object.state = (this.value);
 	}
 
 }

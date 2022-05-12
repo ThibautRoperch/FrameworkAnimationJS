@@ -10,14 +10,14 @@ export class Up extends SimpleMovement {
 	}
 
 	execute() {
-		this.object.setState(MOVING_STATE);
+		this.object.state = (MOVING_STATE);
 		let original_distance = this.distance;
 
 		up(this);
 		function up(instruction) {
 			if (instruction.distance > 0) {
 				
-				instruction.object.setY(instruction.object.getY() - instruction.interval);
+				instruction.object.y = (instruction.object.y - instruction.interval);
 				instruction.distance -= instruction.interval;
 				
 				setTimeout(function() {
@@ -25,7 +25,7 @@ export class Up extends SimpleMovement {
 				}, instruction.loop_delay);
 			} else {
 				instruction.distance = original_distance;
-				instruction.object.setState(DEFAULT_STATE);
+				instruction.object.state = (DEFAULT_STATE);
 			}
 		}
 

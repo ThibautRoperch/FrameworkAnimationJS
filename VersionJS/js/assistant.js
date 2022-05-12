@@ -95,7 +95,7 @@ function import_xml(input_id) {
 				let fake_button = document.createElement("button");
 				fake_button.innerHTML = obj.constructor.name;
 				let new_obj_id = new_object(fake_button.innerHTML);
-				document.getElementById(new_obj_id).getElementsByTagName("id")[0].innerHTML = "<b>Identifier :</b> " + obj.getId();
+				document.getElementById(new_obj_id).getElementsByTagName("id")[0].innerHTML = "<b>Identifier :</b> " + obj.id;
 				for (let prop of obj.toXml().attributes) {
 					// Change the value of this property
 					new SetProperty(null, objects_array[new_obj_id], prop.name, prop.value).execute();
@@ -163,7 +163,7 @@ function new_object(object_type) {
 
 	let pen = document.createElement("div");
 	pen.className = "warning";
-	pen.onclick = function () { ask_popup("Change object identifier", "Enter below the new id for the object <b>" + obj_id + "</b>.<input id='new_id' type='text' value='" + objects_array[obj_id].getId() + "' required/>", change_id, [obj_id, "new_id"]); };
+	pen.onclick = function () { ask_popup("Change object identifier", "Enter below the new id for the object <b>" + obj_id + "</b>.<input id='new_id' type='text' value='" + objects_array[obj_id].id  + "' required/>", change_id, [obj_id, "new_id"]); };
 	pen.innerHTML = "&#128397;";
 	header.appendChild(pen);
 
@@ -774,33 +774,33 @@ function new_object(object_type) {
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			// max_X
-			let max_X = width;
+			// max_x
+			let max_x = width;
 			property = document.createElement("property");
-			property.className = "max_X";
+			property.className = "max_x";
 			label = document.createElement("label");
-			label.innerHTML = "max_X";
+			label.innerHTML = "max_x";
 			property.appendChild(label);
 			input = document.createElement("input");
 			input.type = "text";
-			input.value = max_X;
+			input.value = max_x;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			// max_Y
-			let max_Y = height;
+			// max_y
+			let max_y = height;
 			property = document.createElement("property");
-			property.className = "max_Y";
+			property.className = "max_y";
 			label = document.createElement("label");
-			label.innerHTML = "max_Y";
+			label.innerHTML = "max_y";
 			property.appendChild(label);
 			input = document.createElement("input");
 			input.type = "text";
-			input.value = max_Y;
+			input.value = max_y;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Landmark(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y, max_X, max_Y);
+			object = new Landmark(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, scale_x, scale_y, unit_x, unit_y, max_x, max_y);
 			break;
 		case "Grid":
 			// lines
@@ -1166,29 +1166,29 @@ function new_object(object_type) {
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			// max_X
-			let graph_max_X = width;
+			// max_x
+			let graph_max_x = 10;
 			property = document.createElement("property");
-			property.className = "max_X";
+			property.className = "max_x";
 			label = document.createElement("label");
-			label.innerHTML = "max_X";
+			label.innerHTML = "max_x";
 			property.appendChild(label);
 			input = document.createElement("input");
 			input.type = "text";
-			input.value = graph_max_X;
+			input.value = graph_max_x;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			// max_Y
-			let graph_max_Y = height;
+			// max_y
+			let graph_max_y = 10;
 			property = document.createElement("property");
-			property.className = "max_Y";
+			property.className = "max_y";
 			label = document.createElement("label");
-			label.innerHTML = "max_Y";
+			label.innerHTML = "max_y";
 			property.appendChild(label);
 			input = document.createElement("input");
 			input.type = "text";
-			input.value = graph_max_Y;
+			input.value = graph_max_y;
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
@@ -1212,7 +1212,34 @@ function new_object(object_type) {
 			input.appendChild(option);
 			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Graph(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y, false);
+			// min_x
+			let graph_min_x = 0;
+			property = document.createElement("property");
+			property.className = "min_x";
+			label = document.createElement("label");
+			label.innerHTML = "min_x";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = graph_min_x;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// min_y
+			let graph_min_y = 0;
+			property = document.createElement("property");
+			property.className = "min_y";
+			label = document.createElement("label");
+			label.innerHTML = "min_y";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.value = graph_min_y;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			property = document.createElement("property");
+			object = new Graph(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_x, graph_max_y, false, graph_min_x, graph_min_y);
 			break;
 	}
 	objects_array[obj_id] = object;
@@ -1229,6 +1256,7 @@ function new_object(object_type) {
  * @param {Element} property_dom 
  */
 function change_property(object_id, property_dom) {
+	console.log(`${property_dom.parentNode.className}, ${property_dom.value}`);
 	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
 	//objects_array[object_id].draw();
 	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
@@ -1247,7 +1275,7 @@ function change_id(args) {
 	if (new_id === "") return; // stop here if the input is empty (won't change the id and will keep the popup active)
 
 	// Change in the objects array (JS)
-	objects_array[object_id].setId(new_id);
+	objects_array[object_id].id = (new_id);
 
 	// Change in the objects list (HTML)
 	document.getElementById(object_id).getElementsByTagName("id")[0].innerHTML = "<b>Identifier :</b> " + new_id;
@@ -1303,22 +1331,22 @@ function customize(object_id) {
 	let object = objects_array[object_id];
 
 	// Set the object as visible
-	object.setVisible(true);
+	object.visible = (true);
 	document.getElementById(object_id).getElementsByClassName("visible")[0].getElementsByTagName("option")[0].selected = "selected";
 
 	// Set the background object as not transparent
-	object.setBackground_transparent(false);
+	object.background_transparent = (false);
 	document.getElementById(object_id).getElementsByClassName("background_transparent")[0].getElementsByTagName("option")[1].selected = "selected";
 
 	// Set the border object as not transparent
-	object.setBorder_transparency(false);
+	object.border_transparency = (false);
 	document.getElementById(object_id).getElementsByClassName("border_transparency")[0].getElementsByTagName("option")[1].selected = "selected";
 
 	// Give random colors for the background and border object
-	object.setBackground_color(rand_rgb());
-	document.getElementById(object_id).getElementsByClassName("background_color")[0].getElementsByTagName("input")[0].value = object.getBackground_color();
-	object.setBorder_color(rand_rgb());
-	document.getElementById(object_id).getElementsByClassName("border_color")[0].getElementsByTagName("input")[0].value = object.getBorder_color();
+	object.background_color = (rand_rgb());
+	document.getElementById(object_id).getElementsByClassName("background_color")[0].getElementsByTagName("input")[0].value = object.background_color;
+	object.border_color = (rand_rgb());
+	document.getElementById(object_id).getElementsByClassName("border_color")[0].getElementsByTagName("input")[0].value = object.border_color;
 
 	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
 }
@@ -1338,10 +1366,10 @@ function remove(object_id) {
 	}*/
 
 	// Add the object to the deleted objects array (JS)
-	removed_objects_identifier.push(objects_array[object_id].getId()); // l'identifiant réel de l'objet plutot que son indice dans le tableau, car renommage possible de l'id
+	removed_objects_identifier.push(objects_array[object_id].id); // l'identifiant réel de l'objet plutot que son indice dans le tableau, car renommage possible de l'id
 
 	// Set the object as not visible from the objects array (JS)
-	objects_array[object_id].setVisible(false);
+	objects_array[object_id].visible = (false);
 
 	// Remove from the objects list (HTML)
 	if (document.getElementById(object_id)) {
@@ -1382,8 +1410,7 @@ function export_xml() {
 	// objects node
 	let objects_node = doc.createElement("objects");
 	for (let object of objects_array) {
-		if (removed_objects_identifier.indexOf(object.getId()) == -1) {
-			console.log(object.toXml());
+		if (removed_objects_identifier.indexOf(object.id) == -1) {
 			objects_node.appendChild(object.toXml());
 		}
 	}
@@ -1481,8 +1508,6 @@ function draw_animation() {
 				drawing_dom.removeChild(drawing_dom.firstChild);
 			}
 
-			draw_ref.frameRate(1); // 60 fps
-
 			canvas = draw_ref.createCanvas(parseInt(document.getElementById("width").value), parseInt(document.getElementById("height").value));
 			canvas.parent(drawing_dom);
 
@@ -1505,7 +1530,7 @@ function draw_animation() {
 			// Display objects of each layer, if they're set as visible
 			for (let layer of layers) {
 				for (let object of objects_array) {
-					if (object.getLayer() == layer && object.getVisible()) {
+					if (object.layer == layer && object.visible) {
 						object.draw(draw_ref);
 					}
 				}
@@ -1533,7 +1558,7 @@ function draw_animation() {
 			let new_layers = new Set();
 			// Retrieve all layers in a set
 			for (let object of objects_array) {
-				new_layers.add(object.getLayer());
+				new_layers.add(object.layer);
 			}
 
 			// Convert and sort the layers set

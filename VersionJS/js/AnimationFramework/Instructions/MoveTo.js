@@ -17,37 +17,37 @@ export class MoveTo extends Instruction {
 	}
 
 	execute() {
-		this.object.setState(MOVING_STATE);
+		this.object.state = (MOVING_STATE);
 
 		move(this);
 
 		function move(instruction) {
-			if ((instruction.object.getY() === instruction.y) && (instruction.object.getX() === instruction.x)) {
-				instruction.object.setState(DEFAULT_STATE);
+			if ((instruction.object.y === instruction.y) && (instruction.object.x === instruction.x)) {
+				instruction.object.state = (DEFAULT_STATE);
 				return;
 			}
 
-			if (instruction.object.getY() > instruction.y) {
-				instruction.object.setY(instruction.object.getY() - instruction.interval_y);
+			if (instruction.object.y > instruction.y) {
+				instruction.object.y = (instruction.object.y - instruction.interval_y);
 			}
-			else if (instruction.object.getY() < instruction.y) {
-				instruction.object.setY(instruction.object.getY() + instruction.interval_y);
-			}
-
-			if (instruction.object.getX() > instruction.x) {
-				instruction.object.setX(instruction.object.getX() - instruction.interval_x);
-			}
-			else if (instruction.object.getX() < instruction.x) {
-				instruction.object.setX(instruction.object.getX() + instruction.interval_x);
+			else if (instruction.object.y < instruction.y) {
+				instruction.object.y = (instruction.object.y + instruction.interval_y);
 			}
 
-			if ((instruction.object.getY() !== instruction.y) || (instruction.object.getX() !== instruction.x)) {
+			if (instruction.object.x > instruction.x) {
+				instruction.object.x = (instruction.object.x - instruction.interval_x);
+			}
+			else if (instruction.object.x < instruction.x) {
+				instruction.object.x = (instruction.object.x + instruction.interval_x);
+			}
+
+			if ((instruction.object.y !== instruction.y) || (instruction.object.x !== instruction.x)) {
 				setTimeout(function () {
 					move(instruction);
 				}, instruction.delay * 20 * (parseFloat(instruction.loop_delay) / (LOOP_DELAY_MIN * 0.5 + LOOP_DELAY_MAX * 0.5)));
 			}
 			else {
-				instruction.object.setState(DEFAULT_STATE);
+				instruction.object.state = (DEFAULT_STATE);
 			}
 		}
 	}
