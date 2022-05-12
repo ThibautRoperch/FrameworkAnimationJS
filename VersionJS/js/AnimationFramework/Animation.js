@@ -131,12 +131,9 @@ export class Animation {
     }
 
     isRgbColor(strColor) {
-        try {
-            strColor.includes(",");
-            return true;
-        } catch (_) {
-            return false;
-        }
+        let result;
+        strColor.includes(",") ? result = true : result = false;
+        return result;
     }
 
     readXmlFile(contents) {
@@ -502,8 +499,8 @@ export class Animation {
     }
 
     preload (drawing) {
-        // Load the backround image 
-        if (this.background != "" && !this.isValidColor(this.background) && !this.isHexColor(this.background) && !this.isRgbColor(this.background)) {
+        // Load the backround image
+        if (this.background != "" && !this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim()) && !this.isRgbColor(this.background)) {
             this.background = drawing.loadImage(this.background);
         }
 

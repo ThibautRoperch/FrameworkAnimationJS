@@ -1447,12 +1447,9 @@ function isHexColor(strColor) {
 }
 
 function isRgbColor(strColor) {
-	try {
-		strColor.includes(",");
-		return true;
-	} catch (_) {
-		return false;
-	}
+	let result;
+    strColor.includes(",") ? result = true : result = false;
+    return result;
 }
 
 
