@@ -12,8 +12,8 @@ export class Text extends AnimatedObject {
 
 	/**
 	 * The font caracteristic
-	 * FontName, FontSize, FontWeight
-	 * @type string
+	 * [FontName, FontSize, FontWeight]
+	 * @type [string]
 	 */
 	font;
 
@@ -107,7 +107,6 @@ export class Text extends AnimatedObject {
 		this.padding_right = 0;
 		this.padding_bottom = 0;
 		this.padding_left = 0;
-		this.computeRealDimension();
 		this.setPaddingValues();
 	}
 
@@ -117,26 +116,30 @@ export class Text extends AnimatedObject {
 
 	setText (text) {
 		this.text = text;
-		this.computeRealDimension();
 	}
 
 	draw (drawing) {
 		super.draw(drawing);
+
 		drawing.push();
-		// Background
-		drawing.rect(this.x, this.y, this.real_width, this.real_height);
-		// Text's color, font, size and style
-		drawing.noStroke();
-		drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
+
 		drawing.textFont(this.font[0]);
 		drawing.textSize(parseInt(this.font[1]));
 		drawing.textStyle(this.font[2] == "bold" ? drawing.BOLD : this.font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
 		// Text alignment
 		drawing.textAlign(
-			this.halignment == "right" ? drawing.RIGHT : 
-			this.halignment == "center" ? drawing.CENTER : drawing.LEFT,
-			this.valignment == "center" ? drawing.CENTER : 
-			this.valignment == "bottom" ? drawing.BOTTOM : this.valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
+			this.halignment == "right" ? drawing.RIGHT :
+				this.halignment == "center" ? drawing.CENTER : drawing.LEFT,
+			this.valignment == "center" ? drawing.CENTER :
+				this.valignment == "bottom" ? drawing.BOTTOM : this.valignment == "baseline" ? drawing.BASELINE : drawing.TOP);
+
+		// Compute real_width and real_height
+		this.computeRealDimension(drawing);
+
+
+		// Background
+		drawing.rect(this.x, this.y, this.real_width, this.real_height);
+
 		// Padding
 		let x = this.x;
 		let y = this.y;
@@ -155,8 +158,13 @@ export class Text extends AnimatedObject {
 			case "bottom":
 				y -= this.padding_bottom;
 		}
+
+		// Text's color, font, size and style
+		drawing.noStroke();
+		drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
+
 		// Display
-		drawing.text(this.text.replaceAll('@', '\n'), x, y, this.real_width + 20, this.real_height + 20);
+		drawing.text(this.text.replaceAll('@', '\n'), x, y, this.real_width, this.real_height);
 		drawing.pop();
 	}
 
@@ -193,20 +201,23 @@ export class Text extends AnimatedObject {
 		return new Text(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.padding, this.width, this.height, this.halignment, this.valignment);
 	}
 
-	computeRealDimension () {
+	computeRealDimension (drawing) {
 		if (this.text != "") {
 			switch (this.padding.length) {
+				// Same padding for all side
 				case 1:
-					this.real_width = (this.width == undefined) ? this.text.length * (parseInt(this.font[1]) / 2 + 1) + this.padding[0] * 2 : this.width;
+					this.real_width = (this.width == undefined) ? drawing.textWidth(this.text) + this.padding[0] * 2 : this.width;
 					this.real_height = (this.height == undefined) ? (parseInt(this.font[1]) + this.padding[0]) * ((this.text.match(/@/g) || []).length + 1) : this.height;
 					break;
+				// Padding different for each side
 				case 4:
-					this.real_width = (this.width == undefined) ? this.text.length * (parseInt(this.font[1]) / 2 + 1) + this.padding[1] + this.padding[3] : this.width;
+					this.real_width = (this.width == undefined) ? drawing.textWidth(this.text) + this.padding[1] + this.padding[3] : this.width;
 					this.real_height = (this.height == undefined) ? (parseInt(this.font[1]) + this.padding[0] + this.padding[2]) * ((this.text.match(/@/g) || []).length + 1) : this.height;
 					break;
+				// No padding
 				default:
-					this.real_width = (this.width == undefined) ? this.text.length * (parseInt(this.font[1]) / 2 + 1) : this.width;
-					this.real_height = (this.height == undefined) ? parseInt(this.font[1]) * ((this.text.match(/@/g) || []).length + 1) : this.height;
+					this.real_width = (this.width == undefined) ? drawing.textWidth(this.text) + 5 : this.width;
+					this.real_height = (this.height == undefined) ? parseInt(this.font[1]) * ((this.text.match(/@/g) || []).length + 1) + 5 : this.height;
 					break;
 			}
 		} else {
@@ -262,7 +273,6 @@ export class Text extends AnimatedObject {
 
 	set padding (value) {
 		this.padding = value;
-		this.computeRealDimension();
 	}
 
 	get font () {
@@ -295,7 +305,6 @@ export class Text extends AnimatedObject {
 
 	set height (value) {
 		this.height = value;
-		this.computeRealDimension();
 	}
 
 	get width () {
@@ -304,7 +313,6 @@ export class Text extends AnimatedObject {
 
 	set width (value) {
 		this.width = value;
-		this.computeRealDimension();
 	}
 
 	get text () {
@@ -313,6 +321,5 @@ export class Text extends AnimatedObject {
 
 	set text (value) {
 		this.text = value;
-		this.computeRealDimension();
 	}
 }
