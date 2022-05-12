@@ -5,7 +5,7 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Text extends AnimatedObject {
 
-	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment) {
+	constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment, round) {
         super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
 		this.text = text;
 		this.font = font; // FontName, FontSize, FontWeight
@@ -15,6 +15,7 @@ export class Text extends AnimatedObject {
 		this.height = height;
 		this.halignment = halignment;
 		this.valignment = valignment;
+		this.round = round.lenght == 4 ? round : [round[0], round[0], round[0], round[0]]; // tl, tr, bl, br
 		this.real_width;
 		this.real_height;
 		this.padding_top = 0;
@@ -57,6 +58,10 @@ export class Text extends AnimatedObject {
 		return this.valignment;
 	}
 
+	getRound() {
+        return this.round;
+    }
+
 	setText(text) {
 		this.text = text;
 		this.computeRealDimension();
@@ -92,6 +97,10 @@ export class Text extends AnimatedObject {
 	setValignment(valignment) {
 		this.valignment = valignment;
 	}
+
+	setRound(round) {
+        this.round = round;
+    }
 
 	computeRealDimension() {
 		if (this.text != "") {
@@ -137,7 +146,7 @@ export class Text extends AnimatedObject {
 		super.draw(drawing);
 		
 		// Background
-		drawing.rect(this.x, this.y, this.real_width, this.real_height);
+		drawing.rect(this.x, this.y, this.real_width, this.real_height, this.round[0], this.round[1], this.round[2], this.round[3]);
 		// Text's color, font, size and style
 		drawing.noStroke();
 		drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
@@ -196,11 +205,12 @@ export class Text extends AnimatedObject {
 		if (this.height != undefined) text.setAttribute("height", this.height);
 		text.setAttribute("halignment",this.halignment); 
 		text.setAttribute("valignment", this.valignment);
+		text.setAttribute("round", this.round);
         return text;
     }
 
     clone() {
-		return new Text(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency,this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.padding, this.width, this.height, this.halignment, this.valignment);
+		return new Text(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency,this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.text, this.font, this.color, this.padding, this.width, this.height, this.halignment, this.valignment, this.round);
 	}
 	
 }

@@ -10,7 +10,7 @@
 	</background>
 	
 	<objects>
-		<object_text text="test avec gros padding" font="Arial,18,bold" x="800" y="60" visible="true" padding="30,40,30,50" background_transparent="false">a_copier</object_text>
+		<object_text text="test avec gros padding" round="10,20,30,40" font="Arial,18,bold" x="800" y="60" visible="true" padding="30,40,30,50" background_transparent="false">a_copier</object_text>
 		<object_copy idcopy="a_copier" text="copie du texte avec gros padding" y="150">jl_copy</object_copy>
 
 		<object_grid 
@@ -50,9 +50,12 @@
 			border_color="255,0,0" 
 			font="Arial,14" 
 			x="800" 
-			y="700" 
+			y="700"
+			round="50"
 			visible="true" 
 			background_transparent="false" 
+			halignment="center"
+			valignment="center"
 			width="170">tests deplacement et clics</object_text>
 
 		<object_graph 

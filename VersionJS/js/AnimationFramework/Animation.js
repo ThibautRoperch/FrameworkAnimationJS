@@ -216,6 +216,7 @@ export class Animation {
                 let valignment;
                 let line_height;
                 let column_width;
+                let round;
 
                 // Retrieve the others specific attributes of the object and create the associated animated object
                 switch (type) {
@@ -228,7 +229,8 @@ export class Animation {
                         height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
                         valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-                        new_object = new Text(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment);
+                        round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0,0,0,0];
+                        new_object = new Text(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment, round);
                         break;
                     case 'object_image':
                         width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
@@ -240,7 +242,7 @@ export class Animation {
                     case 'object_rectangle':
                         width = parseInt(read_object.getAttribute("width"));
                         height = parseInt(read_object.getAttribute("height"));
-                        let round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0,0,0,0];
+                        round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0,0,0,0];
                         new_object = new Rectangle(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
                         break;
                     case 'object_polygon':
