@@ -58,17 +58,6 @@ export class Arrow extends AnimatedObject {
     draw(drawing) {
         drawing.push();
         super.draw(drawing);
-        if(!this.border_transparency){
-            drawing.stroke(this.border_color[0], this.border_color[1], this.border_color[2], this.border_color[3], this.opacity * 255);
-        }
-        else {
-            drawing.noStroke();
-        }
-        if(!this.background_transparent){
-            drawing.fill(this.background_color[0], this.background_color[1], this.background_color[2], this.opacity * 255);
-        }
-        else
-            drawing.noFill();
         drawing.translate(this.x, this.y);
         drawing.rotate(this.rotation);
         drawing.rect(0, 0, this.width_line, this.height_line);
