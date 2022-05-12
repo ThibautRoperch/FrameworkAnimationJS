@@ -144,10 +144,10 @@ export class Table extends AnimatedObject {
      * @type number
      */
     _padding_left;
-  
-  _header_column_width;
-  
-  _header_line_height;
+
+    _header_column_width;
+
+    _header_line_height;
 
     constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_rows, header_font, header_color, header_background_color, header_column_width, header_line_height) {
         super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
@@ -291,11 +291,16 @@ export class Table extends AnimatedObject {
         table.setAttribute("header_background_color", this.header_background_color);
         table.setAttribute("header_color", this.header_color);
         table.setAttribute("header_font", this.header_font);
+        table.setAttribute("header_line_height", this._header_line_height);
+        table.setAttribute("header_column_width", this._header_column_width);
         return table;
     }
 
     clone () {
-        return new Table(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, this._border_size, this._state, this._layer, this._visible, this._opacity, this._angle, this._values, this._line_height, this._column_width, this._font, this._color, this._padding, this._halignment, this._valignment, this._has_header_columns, this._has_header_rows, this._header_font, this._header_color, this._header_background_color);
+        return new Table(this._id, this._x, this._y, this._background_color, this._background_transparent, this._border_color, this._border_transparency, 
+            this._border_size, this._state, this._layer, this._visible, this._opacity, this._angle, this._values, this._line_height, this._column_width, 
+            this._font, this._color, this._padding, this._halignment, this._valignment, this._has_header_columns, this._has_header_rows, this._header_font, 
+            this._header_color, this._header_background_color, this._header_column_width, this._header_line_height);
     }
 
     fillValueTab () {
@@ -476,5 +481,19 @@ export class Table extends AnimatedObject {
     }
     set header_font (value) {
         this._header_font = value;
+    }
+
+    get _header_column_width () {
+        return this._header_column_width;
+    }
+    set _header_column_width (value) {
+        this._header_column_width = value;
+    }
+
+    get header_line_height () {
+        return this._header_line_height;
+    }
+    set header_line_height (value) {
+        this._header_line_height = value;
     }
 }
