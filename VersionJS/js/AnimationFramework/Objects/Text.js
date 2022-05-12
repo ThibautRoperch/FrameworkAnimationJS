@@ -174,8 +174,8 @@ export class Text extends AnimatedObject {
 	set padding_left (value) {
 		this._padding_left = value;
 	}
-    
-   _round;
+
+	_round;
 	get round () {
 		return this._round;
 	}
@@ -191,7 +191,7 @@ export class Text extends AnimatedObject {
 		this._padding = padding;
 		this._width = width;
 		this._height = height;
-    this._round = round.lenght == 4 ? round : [round[0], round[0], round[0], round[0]]; // tl, tr, bl, br
+		this._round = round.lenght == 4 ? round : [round[0], round[0], round[0], round[0]]; // tl, tr, bl, br
 		this._halignment = halignment;
 		this._valignment = valignment;
 		this._real_width;
