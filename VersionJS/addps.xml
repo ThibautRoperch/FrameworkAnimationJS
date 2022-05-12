@@ -151,14 +151,16 @@
 				values="dest ||||">ex_dest</object_table>
 
 		<object_text
-				x="181"
-				y="268"
+				x="140"
+				y="250"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="1"
 				opacity="1"
 				text="4"
@@ -168,14 +170,16 @@
 				valignment="center">ex_src1_value3</object_text>
 
 		<object_text
-				x="271"
-				y="268"
+				x="230"
+				y="250"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="1"
 				opacity="1"
 				text="3"
@@ -185,14 +189,16 @@
 				valignment="center">ex_src1_value2</object_text>
 
 		<object_text
-				x="361"
-				y="268"
+				x="320"
+				y="250"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="1"
 				opacity="1"
 				text="2"
@@ -202,14 +208,16 @@
 				valignment="center">ex_src1_value1</object_text>
 
 		<object_text
-				x="451"
-				y="268"
+				x="410"
+				y="250"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="1"
 				opacity="1"
 				text="1"
@@ -219,14 +227,16 @@
 				valignment="center">ex_src1_value0</object_text>
 
 		<object_text
-				x="181"
-				y="368"
+				x="140"
+				y="350"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="1"
 				opacity="1"
 				text="8"
@@ -236,14 +246,16 @@
 				valignment="center">ex_src2_value3</object_text>
 
 		<object_text
-				x="271"
-				y="368"
+				x="230"
+				y="350"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="1"
 				opacity="1"
 				text="7"
@@ -253,14 +265,16 @@
 				valignment="center">ex_src2_value2</object_text>
 
 		<object_text
-				x="361"
-				y="368"
+				x="320"
+				y="350"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="1"
 				opacity="1"
 				text="6"
@@ -270,14 +284,16 @@
 				valignment="center">ex_src2_value1</object_text>
 
 		<object_text
-				x="451"
-				y="368"
+				x="410"
+				y="350"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="1"
 				opacity="1"
 				text="5"
@@ -287,14 +303,16 @@
 				valignment="center">ex_src2_value0</object_text>
 
 		<object_text
-				x="181"
-				y="469"
+				x="140"
+				y="450"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="0"
 				opacity="1"
 				text="+"
@@ -304,14 +322,16 @@
 				valignment="center">ex_dest_value3</object_text>
 
 		<object_text
-				x="271"
-				y="469"
+				x="230"
+				y="450"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="0"
 				opacity="1"
 				text="+"
@@ -321,14 +341,16 @@
 				valignment="center">ex_dest_value2</object_text>
 
 		<object_text
-				x="361"
-				y="469"
+				x="320"
+				y="450"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="0"
 				opacity="1"
 				text="+"
@@ -338,14 +360,16 @@
 				valignment="center">ex_dest_value1</object_text>
 
 		<object_text
-				x="451"
-				y="469"
+				x="410"
+				y="450"
 				background_color="0,0,0"
 				background_transparent="1"
 				border_color="0,0,0"
 				border_transparency="1"
 				border_size="1"
 				layer="0"
+				width="90"
+				height="50"
 				visible="0"
 				opacity="1"
 				text="+"
@@ -361,83 +385,83 @@
 		<program assigned_to="ex_src1_value0">
             <sleep value="1000" />
             <trigger object="ex_src2_value0" value="start" />
-			<moveto x="431" y="469" dx="1" dy="1" />
+			<moveto x="390" y="450" dx="1" dy="1" />
             <trigger object="ex_dest_value0" value="appear" />
             <trigger object="ex_src1_value1" value="start" />
             <sleep value="1000" />
             <trigger object="ex_src2_value0" value="continue" />
-			<moveto x="451" y="469" dx="1" dy="1" />
+			<moveto x="410" y="450" dx="1" dy="1" />
             <trigger object="ex_dest_value0" value="display_result" />
 			<visible value="false" />
 		</program>
 
         <program assigned_to="ex_src2_value0">
 			<wait value="start" />
-			<moveto x="471" y="469" dx="1" dy="1" />
+			<moveto x="430" y="450" dx="1" dy="1" />
 			<wait value="continue" />
-			<moveto x="451" y="469" dx="1" dy="1" />
+			<moveto x="410" y="450" dx="1" dy="1" />
 			<visible value="false" />
 		</program>
 
         <program assigned_to="ex_src1_value1">
 			<wait value="start" />
 			<trigger object="ex_src2_value1" value="start" />
-			<moveto x="341" y="469" dx="1" dy="1" />
+			<moveto x="300" y="450" dx="1" dy="1" />
 			<trigger object="ex_dest_value1" value="appear" />
             <trigger object="ex_src1_value2" value="start" />
 			<sleep value="1000" />
 			<trigger object="ex_src2_value1" value="continue" />
-			<moveto x="361" y="469" dx="1" dy="1" />
+			<moveto x="320" y="450" dx="1" dy="1" />
 			<trigger object="ex_dest_value1" value="display_result" />
 			<visible value="false" />
 		</program>
 
         <program assigned_to="ex_src2_value1">
 			<wait value="start" />
-			<moveto x="381" y="469" dx="1" dy="1" />
+			<moveto x="340" y="450" dx="1" dy="1" />
 			<wait value="continue" />
-			<moveto x="361" y="469" dx="1" dy="1" />
+			<moveto x="320" y="450" dx="1" dy="1" />
 			<visible value="false" />
 		</program>
 
 		<program assigned_to="ex_src1_value2">
 			<wait value="start" />
 			<trigger object="ex_src2_value2" value="start" />
-			<moveto x="251" y="469" dx="1" dy="1" />
+			<moveto x="210" y="450" dx="1" dy="1" />
             <trigger object="ex_dest_value2" value="appear" />
             <trigger object="ex_src1_value3" value="start" />
 			<sleep value="1000" />
             <trigger object="ex_src2_value2" value="continue" />
-			<moveto x="271" y="469" dx="1" dy="1" />
+			<moveto x="230" y="450" dx="1" dy="1" />
             <trigger object="ex_dest_value2" value="display_result" />
 			<visible value="false" />
 		</program>
 
         <program assigned_to="ex_src2_value2">
 			<wait value="start" />
-			<moveto x="291" y="469" dx="1" dy="1" />
+			<moveto x="250" y="450" dx="1" dy="1" />
 			<wait value="continue" />
-			<moveto x="271" y="469" dx="1" dy="1"  />
+			<moveto x="230" y="450" dx="1" dy="1"  />
 			<visible value="false" />
 		</program>
 
 		<program assigned_to="ex_src1_value3">
 			<wait value="start" />
             <trigger object="ex_src2_value3" value="start" />
-			<moveto x="161" y="469" dx="1" dy="1" />
+			<moveto x="120" y="450" dx="1" dy="1" />
 			<trigger object="ex_dest_value3" value="appear" />
 			<sleep value="1000" />
 			<trigger object="ex_src2_value3" value="continue" />
-			<moveto x="181" y="469" dx="1" dy="1" />
+			<moveto x="140" y="450" dx="1" dy="1" />
 			<trigger object="ex_dest_value3" value="display_result" />
 			<visible value="false" />
 		</program>
 
 		<program assigned_to="ex_src2_value3">
 			<wait value="start" />
-			<moveto x="201" y="469" dx="1" dy="1" />
+			<moveto x="160" y="450" dx="1" dy="1" />
 			<wait value="continue" />
-			<moveto x="181" y="469" dx="1" dy="1" />
+			<moveto x="140" y="450" dx="1" dy="1" />
 			<visible value="false" />
 		</program>
 
