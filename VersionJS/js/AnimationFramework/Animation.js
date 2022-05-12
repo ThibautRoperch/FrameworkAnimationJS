@@ -32,6 +32,7 @@ import { StartButton } from './Objects/StartButton.js';
 import { Table } from './Objects/Table.js';
 import { Text } from './Objects/Text.js';
 import { Graph } from './Objects/Graph.js';
+import { Arrow } from './Objects/Arrow.js';
 
 /**
  * Animation class
@@ -305,6 +306,14 @@ export class Animation {
                         let graph_min_Y = parseInt(read_object.getAttribute("min_Y"));
                         let draw_point = read_object.hasAttribute("draw_point") ? (read_object.getAttribute("draw_point") === "true" ? true : false) : false;
                         new_object = new Graph(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, graph_height, graph_width, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_X, graph_max_Y, draw_point, graph_min_X, graph_min_Y);
+                        break;
+                    case 'object_arrow':
+                        let width_line = parseInt(read_object.getAttribute("width_line"));
+                        let hegiht_line = parseInt(read_object.getAttribute("height_line"));
+                        let width_triangle = parseInt(read_object.getAttribute("width_triangle"));
+                        let height_triangle = parseInt(read_object.getAttribute("height_triangle"));
+                        let rotation = read_object.hasAttribute("rotation") ? parseInt(read_object.getAttribute("rotation")) : 0;
+                        new_object = new Arrow(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width_line, hegiht_line, width_triangle, height_triangle, rotation);
                         break;
                     case 'object_copy':
                         let idcopy = read_object.getAttribute("idcopy");

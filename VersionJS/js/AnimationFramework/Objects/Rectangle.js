@@ -66,7 +66,7 @@ export class Rectangle extends AnimatedObject {
     }
     
     clone() {
-        return new Text(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.round);
+        return new Rectangle(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.state, this.layer, this.visible, this.opacity, this.angle, this.width, this.height, this.round);
     }
 
 }
