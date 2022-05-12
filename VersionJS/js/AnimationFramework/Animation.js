@@ -156,10 +156,10 @@ export class Animation {
         if (init_node) {
             let start_node = init_node.getElementsByTagName("start_button")[0];
             if (start_node) {
-                if (start_node.hasAttribute("text")) this.start_button.setText(start_node.getAttribute("text"));
-                if (start_node.hasAttribute("x")) this.start_button.setX(start_node.getAttribute("x"));
-                if (start_node.hasAttribute("y")) this.start_button.setY(start_node.getAttribute("y"));
-                if (start_node.hasAttribute("present") && start_node.getAttribute("present") == "false") this.start_button.setPresent(false);
+                if (start_node.hasAttribute("text")) this.start_button.text = start_node.getAttribute("text");
+                if (start_node.hasAttribute("x")) this.start_button.x = start_node.getAttribute("x");
+                if (start_node.hasAttribute("y")) this.start_button.y = start_node.getAttribute("y");
+                if (start_node.hasAttribute("present") && start_node.getAttribute("present") == "false") this.start_button.present = false;
             }
         }
 
@@ -223,7 +223,7 @@ export class Animation {
                         let text = read_object.getAttribute("text");
                         font = read_object.getAttribute("font").split(",");
                         color = read_object.hasAttribute("color") ? parseIntArray(read_object.getAttribute("color")) : [255, 255, 255];
-                        padding = read_object.getAttribute("padding") ? parseIntArray(read_object.getAttribute("padding")) : [];
+                        padding = read_object.hasAttribute("padding") ? parseIntArray(read_object.getAttribute("padding")) : [];
                         width = read_object.hasAttribute("width") ? parseInt(read_object.getAttribute("width")) : undefined;
                         height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
@@ -313,7 +313,7 @@ export class Animation {
                             console.log("[Animation.js] L'objet '" + idcopy + "' à copier n'existe pas (le définir avec l'attribut idcopy)");
                         } else {
                             new_object = initial_object.clone();
-                            new_object.setId(id);
+                            new_object.id = id;
                             for (let i = 1; i < read_object.attributes.length; ++i) { // i = 1 in order to avoid the first attribute (which is "object")
                                 new SetProperty(null, new_object, read_object.attributes[i].name, read_object.attributes[i].value).execute();
                             }
@@ -515,6 +515,8 @@ export class Animation {
     setup (drawing) {
         this.canvas = drawing.createCanvas(this.width, this.height);
         this.canvas.parent(this.parent);
+
+        //drawing.frameRate(1);
 
         // Remove the loading message
         this.parent.removeChild(this.parent.getElementsByClassName("loading")[0]);
