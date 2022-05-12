@@ -119,7 +119,7 @@ export class Table extends AnimatedObject {
      * Number of rows
      * @type number
      */
-    _nb_row;
+    _nb_rows;
 
     /**
      * padding_top
@@ -183,7 +183,7 @@ export class Table extends AnimatedObject {
 
     draw (drawing) {
         super.draw(drawing);
-        drawing.rect(this._x, this._y, this._header_column_width + this._column_width * (this._nb_columns - 1), this._header_line_height + this._line_height * (this._nb_rowss - 1));
+        drawing.rect(this._x, this._y, this._header_column_width + this._column_width * (this._nb_columns - 1), this._header_line_height + this._line_height * (this._nb_rows - 1));
 
         if (this._has_header_columns) {
             drawing.push();
@@ -200,14 +200,14 @@ export class Table extends AnimatedObject {
         }
 
         for (let i = 1; i < this._nb_rows; ++i) {
-            if (this.has_header_rows && i == 1) {
+            if (this._has_header_rows && i == 1) {
                 drawing.line(this._x, this._y + this._header_line_height, this._x + this._header_column_width + this._column_width * (this._nb_columns-1), this._y + this._header_line_height);
             } else {
                 drawing.line(this._x, this._y + this._header_line_height + (i - 1) * this._line_height, this._x + this._header_column_width + this._column_width * (this._nb_columns-1), this._y + this._header_line_height + (i - 1) * this._line_height);
             }
         }
         for (let i = 1; i < this._nb_columns; ++i) {
-            if (this.has_header_columns && i == 1) {
+            if (this._has_header_columns && i == 1) {
                 drawing.line(this._x + i * this._header_column_width, this._y, this._x + i * this._header_column_width, this._y + this._header_line_height + this._line_height * (this._nb_rows-1));
             } else {
                 drawing.line(this._x + this._header_column_width + (i - 1) * this._column_width, this._y, this._x + this._header_column_width + (i - 1) * this._column_width, this._y + this._header_line_height + this._line_height * (this._nb_rows - 1));
@@ -274,31 +274,31 @@ export class Table extends AnimatedObject {
 
     toXml () {
         let table = document.createElement("object_table");
-        table.innerHTML = this.id;
-        table.setAttribute("x", this.x);
-        table.setAttribute("y", this.y);
-        table.setAttribute("background_color", this.background_color); // r, g, b
-        table.setAttribute("background_transparent", this.background_transparent);
-        table.setAttribute("border_color", this.border_color); // r, g, b
-        table.setAttribute("border_transparency", this.border_transparency);
-        table.setAttribute("border_size", this.border_size);
-        table.setAttribute("layer", this.layer);
-        table.setAttribute("visible", this.visible);
-        table.setAttribute("opacity", this.opacity);
+        table.innerHTML = this._id;
+        table.setAttribute("x", this._x);
+        table.setAttribute("y", this._y);
+        table.setAttribute("background_color", this._background_color); // r, g, b
+        table.setAttribute("background_transparent", this._background_transparent);
+        table.setAttribute("border_color", this._border_color); // r, g, b
+        table.setAttribute("border_transparency", this._border_transparency);
+        table.setAttribute("border_size", this._border_size);
+        table.setAttribute("layer", this._layer);
+        table.setAttribute("visible", this._visible);
+        table.setAttribute("opacity", this._opacity);
         // table.setAttribute("angle", this.angle); // degrees
-        table.setAttribute("values", this.values);
-        table.setAttribute("font", this.font); // FontName, FontSize, FontWeight
-        table.setAttribute("color", this.color); // r, g, b
-        table.setAttribute("padding", this.padding);
-        table.setAttribute("halignment", this.halignment);
-        table.setAttribute("valignment", this.valignment);
-        table.setAttribute("line_height", this.line_height);
-        table.setAttribute("column_width", this.column_width);
-        table.setAttribute("has_header_columns", this.has_header_columns);
-        table.setAttribute("has_header_rows", this.has_header_rows);
-        table.setAttribute("header_background_color", this.header_background_color);
-        table.setAttribute("header_color", this.header_color);
-        table.setAttribute("header_font", this.header_font);
+        table.setAttribute("values", this._values);
+        table.setAttribute("font", this._font); // FontName, FontSize, FontWeight
+        table.setAttribute("color", this._color); // r, g, b
+        table.setAttribute("padding", this._padding);
+        table.setAttribute("halignment", this._halignment);
+        table.setAttribute("valignment", this._valignment);
+        table.setAttribute("line_height", this._line_height);
+        table.setAttribute("column_width", this._column_width);
+        table.setAttribute("has_header_columns", this._has_header_columns);
+        table.setAttribute("has_header_rows", this._has_header_rows);
+        table.setAttribute("header_background_color", this._header_background_color);
+        table.setAttribute("header_color", this._header_color);
+        table.setAttribute("header_font", this._header_font);
         table.setAttribute("header_line_height", this._header_line_height);
         table.setAttribute("header_column_width", this._header_column_width);
         return table;
