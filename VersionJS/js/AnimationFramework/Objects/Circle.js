@@ -20,7 +20,9 @@ export class Circle extends Ellipse {
     }
 
     draw(drawing) {
+        drawing.push();
         super.draw(drawing);
+        drawing.pop();
     }
 
     isClicked(x, y, drawing) {

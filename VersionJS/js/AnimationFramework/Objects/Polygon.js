@@ -28,12 +28,14 @@ export class Polygon extends AnimatedObject {
     }
 
     draw(drawing) {
+        drawing.push();
         super.draw(drawing);
         drawing.beginShape();
         for (let i = 0; i < this.coord_x.length; ++i) {
             drawing.vertex(this.x + this.coord_x[i], this.y + this.coord_y[i]);
         }
         drawing.endShape(drawing.CLOSE);
+        drawing.pop();
     }
     
     isClicked(x, y, drawing) {

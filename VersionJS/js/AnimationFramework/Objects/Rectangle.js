@@ -9,7 +9,7 @@ export class Rectangle extends AnimatedObject {
         super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.width = width;
         this.height = height;
-        this.round = round; // tl, tr, bl, br
+        this.round = round.lenght == 4 ? round : [round[0], round[0], round[0], round[0]]; // tl, tr, bl, br
     }
     
     getWidth() {
@@ -37,8 +37,10 @@ export class Rectangle extends AnimatedObject {
     }
 
     draw(drawing) {
+        drawing.push();
         super.draw(drawing);
         drawing.rect(this.x, this.y, this.width, this.height, this.round[0], this.round[1], this.round[2], this.round[3]);
+        drawing.pop();
     }
     
     isClicked(x, y, drawing) {
@@ -58,7 +60,7 @@ export class Rectangle extends AnimatedObject {
         rectangle.setAttribute("layer", this.layer);
         rectangle.setAttribute("visible", this.visible);
         rectangle.setAttribute("opacity", this.opacity);
-        // rectangle.setAttribute("angle", this.angle); 
+        rectangle.setAttribute("angle", this.angle); 
         rectangle.setAttribute("width", this.width);
         rectangle.setAttribute("height", this.height);
         rectangle.setAttribute("round", this.round);

@@ -17,7 +17,7 @@ export class Grid extends AnimatedObject {
         return this.lines;
     }
 
-    getLine_height() {
+    getLineHeight() {
         return this.line_height;
     }
 
@@ -25,7 +25,7 @@ export class Grid extends AnimatedObject {
         return this.columns;
     }
 
-    getColumn_width() {
+    getColumnWidth() {
         return this.column_width;
     }
 
@@ -33,7 +33,7 @@ export class Grid extends AnimatedObject {
         this.lines = lines;
     }
 
-    setLine_height(line_height) {
+    setLineHeight(line_height) {
         return this.line_height = line_height;
     }
 
@@ -41,11 +41,12 @@ export class Grid extends AnimatedObject {
         this.columns = columns;
     }
 
-    setColumn_width(column_width) {
+    setColumnWidth(column_width) {
         this.column_width = column_width;
     }
 
     draw(drawing) {
+        drawing.push();
         super.draw(drawing);
         drawing.rect(this.x, this.y, this.column_width * this.columns, this.line_height * this.lines);
         for (let i = 1; i < this.lines; ++i) {
@@ -54,6 +55,7 @@ export class Grid extends AnimatedObject {
         for (let i = 1; i < this.columns; ++i) {
             drawing.line(this.x + i * this.column_width, this.y, this.x + i * this.column_width, this.y + this.line_height * this.lines);
         }
+        drawing.pop();
     }
 
     isClicked(x, y, drawing) {

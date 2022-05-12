@@ -27,8 +27,10 @@ export class Ellipse extends AnimatedObject {
     }
 
     draw(drawing) {
+        drawing.push();
         super.draw(drawing);
         drawing.ellipse(this.x + this.width / 2, this.y + this.height / 2, this.width, this.height);
+        drawing.pop();
     }
 
     isClicked(x, y, drawing) {

@@ -32,9 +32,9 @@ export class Graph extends Landmark {
 	}
 
 	draw (drawing) {
+		drawing.push();
 		super.draw(drawing);
 
-		drawing.push();
 		// We move at the origin of graph
 		drawing.translate(this.x, this.y);
 
