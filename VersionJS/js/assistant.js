@@ -10,6 +10,7 @@ import { Rectangle } from './AnimationFramework/Objects/Rectangle.js';
 import { Text } from './AnimationFramework/Objects/Text.js';
 import { Table } from './AnimationFramework/Objects/Table.js';
 import { Graph } from './AnimationFramework/Objects/Graph.js';
+import { Arrow } from './AnimationFramework/Objects/Arrow.js';
 
 import { SetProperty } from './AnimationFramework/Instructions/SetProperty.js';
 
@@ -39,6 +40,7 @@ document.getElementById("addLandmark").addEventListener('click', function () { n
 document.getElementById("addGrid").addEventListener('click', function () { new_object('Grid') });
 document.getElementById("addTable").addEventListener('click', function () { new_object('Table') });
 document.getElementById("addGraph").addEventListener('click', function () { new_object('Graph') });
+document.getElementById("addArrow").addEventListener('click', function () { new_object('Arrow') });
 document.getElementById("width").addEventListener('change', function () { sketch.resizeCanvas(this.value, document.getElementById("height").value); update_section_size();});
 document.getElementById("height").addEventListener('change', function () { sketch.resizeCanvas(document.getElementById("width").value, this.value); update_section_size(); });
 document.getElementById("myBackground").addEventListener('change', function () { sketch.load_background() });
@@ -1241,6 +1243,74 @@ function new_object(object_type) {
 			property = document.createElement("property");
 			object = new Graph(obj_id, 60, 60, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width, height, graph_scale_x, graph_scale_y, graph_unit_x, graph_unit_y, algorithmic_function, graph_max_x, graph_max_y, false, graph_min_x, graph_min_y);
 			break;
+		case "Arrow":
+			// width_line
+			let width_line = 50;
+			property = document.createElement("property");
+			property.className = "width_line";
+			label = document.createElement("label");
+			label.innerHTML = "width_line";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = width_line;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// height_line
+			let height_line = 5;
+			property = document.createElement("property");
+			property.className = "height_line";
+			label = document.createElement("label");
+			label.innerHTML = "height_line";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = height_line;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// width_line
+			let width_triangle = 15;
+			property = document.createElement("property");
+			property.className = "width_triangle";
+			label = document.createElement("label");
+			label.innerHTML = "width_triangle";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = width_triangle;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// height_line
+			let height_triangle = 15;
+			property = document.createElement("property");
+			property.className = "height_triangle";
+			label = document.createElement("label");
+			label.innerHTML = "height_triangle";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = height_triangle;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			// rotation
+			let rotation = 0;
+			property = document.createElement("property");
+			property.className = "rotation";
+			label = document.createElement("label");
+			label.innerHTML = "rotation";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "number";
+			input.value = rotation;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
+			object = new Arrow(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, width_line, height_line, width_triangle, height_triangle, rotation);
+			break;
 	}
 	objects_array[obj_id] = object;
 	instructions_array[obj_id] = new Array();
@@ -1256,7 +1326,6 @@ function new_object(object_type) {
  * @param {Element} property_dom 
  */
 function change_property(object_id, property_dom) {
-	console.log(`${property_dom.parentNode.className}, ${property_dom.value}`);
 	new SetProperty(null, objects_array[object_id], property_dom.parentNode.className, property_dom.value).execute();
 	//objects_array[object_id].draw();
 	//draw_animation(); // redessiner le canevas depuis le début sinon ca bug...
