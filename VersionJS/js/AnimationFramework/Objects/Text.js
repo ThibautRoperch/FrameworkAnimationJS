@@ -176,6 +176,12 @@ export class Text extends AnimatedObject {
 	}
     
    _round;
+	get round () {
+		return this._round;
+	}
+	set round (value) {
+		this._round = value;
+	}
 
 	constructor (id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment, round) {
 		super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
@@ -281,6 +287,7 @@ export class Text extends AnimatedObject {
 		if (this._height != undefined) text.setAttribute("height", this._height);
 		text.setAttribute("halignment", this._halignment);
 		text.setAttribute("valignment", this._valignment);
+		text.setAttribute("round", this._round);
 		return text;
 	}
 
