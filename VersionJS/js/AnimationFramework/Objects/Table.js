@@ -5,7 +5,7 @@ import { AnimatedObject } from "./AnimatedObject.js";
 
 export class Table extends AnimatedObject {
     
-    constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_rows, header_font, header_color, header_background_color) {
+    constructor(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, values, line_height, column_width, font, color, padding, halignment, valignment, has_header_columns, has_header_rows, header_font, header_color, header_background_color, header_column_width, header_line_height) {
         super(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle);
         this.values = values; // row1col1 | row1col2 | row1col3 $ row2col1 | row2col1
         this.line_height = line_height;
@@ -20,12 +20,14 @@ export class Table extends AnimatedObject {
         this.header_font = header_font; // r, g, b
         this.header_color = header_color; // r, g, b
         this.header_background_color = header_background_color; // r, g, b
+        this.header_column_width = header_column_width;
+        this.header_line_height = header_line_height;
 
         this.value_tab = [];
         this.index_tab = [];
         this.coord_cells = new Map();
         this.nb_columns = 0;
-        this.nb_row = 0;
+        this.nb_rows = 0;
         this.padding_top = 0;
         this.padding_right = 0;
         this.padding_bottom = 0;
@@ -35,21 +37,11 @@ export class Table extends AnimatedObject {
         this.setPaddingValues();
     }
 
-    setX(x) {
-        super.setX(x);
-        this.fillCoordCells();
-    }
-
-    setY(y) {
-        super.setY(y);
-        this.fillCoordCells();
-    }
-
 	getColor () {
 		return this.color;
 	}
 
-    getColumn_width() {
+    getColumnWidth() {
         return this.column_width;
     }
 
@@ -77,11 +69,19 @@ export class Table extends AnimatedObject {
         return this.header_color;
     }
 
+    getHeaderColumnWidth() {
+        return this.header_column_width;
+    }
+
     getHeaderFont() {
         return this.header_font;
     }
 
-    getLine_height() {
+    getHeaderLineHeight() {
+        return this.header_line_height;
+    }
+
+    getLineHeight() {
         return this.line_height;
     }
 
@@ -101,7 +101,7 @@ export class Table extends AnimatedObject {
         this.color = color;
     }
 
-    setColumn_width(column_width) {
+    setColumnWidth(column_width) {
         this.column_width = column_width;
         this.fillCoordCells();
     }
@@ -132,12 +132,20 @@ export class Table extends AnimatedObject {
         this.header_color = header_color;
     }
 
+    setHeaderColumnWidth(header_column_width) {
+        this.header_column_width = header_column_width;
+    }
+
     setHeaderFont(header_font) {
         console.log(typeof header_font);
         this.header_font = header_font;
     }
 
-    setLine_height(line_height) {
+    setHeaderLineHeight(header_line_height) {
+        this.header_line_height = header_line_height;
+    }
+
+    setLineHeight(line_height) {
         this.line_height = line_height;
         this.fillCoordCells();
     }
@@ -157,6 +165,16 @@ export class Table extends AnimatedObject {
         this.fillCoordCells();
     }
 
+    setX(x) {
+        super.setX(x);
+        this.fillCoordCells();
+    }
+
+    setY(y) {
+        super.setY(y);
+        this.fillCoordCells();
+    }
+
     fillValueTab() {
         let rows = this.values.split("$");
         let columns;
@@ -173,20 +191,19 @@ export class Table extends AnimatedObject {
                 this.nb_columns = columns.length;
             }
         }
-        this.nb_row = this.value_tab.length;
+        this.nb_rows = this.value_tab.length;
     }
 
     fillCoordCells() {
         this.index_tab = [];
-        for (let i = 0; i < this.nb_row; i++) {
-
-            let y_start = this.y + i * this.line_height;
-            let y_end = y_start + this.line_height;
+        for (let i = 0; i < this.nb_rows; i++) {
+            let y_start = (this.has_header_columns && i == 0) ? this.y : this.y + this.header_line_height + (i - 1) * this.line_height;
+            let y_end = (this.has_header_columns && i == 0) ? y_start + this.header_line_height : y_start + this.line_height;
 
             for (let j = 0; j < this.nb_columns; j++) {
+                let x_start = (this.has_header_rows && j == 0) ? this.x : this.x + this.header_column_width + (j - 1) * this.column_width;
+                let x_end = (this.has_header_rows && j == 0) ? x_start + this.header_column_width : x_start + this.column_width;
 
-                let x_start = this.x + j * this.column_width;
-                let x_end = x_start + this.column_width;
                 let index_value = [i, j];
                 let cell = [x_start, y_start, x_end, y_end];
                 this.coord_cells.set(index_value, cell);
@@ -213,29 +230,37 @@ export class Table extends AnimatedObject {
     }
 
     draw(drawing) {
+        drawing.push();
         super.draw(drawing);
-        drawing.rect(this.x, this.y, this.column_width * this.nb_columns, this.line_height * this.nb_row);
-
+        drawing.rect(this.x, this.y, this.header_column_width + this.column_width * (this.nb_columns - 1), this.header_line_height + this.line_height * (this.nb_rows - 1));
 
         if (this.has_header_columns) {
             drawing.push();
             drawing.fill(this.header_background_color[0], this.header_background_color[1], this.header_background_color[2], this.opacity * 255);
-            drawing.rect(this.x, this.y, this.column_width * this.nb_columns, this.line_height);
+            drawing.rect(this.x, this.y, this.header_column_width + this.column_width * (this.nb_columns-1), this.header_line_height);
             drawing.pop();
         }
 
         if (this.has_header_rows) {
             drawing.push();
             drawing.fill(this.header_background_color[0], this.header_background_color[1], this.header_background_color[2], this.opacity * 255);
-            drawing.rect(this.x, this.y, this.column_width, this.line_height * this.nb_row);
+            drawing.rect(this.x, this.y, this.header_column_width, this.header_line_height + this.line_height * (this.nb_rows - 1));
             drawing.pop();
         }
 
-        for (let i = 1; i < this.nb_row; ++i) {
-            drawing.line(this.x, this.y + i * this.line_height, this.x + this.column_width * this.nb_columns, this.y + i * this.line_height);
+        for (let i = 1; i < this.nb_rows; ++i) {
+            if (this.has_header_rows && i == 1) {
+                drawing.line(this.x, this.y + this.header_line_height, this.x + this.header_column_width + this.column_width * (this.nb_columns-1), this.y + this.header_line_height);
+            } else {
+                drawing.line(this.x, this.y + this.header_line_height + (i - 1) * this.line_height, this.x + this.header_column_width + this.column_width * (this.nb_columns-1), this.y + this.header_line_height + (i - 1) * this.line_height);
+            }
         }
         for (let i = 1; i < this.nb_columns; ++i) {
-            drawing.line(this.x + i * this.column_width, this.y, this.x + i * this.column_width, this.y + this.line_height * this.nb_row);
+            if (this.has_header_columns && i == 1) {
+                drawing.line(this.x + i * this.header_column_width, this.y, this.x + i * this.header_column_width, this.y + this.header_line_height + this.line_height * (this.nb_rows-1));
+            } else {
+                drawing.line(this.x + this.header_column_width + (i - 1) * this.column_width, this.y, this.x + this.header_column_width + (i - 1) * this.column_width, this.y + this.header_line_height + this.line_height * (this.nb_rows - 1));
+            }
         }
         
         drawing.fill(this.color[0], this.color[1], this.color[2], this.opacity * 255);
@@ -263,16 +288,17 @@ export class Table extends AnimatedObject {
                         drawing.textSize(parseInt(this.header_font[1]));
                         drawing.textStyle(this.header_font[2] == "bold" ? drawing.BOLD : this.header_font[2] == "italic" ? drawing.ITALIC : drawing.NORMAL);
                     }
-                    this.drawText(drawing, value, coords[0], coords[1]);
+                    this.drawText(drawing, value, coords[0], coords[1], coords[2]- coords[0], coords[3] - coords[1]);
                     drawing.pop();
                 } else {
-                    this.drawText(drawing, value, coords[0], coords[1]);
+                    this.drawText(drawing, value, coords[0], coords[1], coords[2]- coords[0], coords[3] - coords[1]);
                 }
             }
         }
+        drawing.pop();
     }
 
-    drawText(drawing, text, x, y) {
+    drawText(drawing, text, x, y, width, height) {
         switch (this.halignment) {
             case "left":
                 x += this.padding_left;
@@ -289,11 +315,11 @@ export class Table extends AnimatedObject {
             case "bottom":
                 y -= this.padding_bottom;
         }
-        drawing.text(text, x, y, this.column_width, this.line_height);
+        drawing.text(text, x, y, width, height);
     } 
 
     isClicked(x, y) {
-        return (x >= this.x) && (x <= this.nb_columns * this.column_width) && (y >= this.y) && (y <= this.nb_row * this.line_height);
+        return (x >= this.x) && (x <= this.nb_columns * this.column_width) && (y >= this.y) && (y <= this.nb_rows * this.line_height);
     }
 
     toXml() {
@@ -323,11 +349,13 @@ export class Table extends AnimatedObject {
         table.setAttribute("header_background_color", this.header_background_color);
         table.setAttribute("header_color", this.header_color);
         table.setAttribute("header_font", this.header_font);
+        table.setAttribute("header_column_width", this.header_column_width);
+        table.setAttribute("header_line_height", this.header_line_height);
         return table;
     }
 
     clone() {
-        return new Table(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.values, this.line_height, this.column_width, this.font, this.color, this.padding, this.halignment, this.valignment, this.has_header_columns, this.has_header_rows, this.header_font, this.header_color, this.header_background_color);
+        return new Table(this.id, this.x, this.y, this.background_color, this.background_transparent, this.border_color, this.border_transparency, this.border_size, this.state, this.layer, this.visible, this.opacity, this.angle, this.values, this.line_height, this.column_width, this.font, this.color, this.padding, this.halignment, this.valignment, this.has_header_columns, this.has_header_rows, this.header_font, this.header_color, this.header_background_color, this.header_column_width, this.header_line_height);
     }
 
 }

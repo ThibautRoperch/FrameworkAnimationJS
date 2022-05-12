@@ -131,8 +131,9 @@
 			visible="true">Polygone</object_polygon>
 
 		<object_table 
-			x="20" 
-			y="20" 
+			x="0" 
+			y="50" 
+			layer="5"
 			visible="true"
 			background_transparent="false" 
 			background_color="210,180,222"
@@ -145,12 +146,14 @@
 			font="Arial,14"
 			color="169,50,38"
 			line_height="30"
-			column_width="60"
+			column_width="80"
 			has_header_columns="true"
 			has_header_lines="true"
 			header_background_color="133,193,233"
 			header_color="0,0,255"
 			header_font="Courier,24,italic"
+			header_column_width="60"
+			header_line_height="50"
 			halignment="center"
 			valignment="center">Table</object_table>
 	</objects>

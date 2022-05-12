@@ -32,6 +32,7 @@ export class StartButton extends AnimatedObject {
     }
 
     draw(drawing) {
+        drawing.push();
 		super.draw(drawing);
         // Background
        	drawing.rect(this.x - this.width / 2 + 2, this.y - this.height / 2 + 2, this.width, this.height); 
@@ -44,6 +45,7 @@ export class StartButton extends AnimatedObject {
 		drawing.textAlign(drawing.CENTER, drawing.CENTER);
 		// Display
 		drawing.text(this.text.replace("@", "\n"), this.x + 2, this.y + 4);
+        drawing.pop();
     }
 
     isClicked(x, y) {
