@@ -310,7 +310,7 @@ export class Text extends AnimatedObject {
 					break;
 				// No padding
 				default:
-					this._real_width = (this._width == undefined) ? drawing.textWidth(this._text) + 5 : this._width;
+					this._real_width = (this._width == undefined) ? drawing.textWidth(this._text) + 15 : this._width;
 					this._real_height = (this._height == undefined) ? parseInt(this._font[1]) * ((this._text.match(/@/g) || []).length + 1) + 5 : this._height;
 					break;
 			}

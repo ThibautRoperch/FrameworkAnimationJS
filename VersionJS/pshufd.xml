@@ -186,7 +186,7 @@
 
         <object_rectangle
             x="450"
-            y="310"
+            y="305"
             border_color="255,0,0"
             border_transparency="0"
             border_size="2"
@@ -199,7 +199,7 @@
         <object_text
             x="-400"
             y="360"
-            text="00b = 0 ---> prendre adresse d[0]"
+            text="00b = 0 ---> prendre la valeur d[0]"
             font="Arial,20,normal"
             visible="0"
             color="0,0,0">calcul_00</object_text>
@@ -214,7 +214,7 @@
 
         <object_rectangle
             x="483"
-            y="310"
+            y="305"
             border_color="255,0,0"
             border_transparency="0"
             border_size="2"
@@ -227,7 +227,7 @@
         <object_text
             x="-400"
             y="360"
-            text="01b = 1 ---> prendre adresse d[1]"
+            text="01b = 1 ---> prendre la valeur d[1]"
             font="Arial,20,normal"
             visible="0"
             color="0,0,0">calcul_01</object_text>
@@ -242,7 +242,7 @@
 
         <object_rectangle
             x="518"
-            y="310"
+            y="305"
             border_color="255,0,0"
             border_transparency="0"
             border_size="2"
@@ -255,7 +255,7 @@
         <object_text
             x="-400"
             y="360"
-            text="10b = 2 ---> prendre adresse d[2]"
+            text="10b = 2 ---> prendre la valeur d[2]"
             font="Arial,20,normal"
             visible="0"
             color="0,0,0">calcul_10</object_text>
@@ -270,7 +270,7 @@
 
         <object_rectangle
             x="551"
-            y="310"
+            y="305"
             border_color="255,0,0"
             border_transparency="0"
             border_size="2"
@@ -283,7 +283,7 @@
         <object_text
             x="-400"
             y="360"
-            text="11b = 3 ---> prendre adresse d[3]"
+            text="11b = 3 ---> prendre la valeur d[3]"
             font="Arial,20,normal"
             visible="0"
             color="0,0,0">calcul_11</object_text>
