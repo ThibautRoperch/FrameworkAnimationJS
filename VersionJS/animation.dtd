@@ -2,8 +2,10 @@
 <!ELEMENT animation (init?,background?,objects,programs) >
 <!ATTLIST animation width CDATA #IMPLIED >
 <!ATTLIST animation height CDATA #IMPLIED >
-<!ATTLIST animation speed (very_slow|slow|normal|fast|very_fast) "normal" >
-<!ATTLIST animation marker (true|false) "true" >
+<!ATTLIST animation speed (very_slow|slow|normal|fast|very_fast) "normal" #IMPLIED >
+<!ATTLIST animation marker_enabled (true|false) "true" #IMPLIED >
+<!ATTLIST animation marker_stroke_weight CDATA #IMPLIED >
+<!ATTLIST animation marker_color CDATA #IMPLIED >
 
 <!ELEMENT init (start_button) >
 <!ELEMENT start_button EMPTY >
