@@ -134,13 +134,13 @@ export class Animation {
         }
     }
 
-    isRgbColor(strColor) {
+    isRgbColor (strColor) {
         let result;
         strColor.includes(",") ? result = true : result = false;
         return result;
     }
 
-    readXmlFile(contents) {
+    readXmlFile (contents) {
         let parser = new DOMParser();
         let root = parser.parseFromString(contents, "text/xml");
 
@@ -175,13 +175,13 @@ export class Animation {
         // If the background's node exists
         if (background_node) {
             this.background = background_node.textContent;
-            if(!this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim()) && !this.isRgbColor(this.background.trim())) {
+            if (!this.isValidColor(this.background.trim()) && !this.isHexColor(this.background.trim()) && !this.isRgbColor(this.background.trim())) {
                 // The image path is relative to the source file's one
                 let source_file_path = this.source_file.substr(0, this.source_file.lastIndexOf("/") + 1);
                 this.background = source_file_path + this.background;
             }
             else {
-                if(this.isRgbColor(this.background.trim()))
+                if (this.isRgbColor(this.background.trim()))
                     this.background = parseIntArray(this.background);
             }
         } else {
@@ -238,7 +238,7 @@ export class Animation {
                         height = read_object.hasAttribute("height") ? parseInt(read_object.getAttribute("height")) : undefined;
                         halignment = read_object.hasAttribute("halignment") ? read_object.getAttribute("halignment") : "left";
                         valignment = read_object.hasAttribute("valignment") ? read_object.getAttribute("valignment") : "top";
-                        round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0,0,0,0];
+                        round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0, 0, 0, 0];
                         new_object = new Text(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, text, font, color, padding, width, height, halignment, valignment, round);
                         break;
                     case 'object_image':
@@ -251,7 +251,7 @@ export class Animation {
                     case 'object_rectangle':
                         width = parseInt(read_object.getAttribute("width"));
                         height = parseInt(read_object.getAttribute("height"));
-                        round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0,0,0,0];
+                        round = read_object.hasAttribute("round") ? parseIntArray(read_object.getAttribute("round")) : [0, 0, 0, 0];
                         new_object = new Rectangle(id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, DEFAULT_STATE, layer, visible, opacity, angle, width, height, round);
                         break;
                     case 'object_polygon':
@@ -531,6 +531,12 @@ export class Animation {
         // Convert and sort the layers set
         this.layers = Array.from(this.layers);
         this.layers.sort();
+
+        if (this.canUseMarker) {
+            this.clearButton = new ImageFile('Clear button', this.width - 50, 50, [0, 0, 0], true, [255, 255, 255], false,
+                2, DEFAULT_STATE, 5, true, 255, null, 50, 50, '../../img/supprimer.png');
+            this.clearButton.loadImage(drawing);
+        }
     }
 
     setup (drawing) {
@@ -564,20 +570,22 @@ export class Animation {
         // Marker
         if (this.canUseMarker) {
             drawing.push();
-    
+
             drawing.strokeWeight(3);
             drawing.stroke(0, 0, 0);
-    
+
             for (let arr of this.markerShape) {
                 for (let i = 0; i < arr.length; i++) {
                     if (i + 1 < arr.length) {
-                        drawing.line(arr[i].x, arr[i].y, arr[i + 1].x, arr[i + 1].y)
+                        drawing.line(arr[i].x, arr[i].y, arr[i + 1].x, arr[i + 1].y);
                     }
                 }
             }
             drawing.endShape();
-    
+
             drawing.pop();
+
+            this.clearButton.draw(drawing);
         }
     }
 
@@ -593,6 +601,10 @@ export class Animation {
 
         if (this.start_button.getPresent() && this.start_button.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
             this.start_button.setPresent(false);
+        }
+
+        if (this.canUseMarker && this.clearButton.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
+            this.markerShape = [];
         }
     }
 
