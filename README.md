@@ -50,3 +50,9 @@ Enfin, pour charger une animation contenue dans un fichier XML, spécifier l'emp
 [Pierre GRANIER--RICHARD](https://github.com/PierreGranier/)
 
 [Thibaut ROPERCH](https://github.com/ThibautRoperch/)
+
+[Pierre-Yves DELEPINE](https://github.com/pdelepine)
+
+[Florian FERNANDES](https://github.com/FlorianFernandes)
+
+[Simon MITATY](https://github.com/Smitaty)
