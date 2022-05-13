@@ -63,8 +63,10 @@ export class Animation {
 
         this.stop_animation = false;
 
-        this.markerShape = new Array();
-        this.canUseMarker = true;
+        this.marker_shape = new Array();
+        this.marker_enabled = true;
+        this.marker_stroke_weight = 3;
+        this.marker_color = [0,0,0];
 
         // Resize the target node if given
         if (this.parent != null) {
@@ -157,9 +159,12 @@ export class Animation {
         }
 
         // If the marker attribute exists
-        if (animation_node.hasAttribute("marker")) {
-            this.canUseMarker = animation_node.getAttribute("marker") == "true";
+        if (animation_node.hasAttribute("marker_enabled")) {
+            this.marker_enabled = animation_node.getAttribute("marker_enabled") == "true";
         }
+
+        this.marker_stroke_weight = animation_node.hasAttribute("marker_stroke_weight") ? parseInt(animation_node.getAttribute("marker_stroke_weight")) : 3;
+        this.marker_color = animation_node.hasAttribute("marker_color") ? parseIntArray(animation_node.getAttribute("marker_color")) : [0, 0, 0];
 
         // If the init's node exists
         if (init_node) {
@@ -532,7 +537,7 @@ export class Animation {
         this.layers = Array.from(this.layers);
         this.layers.sort();
 
-        if (this.canUseMarker) {
+        if (this.marker_enabled) {
             this.clearButton = new ImageFile('Clear button', this.width - 20, 0, [0, 0, 0], true, [255, 255, 255], false,
                 2, DEFAULT_STATE, 5, true, 255, null, 20, 20, '../../img/supprimer.png');
             this.clearButton.loadImage(drawing);
@@ -570,20 +575,19 @@ export class Animation {
         }
 
         // Marker
-        if (this.canUseMarker) {
+        if (this.marker_enabled) {
             drawing.push();
 
-            drawing.strokeWeight(3);
-            drawing.stroke(0, 0, 0);
+            drawing.strokeWeight(this.marker_stroke_weight);
+            drawing.stroke(this.marker_color);
 
-            for (let arr of this.markerShape) {
+            for (let arr of this.marker_shape) {
                 for (let i = 0; i < arr.length; i++) {
                     if (i + 1 < arr.length) {
                         drawing.line(arr[i].x, arr[i].y, arr[i + 1].x, arr[i + 1].y);
                     }
                 }
             }
-            drawing.endShape();
 
             drawing.pop();
 
@@ -605,20 +609,20 @@ export class Animation {
             this.start_button.present = (false);
         }
 
-        if (this.canUseMarker && this.clearButton.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
-            this.markerShape = [];
+        if (this.marker_enabled && this.clearButton.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
+            this.marker_shape = [];
         }
     }
 
     markerStart () {
-        if (this.canUseMarker) {
-            this.markerShape.push([]);
+        if (this.marker_enabled) {
+            this.marker_shape.push([]);
         }
     }
 
     markerInUse (drawing) {
-        if (this.canUseMarker) {
-            this.markerShape[this.markerShape.length - 1].push(drawing.createVector(drawing.mouseX, drawing.mouseY));
+        if (this.marker_enabled) {
+            this.marker_shape[this.marker_shape.length - 1].push(drawing.createVector(drawing.mouseX, drawing.mouseY));
         }
     }
 

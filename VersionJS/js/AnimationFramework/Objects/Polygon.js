@@ -36,7 +36,7 @@ export class Polygon extends AnimatedObject {
     }
 
     draw (drawing) {
-      drawing.push();
+        drawing.push();
         super.draw(drawing);
         drawing.beginShape();
         for (let i = 0; i < this._coord_x.length; ++i) {

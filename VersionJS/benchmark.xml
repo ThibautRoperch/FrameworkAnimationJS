@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE animation SYSTEM "animation.dtd">
-<animation marker="true">
+<animation marker_enabled="true" marker_color="255,0,0" marker_stroke_weight="5">
 	<init>
     	<start_button present="false" />
 	</init>
