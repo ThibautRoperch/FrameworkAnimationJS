@@ -533,8 +533,8 @@ export class Animation {
         this.layers.sort();
 
         if (this.canUseMarker) {
-            this.clearButton = new ImageFile('Clear button', this.width - 50, 50, [0, 0, 0], true, [255, 255, 255], false,
-                2, DEFAULT_STATE, 5, true, 255, null, 50, 50, '../../img/supprimer.png');
+            this.clearButton = new ImageFile('Clear button', this.width - 20, 0, [0, 0, 0], true, [255, 255, 255], false,
+                2, DEFAULT_STATE, 5, true, 255, null, 20, 20, '../../img/supprimer.png');
             this.clearButton.loadImage(drawing);
         }
     }
