@@ -27,24 +27,33 @@
 		<article>
 			<h2>2. Utilisation</h2>
 
-			<p>Copier et coller le dossier <tt>js/AnimationFramework</tt> au sein du projet destiné à utiliser le framework. Il doit être accessible par l'ensemble des pages HTML du projet et son arborescence inchangée.</p>
-			<p>Il faut inclure le fichier <a href="js/AnimationFramework/animation_controller.js"><tt>animation_controller.js</tt></a> dans chaque fichier contenant une animation.</p>
+			<p>Copier et coller le dossier <tt>VersionJS/</tt> au sein du projet destiné à utiliser le framework. Il doit être accessible par l'ensemble des pages HTML du projet et son arborescence inchangée.</p>
+			<p>Il faut créer un fichier javascript qui import le fichier <a href="js/AnimationFramework/animation_controller.js"><tt>animation_controller.js</tt></a></p>
 			<p>Les fichiers nécessaires au bon fonctionnement du framework doivent être inclus en appellant la fonction `include_animation_files` en donnant le chemin du dossier contenant le framework.</p>
 			<p>Une animation est chargée avec la fonction `load_animation` en précisant le chemin de son fichier XML.</p>
 			<p>Le script suivant permet de charger l'animation contenue dans le fichier <tt>animation.xml</tt> et de l'afficher dans la balise ayant pour <code>id</code> <tt>anim1</tt>  :</p>
+			
+			<p>Dans le fichier <tt>animation.html</tt></p>
+			<pre>
+			<code>
+&lt;script type ='module' src="animation.js"&gt;&lt;/script&gt;<br>
+			</code>
+			</pre>
+			<p>Dans le fichier <tt>animation.js</tt></p>
 			<pre>
 <code>
-  &lt;script src="js/AnimationFramework/animation_controller.js"&gt;&lt;/script&gt;<br>
-  &lt;script&gt;
-  include_animation_files("js/AnimationFramework/");
-  load_animation("animation.xml", "anim1", 1600, 900);
-  &lt;/script&gt;
+import * as Animation from './AnimationFramework/animation_controller.js';
+
+Animation.include_animation_files("js/AnimationFramework/");
+
+Animation.load_animation("animation.xml", "anim1", 1600, 900);
 </code>
 			</pre>
 
 			<p>Vous pouvez modifier les paramètres suivants :</p>
 			
 			<ul>
+				<li><tt>animation.js</tt> : il s'agit du fichier qui inclut <tt>animation_controller.js</tt></li>
 				<li><tt>animation.xml</tt> : il s'agit du fichier qui décrit l'animation</li>
 				<li><tt>anim1</tt> : il s'agit de l'<code>id</code> de la balise HMTL dans laquelle sera affichée l'animation</li>
 				<li><tt>1600</tt> : largeur en pixels de l'espace occupé par l'animation</li>
@@ -84,9 +93,12 @@
 					<li>Polygone : <tt>object_polygon</tt></li>
 					<li>Cercle : <tt>object_circle</tt></li>
 					<li>Ellipse : <tt>object_ellipse</tt></li>
-					<li>Repère (pour graphiques) : <tt>object_landmark</tt></li>
-					<li>Grille (tableau) : <tt>object_grid</tt></li>
+					<li>Repère : <tt>object_landmark</tt></li>
+					<li>Graphique : <tt>object_graph</tt></li>
+					<li>Grille : <tt>object_grid</tt></li>
 					<li>Copie d'un objet : <tt>object_copy</tt></li>
+					<li>Tableau : <tt>object_table</tt></li>
+					<li>Flèche : <tt>object_arrow</tt></li>
 				</ul>
 
 				Les attributs communs à tous les objets sont les suivants :
@@ -97,10 +109,10 @@
 					<li><tt>background_color ("0, 0, 0" par défaut)</tt> : Couleur d'arrière-plan de l'objet</li>
 					<li><tt>background_transparent (true par défaut)</tt> : L'arrière-plan est transparent</li>
 					<li><tt>border_color ("0, 0, 0" par défaut)</tt> : Couleur de bordure de l'objet</li>
-					<li><tt>border_transparency (true par défaut)</tt> : La bordure est transparente</li>
+					<li><tt>border_transparency (false par défaut)</tt> : La bordure est transparente</li>
 					<li><tt>border_size (1 par défaut)</tt> : Epaisseur de la bordure</li>
 					<li><tt>layer (0 par défaut)</tt> : Indice du plan de l'objet (les couches supérieures sont d'un indice plus élevé que les autres)</li>
-					<li><tt>visible (false par défaut)</tt> : L'objet est visible</li>
+					<li><tt>visible (true par défaut)</tt> : L'objet est visible</li>
 					<li><tt>opacity (1 par défaut)</tt> : Opacité de l'objet (nombre décimal entre 0 et 1, 1 étant totalement opaque)</li>
 				</ul>
 				
