@@ -63,6 +63,8 @@ export class Animation {
 
         this.stop_animation = false;
 
+        this.markerShape = new Array();
+
         // Resize the target node if given
         if (this.parent != null) {
             this.parent.style.width = this.width + "px";
@@ -552,6 +554,23 @@ export class Animation {
                 }
             }
         }
+
+        drawing.push();
+        
+        drawing.strokeWeight(3);
+        drawing.stroke(0, 0, 0);
+
+        for (let arr of this.markerShape) {
+            for (let i = 0; i < arr.length; i++) {
+                if (i + 1 < arr.length) {
+                    drawing.line(arr[i].x, arr[i].y, arr[i + 1].x, arr[i + 1].y)
+                }
+            }
+        }
+        drawing.endShape();
+
+        drawing.pop();
+
     }
 
     canvasClicked (drawing) {
@@ -567,6 +586,14 @@ export class Animation {
         if (this.start_button.getPresent() && this.start_button.isClicked(drawing.mouseX, drawing.mouseY, drawing)) {
             this.start_button.setPresent(false);
         }
+    }
+
+    markerStart () {
+        this.markerShape.push([]);
+    }
+
+    markerInUse (drawing) {
+        this.markerShape[this.markerShape.length - 1].push(drawing.createVector(drawing.mouseX, drawing.mouseY));
     }
 
 }

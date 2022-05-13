@@ -90,6 +90,14 @@ function draw_animation(animation_obj) {
 			return false;
 		}
 
+		draw_ref.mousePressed = function() {
+			animation_obj.markerStart();
+		}
+
+		draw_ref.mouseDragged = function() {
+			animation_obj.markerInUse(draw_ref);
+		}
+
 	});
 }
 

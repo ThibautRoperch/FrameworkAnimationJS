@@ -13,6 +13,8 @@
 
 <!ELEMENT background (#PCDATA) >
 
+<!ELEMENT marker (true|false) >
+
 <!ELEMENT objects (object_text|object_image|object_rectangle|object_polygon|object_circle|object_ellipse|object_landmark|object_grid|object_table|object_graph|object_arrow|object_copy)+ >
 
 <!ELEMENT object_text (#PCDATA) >
