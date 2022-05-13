@@ -104,6 +104,7 @@ function import_xml(input_id) {
 					// Display the value of this property
 					// Try to retrieve the DOM of this property
 					let property_dom = objects_list.lastChild.getElementsByClassName(prop.name)[0];
+					console.table(objects_list);
 					if (property_dom) {
 						// Try to retrieve the input of this property
 						// Otherwise, this is a select option
@@ -469,6 +470,19 @@ function new_object(object_type) {
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
+			// round
+			let round_text = [0, 0, 0, 0];
+			property = document.createElement("property");
+			property.className = "round";
+			label = document.createElement("label");
+			label.innerHTML = "round";
+			property.appendChild(label);
+			input = document.createElement("input");
+			input.type = "text";
+			input.placeholder = round_text;
+			input.onchange = function () { change_property(obj_id, this); };
+			property.appendChild(input);
+			article1.appendChild(property);
 			// halignment
 			let halignment = "left";
 			property = document.createElement("property");
@@ -521,7 +535,7 @@ function new_object(object_type) {
 			input.appendChild(option);
 			property.appendChild(input);
 			article1.appendChild(property);
-			object = new Text(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, "", font, color, padding, width, height, halignment, valignment);
+			object = new Text(obj_id, x, y, background_color, background_transparent, border_color, border_transparency, border_size, state, layer, visible, opacity, angle, "", font, color, padding, width, height, halignment, valignment, round_text);
 			break;
 		case "ImageFile":
 			// width
@@ -1476,7 +1490,7 @@ function export_xml() {
 	// background node
 	if (document.getElementById("myBackground").value != "") {
 		let background_node = doc.createElement("background");
-		background_node.innerHTML = document.getElementById("background").value;
+		background_node.innerHTML = document.getElementById("myBackground").value;
 		animation_node.appendChild(background_node);
 	}
 
