@@ -3,6 +3,7 @@
 <!ATTLIST animation width CDATA #IMPLIED >
 <!ATTLIST animation height CDATA #IMPLIED >
 <!ATTLIST animation speed (very_slow|slow|normal|fast|very_fast) "normal" >
+<!ATTLIST animation marker (true|false) "true" >
 
 <!ELEMENT init (start_button) >
 <!ELEMENT start_button EMPTY >

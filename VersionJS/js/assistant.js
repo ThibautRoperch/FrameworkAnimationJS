@@ -1469,7 +1469,7 @@ function export_xml() {
 	// speed attribute
 	animation_node.setAttribute('speed', document.getElementById("mySpeed").value);
 
-	// background image node
+	// background node
 	if (document.getElementById("myBackground").value != "") {
 		let background_node = doc.createElement("background");
 		background_node.innerHTML = document.getElementById("background").value;
