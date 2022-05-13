@@ -59,6 +59,7 @@ export class Arrow extends AnimatedObject {
         drawing.push();
         super.draw(drawing);
         drawing.translate(this.x, this.y);
+        drawing.angleMode(drawing.DEGREES);
         drawing.rotate(this._rotation);
         drawing.rect(0, 0, this._width_line, this._height_line);
         drawing.translate(this._width_line, this._height_line / 2);

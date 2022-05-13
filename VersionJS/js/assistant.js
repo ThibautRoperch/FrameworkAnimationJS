@@ -1270,7 +1270,7 @@ function new_object(object_type) {
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			// width_line
+			// width_triangle
 			let width_triangle = 15;
 			property = document.createElement("property");
 			property.className = "width_triangle";
@@ -1283,7 +1283,7 @@ function new_object(object_type) {
 			input.onchange = function () { change_property(obj_id, this); };
 			property.appendChild(input);
 			article1.appendChild(property);
-			// height_line
+			// height_triangle
 			let height_triangle = 15;
 			property = document.createElement("property");
 			property.className = "height_triangle";
