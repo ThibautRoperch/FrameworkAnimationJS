@@ -539,7 +539,7 @@ export class Animation {
 
         if (this.marker_enabled) {
             this.clearButton = new ImageFile('Clear button', this.width - 20, 0, [0, 0, 0], true, [255, 255, 255], false,
-                2, DEFAULT_STATE, 5, true, 255, null, 20, 20, ANIMATION_PATH + '../img/supprimer.png');
+                2, DEFAULT_STATE, 5, true, 255, null, 20, 20, ANIMATION_PATH + '../../img/supprimer.png');
             this.clearButton.loadImage(drawing);
         }
     }
