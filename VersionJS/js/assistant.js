@@ -1468,6 +1468,10 @@ function export_xml() {
 
 	// speed attribute
 	animation_node.setAttribute('speed', document.getElementById("mySpeed").value);
+	// marker attribute
+	animation_node.setAttribute('marker_enable', document.getElementById('enableMarker').checked);
+	animation_node.setAttribute('marker_stroke_weight', document.getElementById('markerStrokeWeight').value);
+	animation_node.setAttribute('marker_color', document.getElementById('markerStrokeColor').value);
 
 	// background node
 	if (document.getElementById("myBackground").value != "") {
