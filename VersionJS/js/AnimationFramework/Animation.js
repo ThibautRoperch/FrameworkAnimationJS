@@ -64,6 +64,7 @@ export class Animation {
         this.stop_animation = false;
 
         this.markerShape = new Array();
+        this.canUseMarker = true;
 
         // Resize the target node if given
         if (this.parent != null) {
@@ -143,16 +144,21 @@ export class Animation {
         let parser = new DOMParser();
         let root = parser.parseFromString(contents, "text/xml");
 
-        // Retrieve sped, init, background, objects and programs nodes
+        // Retrieve speed, init, background, objects and programs nodes
         let animation_node = root.getElementsByTagName("animation")[0];
         let init_node = root.getElementsByTagName("init")[0];
         let background_node = root.getElementsByTagName("background")[0];
         let objects_node = root.getElementsByTagName("objects")[0];
         let programs_node = root.getElementsByTagName("programs")[0];
 
-        // If the speed node node exists
+        // If the speed attribute exists
         if (animation_node.hasAttribute("speed")) {
             this.loop_delay = speed_animation(animation_node.getAttribute("speed"));
+        }
+
+        // If the marker attribute exists
+        if (animation_node.hasAttribute("marker")) {
+            this.canUseMarker = animation_node.getAttribute("marker") == "true";
         }
 
         // If the init's node exists
@@ -555,22 +561,24 @@ export class Animation {
             }
         }
 
-        drawing.push();
-        
-        drawing.strokeWeight(3);
-        drawing.stroke(0, 0, 0);
-
-        for (let arr of this.markerShape) {
-            for (let i = 0; i < arr.length; i++) {
-                if (i + 1 < arr.length) {
-                    drawing.line(arr[i].x, arr[i].y, arr[i + 1].x, arr[i + 1].y)
+        // Marker
+        if (this.canUseMarker) {
+            drawing.push();
+    
+            drawing.strokeWeight(3);
+            drawing.stroke(0, 0, 0);
+    
+            for (let arr of this.markerShape) {
+                for (let i = 0; i < arr.length; i++) {
+                    if (i + 1 < arr.length) {
+                        drawing.line(arr[i].x, arr[i].y, arr[i + 1].x, arr[i + 1].y)
+                    }
                 }
             }
+            drawing.endShape();
+    
+            drawing.pop();
         }
-        drawing.endShape();
-
-        drawing.pop();
-
     }
 
     canvasClicked (drawing) {
@@ -589,11 +597,15 @@ export class Animation {
     }
 
     markerStart () {
-        this.markerShape.push([]);
+        if (this.canUseMarker) {
+            this.markerShape.push([]);
+        }
     }
 
     markerInUse (drawing) {
-        this.markerShape[this.markerShape.length - 1].push(drawing.createVector(drawing.mouseX, drawing.mouseY));
+        if (this.canUseMarker) {
+            this.markerShape[this.markerShape.length - 1].push(drawing.createVector(drawing.mouseX, drawing.mouseY));
+        }
     }
 
 }
