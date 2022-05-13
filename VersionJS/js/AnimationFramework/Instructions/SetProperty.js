@@ -171,19 +171,19 @@ export class SetProperty extends Instruction {
 
 			// arrow
 			case "width_line":
-				this.target.width_line = (this.value);
+				this.target.width_line = parseInt(this.value);
 				break;
 			case "height_line":
-				this.target.height_line = (this.value);
+				this.target.height_line = parseInt(this.value);
 				break;
 			case "width_triangle":
-				this.target.width_triangle = (this.value);
+				this.target.width_triangle = parseInt(this.value);
 				break;
 			case "height_triangle":
-				this.target.triangle = (this.value);
+				this.target.triangle = parseInt(this.value);
 				break;
 			case "rotation":
-				this.target.rotation = (this.value);
+				this.target.rotation = parseInt(this.value);
 				break;
 
 			default:

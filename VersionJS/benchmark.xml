@@ -172,7 +172,7 @@
 			height_line="5"
 			width_triangle="15"
 			height_triangle="15"
-			rotation="0">Arrow</object_arrow>
+			rotation="-90">Arrow</object_arrow>
 
 	</objects>
 
