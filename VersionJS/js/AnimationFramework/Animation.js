@@ -1,4 +1,4 @@
-import { speed_animation, parseIntArray } from './animation_controller.js';
+import { speed_animation, parseIntArray, ANIMATION_PATH } from './animation_controller.js';
 
 import { DEFAULT_STATE, WAITING_CLICK_STATE } from './Objects/AnimatedObject.js';
 
@@ -534,7 +534,7 @@ export class Animation {
 
         if (this.canUseMarker) {
             this.clearButton = new ImageFile('Clear button', this.width - 20, 0, [0, 0, 0], true, [255, 255, 255], false,
-                2, DEFAULT_STATE, 5, true, 255, null, 20, 20, '../../img/supprimer.png');
+                2, DEFAULT_STATE, 5, true, 255, null, 20, 20, ANIMATION_PATH + '../img/supprimer.png');
             this.clearButton.loadImage(drawing);
         }
     }

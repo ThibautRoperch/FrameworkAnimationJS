@@ -19,6 +19,8 @@ export let FRAME_RATE = 60; // frames displayed per second
 export let LOOP_DELAY_MAX = 60; // lowest speed of the animation, one frame's duration (ms)
 export let LOOP_DELAY_MIN = 0; // highest speed of the animation, one frame's duration (ms)
 
+export let ANIMATION_PATH;
+
 
 /**********************
  * Loading and execution functions
@@ -136,12 +138,13 @@ export function speed_animation(speed) {
 	return loop_delay;
 }
 
-function include_animation_files(path) {
+export function include_animation_files(path) {
 	let script = document.createElement("script");
 	script.src = path + 'p5.min.js';
 	document.lastChild.appendChild(script);
 
 	ANIMATION_FILES_INCLUDED = true;
+	ANIMATION_PATH = path;
 }
 
 /**
@@ -158,5 +161,3 @@ export function parseIntArray(string) {
 
 	return array;
 }
-
-include_animation_files("js/AnimationFramework/");
