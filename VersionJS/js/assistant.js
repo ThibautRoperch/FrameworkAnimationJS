@@ -14,7 +14,7 @@ import { Arrow } from './AnimationFramework/Objects/Arrow.js';
 
 import { SetProperty } from './AnimationFramework/Instructions/SetProperty.js';
 
-import { ANIMATION_FILES_INCLUDED, parseIntArray } from './AnimationFramework/animation_controller.js';
+import { ANIMATION_FILES_INCLUDED, parseIntArray, include_animation_files } from './AnimationFramework/animation_controller.js';
 import { DEFAULT_STATE } from './AnimationFramework/Objects/AnimatedObject.js';
 
 // Global variables
@@ -45,6 +45,8 @@ document.getElementById("width").addEventListener('change', function () { sketch
 document.getElementById("height").addEventListener('change', function () { sketch.resizeCanvas(document.getElementById("width").value, this.value); update_section_size(); });
 document.getElementById("myBackground").addEventListener('change', function () { sketch.load_background() });
 
+// Include P5.js
+include_animation_files('js/AnimationFramework/');
 wait_for_includes();
 /**
  * Function to check if p5 JS is include and if it isn't wait before starting the animation
