@@ -106,7 +106,6 @@ function import_xml(input_id) {
 					// Display the value of this property
 					// Try to retrieve the DOM of this property
 					let property_dom = objects_list.lastChild.getElementsByClassName(prop.name)[0];
-					console.table(objects_list);
 					if (property_dom) {
 						// Try to retrieve the input of this property
 						// Otherwise, this is a select option
