@@ -129,16 +129,16 @@ export class SetProperty extends Instruction {
 
 			// grid
 			case "lines":
-				this.target.lines = (parseInt(this.value) | 0);
+				this.target.lines = parseInt(this.value) | 0;
 				break;
 			case "columns":
-				this.target.columns = (parseInt(this.value) | 0);
+				this.target.columns = parseInt(this.value) | 0;
 				break;
 			case "line_height":
-				this.target.line_height = (parseInt(this.value) | 0);
+				this.target.line_height = parseInt(this.value) | 0;
 				break;
 			case "column_width":
-				this.target.column_width = (parseInt(this.value) | 0);
+				this.target.column_width = parseInt(this.value) | 0;
 				break;
 
 			// table
@@ -146,19 +146,25 @@ export class SetProperty extends Instruction {
 				this.target.values = this.value;
 				break;
 			case "has_header_columns":
-				this.target.has_header_columns = (this.value == "true" ? true : false);
+				this.target.has_header_columns = this.value == "true" ? true : false;
 				break;
 			case "has_header_rows":
-				this.target.has_header_rows = (this.value == "true" ? true : false);
+				this.target.has_header_rows = this.value == "true" ? true : false;
 				break;
 			case "header_font":
-				this.target.header_font = (this.value.split(","));
+				this.target.header_font = this.value.split(",");
 				break;
 			case "header_color":
-				this.target.header_color = (parseIntArray(this.value));
+				this.target.header_color = parseIntArray(this.value);
 				break;
 			case "header_background_color":
-				this.target.header_background_color = (parseIntArray(this.value));
+				this.target.header_background_color = parseIntArray(this.value);
+				break;
+			case "header_line_height":
+				this.target.header_line_height = parseInt(this.value);
+				break;
+			case "header_column_width":
+				this.target.header_column_width = parseInt(this.value);
 				break;
 
 			// graph
