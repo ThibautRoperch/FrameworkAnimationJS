@@ -643,7 +643,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// coord_y
-			let coord_y = [0, 60, 0, 60];
+			let coord_y = [0, 0, 60, 60];
 			property = document.createElement("property");
 			property.className = "coord_y";
 			label = document.createElement("label");
