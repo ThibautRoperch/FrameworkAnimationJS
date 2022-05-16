@@ -1658,6 +1658,9 @@ function draw_animation() {
 						background_img = parseIntArray(bg);
 				}
 			}
+			else {
+				background_img = [255,255,255];
+			}
 		}
 
 		/** Update the layers of the canvas by iterating on the objects_array */
