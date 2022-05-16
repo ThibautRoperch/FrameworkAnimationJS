@@ -191,7 +191,7 @@ export class Text extends AnimatedObject {
 		this._padding = padding;
 		this._width = width;
 		this._height = height;
-		this._round = round.lenght == 4 ? round : [round[0], round[0], round[0], round[0]]; // tl, tr, bl, br
+		this._round = round.length== 4 ? round : [round[0], round[0], round[0], round[0]]; // tl, tr, bl, br
 		this._halignment = halignment;
 		this._valignment = valignment;
 		this._real_width;
@@ -228,7 +228,6 @@ export class Text extends AnimatedObject {
 
 		// Compute real_width and real_height
 		this.computeRealDimension(drawing);
-
 
 		// Background
 		drawing.rect(this._x, this._y, this._real_width, this._real_height, this.round[0], this.round[1], this.round[2], this.round[3]);
@@ -278,7 +277,7 @@ export class Text extends AnimatedObject {
 		text.setAttribute("layer", this._layer);
 		text.setAttribute("visible", this._visible);
 		text.setAttribute("opacity", this._opacity);
-		// text.setAttribute("angle", this._angle); // degrees
+		text.setAttribute("angle", this._angle); // degrees
 		text.setAttribute("text", this._text);
 		text.setAttribute("font", this._font); // FontName, FontSize, FontWeight
 		text.setAttribute("color", this._color); // r, g, b

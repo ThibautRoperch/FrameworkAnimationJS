@@ -1,3 +1,4 @@
+import { ANIMATION_PATH } from "../animation_controller.js";
 import { AnimatedObject } from "./AnimatedObject.js";
 /**
  * 
@@ -59,6 +60,7 @@ export class ImageFile extends AnimatedObject {
         this._height = height;
         this._image_path = image_path;
         this._loaded_image;
+        this._first = true;
     }
 
     loadImage (drawing) {
@@ -66,8 +68,12 @@ export class ImageFile extends AnimatedObject {
     }
 
     draw (drawing) {
-      drawing.push();
+        drawing.push();
         super.draw(drawing);
+        if(this._first){
+            this.loadImage(drawing);
+            this._first = false;
+        }
         if (this._width == undefined || this._height == undefined) {
             drawing.image(this._loaded_image, this._x, this._y);
         } else {

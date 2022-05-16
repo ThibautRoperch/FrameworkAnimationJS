@@ -485,7 +485,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// halignment
-			let halignment = "left";
+			let halignment = "center";
 			property = document.createElement("property");
 			property.className = "halignment";
 			label = document.createElement("label");
@@ -496,11 +496,11 @@ function new_object(object_type) {
 			option = document.createElement("option");
 			option.value = "left";
 			option.innerHTML = "Left";
-			option.selected = "selected";
 			input.appendChild(option);
 			option = document.createElement("option");
 			option.value = "center";
 			option.innerHTML = "Center";
+			option.selected = "selected";
 			input.appendChild(option);
 			option = document.createElement("option");
 			option.value = "right";
@@ -509,7 +509,7 @@ function new_object(object_type) {
 			property.appendChild(input);
 			article1.appendChild(property);
 			// valignment
-			let valignment = "top";
+			let valignment = "center";
 			property = document.createElement("property");
 			property.className = "valignment";
 			label = document.createElement("label");
@@ -520,7 +520,6 @@ function new_object(object_type) {
 			option = document.createElement("option");
 			option.value = "top";
 			option.innerHTML = "Top";
-			option.selected = "selected";
 			input.appendChild(option);
 			option = document.createElement("option");
 			option.value = "bottom";
@@ -529,6 +528,7 @@ function new_object(object_type) {
 			option = document.createElement("option");
 			option.value = "center";
 			option.innerHTML = "Center";
+			option.selected = "selected";
 			input.appendChild(option);
 			option = document.createElement("option");
 			option.value = "baseline";
@@ -1608,12 +1608,6 @@ function draw_animation() {
 
 			// Load the backround
 			draw_ref.load_background();
-
-			// Load animation's images
-			for (let id of objects_image_id) {
-				let object = objects_array[id];
-				object.loadImage(draw_ref);
-			}
 		}
 
 		/** Setup of the canvas */
